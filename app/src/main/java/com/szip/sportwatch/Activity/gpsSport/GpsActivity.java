@@ -207,7 +207,7 @@ public class GpsActivity extends BaseActivity implements IGpsView{
                     @Override
                     public void onDialogTouch(boolean flag) {
                         if (flag){
-                            if (sportData.time>30&&sportData.distance>200){
+                            if (sportData.time>30){
                                 SaveDataUtil.newInstance().saveSportData(sportData);
                                 Intent intent = new Intent(GpsActivity.this, SportTrackActivity.class);
                                 Bundle bundle = new Bundle();

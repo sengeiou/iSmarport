@@ -170,8 +170,6 @@
     <string name = "runWithout"> دویدن در فضای باز </string>
     <string name = "marathon"> ماراتن </string>
     <string name = "sufing"> موج سواری </string>
-    <string name = "shudu"> سرعت </string>
-    <string name = "averageShudu"> سرعت متوسط ​​</string>
     <string name = "boat"> قایقرانی </string>
     <string name = "altitude"> ارتفاع </string>
     <string name = "climb"> سنگ نوردی </string>
@@ -305,7 +303,6 @@
     <string name = "saved"> با موفقیت ذخیره شد </string>
     <string name = "notificationlistener_prompt_title"> اعلان را فعال کنید </string>
     <string name = "notificationlistener_prompt_content"> ismarport باید اعلان های برنامه را به دستگاه های هوشمند از راه دور منتقل کند. برای ورود به صفحه اعلان ها ، "OK" را فشار دهید تا فعال شود. </string>
-    <string name = "tokenTimeout"> ورود به سیستم منقضی شده است ، لطفاً دوباره وارد سیستم شوید </string>
     <string name = "lostDevice"> دستگاه متصل نیست </string>
     <string name = "permissionErrorForCamare"> مجوز ناموفق بود ، قادر به باز کردن عملکرد دوربین نیست </string>
     <string name = "findPermission"> اگر مجوز به تصویب نرسد ، لیست دستگاه جستجو نمی شود. </string>
@@ -316,28 +313,7 @@
     <string name = "privacyTip"> لطفاً قبل از استفاده از محصولات ما ، با دقت بخوانید و توافق نامه های مربوط به حریم خصوصی کاربر را بطور کامل درک کنید. \ n وقتی روی "تأیید" کلیک می کنید ، به این معنی است که شما با شرایط توافق موافقت کرده اید. \ n خط مشی رازداری کاربر عمدتا شامل محتوای زیر است: \ n1. جمع آوری ، ذخیره و به اشتراک گذاری اطلاعات شخصی (آواتار ، نام مستعار ، قد ، وزن ، داده های ورزش و غیره). \ n2. استفاده از مجوزهای دستگاه (مکان ، دفترچه آدرس ، دوربین و غیره) </string>
     <string name = "crop_pic_failed"> قادر به رهگیری تصویر نبود ، لطفاً تصویر قالب jpg را انتخاب کنید! </string>
     <string name = "visiter"> حالت Tourist از این ویژگی پشتیبانی نمی کند </string>
-    <string name = "chooseJpg"> لطفاً تصاویر را با فرمت jpg انتخاب کنید </string>
     <string name="newVersion">نسخه جدیدی از نرم افزار شناسایی شده است، آیا در حال حاضر به روز شده است؟</string>
-
-    <string name = "planOK"> هدف امروز محقق شد </string>
-    <string name = "planNO"> هدف امروز محقق نشده است </string>
-    <string name = "planStepShare"> مراحل هدف:٪ dsteps </string>
-    <string name = "distanceShare"> مسافت پیاده روی:٪ .1fKm </string>
-    <string name = "calurieShare"> کالری سوزانده شده:٪ .1fKcal </string>
-
-    <string name = "planSleep"> مدت زمان هدف:٪ .1fh </string>
-    <string name = "deepSleepShare"> مدت زمان خواب عمیق:٪ 02dh٪ 02dmin </string>
-    <string name = "lightSleepShare"> مدت زمان خواب سبک:٪ 02dh٪ 02dmin </string>
-
-    <string name = "testTimes"> شماره اندازه گیری امروز:٪ d </string>
-    <string name = "maxHeartShare"> حداکثر ضربان قلب:٪ dbpm </string>
-    <string name = "minHeartShare"> حداقل ضربان قلب:٪ dbpm </string>
-
-    <string name = "bloodOxygenData"> اشباع اکسیژن خون </string>
-    <string name = "testValue"> نتایج آزمون: </string>
-    <string name = "passTimeData"> میزان عبور:٪ .1f ٪٪ </string>
-
-    <string name = "bloodPressureData"> فشار خون متوسط ​​سیستولیک / دیاستولیک </string>
 
     <!-- اسکن و اتصال -->
     <string name="connect_error">خطای اتصال</string>
@@ -383,5 +359,6 @@
     <string name="runShort">طول یا فاصله اجرا بیش از حد کوتاه است تا آمار باشد.</string>
     <string name="started">اول شروع به دویدن کنید</string>
     <string name="touchAgain1">فشار دوباره برای خروج از اجرا</string>
+    <string name="unlock">کشیدن حق برای باز کردن قفل</string>
 
 </resources>

@@ -227,8 +227,6 @@ Jeśli nadal korzystasz z naszych usług, zgadzasz się na związanie niniejszą
     <string name = "runWithout"> bieganie na świeżym powietrzu </string>
     <string name = "marathon"> Maraton </string>
     <string name = "sufing"> surfowanie </string>
-    <string name = "shudu"> prędkość </string>
-    <string name = "averageShudu"> średnia prędkość </string>
     <string name = "boat"> pływanie łódką </string>
     <string name = "altitude">Wysokość</string>
     <string name = "avarageAltitude">Wysokość wspinaczki</string>
@@ -369,7 +367,6 @@ związek. \ n \ nUwaga: zegarek nie może używać funkcji połączenia Bluetoot
     <string name = "saved"> zapisano pomyślnie </string>
     <string name = "notificationlistener_prompt_title"> włącz powiadamianie </string>
     <string name = "notificationlistener_prompt_content"> Aiprint musi przekazywać powiadomienia aplikacji do zdalnych urządzeń inteligentnych. Naciśnij \ ", aby potwierdzićNaciśnij, aby przejść do strony powiadomień w celu aktywacji. </string>
-    <string name = "tokenTimeout"> login wygasł, zaloguj się ponownie </string>
     <string name = "lostDevice"> Urządzenie nie jest podłączone </string>
     <string name = "permissionErrorForCamare"> nieudane uprawnienie, nie można otworzyć funkcji aparatu </string>
     <string name = "findPermission"> Jeśli zezwolenie nie zostanie przekazane, lista urządzeń nie będzie przeszukiwana. </string>
@@ -380,28 +377,7 @@ związek. \ n \ nUwaga: zegarek nie może używać funkcji połączenia Bluetoot
     <string name = "privacyTip"> Przed skorzystaniem z naszych produktów należy uważnie przeczytać i w pełni zrozumieć odpowiednie umowy dotyczące prywatności użytkownika. \ nKiedyKlikasz „OK”, aby zaznaczyć, że zgadzasz się z warunkami umowy. \ nPolityka prywatności użytkownika obejmuje głównie: \ n1. Dane osobowe (awatar, pseudonim,Dane dotyczące wzrostu, wagi, ćwiczeń itp.) Gromadzenie, przechowywanie i udostępnianie. \ n2. Korzystanie z uprawnień urządzenia (lokalizacja, książka adresowa, kamera itp.) </string>
     <string name = "crop_pic_failed"> nie przechwycił obrazu, wybierz obraz w formacie jpg! </string>
     <string name = "visiter"> Tryb turystyczny nie obsługuje tej funkcji </string>
-    <string name = "chooseJpg"> Wybierz zdjęcia w formacie jpg </string>
     <string name="newVersion">Nowa wersja oprogramowania została wykryta, jest ono zaktualizowane teraz?</string>
-
-    <string name = "planOK"> Dzisiejszy cel został osiągnięty </string>
-    <string name = "planNO"> Dzisiejszy cel nie został osiągnięty </string>
-    <string name = "planStepShare"> docelowe kroki:% dsteps </string>
-    <string name = "distanceShare"> odległość pieszo:% .1fKm </string>
-    <string name = "calurieShare"> Spalone kalorie:% .1fKcal </string>
-
-    <string name = "planSleep"> docelowy czas trwania:% .1fh </string>
-    <string name = "deepSleepShare"> Czas trwania głębokiego uśpienia:% 02dh% 02dmin </string>
-    <string name = "lightSleepShare"> Czas trwania niewielkiego snu:% 02dh% 02dmin </string>
-
-    <string name = "testTimes"> Dzisiejszy numer pomiaru:% d </string>
-    <string name = "maxHeartShare"> Maksymalne tętno:% dbpm </string>
-    <string name = "minHeartShare"> minimalne tętno:% dbpm </string>
-
-    <string name = "bloodOxygenData"> nasycenie krwi tlenem </string>
-    <string name = "testValue"> wyniki testu: </string>
-    <string name = "passTimeData"> zdawalność:% .1f %% </string>
-
-    <string name = "bloodPressureData"> średnie skurczowe / rozkurczowe ciśnienie krwi </string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Błąd połączenia</string>
@@ -446,5 +422,6 @@ związek. \ n \ nUwaga: zegarek nie może używać funkcji połączenia Bluetoot
     <string name="runShort">Długość lub odległość biegu jest zbyt krótka, aby można było ich statystyce.</string>
     <string name="started">Zacznij działać jako pierwszy</string>
     <string name="touchAgain1">Naciśnij ponownie, aby zakończyć bieg</string>
+    <string name="unlock">Przesuń palcem w prawo, aby odblokować</string>
 
 </resources>

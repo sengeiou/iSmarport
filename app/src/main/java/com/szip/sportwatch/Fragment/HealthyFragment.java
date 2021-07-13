@@ -1,8 +1,10 @@
 package com.szip.sportwatch.Fragment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.GpsStatus;
@@ -15,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.szip.sportwatch.BLE.BleClient;
@@ -382,9 +386,11 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
                 startActivity(new Intent(getActivity(), EcgListActivity.class));
                 break;
             case R.id.weatherLl:
-                locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-                LocationUtil.getInstance().getLocation(locationManager,myListener,locationListener);
-                getView().findViewById(R.id.weatherLl).setClickable(false);
+
+                    locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+                    LocationUtil.getInstance().getLocation(locationManager,myListener,locationListener);
+                    getView().findViewById(R.id.weatherLl).setClickable(false);
+
                 break;
         }
     }

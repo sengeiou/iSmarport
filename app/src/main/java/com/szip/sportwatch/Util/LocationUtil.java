@@ -1,15 +1,20 @@
 package com.szip.sportwatch.Util;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
+import androidx.core.app.ActivityCompat;
+
 import com.amap.api.maps.CoordinateConverter;
 import com.amap.api.maps.model.LatLng;
+import com.szip.sportwatch.MyApplication;
 
 public class LocationUtil {
 
@@ -26,7 +31,7 @@ public class LocationUtil {
         return locationUtil;
     }
 
-    @SuppressLint("MissingPermission")
+
     public Location getLocation(LocationManager myLocationManager, GpsStatus.Listener myListener, LocationListener locationListener) {
         //获取位置管理服务
 
@@ -45,6 +50,11 @@ public class LocationUtil {
 //
         Location gpsLocation = null;
         Location netLocation = null;
+
+        if (ActivityCompat.checkSelfPermission(MyApplication.getInstance(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return null;
+        }
+
         myLocationManager.addGpsStatusListener(myListener);
         if (netWorkIsOpen(myLocationManager)) {
             //2000代表每2000毫秒更新一次，5代表每5秒更新一次

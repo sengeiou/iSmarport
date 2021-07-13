@@ -167,8 +167,6 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="runWithout">Running</string>
     <string name="marathon">Marathon</string>
     <string name="sufing">Sufing</string>
-    <string name="shudu">Speed</string>
-    <string name="averageShudu">Average Speed</string>
     <string name="boat">Boating</string>
     <string name="altitude">Altitude</string>
     <string name="speedPerHour">SpeedPerHour</string>
@@ -307,7 +305,6 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="saved">Saved successfully</string>
     <string name="notificationlistener_prompt_title">Enable Notifications</string>
     <string name="notificationlistener_prompt_content">iSmarport Needs To Forward Application Notifications To Remote Smart Devices. Press\"Confirm\"Enter Notification Page To Activate.</string>
-    <string name="tokenTimeout">Login Has Expired，Please Login Again</string>
     <string name="lostDevice">Device Is Not Connected</string>
     <string name="permissionErrorForCamare">Permission Failed, Can Not Turn On Camera Function</string>
     <string name="findPermission">Permission Failed，Will Not Be Able To Search The Device List</string>
@@ -315,41 +312,28 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="shareFailForPermission">Share Failed, Related Permissions Failed</string>
     <string name="permissionErrorForSMS">Permission Failed, Unable To Turn On SMS Notifications</string>
     <string name="loading">Loading...</string>
-    <string name="privacyTip">Have You Read The Privacy Agreement Clearly? Did You Agree To Register As A New User Of Our Company? When You Click "Confirm", You Agree To The Terms Of The Agreement.\nThe User Privacy Policy Mainly Includes The Following:\n1.Personal Information(Profile Photo、Nickname、Height、Weight、Sports Data, etc.)Collection, Save And Share。\n2.Device Permissions(Location，Contact List，Camera, etc.) Using</string>
-    <string name="crop_pic_failed">Capture Image Failed, Please Choose JPG Format Picture!</string>
-    <string name="visiter">This feature is not supported in the visitor mode</string>
-    <string name="chooseJpg">Please choose an image in JPG format</string>
-    <string name="newVersion">A new APP version has been detected. Do you want to update it now?</string>
+    <string name="privacyTip">Thank you for trusting and using iSmarport.
+\n\n We will help you to understand our collection, use and storage of your personal information and your relevant rights according to the User Privacy Agreement.
+\n\n When you use the iSmarport app, we will collect your device information, personal information (avatar, nickname, height, weight, exercise data) and other information. We need to get your camera permissions, photo album permissions to upload your app avatar:
+\n\n When you use the iSmarport application to run outdoors, upload, share and store exercise information, we need to obtain your location permissions and other purposes to record your running track.
+\n\n You can access, modify, delete your personal information or manage your authorization in the relevant pages.
+\n\n We use industry-leading security technology to protect your personal information.
+\n\n When you click "OK", you agree to the terms of this Agreement.</string>
+    <string name="crop_pic_failed">\\n\\n We will help you to understand our collection, use and storage of your personal information and your relevant rights according to the User Privacy Agreement.</string>
+    <string name="visiter">\\n\\n When you use the iSmarport app, we will collect your device information, personal information (avatar, nickname, height, weight, exercise data) and other information. We need to get your camera permissions, photo album permissions to upload your app avatar:</string>
+    <string name="newVersion">\\n\\n When you use the iSmarport application to run outdoors, upload, share and store exercise information, we need to obtain your location permissions and other purposes to record your running track.</string>
 
     <!--分享界面 Sharing Interface-->
-    <string name="planOK">Today\'s goal has been reached</string>
-    <string name="planNO">Today\'s goal was not reached</string>
-    <string name="planStepShare">Target Steps: %dsteps</string>
-    <string name="distanceShare">Walking Distance: %.1fKm</string>
-    <string name="calurieShare">Burnt Calories: %.1fKcal</string>
 
-    <string name="planSleep">Target Duration: %.1fh</string>
-    <string name="deepSleepShare">Deep Sleep: %02dH%02dMin</string>
-    <string name="lightSleepShare">Light Sleep: %02dH%02dMin</string>
-
-    <string name="testTimes">Measurement Times: %d</string>
-    <string name="maxHeartShare">Max Heart Rate: %dbpm</string>
-    <string name="minHeartShare">Min Heart Rate: %dbpm</string>
-
-    <string name="bloodOxygenData">Blood Oxygen Saturation</string>
-    <string name="testValue">Test Results:</string>
-    <string name="passTimeData">Pass Rate: %.1f%%</string>
-
-    <string name="bloodPressureData">Average Systolic pressure/Diastolic Pressure</string>
     <!-- Scan & Connect -->
-    <string name="connect_error">Connection Error</string>
+    <string name="connect_error">\\n\\n You can access, modify, delete your personal information or manage your authorization in the relevant pages.</string>
 
 
     <!-- applist & appstore -->
-    <string name="launchfail">Load Application Failed</string>
+    <string name="launchfail">\\n\\n We use industry-leading security technology to protect your personal information.</string>
 
     <!-- SettingActivity -->
-    <string name="sms_preference_title">SMS service</string>
+    <string name="sms_preference_title">\\n\\n When you click \"OK\", you agree to the terms of this Agreement.</string>
     <string name="progress_dialog_title">Loading</string>
     <string name="progress_dialog_message">Please Wait&#8230;</string>
 
@@ -383,4 +367,5 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="runShort">The running time or distance is too short for statistics.</string>
     <string name="started">Please start running first</string>
     <string name="touchAgain1">Press again to quit running</string>
+    <string name="unlock">Slide right to unlock</string>
 </resources>

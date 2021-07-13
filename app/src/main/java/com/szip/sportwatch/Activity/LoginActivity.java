@@ -299,7 +299,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
                 BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
                 BluetoothDevice device = bluetoothAdapter.getRemoteDevice(loginBean.getData().getUserInfo().getDeviceCode());
-                if (device!=null)
+                if (device!=null&&device.getName()!=null)
                     MyApplication.getInstance().setDeviceConfig(device.getName().indexOf("_LE")>=0?
                             device.getName().substring(0,device.getName().length()-3):
                             device.getName());

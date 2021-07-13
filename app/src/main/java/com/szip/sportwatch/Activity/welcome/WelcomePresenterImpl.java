@@ -140,11 +140,10 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
                             getInstance().setUserInfo(response.getData());
                             if (response.getData().getDeviceCode()!=null&&!response.getData().getDeviceCode().equals("")){
                                 if (MyApplication.getInstance().getDialGroupId().equals("0")){
-                                    Log.d("DATA******","deviceCode = "+response.getData().getDeviceCode());
                                     BluetoothManager bluetoothManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
                                     BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
                                     BluetoothDevice device = bluetoothAdapter.getRemoteDevice(response.getData().getDeviceCode());
-                                    if (device!=null)
+                                    if (device!=null&&device.getName()!=null)
                                         MyApplication.getInstance().setDeviceConfig(device.getName().indexOf("_LE")>=0?
                                                 device.getName().substring(0,device.getName().length()-3):
                                                 device.getName());

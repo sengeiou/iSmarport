@@ -297,7 +297,6 @@ public class DateUtil {
      * @return
      */
     public static String getStringDateFromSecond(long milSecond,String formatStyle) {
-        Log.d("SZIP******","SPORT TIME = "+milSecond);
         long time = milSecond * 1000;
         Date date = new Date(time);
         SimpleDateFormat format = new SimpleDateFormat(formatStyle,Locale.ENGLISH);

@@ -168,8 +168,6 @@ Diğer amaçlar için，veya belirli bir amaç için toplanan bilgiler başka am
     <string name = "runWithout"> açık havada koşu </string>
     <string name = "marathon"> Maraton </string>
     <string name = "sufing"> sörf </string>
-    <string name = "shudu"> hız </string>
-    <string name = "averageShudu"> ortalama hız </string>
     <string name = "boat"> tekne gezintisi </string>
     <string name = "altitude"> rakım </string>
     <string name = "avarageAltitude">Tırmanma yüksekliği</string>
@@ -310,7 +308,6 @@ Diğer amaçlar için，veya belirli bir amaç için toplanan bilgiler başka am
     <string name = "saved"> başarıyla kaydedildi </string>
     <string name = "notificationlistener_prompt_title"> bildirimi etkinleştir </string>
     <string name = "notificationlistener_prompt_content"> Aiprint\'in uygulama bildirimlerini uzak akıllı cihazlara iletmesi gerekir. Etkinleştirmek üzere bildirim sayfasına girmek için \ "Tamam \" a basın. </string>
-    <string name = "tokenTimeout"> girişin süresi doldu, lütfen tekrar giriş yapın </string>
     <string name = "lostDevice"> Cihaz bağlı değil </string>
     <string name = "permissionErrorForCamare"> izni başarısız oldu, kamera işlevi açılamadı </string>
     <string name = "findPermission"> İzin geçilmezse, cihaz listesi aranmayacaktır. </string>
@@ -321,29 +318,8 @@ Diğer amaçlar için，veya belirli bir amaç için toplanan bilgiler başka am
     <string name = "privacyTip"> Ürünlerimizi kullanmadan önce, lütfen ilgili kullanıcı gizlilik sözleşmelerini dikkatlice okuyun ve tam olarak anlayın. \ n "Tamam" ı tıkladığınızda, anlaşmanın şartlarını kabul etmiş olursunuz. \ nKullanıcı gizlilik politikası esas olarak aşağıdaki içeriği içerir: \ n1. Kişisel bilgilerin (avatar, takma ad, boy, kilo, egzersiz verileri vb.) toplanması, depolanması ve paylaşılması. \ n2. Cihaz izinlerinin kullanımı (konum, adres defteri, kamera vb.) </string>
     <string name = "crop_pic_failed"> resmi engelleyemedi, lütfen jpg formatındaki resmi seçin! </string>
     <string name = "visiter"> Turist modu bu özelliği desteklemiyor </string>
-    <string name = "chooseJpg"> Lütfen resimleri jpg biçiminde seçin </string>
     <string name="newVersion">Yazılımın yeni bir sürümü algılandı, şimdi güncelleştirildi mi?</string>
 
-
-    <string name = "planOK"> Bugünün hedefine ulaşıldı </string>
-    <string name = "planNO"> Bugünün hedefine ulaşılmadı </string>
-    <string name = "planStepShare"> hedef adımlar:%dsteps </string>
-    <string name = "distanceShare"> yürüme mesafesi:%.1fKm </string>
-    <string name = "calurieShare"> Yakılan kalori:%.1fKcal </string>
-
-    <string name = "planSleep"> hedef süre:%.1fh </string>
-    <string name = "deepSleepShare"> Derin uyku süresi:%02dH%02dMin </string>
-    <string name = "lightSleepShare"> Hafif uyku süresi:%02dH%02dMin </string>
-
-    <string name = "testTimes"> Bugünün ölçüm numarası:%d </string>
-    <string name = "maxHeartShare"> Maksimum kalp atış hızı:%dbpm </string>
-    <string name = "minHeartShare"> minimum kalp atış hızı:%dbpm </string>
-
-    <string name = "bloodOxygenData"> kan oksijen doygunluğu </string>
-    <string name = "testValue"> test sonuçları: </string>
-    <string name = "passTimeData"> geçiş oranı:%.1f%%</string>
-
-    <string name = "bloodPressureData"> ortalama sistolik / diyastolik kan basıncı </string>
 
     <!-- Tara ve Bağlan -->
     <string name="connect_error">Bağlantı Hatası</string>
@@ -389,5 +365,6 @@ Diğer amaçlar için，veya belirli bir amaç için toplanan bilgiler başka am
     <string name="runShort">Çalışan verilerinizi daha kısa bir çalışma için kaydedemiyorsanız, 30 saniyeden fazla çalışmaya devam edin.</string>
     <string name="started">Önce çalışmaya başla</string>
     <string name="touchAgain1">Çalıştırmadan çıkmak için yeniden basın</string>
+    <string name="unlock">Kilidini açmak için sağa kaydırın</string>
 
 </resources>

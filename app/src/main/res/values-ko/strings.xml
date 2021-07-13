@@ -153,8 +153,6 @@
     <string name="runWithout">야외 달리기</string>
     <string name="marathon">마라톤</string>
     <string name="sufing">파도타기</string>
-    <string name="shudu">속도.</string>
-    <string name="averageShudu">평균 속도</string>
     <string name="boat">배 를 젓다.</string>
     <string name="altitude">해발</string>
     <string name="avarageAltitude">고도 상승</string>
@@ -308,7 +306,6 @@
 
 
 1.\ "확정 \" 키 를 눌 러 알림 페이지 에 들 어가 활성화。</string>
-    <string name="tokenTimeout">로그 인 기간 이 지 났 습 니 다. 다시 로그 인 하 세 요.</string>
     <string name="lostDevice">장치 미 접속</string>
     <string name="permissionErrorForCamare">권한 이 통과 되 지 않 아 사진 촬영 기능 을 열 수 없습니다.</string>
     <string name="findPermission">권한 이 통과 되 지 않 으 면 장치 목록 을 검색 할 수 없습니다.</string>
@@ -333,32 +330,10 @@
 </string>
     <string name="crop_pic_failed">그림 캡 처 실패, jpg 형식 그림 을 선택 하 세 요!</string>
     <string name="visiter">관광객 모드 는 이 기능 을 지원 하지 않 습 니 다</string>
-    <string name="chooseJpg">jpg 형식의 그림 을 선택 하 세 요</string>
     <string name="newVersion">새로운 소프트웨어 버전이 발견되었습니다. 지금 업데이트하시겠습니까?</string>
 
 
     <!--공유 인터페이스-->
-    <string name="planOK">오늘 목표 달성</string>
-    <string name="planNO">오늘 목표 미 달성</string>
-    <string name="planStepShare">목표 걸음 수: %dsteps</string>
-    <string name="distanceShare">주 행 거리: %.1fKm</string>
-    <string name="calurieShare">칼로리 소모: %.1fKcal</string>
-
-    <string name="planSleep">목표 시간 이 길다: %.1fh</string>
-    <string name="deepSleepShare">깊이 잠들다: %02dh%02dmin</string>
-    <string name="lightSleepShare">얕 은 잠 은 길다: %02dh%02dmin</string>
-
-    <string name="testTimes">오늘 측정 수: %d</string>
-    <string name="maxHeartShare">최대 심장 박동 수
-
-: %dbpm</string>
-    <string name="minHeartShare">최소 심 박 률: %dbpm</string>
-
-    <string name="bloodOxygenData">혈액 속 산소 포화 도</string>
-    <string name="testValue">테스트 결과:</string>
-    <string name="passTimeData">합격 율: %.1f%%</string>
-
-    <string name="bloodPressureData">평균 수축 기압.</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>
@@ -403,4 +378,5 @@
     <string name="runShort">달리는 길이나 거리가 너무 짧아 통계를 낼 수 없다.</string>
     <string name="started">달리기 시작하세요</string>
     <string name="touchAgain1">다시 버튼을 눌러 달리기 종료</string>
+    <string name="unlock">오른쪽으로 미끄러지면서 풀다</string>
 </resources>

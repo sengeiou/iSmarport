@@ -185,8 +185,6 @@
     <string name = "runWithout"> الجري في الهواء الطلق </string>
     <string name = "marathon"> ماراثون </string>
     <string name = "sufing"> تصفح </string>
-    <string name = "shudu"> السرعة </string>
-    <string name = "averageShudu"> متوسط ​​السرعة </string>
     <string name = "boat"> القوارب </string>
     <string name = "altitude"> الارتفاع </string>
     <string name = "climb"> تسلق الصخور </string>
@@ -322,7 +320,6 @@
     <string name = "saved"> تم الحفظ بنجاح </string>
     <string name = "notificationlistener_prompt_title"> تمكين الإعلام </string>
     <string name = "notificationlistener_prompt_content"> يحتاج Aiprint إلى إعادة توجيه إعلامات التطبيق إلى الأجهزة الذكية البعيدة. اضغط على \ "موافق \" للدخول إلى صفحة الإعلام للتفعيل. </string>
-    <string name = "tokenTimeout"> انتهت صلاحية تسجيل الدخول ، يرجى تسجيل الدخول مرة أخرى </string>
     <string name = "lostDevice"> الجهاز غير متصل </string>
     <string name = "permissionErrorForCamare"> فشل الإذن ، غير قادر على فتح وظيفة الكاميرا </string>
     <string name = "findPermission"> إذا لم يتم تمرير الإذن ، فلن يتم البحث في قائمة الأجهزة. </string>
@@ -333,28 +330,7 @@
     <string name = "privacyTip"> قبل استخدام منتجاتنا ، يرجى قراءة اتفاقيات خصوصية المستخدم ذات الصلة بعناية وفهمها تمامًا. \ n عند النقر فوق "موافق" ، فهذا يعني أنك وافقت على شروط الاتفاقية. \ n يتضمن نهج خصوصية المستخدم بشكل أساسي المحتوى التالي: \ n1. جمع المعلومات الشخصية وتخزينها ومشاركتها (الصورة الرمزية ، واللقب ، والطول ، والوزن ، وبيانات التمرين ، وما إلى ذلك). \ n2. استخدام أذونات الجهاز (الموقع ، دفتر العناوين ، الكاميرا ، إلخ) </string>
     <string name = "crop_pic_failed"> فشل في اعتراض الصورة ، يرجى تحديد صورة تنسيق jpg! </string>
     <string name = "visiter"> لا يدعم الوضع السياحي هذه الميزة </string>
-    <string name = "chooseJpg"> يرجى تحديد الصور بتنسيق jpg </string>
     <string name="newVersion">تم الكشف عن نسخة جديدة من البرمجيات، هل يتم تحديثها الآن؟</string>
-
-    <string name = "planOK"> تم الوصول إلى هدف اليوم </string>
-    <string name = "planNO"> لم يتم تحقيق هدف اليوم </string>
-    <string name = "planStepShare"> الخطوات المستهدفة:٪ dsteps </string>
-    <string name = "distanceShare"> مسافة السير:٪ .1fKm </string>
-    <string name = "calurieShare"> حرق السعرات الحرارية:٪ .1fKcal </string>
-
-    <string name = "planSleep"> مدة الهدف:٪ .1fh </string>
-    <string name = "deepSleepShare"> مدة السكون العميق:٪ 02dh٪ 02dmin </string>
-    <string name = "lightSleepShare"> مدة السكون الخفيف:٪ 02dh٪ 02dmin </string>
-
-    <string name = "testTimes"> رقم القياس اليوم:٪ d </string>
-    <string name = "maxHeartShare"> أقصى معدل لضربات القلب:٪ dbpm </string>
-    <string name = "minHeartShare"> الحد الأدنى لمعدل ضربات القلب:٪ dbpm </string>
-
-    <string name = "bloodOxygenData"> تشبع الأكسجين في الدم </string>
-    <string name = "testValue"> نتائج الاختبار: </string>
-    <string name = "passTimeData"> معدل النجاح:٪ .1f ٪٪ </string>
-
-    <string name = "bloodPressureData"> متوسط ​​ضغط الدم الانقباضي / الانبساطي </string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">خطأ في الاتصال</string>
@@ -400,5 +376,6 @@
     <string name="runShort">وقت الركض أو المسافة قصيرة جدا لإحصاءات.</string>
     <string name="started">يرجى بدء حركة الجري</string>
     <string name="touchAgain1">اضغط على الخروج مرة أخرى</string>
+    <string name="unlock">انزلق لفتح القفل إلى اليمين</string>
 
 </resources>

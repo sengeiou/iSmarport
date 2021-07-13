@@ -123,8 +123,6 @@
     <string name="runWithout">Jalan di luar</string>
     <string name="marathon">Maraton</string>
     <string name="sufing">Surfing</string>
-    <string name="shudu">kecepatan</string>
-    <string name="averageShudu">kecepatan rata-rata</string>
     <string name="boat">Baris</string>
     <string name="altitude">ketinggian</string>
     <string name="avarageAltitude">- naik ke ketinggian!</string>
@@ -274,7 +272,6 @@
     <string name="saved">Disimpan dengan sukses</string>
     <string name="notificationlistener_prompt_title">Aktifkan pemberitahuan</string>
     <string name="notificationlistener_prompt_content">Everett perlu mengirim notifikasi aplikasi ke perangkat cerdas jauh.Tekan "OK" untuk memasukkan halaman pemberitahuan.</string>
-    <string name="tokenTimeout">Rekaman sudah habis. Silakan log masuk lagi</string>
     <string name="lostDevice">perangkat tidak terhubung</string>
     <string name="permissionErrorForCamare">Permisi gagal, tidak dapat membuka foto mengambil fungsi</string>
     <string name="findPermission">Jika izin tidak lulus, daftar perangkat tidak dapat dicari</string>
@@ -287,30 +284,10 @@
 \nPolisi privasi pengguna terutama mengandung isi berikut:\n1.Kumpulkan, simpan dan berbagi data pribadi (avatar, gelaran, tinggi, berat badan, data latihan, dll.).\n2.Gunakan izin perangkat (lokasi, buku alamat, kamera, dll.)</string>
     <string name="crop_pic_failed">Gagal menangkap gambar, silakan pilih gambar format JPG!</string>
     <string name="visiter">Mode turis tidak mendukung fitur ini</string>
-    <string name="chooseJpg">Silakan pilih gambar dalam format JPG</string>
     <string name="newVersion">Ada versi perangkat lunak baru yang terdeteksi.？</string>
 
 
     <!--Bahagian antaramuka-->
-    <string name="planOK">Tujuan hari ini telah dicapai</string>
-    <string name="planNO">Tujuan hari ini tidak dicapai</string>
-    <string name="planStepShare">Langkah sasaran: %dsteps</string>
-    <string name="distanceShare">Jarak berjalan: %.1fKm</string>
-    <string name="calurieShare">Kalori dimakan: %.1fKcal</string>
-
-    <string name="planSleep">Durasi sasaran: %.1fh</string>
-    <string name="deepSleepShare">Panjang tidur dalam:%02dh%02dmin</string>
-    <string name="lightSleepShare">Panjang tidur ringan: %02dh%02dmin</string>
-
-    <string name="testTimes">Ukuran hari ini:%d</string>
-    <string name="maxHeartShare">Kadar jantung maksimum: %dbpm</string>
-    <string name="minHeartShare">Denyut jantung minimum: %dbpm</string>
-
-    <string name="bloodOxygenData">Ketepuan oksigen darah</string>
-    <string name="testValue">Hasil ujian:</string>
-    <string name="passTimeData">Tingkat lewat: %.1f%%</string>
-
-    <string name="bloodPressureData">Tekanan darah sistolik/diastolik rata</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>
@@ -355,5 +332,6 @@
     <string name="runShort">Panjang atau jarak lari terlalu pendek untuk statistik.</string>
     <string name="started">Silahkan dimulai dengan latihan lari</string>
     <string name="touchAgain1">Tekan sekali lagi untuk keluar</string>
+    <string name="unlock">Geser kanan untuk membuka kunci</string>
 
 </resources>

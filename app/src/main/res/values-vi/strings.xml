@@ -227,8 +227,6 @@ Nếu bạn tiếp tục sử dụng dịch vụ của chúng tôi, bạn đồn
     <string name = "runWithout"> chạy ngoài trời </string>
     <string name = "marathon"> Marathon </string>
     <string name = "sufing"> lướt sóng </string>
-    <string name = "shudu"> tốc độ </string>
-    <string name = "averageShudu"> tốc độ trung bình </string>
     <string name = "boat"> chèo thuyền </string>
     <string name = "altitude"> độ cao </string>
     <string name = "avarageAltitude">Bay cao lên</string>
@@ -372,7 +370,6 @@ mối quan hệ. \ n \ nLưu ý: Đồng hồ không thể sử dụng chức n�
     <string name = "saved"> đã lưu thành công </string>
     <string name = "notificationlistener_prompt_title"> bật thông báo </string>
     <string name = "notificationlistener_prompt_content"> Aiprint cần chuyển tiếp thông báo của ứng dụng đến các thiết bị thông minh từ xa. Nhấn \ "để xác nhậnNhấn để vào trang thông báo để kích hoạt. </string>
-    <string name = "tokenTimeout"> đăng nhập đã hết hạn, vui lòng đăng nhập lại </string>
     <string name = "lostDevice"> Thiết bị chưa được kết nối </string>Quyền
     <string name = "permissionErrorForCamare"> không thành công, không thể mở chức năng camera </string>
     <string name = "findPermission"> Nếu quyền không được thông qua, danh sách thiết bị sẽ không được tìm kiếm. </string>
@@ -385,29 +382,7 @@ mối quan hệ. \ n \ nLưu ý: Đồng hồ không thể sử dụng chức n�
         Dữ liệu về chiều cao, cân nặng, bài tập, v.v.) thu thập, lưu trữ và chia sẻ. \ n2. Sử dụng các quyền của thiết bị (vị trí, sổ địa chỉ, máy ảnh, v.v.) </string>
     <string name = "crop_pic_failed"> không chặn được ảnh, vui lòng chọn ảnh định dạng jpg! </string>
     <string name = "visiter"> Chế độ khách du lịch không hỗ trợ tính năng này </string>
-    <string name = "chooseJpg"> Vui lòng chọn ảnh ở định dạng jpg </string>
     <string name="newVersion">检测到有新的软件版本，是否现在更新？</string>
-
-
-    <string name = "planOK"> Đã đạt được mục tiêu của ngày hôm nay </string>
-    <string name = "planNO"> Không đạt được mục tiêu của ngày hôm nay </string>
-    <string name = "planStepShare"> các bước mục tiêu:% dsteps </string>
-    <string name = "distanceShare"> khoảng cách đi bộ:% .1fKm </string>
-    <string name = "calurieShare"> Lượng calo đã đốt cháy:% .1fKcal </string>
-
-    <string name = "planSleep"> thời lượng mục tiêu:% .1fh </string>
-    <string name = "deepSleepShare"> Thời lượng ngủ sâu:% 02dh% 02dmin </string>
-    <string name = "lightSleepShare"> Thời lượng ngủ nhẹ:% 02dh% 02dmin </string>
-
-    <string name = "testTimes"> Số đo của ngày hôm nay:% d </string>
-    <string name = "maxHeartShare"> Nhịp tim tối đa:% dbpm </string>
-    <string name = "minHeartShare"> nhịp tim tối thiểu:% dbpm </string>
-
-    <string name = "bloodOxygenData"> độ bão hòa oxy trong máu </string>
-    <string name = "testValue"> kết quả kiểm tra: </string>
-    <string name = "passTimeData"> tỷ lệ vượt qua:% .1f %% </string>
-
-    <string name = "bloodPressureData"> huyết áp tâm thu / huyết áp tâm trương trung bình </string>
 
 
     <string name = "connect_error"> Lỗi kết nối </string>
@@ -451,4 +426,5 @@ mối quan hệ. \ n \ nLưu ý: Đồng hồ không thể sử dụng chức n�
     <string name="runShort">Chạy trong một thời gian ngắn không thể lưu dữ liệu chạy bộ, hãy tiếp tục chạy hơn 30 giây.</string>
     <string name="started">Xin vui lòng bắt đầu chạy</string>
     <string name="touchAgain1">Nhấn nút rút lui lần nữa</string>
+    <string name="unlock">Trượt sang phải để mở khóa</string>
 </resources>

@@ -51,7 +51,8 @@
                     android:layout_height="40dp"
                     android:src="@mipmap/sport_icon_type"
                     android:layout_toLeftOf="@+id/historyIv"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/historyIv"

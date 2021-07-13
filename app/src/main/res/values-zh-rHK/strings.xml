@@ -165,8 +165,6 @@
     <string name="runWithout">戶外跑</string>
     <string name="marathon">馬拉松</string>
     <string name="sufing">衝浪</string>
-    <string name="shudu">速度</string>
-    <string name="averageShudu">平均速度</string>
     <string name="boat">划船</string>
     <string name="altitude">海拔</string>
     <string name="avarageAltitude">爬升高度</string>
@@ -307,7 +305,6 @@
     <string name="saved">保存成功</string>
     <string name="notificationlistener_prompt_title">啟用通知</string>
     <string name="notificationlistener_prompt_content">艾跑特需要轉發應用通知到遠程智能設備。按\"確定\"鍵進入通知頁面激活。 </string>
-    <string name="tokenTimeout">登錄已經過期，請重新登錄</string>
     <string name="lostDevice">設備未連接</string>
     <string name="permissionErrorForCamare">權限沒通過，無法打開拍照功能</string>
     <string name="findPermission">權限沒通過，將無法搜索到設備列表</string>
@@ -318,30 +315,10 @@
     <string name="privacyTip">在您使用我們的產品之前，請先認真閱讀並充分理解相關用戶隱私協議。 \n當您點擊"確定"即表示你已經同意該協議的條款。 \n用戶隱私政策主要包括以下內容:\n1.個人資料(頭像、暱稱、身高、體重、運動數據等)的收集，保存和分享。 \n2.設備權限(位置，通訊錄，相機等)的使用</string>
     <string name="crop_pic_failed">截取圖像失敗，請選擇jpg格式圖片！ </string>
     <string name="visiter">遊客模式不支持此功能</string>
-    <string name="chooseJpg">請選擇jpg格式的圖片</string>
     <string name="newVersion">檢測到有新的軟件版本，是否現在更新？</string>
 
 
     <!--分享界面-->
-    <string name="planOK">今日目標已達成</string>
-    <string name="planNO">今日目標未達成</string>
-    <string name="planStepShare">目標步數: %dsteps</string>
-    <string name="distanceShare">行走距離: %.1fKm</string>
-    <string name="calurieShare">消耗卡路里: %.1fKcal</string>
-
-    <string name="planSleep">目標時長: %.1fh</string>
-    <string name="deepSleepShare">深睡時長: %02dh%02dmin</string>
-    <string name="lightSleepShare">淺睡時長: %02dh%02dmin</string>
-
-    <string name="testTimes">今日測量數: %d</string>
-    <string name="maxHeartShare">最大心率: %dbpm</string>
-    <string name="minHeartShare">最小心率: %dbpm</string>
-
-    <string name="bloodOxygenData">血氧飽和度</string>
-    <string name="testValue">測試結果:</string>
-    <string name="passTimeData">合格率: %.1f%%</string>
-
-    <string name="bloodPressureData">平均收縮壓/舒張壓</string>
 
     <!-- 掃描並連接 -->
     <string name="connect_error">連接錯誤</string>
@@ -374,5 +351,6 @@
     <string name="runShort">跑步時長或距離太短，無法統計數據。</string>
     <string name="started">請先開啓跑步運動</string>
     <string name="touchAgain1">再按一次退出跑步</string>
+    <string name="unlock">向右滑動解鎖</string>
 
 </resources>

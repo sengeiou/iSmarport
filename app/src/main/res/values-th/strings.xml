@@ -169,8 +169,6 @@
     <string name = "runWithout"> วิ่งกลางแจ้ง </string>
     <string name = "marathon"> มาราธอน </string>
     <string name = "sufing"> ท่องเว็บ </string>
-    <string name = "shudu"> ความเร็ว </string>
-    <string name = "averageShudu"> ความเร็วเฉลี่ย </string>
     <string name = "boat"> พายเรือ </string>
     <string name = "altitude"> ความสูง </string>
     <string name = "avarageAltitude"> ความสูงเฉลี่ย </string>
@@ -308,7 +306,6 @@
     <string name = "saved"> บันทึกสำเร็จ </string>
     <string name = "notificationlistener_prompt_title"> เปิดใช้งานการแจ้งเตือน </string>
     <string name = "notificationlistener_prompt_content"> ismarport จำเป็นต้องส่งต่อการแจ้งเตือนของแอปพลิเคชันไปยังอุปกรณ์อัจฉริยะระยะไกล กด \ "OK \" เพื่อเข้าสู่หน้าการแจ้งเตือนเพื่อเปิดใช้งาน </string>
-    <string name = "tokenTimeout"> การเข้าสู่ระบบหมดอายุแล้วโปรดเข้าสู่ระบบอีกครั้ง </string>
     <string name = "lostDevice"> อุปกรณ์ไม่ได้เชื่อมต่อ </string>
     <string name = "permissionErrorForCamare"> การอนุญาตล้มเหลวไม่สามารถเปิดฟังก์ชันกล้องได้ </string>
     <string name = "findPermission"> หากไม่ผ่านการอนุญาตรายการอุปกรณ์จะไม่ถูกค้นหา </string>
@@ -319,29 +316,8 @@
     <string name = "privacyTip"> ก่อนที่คุณจะใช้ผลิตภัณฑ์ของเราโปรดอ่านอย่างละเอียดและเข้าใจข้อตกลงความเป็นส่วนตัวของผู้ใช้ที่เกี่ยวข้อง \ n เมื่อคุณคลิก "ตกลง" หมายความว่าคุณได้ยอมรับเงื่อนไขของข้อตกลงแล้ว \ n นโยบายความเป็นส่วนตัวของผู้ใช้ส่วนใหญ่ประกอบด้วยเนื้อหาต่อไปนี้: \ n1. การรวบรวมการจัดเก็บและการแบ่งปันข้อมูลส่วนบุคคล (อวาตาร์ชื่อเล่นส่วนสูงน้ำหนักข้อมูลการออกกำลังกาย ฯลฯ ) \ n2. การใช้สิทธิ์ของอุปกรณ์ (ตำแหน่งที่ตั้งสมุดที่อยู่กล้องถ่ายรูป ฯลฯ ) </string>
     <string name = "crop_pic_failed"> ล้มเหลวในการดักจับรูปภาพโปรดเลือกรูปภาพในรูปแบบ jpg! </string>
     <string name = "visiter"> โหมดนักท่องเที่ยวไม่รองรับคุณลักษณะนี้ </string>
-    <string name = "chooseJpg"> โปรดเลือกรูปภาพในรูปแบบ jpg </string>
     <string name="newVersion">检测到有新的软件版本，是否现在更新？</string>
 
-
-    <string name = "planOK"> บรรลุเป้าหมายของวันนี้แล้ว </string>
-    <string name = "planNO"> เป้าหมายของวันนี้ไม่ถึง </string>
-    <string name = "planStepShare"> ขั้นตอนเป้าหมาย:% dsteps </string>
-    <string name = "distanceShare"> ระยะทางเดิน:% .1fKm </string>
-    <string name = "calurieShare"> แคลอรี่ที่เผาผลาญ:% .1fKcal </string>
-
-    <string name = "planSleep"> ระยะเวลาเป้าหมาย:% .1fh </string>
-    <string name = "deepSleepShare"> ระยะเวลาหลับลึก:% 02dh% 02dmin </string>
-    <string name = "lightSleepShare"> ระยะเวลาการนอนหลับแบบเบา:% 02dh% 02dmin </string>
-
-    <string name = "testTimes"> หมายเลขการวัดของวันนี้:% d </string>
-    <string name = "maxHeartShare"> อัตราการเต้นของหัวใจสูงสุด:% dbpm </string>
-    <string name = "minHeartShare"> อัตราการเต้นของหัวใจขั้นต่ำ:% dbpm </string>
-
-    <string name = "bloodOxygenData"> ความอิ่มตัวของออกซิเจนในเลือด </string>
-    <string name = "testValue"> ผลการทดสอบ: </string>
-    <string name = "passTimeData"> อัตราการส่งผ่าน:% .1f %% </string>
-
-    <string name = "bloodPressureData"> ความดันโลหิตเฉลี่ย systolic / diastolic </string>
 
     <!-- สแกนและเชื่อมต่อ -->
     <string name="connect_error">ข้อผิดพลาดในการเชื่อมต่อ</string>
@@ -386,5 +362,6 @@
     <string name="runShort">" "</string>
     <string name="started">เริ่มออกกำลังกายก่อน</string>
     <string name="touchAgain1">และกดอีกครั้งออกจากการทำงาน</string>
+    <string name="unlock">เลื่อนการปลดล็อคไปทางขวา</string>
 
 </resources>

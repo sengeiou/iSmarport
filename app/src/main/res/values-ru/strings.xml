@@ -158,8 +158,6 @@
     <string name="runWithout"> бег на открытом воздухе</string>
     <string name="marathon"> марафон</string>
     <string name="sufing"> серфинг </string>
-    <string name="shudu"> скорость</string>
-    <string name="averageShudu"> средняя скорость</string>
     <string name="boat"> гребля </string>
     <string name="altitude">высота</string>
     <string name="avarageAltitude">Высота подъёма</string>
@@ -305,7 +303,6 @@
     <string name="saved">Успешно сохранено</string>
     <string name="notificationlistener_prompt_title">Включить уведомления</string>
     <string name="notificationlistener_prompt_content">iSmarport необходимо пересылать уведомления приложений на удаленные интеллектуальные устройства。Нажмите \ "Подтвердить \", введите страницу уведомлений для активации。</string>
-    <string name="tokenTimeout">Срок действия входа истек ， Пожалуйста, войдите снова</string>
     <string name="lostDevice">Устройство не подключено</string>
     <string name="permissionErrorForCamare">Ошибка разрешения, не удается включить функцию камеры</string>
     <string name="findPermission">Ошибка разрешения, невозможно выполнить поиск в списке устройств</string>
@@ -316,30 +313,10 @@
     <string name="privacyTip">Вы ясно прочитали Соглашение о конфиденциальности? Вы согласились зарегистрироваться в качестве нового пользователя нашей компании? Нажимая «Подтвердить», вы соглашаетесь с условиями соглашения.。\nПолитика конфиденциальности пользователя в основном включает следующее: 1. Личную информацию (фото профиля Псевдоним 、 Рост 、 Вес 、 Спортивные данные и т. Д.). Сбор, сохранение и обмен 2. Разрешения для устройств (Местоположение ， Список контактов ， Камера и т. Д.).</string>
     <string name="crop_pic_failed">Не удалось выполнить захват изображения, выберите изображение в формате JPG / PNG!</string>
     <string name="visiter">Эта функция не поддерживается в режиме посетителя.</string>
-    <string name="chooseJpg"> Выберите рисунок в формате jpg </string>
     <string name="newVersion">Обнаружили новую версию программного обеспечения.？</string>
 
 
     <!--Общий интерфейс-->
-    <string name="planOK">Сегодняшняя цель достигнута</string>
-    <string name="planNO">Сегодняшняя цель не достигнута</string>
-    <string name="planStepShare">Целевые шаги: %dsteps</string>
-    <string name="distanceShare">Расстояние пешком: %.1fKm</string>
-    <string name="calurieShare">Сожженные калории: %.1fKcal</string>
-
-    <string name="planSleep">Целевая продолжительность: %.1fh</string>
-    <string name="deepSleepShare">Глубокий сон: %02dh%02dmin</string>
-    <string name="lightSleepShare">Легкий сон: %02dh%02dmin</string>
-
-    <string name="testTimes">Время измерения: %d</string>
-    <string name="maxHeartShare">Максимальная частота пульса: %dbpm</string>
-    <string name="minHeartShare">Мин. Частота пульса: %dbpm</string>
-
-    <string name="bloodOxygenData">Насыщение крови кислородом</string>
-    <string name="testValue">Результаты теста:</string>
-    <string name="passTimeData">Скорость прохождения: %.1f%%</string>
-
-    <string name="bloodPressureData">Среднее систолическое давление / диастолическое давление</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>
@@ -384,5 +361,6 @@
     <string name="runShort">Бег слишком длинный или слишком короткий для статистики.</string>
     <string name="started">Пожалуйста, начните с бега</string>
     <string name="touchAgain1">Нажмите еще раз, чтобы выйти из гонки</string>
+    <string name="unlock">Поверните направо, чтобы открыть замок</string>
 
 </resources>

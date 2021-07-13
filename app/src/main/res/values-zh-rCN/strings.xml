@@ -170,8 +170,6 @@
     <string name="runWithout">户外跑</string>
     <string name="marathon">马拉松</string>
     <string name="sufing">冲浪</string>
-    <string name="shudu">速度</string>
-    <string name="averageShudu">平均速度</string>
     <string name="boat">划船</string>
     <string name="altitude">海拔</string>
     <string name="avarageAltitude">爬升高度</string>
@@ -181,6 +179,7 @@
     <string name="runFinsh">是否结束当前跑步运动？</string>
     <string name="runShort">跑步时长或距离太短，无法统计数据。</string>
     <string name="started">请先开启跑步运动</string>
+    <string name="unlock">向右滑动解锁</string>
     <!--我的页面-->
     <string name="device">设备</string>
     <string name="stepPlan">计步目标</string>
@@ -316,7 +315,6 @@
     <string name="saved">保存成功</string>
     <string name="notificationlistener_prompt_title">启用通知</string>
     <string name="notificationlistener_prompt_content">艾跑特需要转发应用通知到远程智能设备。按\"确定\"键进入通知页面激活。</string>
-    <string name="tokenTimeout">登录已经过期，请重新登录</string>
     <string name="lostDevice">设备未连接</string>
     <string name="permissionErrorForCamare">权限没通过，无法打开拍照功能</string>
     <string name="findPermission">权限没通过，将无法搜索到设备列表</string>
@@ -324,33 +322,19 @@
     <string name="shareFailForPermission">分享失败,相关权限没通过</string>
     <string name="permissionErrorForSMS">权限没通过，无法打开短信通知功能</string>
     <string name="loading">加载中...</string>
-    <string name="privacyTip">在您使用我们的产品之前，请先认真阅读并充分理解相关用户隐私协议。\n当您点击"确定"即表示你已经同意该协议的条款。\n用户隐私政策主要包括以下内容:\n1.个人资料(头像、昵称、身高、体重、运动数据等)的收集，保存和分享。\n2.设备权限(位置，通讯录，相机等)的使用</string>
+    <string name="privacyTip">感谢您信任并使用iSmarport。
+\n\n我们讲依据《用户隐私协议》来帮助您了解我们在收集、使用、存储您个人信息的情况以及您享有的相关权利。
+\n\n在您使用iSmarport应用程序时，我们将收集您的设备信息、个人资料(头像、昵称、身高、体重、运动数据)等信息，我们需要获取您的相机权限、相册权限用于上传您的应用头像:
+\n\n在您使用iSmarport应用进行户外跑步、上传、分享并存储运动信息时，我们需要获取您的位置权限等用于记录您的跑步轨迹。
+\n\n您可以在相关页面访问、修改、删除您的个人信息或者管理您的授权。
+\n\n我们会采用行业领先的安全技术来保护您的个人信息。
+\n\n当您点击"确定"即表示你已经同意该协议的条款。</string>
     <string name="crop_pic_failed">截取图像失败，请选择jpg格式图片！</string>
     <string name="visiter">游客模式不支持此功能</string>
-    <string name="chooseJpg">请选择jpg格式的图片</string>
     <string name="newVersion">检测到有新的APP版本，是否现在更新？</string>
     <string name="checkGPS">检测到您手机的位置开关未打开，为确保应用正常运行，请打开位置开关。</string>
 
     <!--分享界面-->
-    <string name="planOK">今日目标已达成</string>
-    <string name="planNO">今日目标未达成</string>
-    <string name="planStepShare">目标步数: %dsteps</string>
-    <string name="distanceShare">行走距离: %.1fKm</string>
-    <string name="calurieShare">消耗卡路里: %.1fKcal</string>
-
-    <string name="planSleep">目标时长: %.1fh</string>
-    <string name="deepSleepShare">深睡时长: %02dh%02dmin</string>
-    <string name="lightSleepShare">浅睡时长: %02dh%02dmin</string>
-
-    <string name="testTimes">今日测量数: %d</string>
-    <string name="maxHeartShare">最大心率: %dbpm</string>
-    <string name="minHeartShare">最小心率: %dbpm</string>
-
-    <string name="bloodOxygenData">血氧饱和度</string>
-    <string name="testValue">测试结果:</string>
-    <string name="passTimeData">合格率: %.1f%%</string>
-
-    <string name="bloodPressureData">平均收缩压/舒张压</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>

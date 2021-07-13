@@ -181,8 +181,6 @@
     <string name="runWithout">פועל בחוץ</string>
     <string name="marathon">מרתון</string>
     <string name="sufing">גלישה</string>
-    <string name="shudu">מהירות</string>
-    <string name="averageShudu">מהירות ממוצעת</string>
     <string name="boat">שורה</string>
     <string name="altitude">גובה</string>
     <string name="climb">טפסת סלע</string>
@@ -323,7 +321,6 @@
     <string name="saved">שמור בהצלחה</string>
     <string name="notificationlistener_prompt_title">אפשר להודיע</string>
     <string name="notificationlistener_prompt_content">אוורט צריך להעביר הודעות אפליקציות למתקנים חכמים מרחוקים.לחץ על "בסדר" כדי להכניס את עמוד ההודעה.</string>
-    <string name="tokenTimeout">הגישה נגמרה. אנא הגישה שוב</string>
     <string name="lostDevice">מכשיר לא מחובר</string>
     <string name="permissionErrorForCamare">הרישוי נכשל, לא ניתן לפתוח את תפקיד צילום התמונה</string>
     <string name="findPermission">אם האישור לא מועבר, לא ניתן לחפש את רשימת המכשירי</string>
@@ -334,30 +331,10 @@
     <string name="privacyTip">לפני שאתה משתמש במוצרים שלנו, בבקשה לקרוא ולהבין לחלוטין את הסכם פרטיות המשתמש הרלוונטי.כשתלחץ על "בסדר", תסכים לתנאים של ההסכם.\מדיניות הפרטיות של המשתמשים כוללות בעיקר את התוכן הבא: 1. אסוף, אחסון וחלוק של נתונים אישיים (avatar, כינוי, גובה, משקל, נתוני התרגיל, jne.).\ N2. השימוש של רשויות המכשיר (מיקום, ספר כתובות, מצלמה, וכו. ב.)</string>
     <string name="crop_pic_failed">לא הצליח לתפוס תמונה, בבקשה בחר תמונה בצורת JPG!</string>
     <string name="visiter">מצב טוריסטי לא תומך בתוכנית זו</string>
-    <string name="chooseJpg">בבקשה בחר תמונה בצורה JPG</string>
     <string name="newVersion">זוהתה גירסה חדשה של התוכנה, האם היא מתעדכנת כעת?</string>
 
 
     <!--משותף ממשק-->
-    <string name="planOK">המטרה של היום הושגה</string>
-    <string name="planNO">המטרה של היום לא מושגת</string>
-    <string name="planStepShare">צעדים מטרה: %dsteps</string>
-    <string name="distanceShare">מרחק הליכה:%.1fKm</string>
-    <string name="calurieShare">קלוריות נצרפות: %.1fKcal</string>
-
-    <string name="planSleep">משך המטרה:%.1fh</string>
-    <string name="deepSleepShare">אורך שינה עמוקה:%02dh%02dmin</string>
-    <string name="lightSleepShare">אורך שינה קלה: %02dh%02dmin</string>
-
-    <string name="testTimes">מדידות היום: %d</string>
-    <string name="maxHeartShare">קצב לב מקסים:%dbpm</string>
-    <string name="minHeartShare">קצב לב מינימי: %dbpm</string>
-
-    <string name="bloodOxygenData">עיוות חמצן בדם</string>
-    <string name="testValue">תוצאות הבדיקה:</string>
-    <string name="passTimeData">קצב העברה:f%%</string>
-
-    <string name="bloodPressureData">לחץ דם סיסטולי / דיסטולי ממוצע</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>
@@ -404,5 +381,6 @@
     <string name="runShort">אורך הריצה או מרחקה קצרים מכדי להיות נתונים סטטיסטיים.</string>
     <string name="started">התחל לפעול תחילה</string>
     <string name="touchAgain1">לחץ שוב כדי לצאת מההפעלה</string>
+    <string name="unlock">החלק ימינה כדי לבטל נעילה</string>
 
 </resources>

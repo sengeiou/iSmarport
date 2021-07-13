@@ -40,7 +40,7 @@ public class MyAlerDialog {
                 .create();
         alertDialog.show();
         Window window = alertDialog.getWindow();
-        window.setContentView(R.layout.dialog_layout);
+        window.setContentView(R.layout.dialog_layout_pri);
         TextView tv_title = window.findViewById(R.id.dialogTitle);
         tv_title.setText(title);
         TextView tv_message =  window.findViewById(R.id.msgTv);
@@ -93,7 +93,6 @@ public class MyAlerDialog {
         alertDialog.show();
         Window window = alertDialog.getWindow();
         window.setContentView(R.layout.dialog_layout);
-        window.findViewById(R.id.privacyTv).setVisibility(View.GONE);
         TextView tv_title = window.findViewById(R.id.dialogTitle);
         tv_title.setText(title);
         TextView tv_message =  window.findViewById(R.id.msgTv);

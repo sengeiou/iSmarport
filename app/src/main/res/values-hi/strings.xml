@@ -152,8 +152,6 @@
     <string name="runWithout">आउटडोर चल रहा है</string>
     <string name="marathon">मैराथन</string>
     <string name="sufing">लहर</string>
-    <string name="shudu">गति</string>
-    <string name="averageShudu">औसत गति</string>
     <string name="boat">नौका विहार</string>
     <string name="altitude">ऊंचाई</string>
     <string name="avarageAltitude">औसत ऊंचाई</string>
@@ -296,7 +294,6 @@
     <string name="saved">सफलतापूर्वक बचाय</string>
     <string name="notificationlistener_prompt_title">सूचनाएं सक्षम करें</string>
     <string name="notificationlistener_prompt_content">. iSmarport को दूरस्थ स्मार्ट डिवाइसेस के लिए अनुप्रयोग सूचनाओं को अग्रेषित करने की आवश्यकता है \ "पुष्टि करें \" सक्रिय करने के लिए अधिसूचना पृष्ठ दर्ज करें.</string>
-    <string name="tokenTimeout">लॉग इन समाप्त हो गया है, कृपया फिर से लॉगिन करे</string>
     <string name="lostDevice"> डिवाइस कनेक्टेड नहीं है</string>
     <string name="permissionErrorForCamare">अनुमति विफल, कैमरा फ़ंक्शन चालू नहीं कर सकता</string>
     <string name="findPermission">अनुमति विफल। डिवाइस सूची को खोजने में सक्षम नहीं होगी</string>
@@ -309,29 +306,9 @@
 2. डिवाइस अनुमतियाँ (स्थान List संपर्क सूची, कैमरा, आदि) का उपयोग करना</string>
     <string name="crop_pic_failed">कैद की गई छवि, कृपया JPG / PNG प्रारूप चित्र चुनें!</string>
     <string name="visiter"> यह सुविधा विज़िटर मोड में समर्थित नहीं ह</string>
-    <string name="chooseJpg">कृपया jpg प्रारूप में एक चित्र चुनें</string>
     <string name="newVersion">सॉफ्टवेयर का एक नया संस्करण का पता चला है, यह अब अद्यतन किया गया है?</string>
 
     <!--साझाकरण इंटरफ़ेस:-->
-    <string name="planOK">आज का लक्ष्य पूरा हो चुका है</string>
-    <string name="planNO">. आज का लक्ष्य पूरा नहीं हुआ</string>
-    <string name="planStepShare">लक्ष्य चरण: %dsteps</string>
-    <string name="distanceShare">पैदल दूर: %.1fKm</string>
-    <string name="calurieShare">जला कैलोरी: %.1fKcal</string>
-
-    <string name="planSleep">लक्ष्य अवधि: %.1fh</string>
-    <string name="deepSleepShare">गहरी नींद: %02dh%02dmin</string>
-    <string name="lightSleepShare">हल्की नींद: %02dh%02dmin</string>
-
-    <string name="testTimes"> मापन टाइम्स: %d</string>
-    <string name="maxHeartShare">मैक्स हार्ट रेट: %dbpm</string>
-    <string name="minHeartShare">न्यूनतम हृदय दर: %dbpm</string>
-
-    <string name="bloodOxygenData">रक्त ऑक्सीजन संतृप्ति</string>
-    <string name="testValue">परीक्षण के परिणाम:</string>
-    <string name="passTimeData">पारित दर: %.1f%%</string>
-
-    <string name="bloodPressureData">औसत सिस्टोलिक दबाव / डायस्टोलिक दबाव</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>
@@ -375,5 +352,6 @@
     <string name="runShort">" "</string>
     <string name="started">पहले दौड़ना शुरू करें</string>
     <string name="touchAgain1">रन से बाहर निकलने के लिए फिर से दबाएं</string>
+    <string name="unlock">अनलॉक करने के लिए सही स्वाइप करें</string>
 
 </resources>

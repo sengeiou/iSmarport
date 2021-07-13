@@ -8,8 +8,6 @@ import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.StatusBarCompat;
 
 public class PrivacyActivity extends BaseActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +16,6 @@ public class PrivacyActivity extends BaseActivity {
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
         initView();
-
     }
 
     private void initView() {

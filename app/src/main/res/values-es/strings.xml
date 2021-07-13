@@ -168,8 +168,6 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="runWithout">Correr al aire libre</string>
     <string name="marathon">maratón</string>
     <string name="sufing">surf</string>
-    <string name="shudu">velocidad</string>
-    <string name="averageShudu">Velocidad media</string>
     <string name="boat">Boating</string>
     <string name="altitude">elevación</string>
     <string name="avarageAltitude">Altura de ascenso</string>
@@ -307,7 +305,6 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="saved">Guardado con éxito</string>
     <string name="notificationlistener_prompt_title">Habilitar notificaciones</string>
     <string name="notificationlistener_prompt_content">iSmarport necesita reenviar notificaciones de aplicaciones a dispositivos inteligentes remotos. Presione \ "Confirmar \" Ingrese a la página de notificación para activar。</string>
-    <string name="tokenTimeout">El inicio de sesión ha expirado, inicie sesión de nuevo</string>
     <string name="lostDevice">El dispositivo no está conectado</string>
     <string name="permissionErrorForCamare">Permiso fallido, no se puede encender la función de cámara</string>
     <string name="findPermission">Permiso fallido, no podrá buscar en la lista de dispositivos</string>
@@ -318,29 +315,10 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="privacyTip">¿Ha leído claramente el Acuerdo de privacidad? ¿Está de acuerdo en registrarse como nuevo usuario de nuestra empresa? Cuando hace clic en "Confirmar", significa que acepta los términos del acuerdo.La Política de privacidad del usuario incluye principalmente lo siguiente 1. Información personal (foto de perfil, apodo, altura, peso, datos deportivos, etc.), recopilación, guardar y compartir 2. Permisos del dispositivo (ubicación, lista de contactos, cámara, etc.) Utilizando</string>
     <string name="crop_pic_failed">No se pudo capturar la imagen, elija la imagen en formato JPG / PNG!</string>
     <string name="visiter">Esta función no se admite en el modo de visitante</string>
-    <string name="chooseJpg">Elija una imagen en formato JPG</string>
     <string name="newVersion">Se ha detectado una nueva versión del software?</string>
 
     <!--分享界面 Interfaz para compartir-->
-    <string name="planOK">Se ha alcanzado la meta de hoy</string>
-    <string name="planNO">No se alcanzó la meta de hoy</string>
-    <string name="planStepShare">Pasos objetivo</string>
-    <string name="distanceShare">Distancia a pie: %.1fKm</string>
-    <string name="calurieShare">Quema calorías: %.1fKcal</string>
 
-    <string name="planSleep">Duración objetivo: %.1fh</string>
-    <string name="deepSleepShare">Sueño profundo: %02dH%02dMin</string>
-    <string name="lightSleepShare">Sueño ligero: %02dH%02dMin</string>
-
-    <string name="testTimes">Tiempos de medición: %d</string>
-    <string name="maxHeartShare">Frecuencia cardíaca máxima: %dbpm</string>
-    <string name="minHeartShare">Frecuencia cardíaca mínima: %dbpm</string>
-
-    <string name="bloodOxygenData">Saturación de oxígeno en sangre</string>
-    <string name="testValue">Resultados de la prueba:</string>
-    <string name="passTimeData">Tasa de aprobación: %.1f%%</string>
-
-    <string name="bloodPressureData">Presión sistólica promedio / presión diastólica</string>
     <!-- Scan & Connect -->
     <string name="connect_error">Error de conexión</string>
 
@@ -384,5 +362,6 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="runShort">La duración de la carrera o la distancia son demasiado cortas como para hacer estadísticas.</string>
     <string name="started">Por favor, comience la carrera primero</string>
     <string name="touchAgain1">Pulse otra vez para salir de la carrera</string>
+    <string name="unlock">Desbloquear deslizando a la derecha</string>
 
 </resources>

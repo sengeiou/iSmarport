@@ -168,8 +168,6 @@
     <string name = "runWithout"> Laufen im Freien </string>
     <string name = "marathon"> Marathon </string>
     <string name = "sufing"> surfen </string>
-    <string name = "shudu"> Geschwindigkeit </string>
-    <string name = "averageShudu"> Durchschnittsgeschwindigkeit </string>
     <string name = "boat"> Bootfahren </string>
     <string name = "altitude"> Höhe </string>
     <string name = "avarageAltitude">Steigen sie wieder hoch!</string>
@@ -310,7 +308,6 @@
     <string name = "saved"> erfolgreich gespeichert </string>
     <string name = "notificationlistener_prompt_title"> Benachrichtigung aktivieren </string>
     <string name = "notificationlistener_prompt_content"> Aiprint muss Anwendungsbenachrichtigungen an Remote-Smart-Geräte weiterleiten. Drücken Sie "OK", um die zu aktivierende Benachrichtigungsseite aufzurufen. </string>
-    <string name = "tokenTimeout"> Anmeldung abgelaufen, bitte erneut anmelden </string>
     <string name = "lostDevice"> Das Gerät ist nicht verbunden </string>
     <string name = "permissionErrorForCamare"> Berechtigung fehlgeschlagen, Kamerafunktion </string> konnte nicht geöffnet werden
     <string name = "findPermission"> Wenn die Berechtigung nicht übergeben wird, wird die Geräteliste nicht durchsucht. </string>
@@ -321,29 +318,8 @@
     <string name = "privacyTip"> Bevor Sie unsere Produkte verwenden, lesen Sie bitte die relevanten Datenschutzvereinbarungen für Benutzer sorgfältig durch und verstehen Sie sie vollständig. \ nWenn Sie auf "OK" klicken, bedeutet dies, dass Sie den Bedingungen der Vereinbarung zugestimmt haben. \ nDie Datenschutzrichtlinie für Benutzer umfasst hauptsächlich den folgenden Inhalt: \ n1. Erfassung, Speicherung und Weitergabe persönlicher Informationen (Avatar, Spitzname, Größe, Gewicht, Trainingsdaten usw.). \ n2. Verwendung von Geräteberechtigungen (Standort, Adressbuch, Kamera usw.) </string>
     <string name = "crop_pic_failed"> konnte das Bild nicht abfangen, bitte wählen Sie das Bild im JPG-Format aus! </string>
     <string name = "visiter"> Der Touristenmodus unterstützt diese Funktion nicht </string>
-    <string name = "chooseJpg"> Bitte wählen Sie Bilder im JPG-Format </string>
     <string name="newVersion">Gibt es neue versionen? Ist das ein update?</string>
 
-
-    <string name = "planOK"> Das heutige Ziel wurde erreicht </string>
-    <string name = "planNO"> Das heutige Ziel wird nicht erreicht </string>
-    <string name = "planStepShare"> Zielschritte:% dsteps </string>
-    <string name = "distanceShare"> zu Fuß erreichbar:% .1fKm </string>
-    <string name = "calurieShare"> Kalorienverbrauch:% .1fKcal </string>
-
-    <string name = "planSleep"> Zieldauer:% .1fh </string>
-    <string name = "deepSleepShare"> Tiefschlafdauer:% 02dh% 02dmin </string>
-    <string name = "lightSleepShare"> Leichte Schlafdauer:% 02dh% 02dmin </string>
-
-    <string name = "testTimes"> Die heutige Messnummer:% d </string>
-    <string name = "maxHeartShare"> Maximale Herzfrequenz:% dbpm </string>
-    <string name = "minHeartShare"> Mindestherzfrequenz:% dbpm </string>
-
-    <string name = "bloodOxygenData"> Blutsauerstoffsättigung </string>
-    <string name = "testValue"> Testergebnisse: </string>
-    <string name = "passTimeData"> Erfolgsrate:% .1f %% </string>
-
-    <string name = "bloodPressureData"> durchschnittlicher systolischer / diastolischer Blutdruck </string>
 
     <!-- Scannen und verbinden -->
     <string name="connect_error">Verbindungsfehler</string>
@@ -389,5 +365,6 @@
     <string name="runShort">Dauer Oder entfernungen der läufer ist zu kurz für statistiken.</string>
     <string name="started">Bitte starten sie zuerst den laufsport</string>
     <string name="touchAgain1">Und nochmal kurz raus aus dem rennen</string>
+    <string name="unlock">Ziehen sie zum entsperren nach rechts</string>
 
 </resources>

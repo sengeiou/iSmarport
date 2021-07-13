@@ -57,13 +57,12 @@ public class DataParser {
         if (data[1]==0x32){
             int deviceNum = (data[9]&0xff)<<8|(data[8]&0xff)&0x0ffff;
             ArrayList<Integer> datas = new ArrayList<>();
-            for (int i = 10;i<data.length-8;i++){
+            for (int i = 10;i<data.length-11;i++){
                 if (data[i]!=0){
                     datas.add(i-9);
                     if(i==10){
                         datas.add(0x19);
                     }
-                    LogUtil.getInstance().logd("DATA******","datetype = "+(i-9));
                 }
             }
             if (data[27]!=0)
@@ -73,6 +72,13 @@ public class DataParser {
             if (data.length>29){
                 MyApplication.getInstance().setBtMac(String.format("%02X:%02X:%02X:%02X:%02X:%02X",data[34],data[33], data[32],data[31],
                         data[30],data[29]));
+            }
+            if (data.length>35){
+                for (int i = 0;i<3;i++){
+                    if (data[35+i]!=0){
+                        datas.add(0x21+i);
+                    }
+                }
             }
             if (mIDataResponse!=null)
                 mIDataResponse.onGetDataIndex(deviceNum+"",datas);
@@ -306,8 +312,6 @@ public class DataParser {
                 dataType = 0;
                 LogUtil.getInstance().logd("DATA******","跑步数据接受结束");
             }
-
-
         }else if (type==0x05){//徒步数据
             if(sportDataArrayList==null)
                 sportDataArrayList = new ArrayList<>();
@@ -960,6 +964,114 @@ public class DataParser {
                 sportDataArrayList = null;
                 dataType = 0;
                 LogUtil.getInstance().logd("DATA******","跑步机数据接受结束");
+            }
+        }else if (type==0x21){//羽毛球
+            if(sportDataArrayList==null)
+                sportDataArrayList = new ArrayList<>();
+            HashMap<Integer,String> dataHash;
+            SportData sportData = new SportData();
+            sportData.type = 9;
+            sportData.time = time;
+            sportData.sportTime = (data[4] & 0xff) + ((data[5] & 0xFF) << 8) + ((data[6] & 0xff) << 16) + ((data[7] & 0xFF) << 24);
+            sportData.calorie = (data[0] & 0xff) + ((data[1] & 0xFF) << 8) + ((data[2] & 0xff) << 16) + ((data[3] & 0xFF) << 24);
+
+            int longLenght = (data[16] & 0xff) + ((data[17] & 0xFF) << 8);
+            int latLenght = (data[16+2+longLenght] & 0xff) + ((data[17+2+longLenght] & 0xFF) << 8);
+            int speedPerHourLenght = (data[16+4+longLenght+latLenght] & 0xff) + ((data[17+4+longLenght+latLenght] & 0xFF) << 8);
+
+            int heartLenght = (data[16+6+longLenght+latLenght+speedPerHourLenght] & 0xff) +
+                    ((data[17+6+longLenght+latLenght+speedPerHourLenght] & 0xFF) << 8);
+            byte[] heartDatas = new byte[heartLenght];
+            if (heartLenght!=0)
+                System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
+                        heartDatas,0,heartLenght);
+            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            for (int key:dataHash.keySet()){
+                sportData.heart = key;
+                sportData.heartArray = dataHash.get(key);
+            }
+            sportDataArrayList.add(sportData);
+            LogUtil.getInstance().logd("DATA******","解析到的羽毛球数据 : "+time+" ;运动时长 = "+sportData.sportTime+" ;卡路里 = "+sportData.calorie+
+                    " ;平均心率 = "+sportData.heart+" ;心率数组 = "+sportData.heartArray);
+
+            if (isEnd){
+                if (mIDataResponse!=null)
+                    mIDataResponse.onSaveRunDatas(sportDataArrayList);
+                sportDataArrayList = null;
+                dataType = 0;
+                LogUtil.getInstance().logd("DATA******","羽毛球数据接受结束");
+            }
+        }else if (type==0x22){//篮球
+            if(sportDataArrayList==null)
+                sportDataArrayList = new ArrayList<>();
+            HashMap<Integer,String> dataHash;
+            SportData sportData = new SportData();
+            sportData.type = 10;
+            sportData.time = time;
+            sportData.sportTime = (data[4] & 0xff) + ((data[5] & 0xFF) << 8) + ((data[6] & 0xff) << 16) + ((data[7] & 0xFF) << 24);
+            sportData.calorie = (data[0] & 0xff) + ((data[1] & 0xFF) << 8) + ((data[2] & 0xff) << 16) + ((data[3] & 0xFF) << 24);
+
+            int longLenght = (data[16] & 0xff) + ((data[17] & 0xFF) << 8);
+            int latLenght = (data[16+2+longLenght] & 0xff) + ((data[17+2+longLenght] & 0xFF) << 8);
+            int speedPerHourLenght = (data[16+4+longLenght+latLenght] & 0xff) + ((data[17+4+longLenght+latLenght] & 0xFF) << 8);
+
+            int heartLenght = (data[16+6+longLenght+latLenght+speedPerHourLenght] & 0xff) +
+                    ((data[17+6+longLenght+latLenght+speedPerHourLenght] & 0xFF) << 8);
+            byte[] heartDatas = new byte[heartLenght];
+            if (heartLenght!=0)
+                System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
+                        heartDatas,0,heartLenght);
+            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            for (int key:dataHash.keySet()){
+                sportData.heart = key;
+                sportData.heartArray = dataHash.get(key);
+            }
+            sportDataArrayList.add(sportData);
+            LogUtil.getInstance().logd("DATA******","解析到的篮球数据 : "+time+" ;运动时长 = "+sportData.sportTime+" ;卡路里 = "+sportData.calorie+
+                    " ;平均心率 = "+sportData.heart+" ;心率数组 = "+sportData.heartArray);
+
+            if (isEnd){
+                if (mIDataResponse!=null)
+                    mIDataResponse.onSaveRunDatas(sportDataArrayList);
+                sportDataArrayList = null;
+                dataType = 0;
+                LogUtil.getInstance().logd("DATA******","篮球数据接受结束");
+            }
+        }else if (type==0x23){//足球
+            if(sportDataArrayList==null)
+                sportDataArrayList = new ArrayList<>();
+            HashMap<Integer,String> dataHash;
+            SportData sportData = new SportData();
+            sportData.type = 17;
+            sportData.time = time;
+            sportData.sportTime = (data[4] & 0xff) + ((data[5] & 0xFF) << 8) + ((data[6] & 0xff) << 16) + ((data[7] & 0xFF) << 24);
+            sportData.calorie = (data[0] & 0xff) + ((data[1] & 0xFF) << 8) + ((data[2] & 0xff) << 16) + ((data[3] & 0xFF) << 24);
+
+            int longLenght = (data[16] & 0xff) + ((data[17] & 0xFF) << 8);
+            int latLenght = (data[16+2+longLenght] & 0xff) + ((data[17+2+longLenght] & 0xFF) << 8);
+            int speedPerHourLenght = (data[16+4+longLenght+latLenght] & 0xff) + ((data[17+4+longLenght+latLenght] & 0xFF) << 8);
+
+            int heartLenght = (data[16+6+longLenght+latLenght+speedPerHourLenght] & 0xff) +
+                    ((data[17+6+longLenght+latLenght+speedPerHourLenght] & 0xFF) << 8);
+            byte[] heartDatas = new byte[heartLenght];
+            if (heartLenght!=0)
+                System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
+                        heartDatas,0,heartLenght);
+            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            for (int key:dataHash.keySet()){
+                sportData.heart = key;
+                sportData.heartArray = dataHash.get(key);
+            }
+            sportDataArrayList.add(sportData);
+            LogUtil.getInstance().logd("DATA******","解析到的足球数据 : "+time+" ;运动时长 = "+sportData.sportTime+" ;卡路里 = "+sportData.calorie+
+                    " ;平均心率 = "+sportData.heart+" ;心率数组 = "+sportData.heartArray);
+
+            if (isEnd){
+                if (mIDataResponse!=null)
+                    mIDataResponse.onSaveRunDatas(sportDataArrayList);
+                sportDataArrayList = null;
+                dataType = 0;
+                LogUtil.getInstance().logd("DATA******","足球数据接受结束");
             }
         }else if (type == 0x19){
             if (stepOnDayDataArrayList==null)

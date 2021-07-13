@@ -168,8 +168,6 @@
     <string name = "runWithout"> larian luar </string>
     <string name = "marathon"> Marathon </string>
     <string name = "sufing"> melayari </string>
-    <string name = "shudu"> kelajuan </string>
-    <string name = "averageShudu"> kelajuan purata </string>
     <string name = "boat"> berperahu </string>
     <string name = "altitude"> ketinggian </string>
     <string name = "avarageAltitude">Ketinggian pendakian</string>
@@ -307,8 +305,8 @@
     <string name = "passwordUnSame"> dua kata laluan input tidak konsisten </string>
     <string name = "saved"> berjaya disimpan </string>
     <string name = "notificationlistener_prompt_title"> aktifkan pemberitahuan </string>
-    <string name = "notificationlistener_prompt_content"> Aiprint perlu meneruskan pemberitahuan aplikasi ke peranti pintar jauh. Tekan \ "OK \" untuk memasuki halaman pemberitahuan untuk diaktifkan. </string>log masuk
-    <string name = "tokenTimeout"> telah tamat, sila log masuk sekali lagi </string>
+    <string name = "notificationlistener_prompt_content"> Aiprint perlu meneruskan pemberitahuan aplikasi ke peranti pintar jauh. Tekan \ "OK \" untuk memasuki halaman pemberitahuan untuk diaktifkan. </string>log
+    masuk
     <string name = "lostDevice"> Peranti tidak disambungkan </string>
     <string name = "permissionErrorForCamare"> kebenaran gagal, tidak dapat membuka fungsi kamera </string>
     <string name = "findPermission"> Jika kebenaran tidak diluluskan, senarai peranti tidak akan dicari. </string>
@@ -319,29 +317,7 @@
     <string name = "privacyTip"> Sebelum anda menggunakan produk kami, sila baca dengan teliti dan fahami sepenuhnya perjanjian privasi pengguna yang berkaitan. \ nBila anda mengklik "OK", ini bermaksud bahawa anda telah bersetuju dengan syarat-syarat perjanjian. \ n Dasar privasi pengguna terutamanya merangkumi kandungan berikut: \ n1. Pengumpulan, penyimpanan dan perkongsian maklumat peribadi (avatar, nama panggilan, tinggi, berat badan, data latihan, dll.). \ n2. Penggunaan izin perangkat (lokasi, buku alamat, kamera, dll.) </string>
     <string name = "crop_pic_failed"> gagal memintas gambar, sila pilih gambar format jpg! </string>
     <string name = "visiter"> Mod pelancongan tidak menyokong ciri ini </string>
-    <string name = "chooseJpg"> Sila pilih gambar dalam format jpg </string>
     <string name="newVersion">Versi baru perisian telah dikesan, adakah ia dikemaskini sekarang?</string>
-
-
-    <string name = "planOK"> Matlamat hari ini telah tercapai </string>
-    <string name = "planNO"> Matlamat hari ini tidak tercapai </string>
-    <string name = "planStepShare"> langkah sasaran:% dsteps </string>
-    <string name = "distanceShare"> jarak berjalan kaki:% .1fKm </string>
-    <string name = "calurieShare"> Kalori dibakar:% .1fKcal </string>
-
-    <string name = "planSleep"> jangka masa sasaran:% .1fh </string>
-    <string name = "deepSleepShare"> Tempoh tidur nyenyak:% 02dh% 02dmin </string>
-    <string name = "lightSleepShare"> Tempoh tidur ringan:% 02dh% 02dmin </string>
-
-    <string name = "testTimes"> Nombor pengukuran hari ini:% d </string>
-    <string name = "maxHeartShare"> Denyut jantung maksimum:% dbpm </string>
-    <string name = "minHeartShare"> denyut jantung minimum:% dbpm </string>
-
-    <string name = "bloodOxygenData"> ketepuan oksigen darah </string>
-    <string name = "testValue"> keputusan ujian: </string>
-    <string name = "passTimeData"> kadar lulus:% .1f %% </string>
-
-    <string name = "bloodPressureData"> tekanan darah sistolik / diastolik rata-rata </string>
 
 
     <string name = "connect_error"> Ralat Sambungan </string>
@@ -386,5 +362,6 @@
     <string name="runShort">Panjang atau jarak larian terlalu singkat untuk menjadi statistik.</string>
     <string name="started">Mula berjalan dahulu</string>
     <string name="touchAgain1">Tekan sekali lagi untuk keluar dari larian</string>
+    <string name="unlock">Leret ke kanan untuk membuka kunci</string>
 
 </resources>

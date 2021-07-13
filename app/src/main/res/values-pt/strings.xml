@@ -170,8 +170,6 @@
     <string name="runWithout">Correndo PELA porta.</string>
     <string name="marathon">Maratona</string>
     <string name="sufing">Surfar</string>
-    <string name="shudu">Velocidade</string>
-    <string name="averageShudu">Velocidade média</string>
     <string name="boat">Remando</string>
     <string name="altitude">Altitude</string>
     <string name="avarageAltitude">Altura de subida</string>
@@ -315,7 +313,6 @@
     <string name="saved"> Salvo com sucesso</string>
     <string name="notificationlistener_prompt_title"> Habilitar notificações</string>
     <string name="notificationlistener_prompt_content">O iSmarport precisa encaminhar notificações de aplicativos para dispositivos inteligentes remotos。Pressione \ "Confirmar \" Entrar na página de notificação para ativar。</string>
-    <string name="tokenTimeout">O login expirou, faça login novamente</string>
     <string name="lostDevice">O dispositivo não está conectado</string>
     <string name="permissionErrorForCamare">Falha na permissão, não consigo ativar a função de câmera</string>
     <string name="findPermission">Falha na permissão, não será possível pesquisar a lista de dispositivos</string>
@@ -326,29 +323,9 @@
     <string name="privacyTip"> Você leu claramente o Acordo de Privacidade? Você concordou em se registrar como um novo usuário de nossa empresa？ Ao clicar em "Confirmar", você concorda com os termos do contrato。\nA política de privacidade do usuário inclui principalmente o seguinte: 1. Informações pessoais (foto do perfil 、 apelido 、 altura 、 peso 、 dados esportivos, etc.) Coleta, salvar e compartilhar。2. Permissões do dispositivo (localização, lista de contato, câmera, etc.) Usando</string>
     <string name="crop_pic_failed">Falha na captura da imagem, escolha a imagem no formato JPG / PNG!</string>
     <string name="visiter">Este recurso não é compatível com o modo visitante</string>
-    <string name="chooseJpg">Por favor, escolha UMA Imagem no formato JPG</string>
     <string name="newVersion">Uma nova versão do software foi detectada?</string>
 
     <!--Interface de compartilhamento-->
-    <string name="planOK"> A meta de hoje foi alcançada</string>
-    <string name="planNO">O objetivo de hoje não foi alcançado</string>
-    <string name="planStepShare">Etapas alvo: %dsteps</string>
-    <string name="distanceShare">Distância a pé: %.1fKm</string>
-    <string name="calurieShare">Calorias queimadas: %.1fKcal</string>
-
-    <string name="planSleep">Duração prevista: %.1fh</string>
-    <string name="deepSleepShare"> Sono Profundo: %02dh%02dmin</string>
-    <string name="lightSleepShare"> Sono leve: %02dh%02dmin</string>
-
-    <string name="testTimes">Tempos de medição: %d</string>
-    <string name="maxHeartShare">Freqüência cardíaca máxima: %dbpm</string>
-    <string name="minHeartShare">Freqüência cardíaca mínima: %dbpm</string>
-
-    <string name="bloodOxygenData"> Saturação de oxigênio no sangue</string>
-    <string name="testValue"> Resultados do teste:</string>
-    <string name="passTimeData">Taxa de aprovação: %.1f%%</string>
-
-    <string name="bloodPressureData">Pressão sistólica média / pressão diastólica</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>
@@ -393,5 +370,6 @@
     <string name="runShort">O tempo de corrida ou as distâncias são muito curtas para as estatísticas.</string>
     <string name="started">Por favor, comece a correr primeiro</string>
     <string name="touchAgain1">Pressione novamente para sair da corrida</string>
+    <string name="unlock">Desbloqueie para a direita</string>
 
 </resources>

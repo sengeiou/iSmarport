@@ -11,6 +11,7 @@ import android.os.HandlerThread;
 
 import android.os.Message;
 import android.os.Vibrator;
+import android.util.Log;
 
 import com.inuker.bluetooth.library.connect.listener.BleConnectStatusListener;
 import com.inuker.bluetooth.library.connect.listener.BluetoothStateListener;
@@ -303,7 +304,7 @@ public class BleClient {
             if (data.length != 0){
                 if (data.length > 0) {
                     if ((data.length>=2) && (data[0]==-86) && ((!(data[1]>=0x01 && data[1]<0x12))
-                            && data[1]!=0x14 && data[1]!=0x19)) {
+                            && data[1]!=0x14 && data[1]!=0x19&& data[1]!=0x21&&data[1]!=0x22&&data[1]!=0x23)) {
                         DataParser.newInstance().parseData(data);
                     }else {
                         Message message = mAnalysisHandler.obtainMessage();
@@ -375,9 +376,11 @@ public class BleClient {
                 EventBus.getDefault().post(new UpdateSportView());
             }
             if (indexData==null){
+                Log.d("DATA******","index!=null");
                 indexData = dataIndex;
                 if (indexData.size()>0){
                     isSync = false;
+                    Log.d("DATA******","index>0");
                     synSmartDeviceData(0);
                 }else {
                     indexData = null;
@@ -596,6 +599,7 @@ public class BleClient {
     private void synSmartDeviceData(final int dataType) {
         byte[] datas = new byte[0];
         int type = indexData.get(dataType);
+        Log.d("DATA******","type = "+type);
         if (connectState==3) {
             switch (type) {
                 case 0x01:
@@ -727,6 +731,24 @@ public class BleClient {
                     //跑步机
                     LogUtil.getInstance().logd("DATA******", "sync step on day");
                     datas = CommandUtil.getCommandbyteArray(0x19, 8,
+                            0, true);
+                    break;
+                case 0x21:
+                    //跑步机
+                    LogUtil.getInstance().logd("DATA******", "sync badnition on day");
+                    datas = CommandUtil.getCommandbyteArray(0x21, 8,
+                            0, true);
+                    break;
+                case 0x22:
+                    //跑步机
+                    LogUtil.getInstance().logd("DATA******", "sync basket on day");
+                    datas = CommandUtil.getCommandbyteArray(0x22, 8,
+                            0, true);
+                    break;
+                case 0x23:
+                    //跑步机
+                    LogUtil.getInstance().logd("DATA******", "sync foot on day");
+                    datas = CommandUtil.getCommandbyteArray(0x23, 8,
                             0, true);
                     break;
                 default:

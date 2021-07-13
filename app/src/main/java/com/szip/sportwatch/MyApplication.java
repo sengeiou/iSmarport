@@ -95,6 +95,8 @@ public class MyApplication extends Application{
                     ,Integer.valueOf(buff[5],16));
             Log.d("SZIP******","MAC = "+BtMac);
         }
+        if (BtMac.equals("00:00:00:00:00:00"))
+            return;
         if (btAdapt == null)
             btAdapt = BluetoothAdapter.getDefaultAdapter();
         try {

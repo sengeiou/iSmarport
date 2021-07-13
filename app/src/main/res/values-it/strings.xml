@@ -169,8 +169,6 @@
     <string name = "runWithout">corsa all\'aperto</string>
     <string name = "marathon">Maratona</string>
     <string name = "sufing">navigazione</string>
-    <string name = "shudu">velocità</string>
-    <string name = "averageShudu">velocità media</string>
     <string name = "boat">canottaggio</string>
     <string name = "altitude">altitudine</string>
     <string name = "avarageAltitude">Aumento dell’altezza</string>
@@ -309,7 +307,6 @@
     <string name = "saved">salvato correttamente</string>
     <string name = "notificationlistener_prompt_title">abilita la notifica</string>
     <string name = "notificationlistener_prompt_content">Aiprint deve inoltrare le notifiche dell\'applicazione ai dispositivi intelligenti remoti. Premere \ "OK \" per accedere alla pagina di notifica da attivare.</string>
-    <string name = "tokenTimeout">login è scaduto, accedi di nuovo</string>
     <string name = "lostDevice">Il dispositivo non è connesso</string>
     <string name = "permissionErrorForCamare">autorizzazione non riuscita, impossibile aprire la funzione della fotocamera</string>
     <string name = "findPermission">Se l\'autorizzazione non viene passata, l\'elenco dei dispositivi non verrà cercato.</string>
@@ -320,29 +317,8 @@
     <string name = "privacyTip">Prima di utilizzare i nostri prodotti, leggere attentamente e comprendere appieno gli accordi sulla privacy degli utenti pertinenti. \ nQuando fai clic su "OK", significa che hai accettato i termini del contratto. \ nL\'informativa sulla privacy dell\'utente include principalmente i seguenti contenuti: \ n1. Raccolta, archiviazione e condivisione di informazioni personali (avatar, nickname, altezza, peso, dati di esercizio, ecc.). \ n2. Utilizzo delle autorizzazioni del dispositivo (posizione, rubrica, fotocamera, ecc.)</string>
     <string name = "crop_pic_failed">non è riuscito a intercettare l\'immagine, seleziona l\'immagine in formato jpg!</string>
     <string name = "visiter">La modalità turistica non supporta questa funzione</string>
-    <string name = "chooseJpg">Seleziona le immagini in formato jpg</string>
     <string name="newVersion">Una nuova versione del software è stata individuata e aggiornata?</string>
 
-
-    <string name = "planOK">L\'obiettivo di oggi è stato raggiunto</string>
-    <string name = "planNO">L\'obiettivo di oggi non è stato raggiunto</string>
-    <string name = "planStepShare">passaggi di destinazione:% dsteps</string>
-    <string name = "distanceShare">distanza percorribile:% .1fKm</string>
-    <string name = "calurieShare">Calorie bruciate:% .1fKcal</string>
-
-    <string name = "planSleep">durata target:% .1fh</string>
-    <string name = "deepSleepShare">Durata del sonno profondo:% 02dh% 02dmin</string>
-    <string name = "lightSleepShare">Durata del sonno leggero:% 02dh% 02dmin</string>
-
-    <string name = "testTimes">Numero di misurazione odierna:% d</string>
-    <string name = "maxHeartShare">Frequenza cardiaca massima:% dbpm</string>
-    <string name = "minHeartShare">frequenza cardiaca minima:% dbpm</string>
-
-    <string name = "bloodOxygenData">saturazione di ossigeno nel sangue</string>
-    <string name = "testValue">risultati del test:</string>
-    <string name = "passTimeData">tasso di passaggio:% .1f %%</string>
-
-    <string name = "bloodPressureData">pressione sanguigna sistolica / diastolica media</string>
 
     <string name = "connect_error">Errore di connessione</string>
 
@@ -384,5 +360,6 @@
     <string name="runShort">I tempi di percorrenza sono troppo lunghi o le distanze troppo brevi per essere statisticamente significative.</string>
     <string name="started">Per favore, inizi la corsa</string>
     <string name="touchAgain1">Ancora una volta</string>
+    <string name="unlock">Sbloccarsi a destra</string>
 
 </resources>

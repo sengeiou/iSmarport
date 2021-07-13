@@ -159,8 +159,6 @@
     <string name="runWithout">Outdoor Run</string>
     <string name="marathon">Outdoor Run</string>
     <string name="sufing">Surf</string>
-    <string name="shudu">Vitesse</string>
-    <string name="averageShudu">Vitesse moyenne</string>
     <string name="boat">Ramer</string>
     <string name="altitude">Altitude</string>
     <string name="avarageAltitude">Hauteur de montée</string>
@@ -302,7 +300,6 @@
     <string name="saved">Enregistrer le succès</string>
     <string name="notificationlistener_prompt_title">Avis d \'ouverture</string>
     <string name="notificationlistener_prompt_content">l faut envoyer une notification d \'application à distance.Appuyez sur \ \ déterminer \ \ pour entrer dans la page d \'avis.</string>
-    <string name="tokenTimeout">L \'accès est expiré</string>
     <string name="lostDevice">Dispositif non connecté</string>
     <string name="permissionErrorForCamare">Pas d\'accès. Pas de caméra.</string>
     <string name="findPermission">Impossible de trouver la liste des périphériques</string>
@@ -313,29 +310,10 @@
     <string name="privacyTip">Avant d \'utiliser nos produits, lisez attentivement et comprenez bien les accords de confidentialité des utilisateurs.\nLorsque vous cliquez sur Oui, cela signifie que vous êtes d \'accord avec les termes du Protocole.\nLa politique de protection de la vie privée des utilisateurs comprend les éléments suivants::\n1.Collecte, conservation et partage de données personnelles (images, surnoms, taille, poids, données sportives, etc.).\n2.Utilisation des droits d \'équipement (emplacement, enregistrement de communications, appareil photo, etc.).</string>
     <string name="crop_pic_failed">Impossible d \'intercepter l\' image, sélectionnez l \'image en format JPG!</string>
     <string name="visiter">Le mode touristique ne supporte pas cette fonction</string>
-    <string name="chooseJpg">Veuillez sélectionner l \'image au format JPG</string>
     <string name="newVersion">Une nouvelle version du logiciel a été détectée?</string>
 
 
     <!--Interface de partage-->
-    <string name="planOK">L\'objectif est atteint aujourd\'hui..</string>
-    <string name="planNO">Pas aujourd\'hui</string>
-    <string name="planStepShare">Nombre cible: %dsteps</string>
-    <string name="distanceShare">Distance de marche: %.1fKm</string>
-    <string name="calurieShare">Consommation calorique: %.1fKcal</string>
-    <string name="planSleep">Durée de la cible: %.1fh</string>
-    <string name="deepSleepShare">Endormir: %02dh%02dmin</string>
-    <string name="lightSleepShare">Long sleep: %02dh%02dmin</string>
-
-    <string name="testTimes">Mesure d \'aujourd\' hui: %d</string>
-    <string name="maxHeartShare">Max.: %dbpm</string>
-    <string name="minHeartShare">Minimum Cardiac rate: %dbpm</string>
-
-    <string name="bloodOxygenData">Oxygen Saturation</string>
-    <string name="testValue">Résultats des essais:</string>
-    <string name="passTimeData">Taux de conformité: %.1f%%</string>
-
-    <string name="bloodPressureData">Pression de compression moyenne</string>
 
     <!-- Scan & Connect -->
     <string name="connect_error">Connect Error</string>
@@ -380,5 +358,6 @@
     <string name="runShort">Les durées de parcours ou les distances parcourues sont trop courtes pour être chiffrées.</string>
     <string name="started">S’il vous plaît, commencez la course</string>
     <string name="touchAgain1">Appuyez à nouveau sur la touche pour sortir de la course</string>
+    <string name="unlock">Déverrouiller à droite</string>
 
 </resources>
