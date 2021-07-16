@@ -1,6 +1,7 @@
 package com.szip.sportwatch.Fragment.ReportFragment.sport;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.szip.sportwatch.Fragment.BaseFragment;
@@ -50,6 +51,13 @@ public class ClimbFragment extends BaseFragment {
         tableView1.addData(sportData.getHeartArray().equals("")?null:sportData.getHeartArray().split(","));
         averageTv2.setText(sportData.height+"");
         tableView2.addData(sportData.getAltitudeArray().equals("")?null:sportData.getAltitudeArray().split(","));
+
+        if(sportData.heart==0){
+            getView().findViewById(R.id.heartLl).setVisibility(View.GONE);
+        }
+        if(sportData.height==0){
+            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
+        }
 
     }
 

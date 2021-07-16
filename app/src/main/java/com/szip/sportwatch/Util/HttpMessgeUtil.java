@@ -16,6 +16,8 @@ import com.szip.sportwatch.Model.HttpBean.CheckVerificationBean;
 import com.szip.sportwatch.Model.HttpBean.DeviceConfigBean;
 import com.szip.sportwatch.Model.HttpBean.DialBean;
 import com.szip.sportwatch.Model.HttpBean.DownloadDataBean;
+import com.szip.sportwatch.Model.HttpBean.FaqBean;
+import com.szip.sportwatch.Model.HttpBean.FaqListBean;
 import com.szip.sportwatch.Model.HttpBean.LoginBean;
 import com.szip.sportwatch.Model.HttpBean.UserInfoBean;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
@@ -484,6 +486,39 @@ public class HttpMessgeUtil {
                 .addParams("watchPlateGroupId",watchPlateGroupId)
                 .build()
                 .execute(callback,new TokenInterceptor());
+    }
+
+    private void _getFaqList(GenericsCallback<FaqListBean> callback)throws IOException{
+        String url = this.url+"comm/getQuestionAndAnswers";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addHeader("Time-Diff",time)
+                .addHeader("Accept-Language",language)
+                .addParams("pageNum","1")
+                .addParams("pageSize","30")
+                .build()
+                .execute(callback,new TokenInterceptor());
+    }
+
+    private void _getFaqContent(String id,GenericsCallback<FaqBean> callback)throws IOException{
+        String url = this.url+"comm/getQuestionAndAnswerDetail";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addHeader("Time-Diff",time)
+                .addHeader("Accept-Language",language)
+                .addParams("id",id)
+                .build()
+                .execute(callback,new TokenInterceptor());
+    }
+
+    public void getFaq(String id,GenericsCallback<FaqBean> callback)throws IOException{
+        _getFaqContent(id,callback);
+    }
+
+    public void getFaqList(GenericsCallback<FaqListBean> callback)throws IOException{
+        _getFaqList(callback);
     }
 
     public void getDeviceConfig(GenericsCallback<DeviceConfigBean> callback)throws IOException{

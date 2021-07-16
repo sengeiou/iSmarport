@@ -1,6 +1,7 @@
 package com.szip.sportwatch.Fragment.ReportFragment.sport;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.szip.sportwatch.Fragment.BaseFragment;
@@ -82,5 +83,18 @@ public class MarathonFragment extends BaseFragment {
         tableView2.addData(strideArray);
         tableView3.addData(altitudeArray);
         sportSpeed.addData(speedArray);
+
+        if(sportData.heart==0){
+            getView().findViewById(R.id.heartLl).setVisibility(View.GONE);
+        }
+        if(sportData.height==0){
+            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
+        }
+        if(sportData.stride==0){
+            getView().findViewById(R.id.strideLl).setVisibility(View.GONE);
+        }
+        if(sportData.speed==0){
+            getView().findViewById(R.id.speedLl).setVisibility(View.GONE);
+        }
     }
 }

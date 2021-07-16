@@ -134,7 +134,6 @@
     <string name="kcal">소모 (kcal)</string>
     <string name="time">시간 이 길다.</string>
     <string name="heart_rate">심장 박동 수 (bpm)</string>
-    <string name="stride">주파수 (spm)</string>
     <string name="cadence">주파수</string>
     <string name="distance">거리</string>
     <string name="speedData">평균 배 속</string>
@@ -379,4 +378,5 @@
     <string name="started">달리기 시작하세요</string>
     <string name="touchAgain1">다시 버튼을 눌러 달리기 종료</string>
     <string name="unlock">오른쪽으로 미끄러지면서 풀다</string>
+    <string name="startRun">시작</string>
 </resources>

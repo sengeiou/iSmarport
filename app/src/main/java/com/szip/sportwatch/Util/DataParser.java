@@ -4,6 +4,7 @@ import android.util.Log;
 
 
 import com.szip.sportwatch.DB.dbModel.AnimalHeatData;
+import com.szip.sportwatch.DB.dbModel.BloodOxygenData;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
@@ -26,6 +27,7 @@ public class DataParser {
 
     private ArrayList<BleStepModel> stepDataArrayList;
     private ArrayList<StepData> stepOnDayDataArrayList;
+    private ArrayList<BloodOxygenData> bloodOxygenDataArrayList;
     private ArrayList<HeartData> heartDataArrayList;
     private ArrayList<AnimalHeatData> animalHeatDataArrayList;
     private ArrayList<SportData> sportDataArrayList;
@@ -57,7 +59,7 @@ public class DataParser {
         if (data[1]==0x32){
             int deviceNum = (data[9]&0xff)<<8|(data[8]&0xff)&0x0ffff;
             ArrayList<Integer> datas = new ArrayList<>();
-            for (int i = 10;i<data.length-11;i++){
+            for (int i = 10;i<data.length-12;i++){
                 if (data[i]!=0){
                     datas.add(i-9);
                     if(i==10){
@@ -79,6 +81,9 @@ public class DataParser {
                         datas.add(0x21+i);
                     }
                 }
+            }
+            if (data.length>38&&data[38]==1){
+                datas.add(0x24);
             }
             if (mIDataResponse!=null)
                 mIDataResponse.onGetDataIndex(deviceNum+"",datas);
@@ -1086,6 +1091,17 @@ public class DataParser {
             stepOnDayDataArrayList = null;
             dataType = 0;
             LogUtil.getInstance().logd("DATA******","总计步接受结束 step= "+step+" ;distance = "+distence+" ;calorie = "+calorie);
+        }else if (type == 0x24){
+            if (bloodOxygenDataArrayList==null)
+                bloodOxygenDataArrayList = new ArrayList<>();
+            long timeOfDay = time;
+            int bloodOxy = (data[0] & 0xff);
+            bloodOxygenDataArrayList.add(new BloodOxygenData(timeOfDay,bloodOxy));
+            if (mIDataResponse!=null)
+                mIDataResponse.onSaveBloodOxygenDatas(bloodOxygenDataArrayList);
+            bloodOxygenDataArrayList = null;
+            dataType = 0;
+            LogUtil.getInstance().logd("DATA******","总计血氧数据接收 time= "+timeOfDay+" ;data = "+bloodOxy);
         }
     }
 

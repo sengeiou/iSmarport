@@ -157,7 +157,8 @@
     <string name = "refreshing"> قيد التحديث ... </string>
     <string name = "refresh_succeed"> التحديث بنجاح </string>
     <string name = "refresh_fail"> فشل التحديث </string>
-
+    <string name="getPrivacy">ويتطلب هذا التطبيق، أثناء استخدامه، الوصول إلى صلاحية تحديد المواقع لتسجيل ومعايرة مسارات الحركة والمسافات
+إذا لم توافق على نقل الصلاحيات المذكورة أعلاه، فإن هذه الوظيفة غير صالحة للاستخدام بشكل صحيح دون المساس بالوظيفة الأساسية لهذا التطبيق. يمكنك الذهاب إلى "إدارة الصلاحيات" في أي وقت واختيار إغلاق نداء الصلاحيات لسحب موافقتكفي أي وقت ؛ "إدارة الصلاحيات"، اختر إغلاق اللّالصلاحيات إلى سحب موافقتك</string>
 
     <string name = "best"> أفضل سجل للجري في الهواء الطلق </string>
     <string name = "history"> تاريخ السجلات الرياضية </string>
@@ -166,7 +167,6 @@
     <string name = "kcal"> الاستهلاك (kcal) </string>
     <string name = "time"> المدة </string>
     <string name = "heart_rate"> معدل ضربات القلب (نبضة في الدقيقة) </string>
-    <string name = "stride"> تردد الخطوة (الخطوات / الخطوات) </string>
     <string name = "cadence"> تردد الخطوة </string>
     <string name = "distance"> الأميال (</string>
     <string name = "speedData"> متوسط ​​السرعة </string>
@@ -377,5 +377,7 @@
     <string name="started">يرجى بدء حركة الجري</string>
     <string name="touchAgain1">اضغط على الخروج مرة أخرى</string>
     <string name="unlock">انزلق لفتح القفل إلى اليمين</string>
+    <string name="startRun">بدأت</string>
+    <string name="tipForPrivacy">تعليمات الترخيص</string>
 
 </resources>

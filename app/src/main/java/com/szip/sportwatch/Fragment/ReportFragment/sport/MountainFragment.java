@@ -85,12 +85,27 @@ public class MountainFragment extends BaseFragment {
         tableView3.addData(strideArray);
         sportSpeed.addData(speedArray);
 
-        if (MyApplication.getInstance().isMtk()){
-            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
-        }else {
-            getView().findViewById(R.id.speedLl).setVisibility(View.GONE);
+
+        if(sportData.heart==0){
+            getView().findViewById(R.id.heartLl).setVisibility(View.GONE);
+        }
+        if(sportData.height==0){
+            getView().findViewById(R.id.heightRl).setVisibility(View.GONE);
+        }
+        if(sportData.stride==0){
             getView().findViewById(R.id.strideLl).setVisibility(View.GONE);
         }
+        if(sportData.speed==0){
+            getView().findViewById(R.id.speedLl).setVisibility(View.GONE);
+        }
+
+
+//        if (MyApplication.getInstance().isMtk()){
+//            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
+//        }else {
+//            getView().findViewById(R.id.speedLl).setVisibility(View.GONE);
+//            getView().findViewById(R.id.strideLl).setVisibility(View.GONE);
+//        }
 
     }
 

@@ -139,7 +139,6 @@
     <string name="kcal">Потреблено (ккал))</string>
     <string name="time">Время</string>
     <string name="heart_rate">Частота пульса (уд / мин)(bpm)</string>
-    <string name="stride">Шаг (spm)</string>
     <string name="cadence">Шаг</string>
     <string name="distance">Расстояние(</string>
     <string name="speedData">Средняя скорость</string>
@@ -362,5 +361,6 @@
     <string name="started">Пожалуйста, начните с бега</string>
     <string name="touchAgain1">Нажмите еще раз, чтобы выйти из гонки</string>
     <string name="unlock">Поверните направо, чтобы открыть замок</string>
+    <string name="startRun">нача</string>
 
 </resources>

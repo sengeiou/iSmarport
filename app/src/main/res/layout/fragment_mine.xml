@@ -297,14 +297,14 @@
                     android:id="@+id/image4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/my_icon_call"
+                    android:src="@mipmap/my_icon_faq"
                     android:padding="@dimen/item_pad"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/blePhone"
+                    android:text="@string/FAQ"
                     android:textColor="@color/rayblue"
                     android:textSize="@dimen/item_text_size"
                     android:layout_centerVertical="true"

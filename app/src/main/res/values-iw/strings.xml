@@ -162,7 +162,6 @@
     <string name="kcal">להשתמש</string>
     <string name="time">משך</string>
     <string name="heart_rate">קצב הלב (bpm)</string>
-    <string name="stride">תדר צעדים (spm)</string>
     <string name="cadence">תדר צעדים</string>
     <string name="distance">קילומטר(</string>
     <string name="speedData">מהירות ממוצעת</string>
@@ -382,5 +381,6 @@
     <string name="started">התחל לפעול תחילה</string>
     <string name="touchAgain1">לחץ שוב כדי לצאת מההפעלה</string>
     <string name="unlock">החלק ימינה כדי לבטל נעילה</string>
+    <string name="startRun">להתחיל</string>
 
 </resources>

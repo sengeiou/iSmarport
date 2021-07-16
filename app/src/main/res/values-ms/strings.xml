@@ -149,7 +149,6 @@
     <string name = "kcal"> Penggunaan (kcal) </string>
     <string name = "time"> durasi </string>
     <string name = "heart_rate"> Denyut jantung (bpm) </string>
-    <string name = "stride">Kekerapan langkah (spm)</string>
     <string name="cadence">Kekerapan langkah</string>
     <string name = "distance"> jarak tempuh (</string>
     <string name = "speedData"> kecepatan rata-rata </string>
@@ -363,5 +362,6 @@
     <string name="started">Mula berjalan dahulu</string>
     <string name="touchAgain1">Tekan sekali lagi untuk keluar dari larian</string>
     <string name="unlock">Leret ke kanan untuk membuka kunci</string>
+    <string name="startRun">Mula</string>
 
 </resources>

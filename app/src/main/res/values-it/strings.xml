@@ -150,7 +150,6 @@
     <string name = "kcal">consumo (kcal)</string>
     <string name = "time">durata</string>
     <string name = "heart_rate">Frequenza cardiaca (bpm)</string>
-    <string name = "stride">Frequenza dei passi (spm)</string>
     <string name="cadence">Frequenza dei passi</string>
     <string name = "distance">chilometraggio (</string>
     <string name = "speedData">ritmo medio</string>
@@ -361,5 +360,6 @@
     <string name="started">Per favore, inizi la corsa</string>
     <string name="touchAgain1">Ancora una volta</string>
     <string name="unlock">Sbloccarsi a destra</string>
+    <string name="startRun">inizio</string>
 
 </resources>

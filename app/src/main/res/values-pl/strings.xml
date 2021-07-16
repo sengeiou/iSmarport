@@ -208,7 +208,6 @@ Jeśli nadal korzystasz z naszych usług, zgadzasz się na związanie niniejszą
     <string name = "kcal"> zużycie (kcal) </string>
     <string name = "time"> czas trwania </string>
     <string name = "heart_rate"> Tętno (bpm) </string>
-    <string name = "stride">Częstotliwość kroków (spm)</string>
     <string name="cadence">Częstotliwość kroków</string>
     <string name = "distance"> przebieg (</string>
     <string name = "speedData"> średnie tempo </string>
@@ -423,5 +422,6 @@ związek. \ n \ nUwaga: zegarek nie może używać funkcji połączenia Bluetoot
     <string name="started">Zacznij działać jako pierwszy</string>
     <string name="touchAgain1">Naciśnij ponownie, aby zakończyć bieg</string>
     <string name="unlock">Przesuń palcem w prawo, aby odblokować</string>
+    <string name="startRun">zaczynać</string>
 
 </resources>

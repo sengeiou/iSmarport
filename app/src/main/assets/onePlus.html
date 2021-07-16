@@ -1,0 +1,64 @@
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script anguage="JavaScript" type="text/javascript">
+        function LoadTable()
+        {
+        var ual = navigator.language;
+        var baseLang = 'zh';
+        baseLang = ual ? ual.substring(0,2).toLowerCase() : "zh";
+        var strLoading = "";
+        if(baseLang != 'zh'){
+         strLoading += "<p style=\"text-align:left;\">";
+         strLoading += "<font size=\"2\">1.Open Settings and select \"Applications&Notifications\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_en_1.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%; margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">2.Select \"Special app occess\"</font>";
+          strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_en_2.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+           strLoading += "<br/>";
+         strLoading += "<font size=\"2\">3.Select \"Battery Optimization\"</font>";
+          strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_en_3.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+           strLoading += "<br/>";
+         strLoading += "<font size=\"2\">4.Find our APP and click \"Don't Optimized\".</font>";
+          strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_en_4.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "</p>";
+        }else{
+         strLoading += "<p style=\"text-align:left;\">";
+         strLoading += "<font size=\"2\">1.打开设置选择“应用和通知”</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_1.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">2.选择“特殊应用权限”</font>";
+          strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_2.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+           strLoading += "<br/>";
+         strLoading += "<font size=\"2\">3.选择“电池优化”</font>";
+          strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_3.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+           strLoading += "<br/>";
+         strLoading += "<font size=\"2\">4.找到我们的APP之后点击“不优化”</font>";
+          strLoading += "<br/>";
+         strLoading += "<img src=\"oneplus_4.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "</p>";
+        }
+         document.getElementById("loading_div").innerHTML = strLoading;
+        }
+
+        window.onload = function() {
+          LoadTable();
+        }
+        </script>
+</head>
+
+
+
+<body>
+    <div id="loading_div" ></div>
+</body>
+</html>

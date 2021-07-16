@@ -149,7 +149,6 @@
     <string name = "kcal"> Verbrauch (kcal) </string>
     <string name = "time"> Dauer </string>
     <string name = "heart_rate"> Herzfrequenz (bpm) </string>
-    <string name = "stride">Schrittfrequenz (spm)</string>
     <string name="cadence">Schrittfrequenz</string>
     <string name = "distance"> Kilometerstand (</string>
     <string name = "speedData"> durchschnittliches Tempo </string>
@@ -366,5 +365,6 @@
     <string name="started">Bitte starten sie zuerst den laufsport</string>
     <string name="touchAgain1">Und nochmal kurz raus aus dem rennen</string>
     <string name="unlock">Ziehen sie zum entsperren nach rechts</string>
+    <string name="startRun">Und action!</string>
 
 </resources>

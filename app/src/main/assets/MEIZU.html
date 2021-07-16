@@ -1,0 +1,119 @@
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script anguage="JavaScript" type="text/javascript">
+     function LoadTable(){
+        var ual = navigator.language;
+        var baseLang = 'zh';
+        baseLang = ual ? ual.substring(0,2).toLowerCase() : "zh";
+        var strLoading = "";
+        if(baseLang != 'zh'){
+        strLoading += "<p style=\"text-align:left;\">";
+         strLoading += "<font size=\"4\">MEIZU background protection settings</font>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">1.Turn on \"Security\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_1.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">2.Select \"Permissions\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_2.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">3.Select \"Background progresses\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_3.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">4.Find our APP in the list</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_4.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">5.Select Allow background running</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_5.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"4\">MEIZU anti-sleep settings</font>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">1.Turn on \"Security\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_1.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">2.Select \"Bettery\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_7.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">3.Click \"Power usage details\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_8.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">4.Find our APP in the \"Power usage details\" list</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_9.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">5.Click \"Permission to run in background\", and then tick \"Keep running in background\"</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_en_10.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "</p>";
+        }else{
+         strLoading += "<p style=\"text-align:left;\">";
+         strLoading += "<font size=\"4\">魅族后台保护设置：</font>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">1.打开“手机管家”</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_1.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">2.选择“权限管理”</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_2.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">3.选择“后台管理”</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_3.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">4.在列表中找到我们的APP</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_4.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">5.选择允许后台运行</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_5.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"4\">魅族防睡眠设置：</font>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">1.点开“手机管家”</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_1.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">2.选择“电量管理”</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_7.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">3.点击“耗电详情”</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_8.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "<br/>";
+         strLoading += "<font size=\"2\">4.在“耗电详情”列表中找到我们的APP</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_9.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+          strLoading += "<br/>";
+         strLoading += "<font size=\"2\">5.点击“待机运行权限”，再勾选“允许后台运行”即可</font>";
+         strLoading += "<br/>";
+         strLoading += "<img src=\"meizu_zh_10.png\" contenteditable=\"false\" style=\"font-size: 14px; text-align: center; max-width: 50%;margin-top:10px;margin-bottom:10px;\"/>";
+         strLoading += "</p>";
+        }
+         document.getElementById("loading_div").innerHTML = strLoading;
+        }
+
+        window.onload = function() {
+          LoadTable();
+        }
+        </script>
+</head>
+
+
+
+<body>
+    <div id="loading_div" ></div>
+</body>
+</html>

@@ -150,7 +150,6 @@
     <string name="kcal">消費（kcal）</string>
     <string name="time">時間</string>
     <string name="heart_rate">心拍数（bpm）</string>
-    <string name="stride">ストライド（spm）</string>
     <string name="cadence">ストライド</string>
     <string name="distance">距離</string>
     <string name="speedData">平均速度</string>
@@ -378,5 +377,6 @@
     <string name="started">まずはランニングを始めてください</string>
     <string name="touchAgain1">もう一度押して走るのをやめる</string>
     <string name="unlock">右にスライドしてロックを解除します</string>
+    <string name="startRun">から</string>
 
 </resources>

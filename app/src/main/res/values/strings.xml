@@ -148,7 +148,6 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="kcal">Consumed (kcal)</string>
     <string name="time">Time</string>
     <string name="heart_rate">Heart Rate(bpm)</string>
-    <string name="stride">Cadence(spm)</string>
     <string name="cadence">Cadence</string>
     <string name="distance">Distance(</string>
     <string name="speedData">Average Speed</string>
@@ -174,6 +173,10 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="climb">Climbing</string>
     <string name="skii">Skii</string>
     <string name="golf">Golf</string>
+    <string name="tipForPrivacy">Permission to illustrate</string>
+    <string name="getPrivacy">During use, the application requires access to location permissions to record and calibrate motion tracks and distances</string>
+
+
     <!--我的页面 Mine-->
     <string name="device">Device</string>
     <string name="stepPlan">Step Goal</string>
@@ -215,7 +218,22 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="unline">Disconnect</string>
     <string name="line">Connect The Watch</string>
     <string name="addDevice">Add Device</string>
-
+    <string name="help">help</string>
+    <string name="FAQ">FAQ</string>
+    <string name="guide">User Guide</string>
+    <string name="service">Keep app active</string>
+    <string name="huawei">HUAWEI</string>
+    <string name="oppo">oppo</string>
+    <string name="vivo">vivo</string>
+    <string name="lenovo">Lenovo</string>
+    <string name="oneplus">onePlus</string>
+    <string name="samsun">Samsun</string>
+    <string name="mi">MI</string>
+    <string name="meizu">MEIZU</string>
+    <string name="serviceTip">In order to improve the stability of the watch connection, it is recommended that you make the following Settings:</string>
+    <string name="saverBettery">Do not open (power saving mode) :</string>
+    <string name="bettyContent">If the power-saving mode is turned on, it may cause problems such as unstable Bluetooth connection, abnormal movement trajectory and reduced power distance. It is recommended to turn off the power-saving mode while in use.</string>
+    <string name="protect">Set the method of background protection::</string>
     <!--蓝牙通话界面 Bluetooth Call Interface-->
     <string name="step1">1.Pair watch With Mobile Phone</string>
     <string name="step2">2.Unmatch</string>
@@ -368,4 +386,6 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="started">Please start running first</string>
     <string name="touchAgain1">Press again to quit running</string>
     <string name="unlock">Slide right to unlock</string>
+    <string name="startRun">Start</string>
+    <string name="stride">stride</string>
 </resources>

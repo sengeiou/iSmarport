@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ismarport</string>
+    <string name="app_name">iSmarport</string>
 
-    <string name = "logo"> به ismarport خوش آمدید </string>
+    <string name = "logo"> به iSmarport خوش آمدید </string>
     <string name = "user"> شماره حساب </string>
     <string name = "phoneOrEmail"> لطفاً تلفن / ایمیل خود را وارد کنید </string>
     <string name = "password"> رمز عبور </string>
@@ -151,7 +151,6 @@
     <string name = "kcal"> مصرف (kcal) </string>
     <string name = "time"> مدت زمان </string>
     <string name = "heart_rate"> ضربان قلب (bpm) </string>
-    <string name = "stride">فرکانس مرحله (spm)</string>
     <string name="cadence">فرکانس مرحله</string>
     <string name = "distance"> مسافت پیموده شده </string>
     <string name = "speedData"> سرعت متوسط ​​</string>
@@ -302,7 +301,7 @@
     <string name = "passwordUnSame"> دو رمز ورود متناقض هستند </string>
     <string name = "saved"> با موفقیت ذخیره شد </string>
     <string name = "notificationlistener_prompt_title"> اعلان را فعال کنید </string>
-    <string name = "notificationlistener_prompt_content"> ismarport باید اعلان های برنامه را به دستگاه های هوشمند از راه دور منتقل کند. برای ورود به صفحه اعلان ها ، "OK" را فشار دهید تا فعال شود. </string>
+    <string name = "notificationlistener_prompt_content"> iSmarport باید اعلان های برنامه را به دستگاه های هوشمند از راه دور منتقل کند. برای ورود به صفحه اعلان ها ، "OK" را فشار دهید تا فعال شود. </string>
     <string name = "lostDevice"> دستگاه متصل نیست </string>
     <string name = "permissionErrorForCamare"> مجوز ناموفق بود ، قادر به باز کردن عملکرد دوربین نیست </string>
     <string name = "findPermission"> اگر مجوز به تصویب نرسد ، لیست دستگاه جستجو نمی شود. </string>
@@ -360,5 +359,6 @@
     <string name="started">اول شروع به دویدن کنید</string>
     <string name="touchAgain1">فشار دوباره برای خروج از اجرا</string>
     <string name="unlock">کشیدن حق برای باز کردن قفل</string>
+    <string name="startRun">شروع</string>
 
 </resources>

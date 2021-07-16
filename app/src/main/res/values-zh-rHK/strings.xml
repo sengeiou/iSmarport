@@ -146,7 +146,6 @@
     <string name="kcal">消耗(kcal)</string>
     <string name="time">時長</string>
     <string name="heart_rate">心率(bpm)</string>
-    <string name="stride">步頻(spm)</string>
     <string name="cadence">步頻</string>
     <string name="distance">里程(</string>
     <string name="speedData">平均配速</string>
@@ -172,7 +171,7 @@
     <string name="skii">滑雪</string>
     <string name="golf">高爾夫</string>
     <!--我的頁面-->
-    <string name="device">設備</string>
+    <string name="device">如果您不同意調用以上權限，將導致該功能無法正常使用，擔不影響您使用本應用的基本功能。您可隨時前往“設置”&gt;“權限管理”，選擇關閉以上權限調用以撤回您的同意</string>
     <string name="stepPlan">計步目標</string>
     <string name="sleepPlan">睡眠目標</string>
     <string name="find">尋找手錶</string>
@@ -352,5 +351,8 @@
     <string name="started">請先開啓跑步運動</string>
     <string name="touchAgain1">再按一次退出跑步</string>
     <string name="unlock">向右滑動解鎖</string>
+    <string name="startRun">開始運動</string>
+    <string name="getPrivacy">在使用過程中，本應用需要訪問定位權限，用於記錄和校準運動軌跡與距離</string>
+    <string name="tipForPrivacy">權限說明</string>
 
 </resources>

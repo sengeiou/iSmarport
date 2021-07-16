@@ -149,7 +149,6 @@ Diğer amaçlar için，veya belirli bir amaç için toplanan bilgiler başka am
     <string name = "kcal"> tüketim (kcal) </string>
     <string name = "time"> süre </string>
     <string name = "heart_rate"> Nabız (bpm) </string>
-    <string name = "stride">Adım frekansı (spm)</string>
     <string name="cadence">Adım frekansı</string>
     <string name = "distance"> kilometre (</string>
     <string name = "speedData"> ortalama hız </string>
@@ -366,5 +365,6 @@ Diğer amaçlar için，veya belirli bir amaç için toplanan bilgiler başka am
     <string name="started">Önce çalışmaya başla</string>
     <string name="touchAgain1">Çalıştırmadan çıkmak için yeniden basın</string>
     <string name="unlock">Kilidini açmak için sağa kaydırın</string>
+    <string name="startRun">başlamak</string>
 
 </resources>

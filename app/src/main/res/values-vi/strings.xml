@@ -208,7 +208,6 @@ Nếu bạn tiếp tục sử dụng dịch vụ của chúng tôi, bạn đồn
     <string name = "kcal"> tiêu thụ (kcal) </string>
     <string name = "time"> thời lượng </string>
     <string name = "heart_rate"> Nhịp tim (bpm) </string>
-    <string name = "stride">Tần suất bước (spm)</string>
     <string name="cadence">Tần suất bước</string>
     <string name = "distance"> mileage </string>
     <string name = "speedData"> nhịp độ trung bình </string>
@@ -427,4 +426,5 @@ mối quan hệ. \ n \ nLưu ý: Đồng hồ không thể sử dụng chức n�
     <string name="started">Xin vui lòng bắt đầu chạy</string>
     <string name="touchAgain1">Nhấn nút rút lui lần nữa</string>
     <string name="unlock">Trượt sang phải để mở khóa</string>
+    <string name="startRun">Bắt đầu</string>
 </resources>

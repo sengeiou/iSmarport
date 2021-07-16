@@ -26,6 +26,7 @@ import com.inuker.bluetooth.library.model.BleGattProfile;
 import com.szip.sportwatch.Activity.camera.CameraActivity;
 import com.szip.sportwatch.DB.SaveDataUtil;
 import com.szip.sportwatch.DB.dbModel.AnimalHeatData;
+import com.szip.sportwatch.DB.dbModel.BloodOxygenData;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
@@ -304,7 +305,7 @@ public class BleClient {
             if (data.length != 0){
                 if (data.length > 0) {
                     if ((data.length>=2) && (data[0]==-86) && ((!(data[1]>=0x01 && data[1]<0x12))
-                            && data[1]!=0x14 && data[1]!=0x19&& data[1]!=0x21&&data[1]!=0x22&&data[1]!=0x23)) {
+                            && data[1]!=0x14 && data[1]!=0x19&& data[1]!=0x21&&data[1]!=0x22&&data[1]!=0x23&&data[1]!=0x24)) {
                         DataParser.newInstance().parseData(data);
                     }else {
                         Message message = mAnalysisHandler.obtainMessage();
@@ -370,30 +371,26 @@ public class BleClient {
         }
 
         @Override
+        public void onSaveBloodOxygenDatas(ArrayList<BloodOxygenData> datas) {
+            SaveDataUtil.newInstance().saveBloodOxygenDataListData(datas);
+        }
+
+        @Override
         public void onGetDataIndex(String deviceNum, ArrayList<Integer> dataIndex) {
             if(MyApplication.getInstance().getDeviceNum()!=deviceNum){
                 MyApplication.getInstance().setDeviceNum(deviceNum);
                 EventBus.getDefault().post(new UpdateSportView());
             }
             if (indexData==null){
-                Log.d("DATA******","index!=null");
                 indexData = dataIndex;
                 if (indexData.size()>0){
                     isSync = false;
-                    Log.d("DATA******","index>0");
                     synSmartDeviceData(0);
                 }else {
                     indexData = null;
                 }
 
             }
-            //测试数据
-//            Message message = mAnalysisHandler.obtainMessage();
-//            message.what = ANALYSIS_HANDLER_FLAG;
-//            message.obj = new byte[]{(byte) 0xAA,0x01,0x0C,0x00, (byte) 0x9B,0x7C, (byte) 0x92,0x5F,0x5F,0x01,0x00,0x00
-//                    ,0x4C,0x00,0x00,0x00, (byte) 0x96,0x0F,0x00,0x00,(byte) 0xAA,0x01,0x0C,0x00, (byte) 0xab, (byte) 0x8a, (byte)
-//                    0x92,0x5F,0x5F,0x02,0x00,0x00,0x4C,0x00,0x00,0x00, (byte) 0x96,0x0F,0x00,0x00,};
-//            mAnalysisHandler.sendMessage(message);
         }
 
         @Override
@@ -599,7 +596,6 @@ public class BleClient {
     private void synSmartDeviceData(final int dataType) {
         byte[] datas = new byte[0];
         int type = indexData.get(dataType);
-        Log.d("DATA******","type = "+type);
         if (connectState==3) {
             switch (type) {
                 case 0x01:
@@ -734,21 +730,27 @@ public class BleClient {
                             0, true);
                     break;
                 case 0x21:
-                    //跑步机
+                    //羽毛球
                     LogUtil.getInstance().logd("DATA******", "sync badnition on day");
                     datas = CommandUtil.getCommandbyteArray(0x21, 8,
                             0, true);
                     break;
                 case 0x22:
-                    //跑步机
+                    //篮球
                     LogUtil.getInstance().logd("DATA******", "sync basket on day");
                     datas = CommandUtil.getCommandbyteArray(0x22, 8,
                             0, true);
                     break;
                 case 0x23:
-                    //跑步机
+                    //足球
                     LogUtil.getInstance().logd("DATA******", "sync foot on day");
                     datas = CommandUtil.getCommandbyteArray(0x23, 8,
+                            0, true);
+                    break;
+                case 0x24:
+                    //血氧
+                    LogUtil.getInstance().logd("DATA******", "sync bloodoxygen on day");
+                    datas = CommandUtil.getCommandbyteArray(0x24, 8,
                             0, true);
                     break;
                 default:

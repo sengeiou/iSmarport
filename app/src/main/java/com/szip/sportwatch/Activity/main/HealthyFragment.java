@@ -1,10 +1,8 @@
-package com.szip.sportwatch.Fragment;
+package com.szip.sportwatch.Activity.main;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.GpsStatus;
@@ -18,8 +16,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.app.ActivityCompat;
-
 import com.bumptech.glide.Glide;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.BLE.EXCDController;
@@ -28,6 +24,7 @@ import com.szip.sportwatch.Activity.report.ReportActivity;
 import com.szip.sportwatch.Activity.userInfo.UserInfoActivity;
 import com.szip.sportwatch.DB.LoadDataUtil;
 import com.szip.sportwatch.DB.dbModel.HealthyConfig;
+import com.szip.sportwatch.Fragment.BaseFragment;
 import com.szip.sportwatch.Interface.MyListener;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
 import com.szip.sportwatch.Model.EvenBusModel.PlanModel;
@@ -35,7 +32,6 @@ import com.szip.sportwatch.Model.HealthyDataModel;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
-import com.szip.sportwatch.Service.MainService;
 import com.szip.sportwatch.Util.DateUtil;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.JsonGenericsSerializator;

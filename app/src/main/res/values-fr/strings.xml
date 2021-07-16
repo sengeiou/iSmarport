@@ -140,7 +140,6 @@
     <string name="kcal">Consommation</string>
     <string name="time">Durée</string>
     <string name="heart_rate">Taux cardiaque</string>
-    <string name="stride">Étape taux(spm)</string>
     <string name="cadence">Étape taux</string>
     <string name="distance">Mile(</string>
     <string name="speedData">Vitesse moyenne</string>
@@ -359,5 +358,6 @@
     <string name="started">S’il vous plaît, commencez la course</string>
     <string name="touchAgain1">Appuyez à nouveau sur la touche pour sortir de la course</string>
     <string name="unlock">Déverrouiller à droite</string>
+    <string name="startRun">début</string>
 
 </resources>

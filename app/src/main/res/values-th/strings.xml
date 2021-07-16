@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ismarport</string>
+    <string name="app_name">iSmarport</string>
 
 
-    <string name = "logo"> ยินดีต้อนรับสู่ ismarport </string>
+    <string name = "logo"> ยินดีต้อนรับสู่ iSmarport </string>
     <string name = "user"> หมายเลขบัญชี </string>
     <string name = "phoneOrEmail"> โปรดป้อนโทรศัพท์ / อีเมลของคุณ </string>
     <string name = "password"> รหัสผ่าน </string>
@@ -150,7 +150,6 @@
     <string name = "kcal"> การบริโภค (kcal) </string>
     <string name = "time"> ระยะเวลา </string>
     <string name = "heart_rate"> อัตราการเต้นของหัวใจ (bpm) </string>
-    <string name = "stride"> ความถี่ขั้นตอน (Steps / s) </string>
     <string name="cadence">Cadence</string>
     <string name = "distance"> ระยะทาง (</string>
     <string name = "speedData"> ก้าวเฉลี่ย </string>
@@ -305,7 +304,7 @@
     <string name = "passwordUnSame"> รหัสผ่านที่ป้อนสองรหัสไม่สอดคล้องกัน </string>
     <string name = "saved"> บันทึกสำเร็จ </string>
     <string name = "notificationlistener_prompt_title"> เปิดใช้งานการแจ้งเตือน </string>
-    <string name = "notificationlistener_prompt_content"> ismarport จำเป็นต้องส่งต่อการแจ้งเตือนของแอปพลิเคชันไปยังอุปกรณ์อัจฉริยะระยะไกล กด \ "OK \" เพื่อเข้าสู่หน้าการแจ้งเตือนเพื่อเปิดใช้งาน </string>
+    <string name = "notificationlistener_prompt_content"> iSmarport จำเป็นต้องส่งต่อการแจ้งเตือนของแอปพลิเคชันไปยังอุปกรณ์อัจฉริยะระยะไกล กด \ "OK \" เพื่อเข้าสู่หน้าการแจ้งเตือนเพื่อเปิดใช้งาน </string>
     <string name = "lostDevice"> อุปกรณ์ไม่ได้เชื่อมต่อ </string>
     <string name = "permissionErrorForCamare"> การอนุญาตล้มเหลวไม่สามารถเปิดฟังก์ชันกล้องได้ </string>
     <string name = "findPermission"> หากไม่ผ่านการอนุญาตรายการอุปกรณ์จะไม่ถูกค้นหา </string>
@@ -363,5 +362,6 @@
     <string name="started">เริ่มออกกำลังกายก่อน</string>
     <string name="touchAgain1">และกดอีกครั้งออกจากการทำงาน</string>
     <string name="unlock">เลื่อนการปลดล็อคไปทางขวา</string>
+    <string name="startRun">เริ่มได้</string>
 
 </resources>

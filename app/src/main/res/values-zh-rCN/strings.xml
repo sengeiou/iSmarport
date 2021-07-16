@@ -151,7 +151,6 @@
     <string name="kcal">消耗(kcal)</string>
     <string name="time">时长</string>
     <string name="heart_rate">心率(bpm)</string>
-    <string name="stride">步频(spm)</string>
     <string name="cadence">步频</string>
     <string name="distance">里程(</string>
     <string name="speedData">平均配速</string>
@@ -180,6 +179,10 @@
     <string name="runShort">跑步时长或距离太短，无法统计数据。</string>
     <string name="started">请先开启跑步运动</string>
     <string name="unlock">向右滑动解锁</string>
+    <string name="startRun">开始运动</string>
+    <string name="tipForPrivacy">权限说明</string>
+    <string name="getPrivacy">在使用过程中，本应用需要访问定位权限，用于记录和校准运动轨迹与距离\n\n如果您不同意调用以上权限，将导致该功能无法正常使用，担不影响您使用本应用的基本功能。您可随时前往“设置”>“权限管理”，选择关闭以上权限调用以撤回您的同意</string>
+
     <!--我的页面-->
     <string name="device">设备</string>
     <string name="stepPlan">计步目标</string>
@@ -221,8 +224,22 @@
     <string name="unline">断开连接</string>
     <string name="line">连接手表</string>
     <string name="addDevice">添加设备</string>
-
-
+    <string name="help">帮助</string>
+    <string name="FAQ">常见问题</string>
+    <string name="guide">使用指引</string>
+    <string name="service">保持后台运行</string>
+    <string name="huawei">华为</string>
+    <string name="oppo">oppo</string>
+    <string name="vivo">vivo</string>
+    <string name="lenovo">联想</string>
+    <string name="oneplus">一加</string>
+    <string name="samsun">三星</string>
+    <string name="mi">小米</string>
+    <string name="meizu">魅族</string>
+    <string name="serviceTip">为了提升手表连接的稳定性，建议您进行如下设置：</string>
+    <string name="saverBettery">请勿开启（省电模式）：</string>
+    <string name="bettyContent">如果开启了省电模式，将可能导致蓝牙连接不稳定、运动轨迹异常、运功距离减少等问题。建议在使用中关闭省电模式。</string>
+    <string name="protect">各大厂商后台保护设置方法：</string>
     <!--蓝牙通话界面-->
     <string name="step1">1.手表与手机蓝牙配对</string>
     <string name="step2">2.解除匹配关系</string>
@@ -374,5 +391,6 @@
     <string name="speedPerHour">时速</string>
     <string name="training">训练跑</string>
     <string name="heart_switch">自动测量心率</string>
+    <string name="stride">步频</string>
 
 </resources>

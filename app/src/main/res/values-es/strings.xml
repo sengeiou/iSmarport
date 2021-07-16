@@ -149,7 +149,6 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="kcal">Consumir (kcal)</string>
     <string name="time">Hora</string>
     <string name="heart_rate">Frecuencia cardíaca</string>
-    <string name="stride">Zancada (spm)</string>
     <string name="cadence">Zancada</string>
     <string name="distance">Distancia(</string>
     <string name="speedData">Velocidad media</string>
@@ -363,5 +362,6 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="started">Por favor, comience la carrera primero</string>
     <string name="touchAgain1">Pulse otra vez para salir de la carrera</string>
     <string name="unlock">Desbloquear deslizando a la derecha</string>
+    <string name="startRun">a</string>
 
 </resources>

@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
 import android.widget.TabHost;
 
 import androidx.annotation.NonNull;
@@ -23,9 +22,6 @@ import androidx.fragment.app.FragmentTabHost;
 
 import com.mediatek.wearable.WearableManager;
 import com.szip.sportwatch.BuildConfig;
-import com.szip.sportwatch.Fragment.HealthyFragment;
-import com.szip.sportwatch.Fragment.MineFragment;
-import com.szip.sportwatch.Fragment.SportFragment;
 import com.szip.sportwatch.Model.HttpBean.CheckUpdateBean;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;

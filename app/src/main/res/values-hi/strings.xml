@@ -133,7 +133,6 @@
     <string name="kcal">उपभोग किया गया (kcal)</string>
     <string name="time">समय:</string>
     <string name="heart_rate">हृदय गति (bpm)</string>
-    <string name="stride"> स्ट्राइड (स्टेप्स /s)</string>
     <string name="cadence">Cadence</string>
     <string name="distance">दूरी(</string>
     <string name="speedData"> औसत गत</string>
@@ -353,5 +352,6 @@
     <string name="started">पहले दौड़ना शुरू करें</string>
     <string name="touchAgain1">रन से बाहर निकलने के लिए फिर से दबाएं</string>
     <string name="unlock">अनलॉक करने के लिए सही स्वाइप करें</string>
+    <string name="startRun">शुरू करना</string>
 
 </resources>

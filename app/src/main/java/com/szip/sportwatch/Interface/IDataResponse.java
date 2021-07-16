@@ -1,6 +1,7 @@
 package com.szip.sportwatch.Interface;
 
 import com.szip.sportwatch.DB.dbModel.AnimalHeatData;
+import com.szip.sportwatch.DB.dbModel.BloodOxygenData;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
@@ -46,6 +47,10 @@ public interface IDataResponse {
      */
     void onSaveRunDatas(ArrayList<SportData> datas);
 
+    /**
+     * 接收完成血氧数据
+     */
+    void onSaveBloodOxygenDatas(ArrayList<BloodOxygenData> datas);
 
     /**
      * 解析完业务数据索引

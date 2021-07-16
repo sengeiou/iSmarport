@@ -104,7 +104,6 @@
     <string name="kcal">Konsum</string>
     <string name="time">Durasi</string>
     <string name="heart_rate">Kadar jantung (bpm)</string>
-    <string name="stride">Frekuensi langkah (spm)</string>
     <string name="cadence">Frekuensi langkah</string>
     <string name="distance">mileage(</string>
     <string name="speedData">Kecepatan rata-rata</string>
@@ -333,5 +332,6 @@
     <string name="started">Silahkan dimulai dengan latihan lari</string>
     <string name="touchAgain1">Tekan sekali lagi untuk keluar</string>
     <string name="unlock">Geser kanan untuk membuka kunci</string>
+    <string name="startRun">mulai</string>
 
 </resources>
