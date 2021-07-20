@@ -180,7 +180,7 @@ public class UpdateFirmwareActivity extends BaseActivity {
         mProgressText =  findViewById(R.id.progress_text);
         mProgressBar =  findViewById(R.id.progress_bar);
 
-        mFileUrl = Environment.getExternalStorageDirectory().getAbsolutePath() + "/iSmarport/image.bin";
+        mFileUrl = getExternalFilesDir(null).getPath() + "/image.bin";
         LogUtil.getInstance().logd("update******","path = "+mFileUrl);
 //                SmartDeviceBLL.getInstance().getFotaFileUrl();
         if (TextUtils.isEmpty(mFileUrl)) {
@@ -190,14 +190,14 @@ public class UpdateFirmwareActivity extends BaseActivity {
         }
         String[] str = mFileUrl.split("/");
         fileName = str[str.length - 1];
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        100);
-            }
-        }else {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+//                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                        100);
+//            }
+//        }else {
             startDownloadFotaFromNetwork();
-        }
+//        }
 
     }
 
@@ -231,18 +231,18 @@ public class UpdateFirmwareActivity extends BaseActivity {
         super.onResume();
     }
 
-    @Override
-    public void onBackPressed() {
-        long nowTime = System.currentTimeMillis();
-        long startTime = mSharedPreferences.getLong("UPDATE_FOTA_START_TIME", nowTime);
-        if ((nowTime - startTime) >= fota_effective_time) {
-            super.onBackPressed();
-        } else {
-            int duration = (int) (fota_effective_time / (60 * 1000));
-            String str = getResources().getString(R.string.warning_updating_text, duration);
-            showToast(str);
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        long nowTime = System.currentTimeMillis();
+//        long startTime = mSharedPreferences.getLong("UPDATE_FOTA_START_TIME", nowTime);
+//        if ((nowTime - startTime) >= fota_effective_time) {
+//            super.onBackPressed();
+//        } else {
+//            int duration = (int) (fota_effective_time / (60 * 1000));
+//            String str = getResources().getString(R.string.warning_updating_text, duration);
+//            showToast(str);
+//        }
+//    }
 
     /**
      * 从网络下载FOTA文件
@@ -256,7 +256,7 @@ public class UpdateFirmwareActivity extends BaseActivity {
 //        }
         Message message = mHandler.obtainMessage();
         message.what = SEND_FOTA_FILE_TO_SD;
-        message.obj = Environment.getExternalStorageDirectory().getAbsolutePath() + "/iSmarport/image.bin";
+        message.obj = getExternalFilesDir(null).getPath() + "/image.bin";
         mHandler.sendMessage(message);
     }
 

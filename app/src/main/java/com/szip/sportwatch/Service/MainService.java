@@ -17,6 +17,7 @@ import android.util.Log;
 
 import androidx.core.content.FileProvider;
 
+import com.mediatek.ctrl.fota.common.FotaOperator;
 import com.mediatek.ctrl.map.MapController;
 import com.mediatek.ctrl.music.RemoteMusicController;
 import com.mediatek.ctrl.notification.NotificationController;
@@ -630,6 +631,7 @@ public class MainService extends Service {
         manager.addController(EXCDController.getInstance());
         EXCDController.getInstance().setReviceDataCallback(reviceDataCallback);
         manager.registerWearableListener(mWearableListener);
+        FotaOperator.getInstance(sContext);
         // start SMS service
         startSmsService();
         startNotificationService();
