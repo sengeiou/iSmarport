@@ -1,6 +1,8 @@
 package com.ctrip.standard;
 
 import android.app.Activity;
+import android.app.Service;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,7 +17,7 @@ public interface AppInterface {
     <T extends View> T findViewById(int id);
 
     void onCreate(Bundle savedInstanceState);
-
+    void onCreate();
     void onStart();
 
     void onResume();
@@ -30,4 +32,10 @@ public interface AppInterface {
      * 需要宿主app注入给插件app上下文
      */
     void attach(Activity activity);
+    /**
+     * 需要宿主app注入给插件app上下文
+     */
+    void setContext(Service service);
+
+    int onStartCommand(Intent intent, int flags, int startId);
 }

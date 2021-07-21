@@ -1,3 +1,3 @@
-include ':run'
+include ':fotaplugin'
 include ':standard'
 include ':app', ':okhttputils', ':citypicker', ':ncalendar', ':library'

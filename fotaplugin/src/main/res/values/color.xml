@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#f3f5f9</color>
+    <color name="colorPrimaryDark">#f3f5f9</color>
+    <color name="colorAccent">#456af3</color>
+
+    <color name="bgColor">#f3f5f9</color>
+
+    <color name="space">#00ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="white1">#88ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black1">#aa000000</color>
+    <color name="rayblue">#0d123b</color>
+    <color name="rayblue1">#aa0d123b</color>
+    <color name="gray">#cecfd8</color>
+    <color name="grayBar">#DCE7F7</color>
+    <color name="color1">#2294FC</color>
+    <color name="color2">#1BC416</color>
+    <color name="color3">#FF4363</color>
+    <color name="gray1">#88c5c6d0</color>
+    <color name="orange">#ffc91a</color>
+    <color name="green">#1BC416</color>
+
+    <color name="goodBg">#caffc7</color>
+    <color name="goodT">#1bc416</color>
+    <color name="normalBg">#a9edff</color>
+    <color name="normalT">#2294fc</color>
+    <color name="badBg">#ffe3cc</color>
+    <color name="badT">#ff4363</color>
+
+    <color name="lineColor">#E6E6E6</color>
+
+    <color name="stepBarBg">#2A8BCF</color>
+    <color name="lineBlue">#829bf6</color>
+    <color name="startBlue">#23BEFF</color>
+    <color name="endBlue">#4b68fa</color>
+    <color name="startBlue1">#aa23BEFF</color>
+    <color name="endBlue1">#aa4b68fa</color>
+
+</resources>

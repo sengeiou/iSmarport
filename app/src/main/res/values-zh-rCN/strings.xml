@@ -388,6 +388,7 @@
     <string name="download_succeed_via_bt">发送完成，请等待升级成功！</string>
     <string name="updated_firmware">升级成功!</string>
     <string name="warning_updating_text">升级中，请等待升级完成，或超时（%1$d分钟）</string>
+
     <string name="speedPerHour">时速</string>
     <string name="training">训练跑</string>
     <string name="heart_switch">自动测量心率</string>

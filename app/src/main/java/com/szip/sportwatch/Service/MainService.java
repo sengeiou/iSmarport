@@ -631,7 +631,6 @@ public class MainService extends Service {
         manager.addController(EXCDController.getInstance());
         EXCDController.getInstance().setReviceDataCallback(reviceDataCallback);
         manager.registerWearableListener(mWearableListener);
-        FotaOperator.getInstance(sContext);
         // start SMS service
         startSmsService();
         startNotificationService();

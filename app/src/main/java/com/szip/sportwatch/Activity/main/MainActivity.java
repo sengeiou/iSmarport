@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
@@ -20,11 +21,13 @@ import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.szip.sportwatch.View.HostTabView;
 import com.szip.sportwatch.View.MyToastView;
+import com.szip.sportwatch.plugin.PluginManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -53,13 +56,19 @@ public class MainActivity extends BaseActivity implements IMainView{
         setContentView(R.layout.activity_main);
         StatusBarCompat.translucentStatusBar(MainActivity.this,true);
         app = (MyApplication) getApplicationContext();
+
         layout = findViewById(R.id.layout);
         iMainPrisenter = new MainPresenterImpl(this,this);
         iMainPrisenter.checkBluetoochState();
         iMainPrisenter.checkUpdata();
         initAnimation();
         initHost();
+
     }
+
+
+
+
 
     @Override
     protected void onResume() {

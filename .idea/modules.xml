@@ -5,10 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/ismarport.iml" filepath="$PROJECT_DIR$/ismarport.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ismarport.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ismarport.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/citypicker/ismarport.citypicker.iml" filepath="$PROJECT_DIR$/.idea/modules/citypicker/ismarport.citypicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fotaplugin/ismarport.fotaplugin.iml" filepath="$PROJECT_DIR$/.idea/modules/fotaplugin/ismarport.fotaplugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/ismarport.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/ismarport.library.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ncalendar/ismarport.ncalendar.iml" filepath="$PROJECT_DIR$/.idea/modules/ncalendar/ismarport.ncalendar.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/okhttputils/ismarport.okhttputils.iml" filepath="$PROJECT_DIR$/.idea/modules/okhttputils/ismarport.okhttputils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/run/ismarport.run.iml" filepath="$PROJECT_DIR$/.idea/modules/run/ismarport.run.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/standard/ismarport.standard.iml" filepath="$PROJECT_DIR$/.idea/modules/standard/ismarport.standard.iml" />
     </modules>
   </component>

@@ -122,6 +122,7 @@ MobSDK {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(path: ':standard')
     testImplementation 'junit:junit:4.12'
     implementation project(':ncalendar')
     implementation 'androidx.appcompat:appcompat:1.0.0'

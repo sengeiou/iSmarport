@@ -4,15 +4,15 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.szip.sportwatch",
+  "applicationId": "com.szip.run",
   "variantName": "processReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 30,
-      "versionName": "1.30",
-      "outputFile": "app-release.apk"
+      "versionCode": 39,
+      "versionName": "1.39",
+      "outputFile": "fotaplugin-release.apk"
     }
   ]
 }

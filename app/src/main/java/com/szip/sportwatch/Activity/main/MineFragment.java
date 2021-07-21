@@ -22,13 +22,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mediatek.wearable.WearableManager;
-import com.szip.sportwatch.Activity.UpdateFirmwareActivity;
+import com.szip.sportwatch.BrigeActivity;
 import com.szip.sportwatch.Activity.help.FaqActivity;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.Activity.AboutActivity;
-import com.szip.sportwatch.Activity.help.BluetoochCallActivity;
 import com.szip.sportwatch.Activity.LoginActivity;
-import com.szip.sportwatch.Activity.NotificationAppListActivity;
 import com.szip.sportwatch.Activity.SeachingActivity;
 import com.szip.sportwatch.Activity.dial.SelectDialActivity;
 import com.szip.sportwatch.Activity.UnitSelectActivity;
@@ -467,7 +465,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 window1.showAtLocation(v, Gravity.BOTTOM, 0, 0);
                 break;
             case R.id.notificationLl:
-                startActivity(new Intent(getActivity(), UpdateFirmwareActivity.class));
+                Intent intent = new Intent(getActivity(), BrigeActivity.class);
+//                intent.putExtra("className", PluginManager.getInstance().getEntryName());
+                startActivity(intent);
                 break;
             case R.id.findLl:
                 if(MainService.getInstance().getState()!=3)

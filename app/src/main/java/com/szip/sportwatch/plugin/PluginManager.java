@@ -7,9 +7,12 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.util.Log;
 
+import com.szip.sportwatch.R;
+
 import java.io.File;
 import java.lang.reflect.Method;
 
+import dalvik.system.BaseDexClassLoader;
 import dalvik.system.DexClassLoader;
 
 /**
@@ -45,7 +48,7 @@ public class PluginManager {
         //参数一是apk的路径，参数二是希望得到的内容
         PackageInfo packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
         //得到插件app的入口activity名称
-        entryName = packageInfo.activities[0].packageName;
+        entryName = "com.szip.run.MainActivity";
         Log.d("SZIP******",entryName);
     }
 
@@ -63,7 +66,11 @@ public class PluginManager {
     private void setClassLoader(String path) {
         //dex的缓存路径
         File dexOutFile = context.getDir("dex", Context.MODE_PRIVATE);
-        dexClassLoader = new DexClassLoader(path, dexOutFile.getAbsoluteFile().getAbsolutePath(), null, context.getClassLoader());
+        String librarySearchPath = ((BaseDexClassLoader) context.getClassLoader()).findLibrary("Command");
+        Log.d("szip******","librarySearchPath1 = "+librarySearchPath);
+        librarySearchPath = librarySearchPath.substring(0, librarySearchPath.lastIndexOf('/'));
+        Log.d("szip******","librarySearchPath2 = "+librarySearchPath);
+        dexClassLoader = new DexClassLoader(path, dexOutFile.getAbsoluteFile().getAbsolutePath(), librarySearchPath, context.getClassLoader());
     }
 
     public DexClassLoader getDexClassLoader() {
@@ -84,9 +91,10 @@ public class PluginManager {
             AssetManager assetManager = AssetManager.class.newInstance();
             Method addAssetPath = AssetManager.class.getMethod("addAssetPath", String.class);
             addAssetPath.invoke(assetManager, path);
-
             resources = new Resources(assetManager, context.getResources().getDisplayMetrics(), context.getResources().getConfiguration());
+            Log.d("SZIP******","resources = "+ R.layout.activity_main);
         } catch (Exception e) {
+            Log.d("SZIP******","e.message"+e.getMessage());
         }
     }
     //-------4:构造resources end--------
