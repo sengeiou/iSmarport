@@ -343,6 +343,36 @@ public class EXCDController extends Controller {
                     writeForRET("SET,"+commands[1]+",0");
                 }else
                     writeForRET("SET,"+commands[1]+",1");
+            } else if (commands[1].equals("45")){//收到音乐播放指令，转换成music可识别的指令
+                String str = "mtk_msctrl msctrl_apk 0 1 ";
+                String cmd = command.split(",")[2];
+                str = str+cmd+" 1 FF";
+                byte[] datas = new byte[0];
+                try {
+                    datas = str.getBytes("ASCII");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                RemoteMusicController.getInstance(mContext).onReceive(datas);
+                if (cmd.equals("2")){
+                    writeForRET("SET,"+commands[1]+",0");
+                }else
+                    writeForRET("SET,"+commands[1]+",1");
+            } else if (commands[1].equals("46")){//收到音乐播放指令，转换成music可识别的指令
+                String str = "mtk_msctrl msctrl_apk 0 1 ";
+                String cmd = command.split(",")[2];
+                str = str+cmd+" 1 FF";
+                byte[] datas = new byte[0];
+                try {
+                    datas = str.getBytes("ASCII");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                RemoteMusicController.getInstance(mContext).onReceive(datas);
+                if (cmd.equals("2")){
+                    writeForRET("SET,"+commands[1]+",0");
+                }else
+                    writeForRET("SET,"+commands[1]+",1");
             }
 
         }else if (commands[0].contains("SEND")){

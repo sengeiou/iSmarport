@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity {
 
                 case MSG_SEND_TIME_OUT:
                     //sIsSending = false;
-                    Log.e("update******", "MGS_TEXT_VIEW_UPDATE");
+                    Log.e("SZIP******", "MGS_TEXT_VIEW_UPDATE");
                     break;
 
                 case MSG_PROGRESS_UPDATE:
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity {
 
                 case SEND_FOTA_FILE_TO_SD:
                     //准备往手表传送FOTA文件的准备工作
-                    Log.d("update******","开始准备烧录");
+                    Log.d("SZIP******","开始准备烧录");
                     mProgressTitle.setText(mContext.getResources().getString(R.string.read_send_fota_file));
                     mProgressText.setText("0%");
                     mProgressBar.setProgress(0);
@@ -149,7 +149,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("update******","path = "+R.layout.activity_fota);
         setContentView(R.layout.activity_fota);
         mContext = (that == null?this:that);
         //注册一个监听蓝牙状态的广播
@@ -189,7 +188,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onConnectChange(int oldState, int newState) {
-            Log.d("update******","newstate = "+newState+" ;oldstate = "+oldState);
+            Log.d("SZIP******","newstate = "+newState+" ;oldstate = "+oldState);
             if (newState == WearableManager.STATE_CONNECTED){//连接成功，发送同步数据指令
                 startDownloadFotaFromNetwork();
             }else if (newState == WearableManager.STATE_CONNECT_LOST){
@@ -255,7 +254,7 @@ public class MainActivity extends BaseActivity {
             isSending = true;
 
             String path = params[0];
-            Log.d("update******","开始烧录 = "+path);
+            Log.d("SZIP******","开始烧录 = "+path);
             FotaOperator.getInstance(mContext).sendFotaFirmwareData(5, path);
             return null;
         }
@@ -268,24 +267,24 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onCustomerInfoReceived(String s) {
-            Log.e("update******", "s" + s);
+            Log.e("SZIP******", "s" + s);
         }
 
         @Override
         public void onFotaVersionReceived(FotaVersion fotaVersion) {
-            Log.e("update******", "status" + fotaVersion.mVersionString);
+            Log.e("SZIP******", "status" + fotaVersion.mVersionString);
         }
 
         @Override
         public void onStatusReceived(int status) {
-            Log.e("update******", "status" + status);
+            Log.e("SZIP******", "status" + status);
             switch (status) {
                 case FOTA_SEND_VIA_BT_SUCCESS:
                     Message msg = mHandler.obtainMessage();
                     msg.what = MGS_TEXT_VIEW_UPDATE;
                     msg.arg1 = MSG_ARG1_DOWNLOAD_FINISHED;
                     mHandler.sendMessage(msg);
-                    Log.d("update******","烧录中");
+                    Log.d("SZIP******","烧录中");
                     break;
 
                 case FOTA_UPDATE_VIA_BT_SUCCESS:
@@ -293,7 +292,7 @@ public class MainActivity extends BaseActivity {
                     msg1.what = MGS_TEXT_VIEW_UPDATE;
                     msg1.arg1 = MSG_ARG1_UPDATE_FINISHED;
                     mHandler.sendMessage(msg1);
-                    Log.d("update******","烧录成功");
+                    Log.d("SZIP******","烧录成功");
                     break;
                 case FOTA_UPDATE_VIA_BT_COMMON_ERROR:
                 case FOTA_UPDATE_VIA_BT_WRITE_FILE_FAILED:
@@ -324,7 +323,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onConnectionStateChange(int newConnectionState) {
-            Log.e("update******", "newConnectionState" + newConnectionState);
+            Log.e("SZIP******", "newConnectionState" + newConnectionState);
             if (newConnectionState == WearableManager.STATE_CONNECT_LOST) {
                 mTransferTask.cancel(true);
                 Message message = mHandler.obtainMessage();
@@ -339,7 +338,7 @@ public class MainActivity extends BaseActivity {
             Message msg = mHandler.obtainMessage(MSG_PROGRESS_UPDATE);
             msg.arg1 = progress;
             mHandler.sendMessage(msg);
-            Log.e("update******", "onProgress:" + progress);
+            Log.e("SZIP******", "onProgress:" + progress);
         }
     };
 
@@ -370,7 +369,7 @@ public class MainActivity extends BaseActivity {
         if (which == MSG_ARG1_UPDATE_FINISHED) {
             showToast(mContext.getResources().getString(R.string.updated_firmware));
             finish();
-            Log.e("update******", "MSG_ARG1_UPDATE_FINISHED");
+            Log.e("SZIP******", "MSG_ARG1_UPDATE_FINISHED");
         } else if (which == MSG_ARG1_UPDATE_FAILED_CAUSE_DISCONNECTED) {
             if (mSendFotaProgress == 100) {
                 mProgressTitle.setText(mContext.getResources().getString(R.string.download_succeed_via_bt));
@@ -380,14 +379,14 @@ public class MainActivity extends BaseActivity {
                 finish();
             }
             //finish();
-            Log.e("update******", "MSG_ARG1_UPDATE_FAILED_CAUSE_DISCONNECTED  progress=" + mSendFotaProgress);
+            Log.e("SZIP******", "MSG_ARG1_UPDATE_FAILED_CAUSE_DISCONNECTED  progress=" + mSendFotaProgress);
         } else if (which == MSG_ARG1_DOWNLOAD_FINISHED) {
             mProgressTitle.setText(mContext.getResources().getString(R.string.download_succeed_via_bt));
-            Log.e("update******", "MSG_ARG1_DOWNLOAD_FINISHED ");
+            Log.e("SZIP******", "MSG_ARG1_DOWNLOAD_FINISHED ");
         } else if (which == MSG_ARG1_UPDATE_FAILED) {
             showToast(mContext.getResources().getString(R.string.update_failed));
             finish();
-            Log.e("update******", "MSG_ARG1_UPDATE_FAILED ");
+            Log.e("SZIP******", "MSG_ARG1_UPDATE_FAILED ");
         }
     }
 

@@ -90,7 +90,7 @@ public class MountainFragment extends BaseFragment {
             getView().findViewById(R.id.heartLl).setVisibility(View.GONE);
         }
         if(sportData.height==0){
-            getView().findViewById(R.id.heightRl).setVisibility(View.GONE);
+            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
         }
         if(sportData.stride==0){
             getView().findViewById(R.id.strideLl).setVisibility(View.GONE);

@@ -1,15 +1,18 @@
 package com.szip.sportwatch.Activity;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ScrollView;
@@ -38,8 +41,6 @@ import static com.szip.sportwatch.MyApplication.FILE;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private String deleteStr = null;
-
     protected void showToast(String str){
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
@@ -47,88 +48,39 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * 分享
      * */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     protected void shareShow(View view){
-        String str = ScreenCapture.getBitmap
+        Uri str = ScreenCapture.getBitmap
                 (this, view);
-        deleteStr = str;
-        OnekeyShare oks = new OnekeyShare();
 
-        oks.setCallback(callback);
-        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle("");
-
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText("");
-
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        oks.setImagePath(str);// 确保SDcard下面存在此张图片
-
-        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("");
-
-        // site是分享此内容的网站名称，仅在QQ空间使用
-        oks.setSite(getString(R.string.app_name));
-
-        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("");
-        // oks.setViewToShare(viewToShare);
-
-        // 启动分享GUI
-        oks.show(this);
+        Log.d("SZIP******","str = "+str);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/jpeg");
+        intent.putExtra(Intent.EXTRA_STREAM, str);
+        startActivityForResult(Intent.createChooser(intent,getString(R.string.app_name)),101);
     }
 
     /**
      * 分享长图
      * */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     protected void shareShowLong(ScrollView view){
-        String str = ScreenCapture.getScollerBitmap
+        Uri str = ScreenCapture.getScollerBitmap
                 (this, view);
-        deleteStr = str;
-        OnekeyShare oks = new OnekeyShare();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/jpeg");
+        intent.putExtra(Intent.EXTRA_STREAM, str);
+        startActivityForResult(Intent.createChooser(intent,getString(R.string.app_name)),101);
 
-        oks.setCallback(callback);
-        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle("");
-
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText("");
-
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        oks.setImagePath(str);// 确保SDcard下面存在此张图片
-
-        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("");
-
-        // site是分享此内容的网站名称，仅在QQ空间使用
-        oks.setSite(getString(R.string.app_name));
-
-        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("");
-        // oks.setViewToShare(viewToShare);
-
-        // 启动分享GUI
-        oks.show(this);
     }
 
-    PlatformActionListener callback = new PlatformActionListener() {
-        @Override
-        public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-            // TODO 分享成功后的操作或者提示
-            FileUtil.getInstance().deleteFile(deleteStr);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101){
+            FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"share.jpg");
         }
-
-        @Override
-        public void onError(Platform platform, int i, Throwable throwable) {
-            // TODO 失败，打印throwable为错误码
-            FileUtil.getInstance().deleteFile(deleteStr);
-        }
-
-        @Override
-        public void onCancel(Platform platform, int i) {
-            // TODO 分享取消操作
-            FileUtil.getInstance().deleteFile(deleteStr);
-        }
-    };
+    }
 
     @Override
     protected void onDestroy() {
@@ -176,6 +128,11 @@ public class BaseActivity extends AppCompatActivity {
         if (textView!=null){
             textView.setText(msg);
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    protected boolean checkPermission(String permission){
+        return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
 }

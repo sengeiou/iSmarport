@@ -12,6 +12,7 @@ import com.szip.sportwatch.BLE.EXCDController;
 import com.szip.sportwatch.Model.HttpBean.DialBean;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
+import com.szip.sportwatch.Util.FileUtil;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.MathUitl;
@@ -101,7 +102,7 @@ public class SelectDialPresenterImpl implements ISelectDialPresenter{
             InputStream in = null;
             try {
                 in = new FileInputStream(MyApplication.getInstance().getPrivatePath()+"dial.jpg");
-                byte[] datas = toByteArray(in);
+                byte[] datas = FileUtil.getInstance().toByteArray(in);
                 in.close();
                 int num = datas.length/PAGENUM;
                 num = datas.length%PAGENUM==0?num:num+1;
@@ -128,14 +129,5 @@ public class SelectDialPresenterImpl implements ISelectDialPresenter{
         }
     }
 
-    private byte[] toByteArray(InputStream in) throws IOException {
 
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024 * 4];
-        int n = 0;
-        while ((n = in.read(buffer)) != -1) {
-            out.write(buffer, 0, n);
-        }
-        return out.toByteArray();
-    }
 }

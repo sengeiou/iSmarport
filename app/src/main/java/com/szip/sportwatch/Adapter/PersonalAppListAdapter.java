@@ -120,11 +120,8 @@ public class PersonalAppListAdapter extends BaseAdapter {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         int index = position;
                         if (index == 0) {
-                            if (isChecked) {
-                                MainService.getInstance().startSmsService();
-                            } else {
-                                MainService.getInstance().stopSmsService();
-                            }
+                            if (onSmsStateListener!=null)
+                                onSmsStateListener.onSmsStateChange(isChecked);
                             return;
                         }
                         Map<String, Object> item = mPersonalAppList.get(index - 1);

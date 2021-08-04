@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.mob.sdk'
 def dbflow_version = "4.2.4"
 android {
     signingConfigs {
@@ -85,46 +84,12 @@ android {
 
 }
 
-MobSDK {
-    appKey "2dd1dcd33f540"
-    appSecret "56e7427a1f9bb5453c8c277add84d55a"
-    ShareSDK {
-        loopShare true
-        devInfo {
-            Wechat {
-                appId "wxa6cff3088f1c746b"
-                appSecret "e30d51162bd98723db04696fa3a5ca89"
-                bypassApproval false
-            }
-            WechatMoments {
-                appId "wxa6cff3088f1c746b"
-                appSecret "e30d51162bd98723db04696fa3a5ca89"
-                shareByAppClient true
-            }
-//            QQ {
-//                appId "100371282"
-//                appKey "aed9b0303e3ed1e27bae87c33761161d"
-//                shareByAppClient true
-//            }
-//            Facebook {
-//                appKey "1412473428822331"
-//                appSecret "a42f4f3f867dc947b9ed6020c2e93558"
-//                callbackUri "https://mob.com"
-//            }
-            SinaWeibo {
-                appKey "3865839557"
-                appSecret "94316b8ff7988126551e58837817de23"
-                shareByAppClient true
-            }
-        }
-    }
-}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(path: ':standard')
+
     testImplementation 'junit:junit:4.12'
-    implementation project(':ncalendar')
+
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'com.google.android.material:material:1.0.0'
@@ -144,22 +109,27 @@ dependencies {
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+    implementation project(path: ':library')
     implementation project(':okhttputils')
     implementation project(':citypicker')
-
+    implementation project(path: ':standard')
+    implementation project(':ncalendar')
 
     implementation files('libs/commons-codec-1.5.jar')
     implementation files('libs/FotaVdmLib.jar')
     implementation files('libs/MREPermission.jar')
     implementation files('libs/signpost-commonshttp4-1.2.1.1.jar')
     implementation files('libs/signpost-core-1.2.1.1.jar')
+    implementation files('libs\\wearable.jar')
     implementation 'org.greenrobot:eventbus:3.0.0'
 
     //图片缓存
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    implementation project(path: ':library')
-    implementation files('libs\\wearable.jar')
+
+
 
     //高德地图SDK
     implementation 'com.amap.api:3dmap:latest.integration'

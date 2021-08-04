@@ -135,18 +135,19 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     String[] proj = { MediaStore.Images.Media.DATA };
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == UCrop.RESULT_ERROR){
-            Log.d("SZIP******","URI = "+data.getData());
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == UCrop.RESULT_ERROR) {
+            Log.d("SZIP******", "URI = " + data.getData());
             showToast(getString(R.string.crop_pic_failed));
             return;
         }
-        switch (requestCode){
-            case 1:{
-                if (data==null||data.getData()==null)
+        switch (requestCode) {
+            case 1: {
+                if (data == null || data.getData() == null)
                     return;
-                Log.d("SZIP******","URI1 = "+data.getData());
+                Log.d("SZIP******", "URI1 = " + data.getData());
                 FileUtil.getInstance().writeUriSdcardFile(data.getData());
-                File file = new File(MyApplication.getInstance().getPrivatePath()+"camera.jpg");
+                File file = new File(MyApplication.getInstance().getPrivatePath() + "camera.jpg");
                 if (file.exists()) {
                     Uri uri;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -159,8 +160,8 @@ public class DIYActivity extends BaseActivity implements IDiyView{
 
             }
             break;
-            case  UCrop.REQUEST_CROP:{
-                if (data!=null){
+            case UCrop.REQUEST_CROP: {
+                if (data != null) {
                     MathUitl.toJpgFile();
                     resultUri = UCrop.getOutput(data);
                     try {
@@ -169,7 +170,7 @@ public class DIYActivity extends BaseActivity implements IDiyView{
                         e.printStackTrace();
                     }
 
-                    if (findViewById(R.id.bottomRl).getVisibility()==View.GONE){
+                    if (findViewById(R.id.bottomRl).getVisibility() == View.GONE) {
                         findViewById(R.id.bottomRl).setVisibility(View.VISIBLE);
                     }
                 }

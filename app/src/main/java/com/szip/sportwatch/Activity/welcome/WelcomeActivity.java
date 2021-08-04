@@ -41,62 +41,13 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView{
         welcomePresenter.checkPrivacy(this);
     }
 
-    /**
-     * 获取权限
-     * */
-    private void checkPermission(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED
-                    || checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_DENIED
-                    || checkSelfPermission(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_DENIED
-                    || checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED
-
-                    ||checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS
-                                ,Manifest.permission.READ_SMS,Manifest.permission.SEND_SMS
-//                                , Manifest.permission.ACCESS_FINE_LOCATION
-                                , Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        sportWatchCode);
-            }else {
-                    welcomePresenter.initBle(getApplicationContext());
-                    welcomePresenter.initDeviceConfig();
-                    welcomePresenter.initUserInfo(getApplicationContext());
-            }
-        }else {
-                welcomePresenter.initBle(getApplicationContext());
-                welcomePresenter.initDeviceConfig();
-                welcomePresenter.initUserInfo(getApplicationContext());
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 100){
-            int code = grantResults[0];
-            int code1 = grantResults[1];
-            int code2= grantResults[2];
-            int code3= grantResults[3];
-            int code4= grantResults[4];
-//            int code5= grantResults[5];
-            if (code == PackageManager.PERMISSION_GRANTED&&code1 == PackageManager.PERMISSION_GRANTED
-                    &&code2 == PackageManager.PERMISSION_GRANTED&&code3 == PackageManager.PERMISSION_GRANTED
-                    &&code4 == PackageManager.PERMISSION_GRANTED
-//                    &&code5 == PackageManager.PERMISSION_GRANTED
-            ){
-                    welcomePresenter.initBle(getApplicationContext());
-                    welcomePresenter.initDeviceConfig();
-                    welcomePresenter.initUserInfo(getApplicationContext());
-            }else {
-                WelcomeActivity.this.finish();
-            }
-        }
-    }
 
     @Override
     public void checkPrivacyResult(boolean comfirm) {
         if (comfirm){//隐私协议通过
-            checkPermission();
+            welcomePresenter.initBle(getApplicationContext());
+            welcomePresenter.initDeviceConfig();
+            welcomePresenter.initUserInfo(getApplicationContext());
         }else {
             finish();
         }

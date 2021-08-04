@@ -16,6 +16,7 @@ import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.Model.HttpBean.DialBean;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
+import com.szip.sportwatch.Util.FileUtil;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.ScreenCapture;
@@ -99,18 +100,17 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
         });
     }
 
-
     private int i = 0;
     private byte datas[];
 
     @Override
     public void sendDial(String resultUri, int clock) {
         if (resultUri != null) {
-            final int PAGENUM = 128;//分包长度
+            final int PAGENUM = 200;//分包长度
             InputStream in = null;
             try {
                 in = new FileInputStream(MyApplication.getInstance().getPrivatePath()+"dial.jpg");
-                byte[] datas = toByteArray(in);
+                byte[] datas =  FileUtil.getInstance().toByteArray(in);
                 in.close();
                 int num = datas.length / PAGENUM;
                 num = datas.length % PAGENUM == 0 ? num : num + 1;
@@ -127,24 +127,13 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
         sendByte();
     }
 
-    private byte[] toByteArray(InputStream in) throws IOException {
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024 * 4];
-        int n = 0;
-        while ((n = in.read(buffer)) != -1) {
-            out.write(buffer, 0, n);
-        }
-        return out.toByteArray();
-    }
-
     private void sendByte(){
         byte[] newDatas;
-        int len = (datas.length- i >128)?128:(datas.length- i);
+        int len = (datas.length- i >200)?200:(datas.length- i);
         newDatas = new byte[len];
         System.arraycopy(datas, i,newDatas,0,len);
-        BleClient.getInstance().writeForSendPicture(1,0,0, i/128,newDatas);
-        i+=128;
+        BleClient.getInstance().writeForSendPicture(1,0,0, i/200,newDatas);
+        i+=200;
         if (i>=datas.length){
             BleClient.getInstance().writeForSendPicture(2,0,0,0,new byte[0]);
         }

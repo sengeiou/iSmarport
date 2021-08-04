@@ -47,7 +47,6 @@ public class BaseActivity extends Activity implements AppInterface {
         if (that == null) {
             super.setContentView(layoutResID);
         } else {
-            Log.d("update******","path = "+layoutResID);
             that.setContentView(layoutResID);
         }
     }

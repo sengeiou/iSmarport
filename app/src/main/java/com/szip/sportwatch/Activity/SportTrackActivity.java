@@ -29,6 +29,7 @@ import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.StatusBarCompat;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -115,7 +116,6 @@ public class SportTrackActivity extends BaseActivity implements View.OnClickList
         transaction =  fm.beginTransaction();
         transaction.replace(R.id.fragment,fragment);
         transaction.commit();
-
     }
 
     private void initEvent() {
@@ -135,6 +135,7 @@ public class SportTrackActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkPermission() {
         /**
          * 获取权限·

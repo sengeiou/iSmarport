@@ -1,6 +1,7 @@
 package com.szip.sportwatch.Activity.report;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -127,6 +128,7 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
         mPager.setScroll(isScroll);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View v) {
         switch (v.getId()){

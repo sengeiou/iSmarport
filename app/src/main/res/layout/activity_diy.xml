@@ -46,8 +46,8 @@
 
             <com.szip.sportwatch.View.CircularImageView
                 android:id="@+id/backgroundIv_c"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="182dp"
+                android:layout_height="182dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 app:is_circular="true"/>

@@ -1,7 +1,9 @@
 package com.szip.sportwatch.Activity.camera;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -12,7 +14,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.widget.FrameLayout;
+
+import androidx.annotation.RequiresApi;
 
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.FileUtil;
@@ -139,6 +144,8 @@ public class CameraPresenterImp implements ICameraPresenter{
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         //添加拍照的回调对象mPicture，mCamera.takePicture的必要参数
         //实现将拍照的图片存储到自己想要的目录
+
+        @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onPictureTaken(byte[] data, final Camera camera) {
             Bitmap bMap;
@@ -161,7 +168,6 @@ public class CameraPresenterImp implements ICameraPresenter{
             byte[] dataFile = baos.toByteArray();
             FileUtil.getInstance().writeFileSdcardFile(System.currentTimeMillis()+".jpg",dataFile);
             mCamera.startPreview();
-
         }
     };
 

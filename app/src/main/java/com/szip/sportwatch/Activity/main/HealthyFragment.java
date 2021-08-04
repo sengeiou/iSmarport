@@ -120,7 +120,7 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
         if (Calendar.getInstance().getTimeInMillis()-time>60*60*1000){
             LogUtil.getInstance().logd("LOCATION******","开始定位");
             locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-            LocationUtil.getInstance().getLocation(locationManager,myListener,locationListener);
+            LocationUtil.getInstance().getLocation(locationManager,true,myListener,locationListener);
         }
     }
 
@@ -384,7 +384,7 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
             case R.id.weatherLl:
 
                     locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-                    LocationUtil.getInstance().getLocation(locationManager,myListener,locationListener);
+                    LocationUtil.getInstance().getLocation(locationManager,true,myListener,locationListener);
                     getView().findViewById(R.id.weatherLl).setClickable(false);
 
                 break;

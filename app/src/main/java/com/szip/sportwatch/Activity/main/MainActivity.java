@@ -1,11 +1,13 @@
 package com.szip.sportwatch.Activity.main;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
@@ -13,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.szip.sportwatch.Activity.BaseActivity;
+import com.szip.sportwatch.Activity.help.GuideActivity;
 import com.szip.sportwatch.Model.UpdateSportView;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
@@ -21,20 +24,22 @@ import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.szip.sportwatch.View.HostTabView;
 import com.szip.sportwatch.View.MyToastView;
-import com.szip.sportwatch.plugin.PluginManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentTabHost;
+
+import static com.szip.sportwatch.MyApplication.FILE;
 
 public class MainActivity extends BaseActivity implements IMainView{
 
+    private ArrayList<HostTabView> mTableItemList;
     private MyApplication app;
     private RelativeLayout layout;
     private FragmentTabHost fragmentTabHost;
@@ -63,7 +68,6 @@ public class MainActivity extends BaseActivity implements IMainView{
         iMainPrisenter.checkUpdata();
         initAnimation();
         initHost();
-
     }
 
 
@@ -102,6 +106,7 @@ public class MainActivity extends BaseActivity implements IMainView{
         iMainPrisenter.checkGPSState();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void checkGPSFinish() {
         iMainPrisenter.initBle();
@@ -114,12 +119,18 @@ public class MainActivity extends BaseActivity implements IMainView{
 
     @Override
     public void initHostFinish(ArrayList<HostTabView> hostTabViews) {
-
+        mTableItemList =hostTabViews;
+        mTableItemList.get(1).setView(app.getSportVisiable());
+        SharedPreferences sharedPreferences = getSharedPreferences(FILE, Context.MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("isFirst",true)){
+            sharedPreferences.edit().putBoolean("isFirst",false).commit();
+            startActivity(new Intent(MainActivity.this, GuideActivity.class));
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateSport(UpdateSportView updateSportView){
-
+        mTableItemList.get(1).setView(app.getSportVisiable());
     }
 
     /**

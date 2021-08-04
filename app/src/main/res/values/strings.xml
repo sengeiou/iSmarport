@@ -240,6 +240,18 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="str1">1)Enter Bluetooth Function In Watch\n2)Search For Bluetooth Devices-Select Phone Bluetooth name\n3)Pair With Your Phone To Make Bluetooth Calls With Your Watch</string>
     <string name="str2">Enter System Setting-Bluetooth-Paired Device, Find Device, Enter Click "Unpair", Unpair Successful。\n\nRemark: Watch Cannot Use Bluetooth Call Function After Unpairing</string>
 
+    <!--引导页-->
+    <string name="guideTitle1">Preparations before binding</string>
+    <string name="guideTitle2">Search Devices</string>
+    <string name="guideTitle3">Choose Device</string>
+    <string name="guideTitle4">Bluetooth pairing</string>
+    <string name="guide1">Make sure the bluetooth of both the phone and watch is enabled</string>
+    <string name="guide2">Click the device bar in the "Mine" interface to enter the search device interface.</string>
+    <string name="guide3">Select your watch according to the device name and LE Address in the watch information interface</string>
+    <string name="guide4">The APP will pop up a Bluetooth pairing request, and the pairing will be completed after confirmation</string>
+    <string name="jump">skip</string>
+    <string name="startApp">Continue</string>
+
     <!--关于界面 About-->
     <string name="version">Current Version</string>
     <string name="feedback">Feedback</string>

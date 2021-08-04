@@ -727,24 +727,11 @@ public class MathUitl {
         //如果上面都没有， 则生成一个id：随机码
         String ANDROID_ID = Settings.System.getString(context.getContentResolver(), Settings.System.ANDROID_ID);
         if(!isEmpty(ANDROID_ID)){
-//            Log.d("SZIP******","uuid = "+ANDROID_ID);
             return ANDROID_ID;
         }
         return null;
     }
-    /**
-     * 得到全局唯一UUID
-     */
-    public static String getUUID(Context context){
-        String uuid = "";
-        SharedPreferences mShare = context.getSharedPreferences(FILE,MODE_PRIVATE);
-        uuid = mShare.getString("uuid", null);
-        if(uuid==null){
-            uuid = UUID.randomUUID().toString();
-            mShare.edit().putString("uuid",uuid).commit();
-        }
-        return uuid;
-    }
+
 
     public static void saveLastTime(SharedPreferences sharedPreferences){
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -858,38 +845,6 @@ public class MathUitl {
             default:
                 return 1;
         }
-    }
-
-    public static boolean isJpgFile(Cursor cursor){
-        String res = null;
-
-        if(cursor.moveToFirst()){
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
-        }
-        cursor.close();
-        Log.d("SZIP******","res = "+res);
-
-        try {
-
-            FileInputStream bin = new FileInputStream(new File(res));
-            int b[] = new int[4];
-            b[0] = bin.read();
-            b[1] = bin.read();
-            bin.skip(bin.available() - 2);
-            b[2] = bin.read();
-            b[3] = bin.read();
-            bin.close();
-
-            return b[0] == 255;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public static void toJpgFile(){

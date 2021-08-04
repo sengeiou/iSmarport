@@ -32,6 +32,7 @@ import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Interface.IDataResponse;
+import com.szip.sportwatch.Interface.IOtaResponse;
 import com.szip.sportwatch.Interface.OnCameraListener;
 import com.szip.sportwatch.Model.BleStepModel;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
@@ -100,7 +101,7 @@ public class BleClient {
 
     private MediaPlayer mediaPlayer;
     private int volume = 0;
-
+    private IOtaResponse iOtaResponse;
 
     private BleClient() {
         DataParser.newInstance().setmIDataResponse(iDataResponse);
@@ -133,6 +134,9 @@ public class BleClient {
 
     }
 
+    public void setiOtaResponse(IOtaResponse iOtaResponse) {
+        this.iOtaResponse = iOtaResponse;
+    }
 
     public void setOnCameraListener(OnCameraListener onCameraListener) {
         this.onCameraListener = onCameraListener;
@@ -167,7 +171,7 @@ public class BleClient {
         public void onResponse(int code, BleGattProfile data) {
             LogUtil.getInstance().logd("SZIP","code = "+code);
             if( code == 0 ){        // 0 成功
-                ClientManager.getClient().requestMtu(mMac, 200, new BleMtuResponse() {
+                ClientManager.getClient().requestMtu(mMac, 512, new BleMtuResponse() {
                     @Override
                     public void onResponse(int code, Integer data) {
                     }
@@ -207,6 +211,7 @@ public class BleClient {
                         writeForSetElevation();
                         writeForUpdateUserInfo();
                         writeForSetUnit();
+//                        writeForSendOtaFile(0,new byte[]{(byte)1,(byte)11},0,0,null);
                         MainService.getInstance().startThread();
                     }
                 };
@@ -282,6 +287,23 @@ public class BleClient {
                         }
                     }
 
+                }else if (value[1] == 0x47){
+                    if (value.length==10&&value[9]==2){
+                        if (iOtaResponse!=null)
+                            iOtaResponse.onSendFail();
+                    }else {
+                        if (iOtaResponse!=null){
+                            if (value[8]==0){
+                                int address = (value[10] & 0xff) + ((value[11] & 0xFF) << 8) +
+                                        ((value[12] & 0xff) << 16) + ((value[13] & 0xFF) << 24);
+                                iOtaResponse.onStartToSendFile(value[9],address);
+                            }else if (value[8]==1){
+                                iOtaResponse.onSendProgress();
+                            }else {
+                                iOtaResponse.onSendSccuess();
+                            }
+                        }
+                    }
                 }else {
                     DataParser.newInstance().parseData(value);
                 }
@@ -830,6 +852,20 @@ public class BleClient {
         }else {
             ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
                     CommandUtil.getCommandbytePicture(10,2,type,clockType,clockType,num,datas),bleWriteResponse);
+
+        }
+    }
+
+    public void writeForSendOtaFile(int type,byte[] version,int addresss,int num,byte[] datas){
+        if (type == 0){
+            ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                    CommandUtil.getCommandbyteOtaFile(14,6,type,version,addresss,num,datas),bleWriteResponse);
+        }else if (type == 1){
+            ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                    CommandUtil.getCommandbyteOtaFile(datas.length+15,datas.length+7,type,version,addresss,num,datas),bleWriteResponse);
+        }else {
+            ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                    CommandUtil.getCommandbyteOtaFile(10,2,type,version,addresss,num,datas),bleWriteResponse);
 
         }
     }

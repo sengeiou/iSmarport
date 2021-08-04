@@ -1,5 +1,6 @@
 package com.szip.sportwatch.Service;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.app.Service;
 import android.bluetooth.BluetoothDevice;
@@ -7,17 +8,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.util.Log;
 
-import androidx.core.content.FileProvider;
+import androidx.annotation.RequiresApi;
 
-import com.mediatek.ctrl.fota.common.FotaOperator;
 import com.mediatek.ctrl.map.MapController;
 import com.mediatek.ctrl.music.RemoteMusicController;
 import com.mediatek.ctrl.notification.NotificationController;
@@ -33,6 +35,7 @@ import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
+import com.szip.sportwatch.Interface.IOtaResponse;
 import com.szip.sportwatch.Interface.ReviceDataCallback;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
 import com.szip.sportwatch.Model.SendDialModel;
@@ -41,6 +44,7 @@ import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Notification.NotificationView;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.DateUtil;
+import com.szip.sportwatch.Util.FileUtil;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.BLE.EXCDController;
@@ -52,6 +56,10 @@ import com.szip.sportwatch.Notification.SmsService;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -454,6 +462,7 @@ public class MainService extends Service {
         mSevice = this;
         app = MyApplication.getInstance();
         mIsMainServiceActive = true;
+
         Map<Object, Object> applist = AppList.getInstance().getAppList();
         if (applist.size() == 0) {
             applist.put(AppList.MAX_APP, (int) AppList.CREATE_LENTH);
@@ -555,16 +564,16 @@ public class MainService extends Service {
     public void onDestroy() {
         Log.i(TAG, "onDestroy()");
         WearableManager manager = WearableManager.getInstance();
-        manager.removeController(MapController.getInstance(sContext));
+//        manager.removeController(MapController.getInstance(sContext));
         manager.removeController(NotificationController.getInstance(sContext));
-        manager.removeController(RemoteMusicController.getInstance(sContext));
+//        manager.removeController(RemoteMusicController.getInstance(sContext));
         manager.removeController(EXCDController.getInstance());
         EXCDController.getInstance().setReviceDataCallback(null);
         manager.unregisterWearableListener(mWearableListener);
         mIsMainServiceActive = false;
         stopNotificationService();
         mSevice = null;
-
+        BleClient.getInstance().setiOtaResponse(null);
         Intent intent = new Intent();
         intent.setClass(this,MainService.class);
         startService(intent);
@@ -619,6 +628,7 @@ public class MainService extends Service {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void registerService() {
         // regist battery low
 
@@ -632,10 +642,11 @@ public class MainService extends Service {
         EXCDController.getInstance().setReviceDataCallback(reviceDataCallback);
         manager.registerWearableListener(mWearableListener);
         // start SMS service
-        startSmsService();
+        if (checkSelfPermission(Manifest.permission.READ_SMS)== PackageManager.PERMISSION_GRANTED)
+            startSmsService();
         startNotificationService();
+        BleClient.getInstance().setiOtaResponse(iOtaResponse);
     }
-
 
     public boolean getSmsServiceStatus() {
         return mIsSmsServiceActive;
@@ -755,18 +766,61 @@ public class MainService extends Service {
             }
         }
     }
-//
-//    private void installApk() {
-//        Intent updateApk = new Intent(Intent.ACTION_VIEW);
-//        File apkFile = new File(getExternalFilesDir(null).getPath()+"/iSmarport.apk");
-//        Log.e("SZIP******",apkFile.toString());
-//        Uri uri = FileProvider.getUriForFile(this, this.getPackageName() + ".fileprovider", apkFile);
-//        Log.e("SZIP******",uri.toString());
-//        updateApk.setDataAndType(uri, "application/vnd.android.package-archive");
-//        updateApk.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//        updateApk.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        this.startActivity(updateApk);
-//    }
 
+    private int index;
+    private byte fileDatas[];
+    private int page;
+
+    private IOtaResponse iOtaResponse = new IOtaResponse() {
+        @Override
+        public void onStartToSendFile(int type, int address) {
+            Log.d("DATA******","准备发送数据");
+            if (type == 0||type == 1){
+                InputStream in = null;
+                try {
+                    in = new FileInputStream(MyApplication.getInstance().getPrivatePath()+"image.bin");
+                    byte[] datas =  FileUtil.getInstance().toByteArray(in);
+                    in.close();
+                    fileDatas = datas;
+                    index = address;
+                    page = 0;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+                sendByte();
+            }else {
+
+            }
+        }
+
+        @Override
+        public void onSendProgress() {
+            sendByte();
+        }
+
+        @Override
+        public void onSendSccuess() {
+            Log.d("DATA******","发送数据成功");
+        }
+
+        @Override
+        public void onSendFail() {
+            Log.d("DATA******","发送数据失败");
+        }
+    };
+
+    private void sendByte(){
+        byte[] newDatas;
+        int len = (fileDatas.length-index- page >240)?240:(fileDatas.length-index- page);
+        newDatas = new byte[len];
+        System.arraycopy(fileDatas, page+index,newDatas,0,len);
+        BleClient.getInstance().writeForSendOtaFile(1,null,index+page, page/240,newDatas);
+        page+=240;
+        if (page>=fileDatas.length-index){
+            BleClient.getInstance().writeForSendOtaFile(2,null,0,0,null);
+        }
+    }
 
 }

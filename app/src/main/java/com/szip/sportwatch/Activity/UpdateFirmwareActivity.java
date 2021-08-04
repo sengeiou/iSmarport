@@ -190,14 +190,7 @@ public class UpdateFirmwareActivity extends BaseActivity {
         }
         String[] str = mFileUrl.split("/");
         fileName = str[str.length - 1];
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-//                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                        100);
-//            }
-//        }else {
             startDownloadFotaFromNetwork();
-//        }
 
     }
 

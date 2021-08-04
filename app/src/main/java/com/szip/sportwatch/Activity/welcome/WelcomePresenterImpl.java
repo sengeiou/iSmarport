@@ -56,7 +56,6 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
                         @Override
                         public void onDialogTouch(boolean flag) {
                             if (flag){
-                                sharedPreferences.edit().putBoolean("isFirst",false).commit();
                                 if (iWelcomeView!=null)
                                     iWelcomeView.checkPrivacyResult(true);
                             }else{

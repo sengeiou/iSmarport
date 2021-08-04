@@ -1,7 +1,9 @@
 package com.szip.sportwatch.Util;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -18,10 +20,12 @@ import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.szip.sportwatch.MyApplication;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -61,8 +65,12 @@ public class FileUtil {
         this.context = context;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void writeFileSdcardFile(String fileName, byte[] writeStr){
-
+        if (context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            Log.d("SZIP******","没授权");
+            return;
+        }
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
@@ -132,5 +140,16 @@ public class FileUtil {
             if (file != null)
                 file.delete();
         }
+    }
+
+    public byte[] toByteArray(InputStream in) throws IOException {
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024 * 4];
+        int n = 0;
+        while ((n = in.read(buffer)) != -1) {
+            out.write(buffer, 0, n);
+        }
+        return out.toByteArray();
     }
 }

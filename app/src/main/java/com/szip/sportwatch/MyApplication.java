@@ -241,7 +241,6 @@ public class MyApplication extends Application{
             }
         });
 
-
         String packageName = getPackageName();
         String strListener = Settings.Secure.getString(this.getContentResolver(),
                 "enabled_notification_listeners");
@@ -256,7 +255,6 @@ public class MyApplication extends Application{
 
        startUpdownThread();
     }
-
 
     public String getPrivatePath() {
         return privatePath;
@@ -295,7 +293,6 @@ public class MyApplication extends Application{
         });
         updownDataThread.start();
     }
-
 
     private void initIgnoreList() {
         HashSet<String> exclusionList = IgnoreList.getInstance().getExclusionList();
@@ -351,7 +348,6 @@ public class MyApplication extends Application{
             sharedPreferences = getSharedPreferences(FILE,MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("heartSwitch",heartSwitch).commit();
     }
-
 
     public int getUpdownTime() {
         return updownTime;
@@ -413,7 +409,6 @@ public class MyApplication extends Application{
             return deviceNum;
     }
 
-
     public void setDeviceConfig(String deviceName) {
         Log.d("DATA******","deviceName = "+deviceName);
         SportWatchAppFunctionConfigDTO sportWatchAppFunctionConfigDTO = LoadDataUtil.newInstance().getDeviceConfig(deviceName);
@@ -429,8 +424,6 @@ public class MyApplication extends Application{
     public boolean isMtk() {
         return isMtk;
     }
-
-
 
     public boolean isCircle() {
         return isCircle;
@@ -449,10 +442,7 @@ public class MyApplication extends Application{
         isNewVersion = newVersion;
         if (sharedPreferences!=null)
             sharedPreferences.edit().putBoolean("version",newVersion).commit();
-
     }
-
-
 
     public void setDialUrl(String url){
         sharedPreferences.edit().putString("dialUrl",url).commit();
@@ -461,6 +451,18 @@ public class MyApplication extends Application{
     public String getDiadUrl(){
         return sharedPreferences.getString("dialUrl","");
     }
+
+    public boolean getSportVisiable(){
+        if (deviceNum==null){
+            deviceNum = sharedPreferences.getString("deviceNum",null);
+            if (deviceNum==null)
+                return true;
+        }
+
+        return LoadDataUtil.newInstance().getSportConfig(Integer.valueOf(deviceNum));
+    }
+
+
 
     public void tokenTimeOut(){
         SharedPreferences sharedPreferences ;

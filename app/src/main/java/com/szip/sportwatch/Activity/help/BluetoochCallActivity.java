@@ -6,7 +6,6 @@ import android.widget.ImageView;
 
 import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.Adapter.MyPagerAdapter;
-import com.szip.sportwatch.Fragment.BluetoochCallFragment;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.szip.sportwatch.View.NoScrollViewPager;
@@ -60,8 +59,6 @@ public class BluetoochCallActivity extends BaseActivity implements ViewPager.OnP
      * */
     private void initData() {
 
-
-        //根据睡眠段数绘制报告
         for (int i = 0;i<2;i++){
             BluetoochCallFragment bluetoochCallFragment = BluetoochCallFragment.newInstance(i);
             views.add(bluetoochCallFragment);

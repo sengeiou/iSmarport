@@ -70,7 +70,7 @@ public class GpsPresenterImpl implements IGpsPresenter {
         }else {
 
             if (locationManager!=null) {
-                LocationUtil.getInstance().getLocation(locationManager,myListener,locationListener);
+                LocationUtil.getInstance().getLocation(locationManager,false,myListener,locationListener);
                 initTask();
                 timer.schedule(timerTask,0,1000);
                 if (iGpsView!=null)

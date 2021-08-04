@@ -330,6 +330,43 @@ public class CommandUtil {
         return data;
     }
 
+    public static byte[] getCommandbyteOtaFile(int byteLength,int dataLength,int type,byte[] version,int address,int num,byte[] datas){
+        byte[] data = new byte[byteLength];
+        data[0] = (byte) 0xAA;
+        data[1] = (byte) 0x47;
+        data[2] = (byte) dataLength;
+        data[3] = 0;
+        data[4] = (byte) (0xF0);
+        data[5] = (byte) (0xF0);
+        data[6] = (byte) (0xF0);
+        data[7] = (byte) (0xF0);
+
+        if (type == 0){
+            data[8] = (byte) type;
+            data[9] = 0;
+            data[10] = 0;
+            data[11] = 0;
+            data[12] = 0;
+            data[13] = 0;
+        }else if (type == 1){
+            data[8] = (byte) type;
+            data[9] = (byte) (num&0xff);
+            data[10] = (byte) ((num>>8)&0xff);
+            data[11] = (byte) (address&0xff);
+            data[12] = (byte) ((address>>8)&0xff);
+            data[13] = (byte) ((address>>16)&0xff);
+            data[14] = (byte) ((address>>24)&0xff);
+            System.arraycopy(datas,0,data,15,datas.length);
+            LogUtil.getInstance().logd("DATA******","发送的OTA包序号 = "+ num+" ;写入角标号 = "+address);
+        }else {
+            data[8] = (byte) type;
+            data[9] = 0;
+            LogUtil.getInstance().logd("DATA******","发送的OTA结束包 = "+DateUtil.byteToHexString(data));
+        }
+
+        return data;
+    }
+
     /**
      * @param syncType
      * @param byteLength

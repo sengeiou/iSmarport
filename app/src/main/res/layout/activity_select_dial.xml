@@ -41,15 +41,15 @@
 
             <ImageView
                 android:id="@+id/dialIv_r"
-                android:layout_width="94dp"
-                android:layout_height="94dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:layout_gravity="center"
                 />
 
             <ImageView
                 android:id="@+id/dialIv_c"
-                android:layout_width="106dp"
-                android:layout_height="106dp"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:layout_gravity="center"/>
         </FrameLayout>
 

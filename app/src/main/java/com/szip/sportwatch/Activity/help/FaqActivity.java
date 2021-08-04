@@ -29,7 +29,7 @@ public class FaqActivity extends BaseActivity {
 
     private ListView faqList;
     private FaqAdapter faqAdapter;
-    private ArrayList<FaqModel> list;
+    private ArrayList<FaqModel> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +55,12 @@ public class FaqActivity extends BaseActivity {
         faqList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position==list.size()+1){
+                if (position==list.size()+2){
                     startActivity(new Intent(FaqActivity.this,BluetoochCallActivity.class));
-                }else if (position==list.size()){
+                }else if (position==list.size()+1){
                     startActivity(new Intent(FaqActivity.this,ServicePrivacyActivity.class));
+                }else if (position==list.size()){
+                    startActivity(new Intent(FaqActivity.this,GuideActivity.class));
                 }else {
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     final Fragment prev = getSupportFragmentManager().findFragmentByTag("FAQ");

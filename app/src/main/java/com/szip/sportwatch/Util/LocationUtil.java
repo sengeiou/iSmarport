@@ -32,22 +32,8 @@ public class LocationUtil {
     }
 
 
-    public Location getLocation(LocationManager myLocationManager, GpsStatus.Listener myListener, LocationListener locationListener) {
+    public Location getLocation(LocationManager myLocationManager, boolean needNetwork,GpsStatus.Listener myListener, LocationListener locationListener) {
         //获取位置管理服务
-
-        //查找服务信息
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE); //定位精度: 最高
-        criteria.setAltitudeRequired(false); //海拔信息：不需要
-        criteria.setBearingRequired(false); //方位信息: 不需要
-        criteria.setCostAllowed(true);  //是否允许付费
-        criteria.setPowerRequirement(Criteria.POWER_HIGH); //耗电量: 低功耗
-//        String provider = myLocationManager.getBestProvider(criteria, true); //获取GPS信息
-//        myLocationManager.requestLocationUpdates(provider,2000,5,locationListener);
-//        Log.e("provider", provider);
-//        List<String> list = myLocationManager.getAllProviders();
-//        Log.e("provider", list.toString());
-//
         Location gpsLocation = null;
         Location netLocation = null;
 
@@ -56,14 +42,14 @@ public class LocationUtil {
         }
 
         myLocationManager.addGpsStatusListener(myListener);
-        if (netWorkIsOpen(myLocationManager)) {
-            //2000代表每2000毫秒更新一次，5代表每5秒更新一次
-            myLocationManager.requestLocationUpdates("network", 1000, 1, locationListener);
-            netLocation = myLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
 
         if (gpsIsOpen(myLocationManager)) {
-            myLocationManager.requestLocationUpdates("gps", 1000, 1, locationListener);
+            myLocationManager.requestLocationUpdates("gps", 2000, 1, locationListener);
+            gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
+
+        if (needNetwork&&netWorkIsOpen(myLocationManager)) {
+            myLocationManager.requestLocationUpdates("network", 2000, 1, locationListener);
             gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
 
@@ -109,28 +95,6 @@ public class LocationUtil {
         return location;
     }
 
-    @SuppressLint("MissingPermission")
-    public Location getLocationOnlyGPS(LocationManager myLocationManager, GpsStatus.Listener myListener, LocationListener locationListener) {
-        //获取位置管理服务
-
-        //查找服务信息
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE); //定位精度: 最高
-        criteria.setAltitudeRequired(true); //海拔信息：需要
-        criteria.setBearingRequired(false); //方位信息: 不需要
-        criteria.setCostAllowed(true);  //是否允许付费
-        criteria.setPowerRequirement(Criteria.POWER_LOW); //耗电量: 低功耗
-//
-        Location gpsLocation = null;
-        myLocationManager.addGpsStatusListener(myListener);
-
-        if (gpsIsOpen(myLocationManager)) {
-            String provider = myLocationManager.getBestProvider(criteria, true); //获取GPS信息
-            myLocationManager.requestLocationUpdates(provider,2000,5,locationListener);
-            gpsLocation = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        }
-        return gpsLocation;
-    }
 
     private boolean gpsIsOpen(LocationManager myLocationManager) {
         boolean isOpen = true;

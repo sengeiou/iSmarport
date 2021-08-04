@@ -10,16 +10,25 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
@@ -36,7 +45,14 @@ public class ScreenCapture {
 	 * @param Activity activity,int x,int y,int width,int height
 	 * @return filePath 文件路径
 	 * */
-	public static String  getBitmap(Activity activity,View layout){
+	@RequiresApi(api = Build.VERSION_CODES.M)
+	public static Uri  getBitmap(Activity activity, View layout){
+
+		if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+			Log.d("SZIP******","没授权");
+			return null;
+		}
+
 		//SYSTEM_UI_FLAG_FULLSCREEN表示全屏的意思，也就是会将状态栏隐藏
 		//设置系统UI元素的可见性
 		layout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
@@ -67,10 +83,28 @@ public class ScreenCapture {
 		}
 		layout.destroyDrawingCache();
 		layout.setSystemUiVisibility(View.VISIBLE);
-		return filePath;
+
+		File file = new File(filePath);
+		if (file.exists()) {
+			Uri uri;
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+				uri = Uri.fromFile(file);
+			} else {
+				uri = FileProvider.getUriForFile(activity, "com.szip.sportwatch.fileprovider", file);
+			}
+			return uri;
+		}
+		return null;
+
 	}
 
-	public static String  getScollerBitmap(Activity activity, ScrollView layout){
+	@RequiresApi(api = Build.VERSION_CODES.M)
+	public static Uri  getScollerBitmap(Activity activity, ScrollView layout){
+
+		if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+			Log.d("SZIP******","没授权");
+			return null;
+		}
 
 		int h = 0;
 		// 获取listView实际高度
@@ -95,7 +129,6 @@ public class ScreenCapture {
 		String filePath = null;
 		try {
 			// 获取内置SD卡路径
-
 			String sdCardPath = MyApplication.getInstance().getPrivatePath();
 			File fileDir = new File(sdCardPath);
 			if (!fileDir.exists()) {
@@ -112,7 +145,17 @@ public class ScreenCapture {
 		}
 		layout.destroyDrawingCache();
 		layout.setSystemUiVisibility(View.VISIBLE);
-		return filePath;
+		File file = new File(filePath);
+		if (file.exists()) {
+			Uri uri;
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+				uri = Uri.fromFile(file);
+			} else {
+				uri = FileProvider.getUriForFile(activity, "com.szip.sportwatch.fileprovider", file);
+			}
+			return uri;
+		}
+		return null;
 	}
 
 	/**

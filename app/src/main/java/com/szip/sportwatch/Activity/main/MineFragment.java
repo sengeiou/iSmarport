@@ -22,7 +22,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mediatek.wearable.WearableManager;
-import com.szip.sportwatch.BrigeActivity;
+import com.ctrip.standard.BrigeActivity;
+import com.szip.sportwatch.Activity.NotificationAppListActivity;
 import com.szip.sportwatch.Activity.help.FaqActivity;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.Activity.AboutActivity;
@@ -355,11 +356,21 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-                            requestPermissions(new String[]{Manifest.permission.CAMERA,
-                            }, 102);
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+                            if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED||
+                            getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                                requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                }, 103);
+                            }else {
+                                app.setCamerable(isChecked);
+                            }
                         }else {
-                            app.setCamerable(isChecked);
+                            if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+                                requestPermissions(new String[]{Manifest.permission.CAMERA,
+                                }, 102);
+                            }else {
+                                app.setCamerable(isChecked);
+                            }
                         }
                     }else {
                         app.setCamerable(isChecked);
@@ -428,6 +439,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
             }else {
                 app.setCamerable(true);
             }
+        }else if (requestCode == 103){
+            int code = grantResults[0];
+            int code1 = grantResults[1];
+            if (!(code == PackageManager.PERMISSION_GRANTED&&code1 == PackageManager.PERMISSION_GRANTED)){
+                showToast(getString(R.string.permissionErrorForCamare));
+                app.setCamerable(false);
+                blePhotoSwitch.setChecked(false);
+            }else {
+                app.setCamerable(true);
+            }
         }
     }
 
@@ -465,8 +486,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 window1.showAtLocation(v, Gravity.BOTTOM, 0, 0);
                 break;
             case R.id.notificationLl:
-                Intent intent = new Intent(getActivity(), BrigeActivity.class);
-//                intent.putExtra("className", PluginManager.getInstance().getEntryName());
+                Intent intent = new Intent(getActivity(), NotificationAppListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.findLl:
@@ -493,10 +513,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 if(MainService.getInstance().getState()!=3)
                     showToast(getString(R.string.lostDevice));
                 else{
-//                    if (app.isMtk())
-                        startActivity(new Intent(getActivity(), SelectDialActivity.class));
-//                    else
-//                        startActivity(new Intent(getActivity(), SelectDialActivity06.class));
+                    startActivity(new Intent(getActivity(), SelectDialActivity.class));
                 }
                 break;
             case R.id.logoutLl:

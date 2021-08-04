@@ -38,6 +38,8 @@ import java.util.ArrayList;
 
 import okhttp3.Call;
 
+import static com.szip.sportwatch.MyApplication.FILE;
+
 public class MainPresenterImpl implements IMainPrisenter{
 
     private IMainView iMainView;
