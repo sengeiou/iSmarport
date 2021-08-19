@@ -34,18 +34,17 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     private ImageView dialIv,changeIv;
     private int progress = 0;
     private boolean isSendPic = false;
+
+    private String faceType = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        if (MyApplication.getInstance().isMtk()) {
-            setContentView(R.layout.activity_select_dial);
-            iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
-        } else{
-            setContentView(R.layout.activity_select_dial06);
-            iSelectDialPresenter = new SelectDialPresenterImpl06(getApplicationContext(),this);
-        }
+        setContentView(R.layout.activity_select_dial);
+        iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
+        faceType = MyApplication.getInstance().getFaceType();
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
         EventBus.getDefault().register(this);
@@ -64,6 +63,7 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        iSelectDialPresenter.setViewDestory();
         EventBus.getDefault().unregister(this);
     }
 
@@ -148,7 +148,10 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
 
     @Override
     public void setView(String id, String pictureId, int clock) {
-        if (MyApplication.getInstance().isCircle()){
+        if (faceType.indexOf("320*385")>=0){
+            changeIv.setImageResource(R.mipmap.change_watch_06);
+            dialIv = findViewById(R.id.dialIv_r06);
+        }else if (faceType.indexOf("240*240 圆")>=0){
             changeIv.setImageResource(R.mipmap.change_watch_c);
             dialIv = findViewById(R.id.dialIv_c);
         }else {

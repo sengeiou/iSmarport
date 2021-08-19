@@ -69,6 +69,7 @@ public class GpsActivity extends BaseActivity implements IGpsView{
     protected void onDestroy() {
         super.onDestroy();
         iGpsPresenter.finishLocationService();
+        iGpsPresenter.setViewDestory();
     }
 
     private void initView() {

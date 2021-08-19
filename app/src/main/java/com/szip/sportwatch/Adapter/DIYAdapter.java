@@ -24,7 +24,7 @@ public class DIYAdapter extends RecyclerView.Adapter<DIYAdapter.Holder>{
     @Override
     public DIYAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (MyApplication.getInstance().isMtk())
+        if (MyApplication.getInstance().getFaceType().indexOf("320*385")<0)
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_diy, null);
         else
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_diy_06, null);

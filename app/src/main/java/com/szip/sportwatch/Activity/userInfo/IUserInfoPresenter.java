@@ -17,4 +17,5 @@ public interface IUserInfoPresenter {
     void selectPhoto(Dialog dialog, int y);
     void cropPhoto(Uri uri);
     void updownPhoto(File file);
+    void setViewDestory();
 }

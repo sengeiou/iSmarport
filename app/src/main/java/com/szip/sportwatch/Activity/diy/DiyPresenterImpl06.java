@@ -130,4 +130,9 @@ public class DiyPresenterImpl06 implements IDiyPresenter{
 
         }
     }
+
+    @Override
+    public void setViewDestory() {
+        iDiyView = null;
+    }
 }

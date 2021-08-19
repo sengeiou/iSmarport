@@ -35,7 +35,7 @@ public class EXCDController extends Controller {
 
     private static final String sControllerTag = "EXCDController";
 
-    private static final String TAG = "EXCDControllerSZIP******";
+    private static final String TAG = "SZIP******";
 
     private static EXCDController mInstance;
 

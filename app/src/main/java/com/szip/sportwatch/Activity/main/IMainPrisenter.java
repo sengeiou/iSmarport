@@ -16,4 +16,5 @@ public interface IMainPrisenter {
     void initHost(FragmentTabHost fragmentTabHost);
     //蓝牙重连
     void initBle();
+    void setViewDestory();
 }

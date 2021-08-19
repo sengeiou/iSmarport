@@ -78,6 +78,7 @@ public class MyApplication extends Application{
     private boolean isCircle = true;
     private boolean isMtk = true;
     private String dialGroupId = "0";
+    private String faceType = "320*385 方";
     private boolean isFirst = true;
     private String BtMac;
 
@@ -167,6 +168,7 @@ public class MyApplication extends Application{
         isMtk = sharedPreferences.getBoolean("bleConfig",true);
         isCircle = sharedPreferences.getBoolean("isCircle",true);
         dialGroupId = sharedPreferences.getString("dialGroup","0");
+        faceType = sharedPreferences.getString("faceType","320*385 方");
         //获取上次退出之后剩余的倒计时上传时间
         updownTime = sharedPreferences.getInt("updownTime",3600);
         //获取手机缓存的远程拍照状态
@@ -415,9 +417,11 @@ public class MyApplication extends Application{
         isMtk = sportWatchAppFunctionConfigDTO.getUseMtkConnect()==1;
         isCircle = sportWatchAppFunctionConfigDTO.getScreenType()==0;
         dialGroupId = Integer.toString(sportWatchAppFunctionConfigDTO.getWatchPlateGroupId());
+        faceType = sportWatchAppFunctionConfigDTO.getScreen();
         sharedPreferences.edit().putBoolean("bleConfig",isMtk).commit();
         sharedPreferences.edit().putBoolean("isCircle",isCircle).commit();
         sharedPreferences.edit().putString("dialGroup",dialGroupId).commit();
+        sharedPreferences.edit().putString("faceType",faceType).commit();
 
     }
 
@@ -433,6 +437,9 @@ public class MyApplication extends Application{
         return dialGroupId;
     }
 
+    public String getFaceType() {
+        return faceType;
+    }
 
     public boolean isNewVersion() {
         return isNewVersion;

@@ -405,14 +405,12 @@ związek. \ n \ nUwaga: zegarek nie może używać funkcji połączenia Bluetoot
     <string name="trigger_failed_due_to_low_battery">The battery of watch is low. Please try it again after charging!</string>
     <string name="update_failed">Watch upgrade failed,Please try again later!</string>
     <string name="send_firmware_date_success">Succeed in data transmition!</string>
-    <string name="new_version">It has been the latest version currently</string>
     <string name="downloading_fota">Firmware is being downloaded</string>
     <string name="read_send_fota_file">It is being prepared</string>
     <string name="sending_fota_file">The file is sent now</string>
     <string name="bt_disconnected_while_transfer">Bluetooth connection is broken!</string>
     <string name="download_succeed_via_bt">Send completed, please wait for upgrade!</string>
     <string name="updated_firmware">Update successfully!</string>
-    <string name="warning_updating_text">In the upgrade, please wait for the upgrade to complete, or timeout (%1$d minutes)</string>
     <string name="checkGPS">Wykryto, że przełącznik pozycji telefonu nie jest włączony, więc aby upewnić się, że aplikacja działa poprawnie, włącz przełącznik pozycyjny.</string>
     <string name="speedPerHour">Prędkość</string>
     <string name="training">Pociąg do uruchomienia</string>
@@ -422,6 +420,5 @@ związek. \ n \ nUwaga: zegarek nie może używać funkcji połączenia Bluetoot
     <string name="started">Zacznij działać jako pierwszy</string>
     <string name="touchAgain1">Naciśnij ponownie, aby zakończyć bieg</string>
     <string name="unlock">Przesuń palcem w prawo, aby odblokować</string>
-    <string name="startRun">zaczynać</string>
 
 </resources>

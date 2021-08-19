@@ -34,6 +34,7 @@ public class SelectDialPresenterImpl implements ISelectDialPresenter{
     private ISelectDialView iSelectDialView;
     private ArrayList<DialBean.Dial> dialArrayList = new ArrayList<>();
 
+
     public SelectDialPresenterImpl(Context context, ISelectDialView iSelectDialView) {
         this.context = context;
         this.iSelectDialView = iSelectDialView;
@@ -127,6 +128,11 @@ public class SelectDialPresenterImpl implements ISelectDialPresenter{
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void setViewDestory() {
+        iSelectDialView = null;
     }
 
 

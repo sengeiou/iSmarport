@@ -11,4 +11,6 @@ public interface IWelcomePresenter {
     void initDeviceConfig();
     //初始化用户信息
     void initUserInfo(Context context);
+
+    void setViewDestory();
 }

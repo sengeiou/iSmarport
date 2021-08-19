@@ -45,6 +45,7 @@ public class AnimalDayFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     protected void afterOnCreated(Bundle savedInstanceState) {
+        activity = (ReportActivity) getActivity();
         initEvent();
         initData();
         initView();
@@ -105,9 +106,6 @@ public class AnimalDayFragment extends BaseFragment implements View.OnClickListe
             activity.setViewPagerScroll(scrollAble);
     }
 
-    public void setActivity(ReportActivity activity) {
-        this.activity = activity;
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateReport(UpdateReport updateReport){
@@ -119,15 +117,15 @@ public class AnimalDayFragment extends BaseFragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rightIv:
-                if (((ReportActivity)getActivity()).reportDate==DateUtil.getTimeOfToday())
+                if (activity.reportDate==DateUtil.getTimeOfToday())
                     showToast(getString(R.string.tomorrow));
                 else{
-                    ((ReportActivity)getActivity()).reportDate+=24*60*60;
+                    activity.reportDate+=24*60*60;
                     EventBus.getDefault().post(new UpdateReport());
                 }
                 break;
             case R.id.leftIv:
-                ((ReportActivity)getActivity()).reportDate-=24*60*60;
+                activity.reportDate-=24*60*60;
                 EventBus.getDefault().post(new UpdateReport());
                 break;
         }

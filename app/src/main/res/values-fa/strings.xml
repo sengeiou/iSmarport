@@ -341,14 +341,12 @@
     <string name="trigger_failed_due_to_low_battery">The battery of watch is low. Please try it again after charging!</string>
     <string name="update_failed">Watch upgrade failed,Please try again later!</string>
     <string name="send_firmware_date_success">Succeed in data transmition!</string>
-    <string name="new_version">It has been the latest version currently</string>
     <string name="downloading_fota">Firmware is being downloaded</string>
     <string name="read_send_fota_file">It is being prepared</string>
     <string name="sending_fota_file">The file is sent now</string>
     <string name="bt_disconnected_while_transfer">Bluetooth connection is broken!</string>
     <string name="download_succeed_via_bt">Send completed, please wait for upgrade!</string>
     <string name="updated_firmware">Update successfully!</string>
-    <string name="warning_updating_text">In the upgrade, please wait for the upgrade to complete, or timeout (%1$d minutes)</string>
     <string name="checkGPS">سوئیچ موقعیت گوشی شما تشخیص داده شده است که روشن نیست، بنابراین برای اطمینان از اینکه برنامه به درستی کار می کند، سوئیچ موقعیت را روشن کنید.</string>
     <string name="avarageAltitude">ارتفاع کوهنوردی</string>
     <string name="speedPerHour">سرعت</string>
@@ -359,6 +357,5 @@
     <string name="started">اول شروع به دویدن کنید</string>
     <string name="touchAgain1">فشار دوباره برای خروج از اجرا</string>
     <string name="unlock">کشیدن حق برای باز کردن قفل</string>
-    <string name="startRun">شروع</string>
 
 </resources>

@@ -169,4 +169,9 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
                 iWelcomeView.initUserinfoFinish(true);
         }
     }
+
+    @Override
+    public void setViewDestory() {
+        iWelcomeView = null;
+    }
 }

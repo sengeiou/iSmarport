@@ -195,6 +195,11 @@ public class MainPresenterImpl implements IMainPrisenter{
     }
 
     @Override
+    public void setViewDestory() {
+        iMainView = null;
+    }
+
+    @Override
     public void checkNotificationState() {
         if (!isNotificationListenerActived())
             showNotifiListnerPrompt();

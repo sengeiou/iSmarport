@@ -336,14 +336,12 @@
     <string name="trigger_failed_due_to_low_battery">The battery of watch is low. Please try it again after charging!</string>
     <string name="update_failed">Watch upgrade failed,Please try again later!</string>
     <string name="send_firmware_date_success">Succeed in data transmition!</string>
-    <string name="new_version">It has been the latest version currently</string>
     <string name="downloading_fota">Firmware is being downloaded</string>
     <string name="read_send_fota_file">It is being prepared</string>
     <string name="sending_fota_file">The file is sent now</string>
     <string name="bt_disconnected_while_transfer">Bluetooth connection is broken!</string>
     <string name="download_succeed_via_bt">Send completed, please wait for upgrade!</string>
     <string name="updated_firmware">Update successfully!</string>
-    <string name="warning_updating_text">In the upgrade, please wait for the upgrade to complete, or timeout (%1$d minutes)</string>
     <string name="speedPerHour">"  "</string>
     <string name="training">" "</string>
     <string name="heart_switch">" "</string>
@@ -352,6 +350,5 @@
     <string name="started">पहले दौड़ना शुरू करें</string>
     <string name="touchAgain1">रन से बाहर निकलने के लिए फिर से दबाएं</string>
     <string name="unlock">अनलॉक करने के लिए सही स्वाइप करें</string>
-    <string name="startRun">शुरू करना</string>
 
 </resources>

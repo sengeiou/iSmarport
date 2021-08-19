@@ -46,6 +46,7 @@ public class BloodOxygenDayFragment extends BaseFragment implements OnPageViewSc
 
     @Override
     protected void afterOnCreated(Bundle savedInstanceState) {
+        activity = (ReportActivity) getActivity();
         initEvent();
         initData();
         initView();
@@ -115,15 +116,15 @@ public class BloodOxygenDayFragment extends BaseFragment implements OnPageViewSc
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rightIv:
-                if (((ReportActivity)getActivity()).reportDate==DateUtil.getTimeOfToday())
+                if (activity.reportDate==DateUtil.getTimeOfToday())
                     showToast(getString(R.string.tomorrow));
                 else{
-                    ((ReportActivity)getActivity()).reportDate+=24*60*60;
+                    activity.reportDate+=24*60*60;
                     EventBus.getDefault().post(new UpdateReport());
                 }
                 break;
             case R.id.leftIv:
-                ((ReportActivity)getActivity()).reportDate-=24*60*60;
+                activity.reportDate-=24*60*60;
                 EventBus.getDefault().post(new UpdateReport());
                 break;
         }

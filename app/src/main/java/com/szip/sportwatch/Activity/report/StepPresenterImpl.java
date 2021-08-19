@@ -43,4 +43,9 @@ public class StepPresenterImpl implements ISportPresenter{
         if (iSportView!=null)
             iSportView.initPager(myPagerAdapter,context.getString(R.string.stepReport));
     }
+
+    @Override
+    public void setViewDestory() {
+        iSportView = null;
+    }
 }

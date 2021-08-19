@@ -40,14 +40,12 @@ public class DiyPresenterImpl implements IDiyPresenter{
                     R.mipmap.diy_preview_c_12_1,R.mipmap.diy_preview_c_13_1,R.mipmap.diy_31,R.mipmap.diy_30,R.mipmap.diy_34};
 
             clock = new int[]{15,25,11,17,18,19,20,21,22,23,24,26,27,31,30,34};
-
         }else {
             dials = new int[]{R.mipmap.diy_preview_1_1,R.mipmap.diy_preview_2_1,R.mipmap.diy_preview_3_1,R.mipmap.diy_preview_4_1,
                     R.mipmap.diy_preview_5_1,R.mipmap.diy_preview_6_1,R.mipmap.diy_preview_7_1,R.mipmap.diy_preview_9_1,
                     R.mipmap.diy_preview_10_1,R.mipmap.diy_preview_11_1,R.mipmap.diy_preview_13_1,R.mipmap.diy_preview_14_1,R.mipmap.diy_28};
 
             clock = new int[]{1,2,3,5,7,8,9,10,12,14,11,13,28};
-
         }
         DIYAdapter diyAdapter = new DIYAdapter(dials);
         dialRv.setAdapter(diyAdapter);
@@ -121,5 +119,10 @@ public class DiyPresenterImpl implements IDiyPresenter{
         } catch (Exception e) {
 
         }
+    }
+
+    @Override
+    public void setViewDestory() {
+        iDiyView = null;
     }
 }

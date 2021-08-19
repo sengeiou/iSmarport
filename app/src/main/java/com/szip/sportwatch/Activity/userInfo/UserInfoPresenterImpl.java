@@ -359,4 +359,9 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void setViewDestory() {
+        iUserInfoView = null;
+    }
 }

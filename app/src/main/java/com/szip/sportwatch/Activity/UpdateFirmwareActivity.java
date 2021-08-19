@@ -10,6 +10,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,8 +36,9 @@ import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.StatusBarCompat;
 
 import java.net.URL;
+import java.util.List;
 
-public class UpdateFirmwareActivity extends BaseActivity {
+public class UpdateFirmwareActivity extends BaseActivity{
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -90,6 +95,10 @@ public class UpdateFirmwareActivity extends BaseActivity {
     private int mSendFotaProgress = 0;
 
     private MyHandler mHandler = new MyHandler();
+
+
+
+
 
     private class MyHandler extends Handler {
         @Override
@@ -156,6 +165,11 @@ public class UpdateFirmwareActivity extends BaseActivity {
     }
 
 
+    SensorManager mSensorManager;//管理器实例
+    Sensor stepCounter;//传感器
+    float mSteps = 0;//步数
+    TextView steps;//显示步数
+    TextView time;//显示时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,36 +177,66 @@ public class UpdateFirmwareActivity extends BaseActivity {
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_update_firmware);
-        StatusBarCompat.translucentStatusBar(this,true);
-        setAndroidNativeLightStatusBar(this,true);
-        mSharedPreferences = getSharedPreferences(MyApplication.FILE, MODE_PRIVATE);
-        mEditor = mSharedPreferences.edit();
-        mEditor.putLong("UPDATE_FOTA_START_TIME", System.currentTimeMillis());
-        mEditor.commit();
-        mContext = this;
-        FotaOperator.getInstance(this).registerFotaCallback(mFotaCallBack);
-        //注册一个监听蓝牙状态的广播
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        this.registerReceiver(mReceiver, filter);
+//        StatusBarCompat.translucentStatusBar(this,true);
+//        setAndroidNativeLightStatusBar(this,true);
+//        mSharedPreferences = getSharedPreferences(MyApplication.FILE, MODE_PRIVATE);
+//        mEditor = mSharedPreferences.edit();
+//        mEditor.putLong("UPDATE_FOTA_START_TIME", System.currentTimeMillis());
+//        mEditor.commit();
+//        mContext = this;
+//        FotaOperator.getInstance(this).registerFotaCallback(mFotaCallBack);
+//        //注册一个监听蓝牙状态的广播
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+//        this.registerReceiver(mReceiver, filter);
+//
+//        mProgressTitle =  findViewById(R.id.progress_title);
+//        mProgressText =  findViewById(R.id.progress_text);
+//        mProgressBar =  findViewById(R.id.progress_bar);
+//
+//        mFileUrl = getExternalFilesDir(null).getPath() + "/image.bin";
+//        LogUtil.getInstance().logd("update******","path = "+mFileUrl);
+////                SmartDeviceBLL.getInstance().getFotaFileUrl();
+//        if (TextUtils.isEmpty(mFileUrl)) {
+//            showToast(getString(R.string.new_version));
+//            finish();
+//            return;
+//        }
+//        String[] str = mFileUrl.split("/");
+//        fileName = str[str.length - 1];
+//            startDownloadFotaFromNetwork();
 
-        mProgressTitle =  findViewById(R.id.progress_title);
-        mProgressText =  findViewById(R.id.progress_text);
-        mProgressBar =  findViewById(R.id.progress_bar);
 
-        mFileUrl = getExternalFilesDir(null).getPath() + "/image.bin";
-        LogUtil.getInstance().logd("update******","path = "+mFileUrl);
-//                SmartDeviceBLL.getInstance().getFotaFileUrl();
-        if (TextUtils.isEmpty(mFileUrl)) {
-            showToast(getString(R.string.new_version));
-            finish();
-            return;
+        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+        steps = findViewById(R.id.steps);
+        time = findViewById(R.id.time);
+        // 获取计步器sensor
+        stepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        Sensor stepCounter1 = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+        if(stepCounter != null&&stepCounter1 != null){
+            // 如果sensor找到，则注册监听器
+            Log.e("SZIP******","注册计步器");
+            mSensorManager.registerListener(sensorEventListener,stepCounter,1000);
         }
-        String[] str = mFileUrl.split("/");
-        fileName = str[str.length - 1];
-            startDownloadFotaFromNetwork();
-
+        else{
+            Log.e("SZIP******","no step counter sensor found");
+        }
     }
+
+    private SensorEventListener sensorEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            Log.d("SZIP******","步数有变");
+            mSteps = event.values[0];
+            steps.setText("你已经走了"+String.valueOf((int)mSteps)+"步");
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            Log.d("SZIP******","步数精确度有变");
+        }
+    };
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -210,13 +254,13 @@ public class UpdateFirmwareActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!mTransferTask.isCancelled()) {
-            mTransferTask.cancel(true);
-        }
-        FotaOperator.getInstance(this).unregisterFotaCallback(mFotaCallBack);
-        this.unregisterReceiver(mReceiver);
-        mHandler.removeCallbacksAndMessages(null);
-        mSendFotaProgress = 0;
+//        if (!mTransferTask.isCancelled()) {
+//            mTransferTask.cancel(true);
+//        }
+//        FotaOperator.getInstance(this).unregisterFotaCallback(mFotaCallBack);
+//        this.unregisterReceiver(mReceiver);
+//        mHandler.removeCallbacksAndMessages(null);
+//        mSendFotaProgress = 0;
     }
 
     @Override

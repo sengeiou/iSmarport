@@ -49,6 +49,7 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        iSportPresenter.setViewDestory();
         FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"share.jpg");
     }
 
@@ -65,13 +66,13 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
                 iSportPresenter = new HeartPresenterImpl(getApplicationContext(),this);
                 break;
             case "bp":
-                iSportPresenter = new BloodPressurePresenterImpl(this,this);
+                iSportPresenter = new BloodPressurePresenterImpl(getApplicationContext(),this);
                 break;
             case "bo":
-                iSportPresenter = new BloodOxygenPresenterImpl(this,this);
+                iSportPresenter = new BloodOxygenPresenterImpl(getApplicationContext(),this);
                 break;
             case "temp":
-                iSportPresenter = new TemperaturePresenterImpl(this,this);
+                iSportPresenter = new TemperaturePresenterImpl(getApplicationContext(),this);
                 break;
             case "sleep":
                 iSportPresenter = new SleepPresenterImpl(getApplicationContext(),this);

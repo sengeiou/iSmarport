@@ -100,6 +100,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        iUserInfoPresenter.setViewDestory();
     }
 
     /**

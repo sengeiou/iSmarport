@@ -49,18 +49,16 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     private boolean isSendPic = false;
     private IDiyPresenter iDiyPresenter;
     private int clock = -1;
+
+    private String faceType = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        if (MyApplication.getInstance().isMtk()){
-            setContentView(R.layout.activity_diy);
-            iDiyPresenter = new DiyPresenterImpl(getApplicationContext(),this);
-        } else{
-            setContentView(R.layout.activity_diy06);
-            iDiyPresenter = new DiyPresenterImpl06(getApplicationContext(),this);
-        }
+        setContentView(R.layout.activity_diy);
+        faceType = MyApplication.getInstance().getFaceType();
+        iDiyPresenter = new DiyPresenterImpl(getApplicationContext(),this);
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
         EventBus.getDefault().register(this);
@@ -80,6 +78,7 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        iDiyPresenter.setViewDestory();
         EventBus.getDefault().unregister(this);
         FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"crop.jpg");
         FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"camera.jpg");
@@ -209,11 +208,14 @@ public class DIYActivity extends BaseActivity implements IDiyView{
 
     @Override
     public void setView(boolean isCircle) {
-        if (isCircle){
+        if (faceType.indexOf("320*385")>=0){
+            diyIv.setImageResource(R.mipmap.diy_06);
+            backgroundIv = findViewById(R.id.backgroundIv_r06);
+        }else if (faceType.indexOf("240*240 方")>=0){
+            backgroundIv = findViewById(R.id.backgroundIv_r);
+        }else {
             diyIv.setImageResource(R.mipmap.diy_c);
             backgroundIv = findViewById(R.id.backgroundIv_c);
-        }else {
-            backgroundIv = findViewById(R.id.backgroundIv_r);
         }
     }
 

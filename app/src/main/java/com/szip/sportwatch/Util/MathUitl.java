@@ -813,10 +813,10 @@ public class MathUitl {
         UserInfo info = new UserInfo();
         info.setBirthday(sharedPreferences.getString("birthday",""));
         info.setUserName(sharedPreferences.getString("userName","ipt"));
-        info.setHeight(sharedPreferences.getInt("height1",0));
-        info.setWeight(sharedPreferences.getInt("weight1",0));
-        info.setHeightBritish(sharedPreferences.getInt("heightBritish",0));
-        info.setWeightBritish(sharedPreferences.getInt("weightBritish",0));
+        info.setHeight(sharedPreferences.getInt("height1",170));
+        info.setWeight(sharedPreferences.getInt("weight1",60));
+        info.setHeightBritish(sharedPreferences.getInt("heightBritish",66));
+        info.setWeightBritish(sharedPreferences.getInt("weightBritish",132));
         info.setUnit(sharedPreferences.getInt("unit1",0));
         info.setTempUnit(sharedPreferences.getInt("temp",0));
         info.setSex(sharedPreferences.getInt("sex",1));
@@ -917,6 +917,8 @@ public class MathUitl {
 
     public static double[]getMapOption(String[] lats,String[] lngs){
         double[] option= new double[3];
+        if (lats.length<2)
+            return option;
         int minLat = Integer.valueOf(lats[1]),maxLat = Integer.valueOf(lats[1]),
                 minLng=Integer.valueOf(lngs[1]),maxLng=Integer.valueOf(lngs[1]);
         int minLatIndex = 1,maxLatIndex = 1,minLngIndex = 1,maxLngIndex = 1;

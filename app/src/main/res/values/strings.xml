@@ -173,8 +173,6 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="climb">Climbing</string>
     <string name="skii">Skii</string>
     <string name="golf">Golf</string>
-    <string name="tipForPrivacy">Permission to illustrate</string>
-    <string name="getPrivacy">During use, the application requires access to location permissions to record and calibrate motion tracks and distances</string>
 
 
     <!--我的页面 Mine-->
@@ -218,7 +216,6 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="unline">Disconnect</string>
     <string name="line">Connect The Watch</string>
     <string name="addDevice">Add Device</string>
-    <string name="help">help</string>
     <string name="FAQ">FAQ</string>
     <string name="guide">User Guide</string>
     <string name="service">Keep app active</string>
@@ -382,14 +379,12 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="trigger_failed_due_to_low_battery">The battery of watch is low. Please try it again after charging!</string>
     <string name="update_failed">Watch upgrade failed,Please try again later!</string>
     <string name="send_firmware_date_success">Succeed in data transmition!</string>
-    <string name="new_version">It has been the latest version currently</string>
     <string name="downloading_fota">Firmware is being downloaded</string>
     <string name="read_send_fota_file">It is being prepared</string>
     <string name="sending_fota_file">The file is sent now</string>
     <string name="bt_disconnected_while_transfer">Bluetooth connection is broken!</string>
     <string name="download_succeed_via_bt">Send completed, please wait for upgrade!</string>
     <string name="updated_firmware">Update successfully!</string>
-    <string name="warning_updating_text">In the upgrade, please wait for the upgrade to complete, or timeout (%1$d minutes)</string>
     <string name="checkGPS">It has been detected that the position switch of your mobile phone is not turned on. To ensure the normal operation of the application, please turn on the position switch.</string>
     <string name="training">Training run</string>
     <string name="heart_switch">Measure your heart rate regularly</string>
@@ -398,6 +393,5 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="started">Please start running first</string>
     <string name="touchAgain1">Press again to quit running</string>
     <string name="unlock">Slide right to unlock</string>
-    <string name="startRun">Start</string>
     <string name="stride">stride</string>
 </resources>

@@ -351,8 +351,5 @@
     <string name="started">請先開啓跑步運動</string>
     <string name="touchAgain1">再按一次退出跑步</string>
     <string name="unlock">向右滑動解鎖</string>
-    <string name="startRun">開始運動</string>
-    <string name="getPrivacy">在使用過程中，本應用需要訪問定位權限，用於記錄和校準運動軌跡與距離</string>
-    <string name="tipForPrivacy">權限說明</string>
 
 </resources>

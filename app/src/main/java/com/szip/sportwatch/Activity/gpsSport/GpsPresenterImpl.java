@@ -128,6 +128,11 @@ public class GpsPresenterImpl implements IGpsPresenter {
         }
     }
 
+    @Override
+    public void setViewDestory() {
+        iGpsView = null;
+    }
+
     private void initTask(){
         timer = new Timer();
         timerTask = new TimerTask() {
@@ -249,7 +254,7 @@ public class GpsPresenterImpl implements IGpsPresenter {
 
     private SportData getSportData(){
         SportData sportData = new SportData();
-        if(time>30){//运动时长大于30秒并且运动里程超过200米，才能生成报告
+        if(time>30&&distance>100){//运动时长大于30秒并且运动里程超过200米，才能生成报告
             sportData.type = 2;//运动类型
             sportData.time = System.currentTimeMillis()/1000;//运动时间（结束运动的时间）
             sportData.sportTime = time;//运动时长

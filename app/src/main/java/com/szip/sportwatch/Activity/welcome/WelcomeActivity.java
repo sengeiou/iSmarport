@@ -21,8 +21,6 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView{
     /**
      * 延时线程
      * */
-    private int sportWatchCode = 100;
-
     private boolean isConfig = false;
     private boolean isInitInfo = false;
     private boolean isInitBle = false;
@@ -41,6 +39,11 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView{
         welcomePresenter.checkPrivacy(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        welcomePresenter.setViewDestory();
+    }
 
     @Override
     public void checkPrivacyResult(boolean comfirm) {

@@ -1,5 +1,7 @@
 package com.szip.sportwatch.Activity.report;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -13,10 +15,10 @@ import com.szip.sportwatch.R;
 import java.util.ArrayList;
 
 public class TemperaturePresenterImpl implements ISportPresenter{
-    private ReportActivity context;
+    private Context context;
     private ISportView iSportView;
 
-    public TemperaturePresenterImpl(ReportActivity context, ISportView iSportView) {
+    public TemperaturePresenterImpl(Context context, ISportView iSportView) {
         this.context = context;
         this.iSportView = iSportView;
     }
@@ -25,7 +27,6 @@ public class TemperaturePresenterImpl implements ISportPresenter{
     public void getPageView(FragmentManager fragmentManager) {
         ArrayList<Fragment> fragments = new ArrayList<>();
         AnimalDayFragment dayFragment =  new AnimalDayFragment();
-        dayFragment.setActivity(context);
         AnimalWeekFragment weekFragment =  new AnimalWeekFragment();
         AnimalMonthFragment monthFragment =  new AnimalMonthFragment();
         AnimalYearFragment yearFragment =  new AnimalYearFragment();
@@ -39,5 +40,10 @@ public class TemperaturePresenterImpl implements ISportPresenter{
         myPagerAdapter.setFragmentArrayList(fragments);
         if (iSportView!=null)
             iSportView.initPager(myPagerAdapter,context.getString(R.string.animalHeatReport));
+    }
+
+    @Override
+    public void setViewDestory() {
+        iSportView = null;
     }
 }

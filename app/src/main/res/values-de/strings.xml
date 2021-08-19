@@ -348,14 +348,12 @@
     <string name="trigger_failed_due_to_low_battery">The battery of watch is low. Please try it again after charging!</string>
     <string name="update_failed">Watch upgrade failed,Please try again later!</string>
     <string name="send_firmware_date_success">Succeed in data transmition!</string>
-    <string name="new_version">It has been the latest version currently</string>
     <string name="downloading_fota">Firmware is being downloaded</string>
     <string name="read_send_fota_file">It is being prepared</string>
     <string name="sending_fota_file">The file is sent now</string>
     <string name="bt_disconnected_while_transfer">Bluetooth connection is broken!</string>
     <string name="download_succeed_via_bt">Send completed, please wait for upgrade!</string>
     <string name="updated_firmware">Update successfully!</string>
-    <string name="warning_updating_text">In the upgrade, please wait for the upgrade to complete, or timeout (%1$d minutes)</string>
     <string name="checkGPS">Das GPS ihres handys ist noch nicht an. Um sicherzustellen, dass die anwendung richtig läuft, stellen sie den navigationsbereich an.</string>
     <string name="speedPerHour">Geschwindigkeit.</string>
     <string name="training">Trainer. Lauftraining.</string>
@@ -365,6 +363,5 @@
     <string name="started">Bitte starten sie zuerst den laufsport</string>
     <string name="touchAgain1">Und nochmal kurz raus aus dem rennen</string>
     <string name="unlock">Ziehen sie zum entsperren nach rechts</string>
-    <string name="startRun">Und action!</string>
 
 </resources>

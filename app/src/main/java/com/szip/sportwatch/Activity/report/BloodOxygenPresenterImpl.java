@@ -1,5 +1,7 @@
 package com.szip.sportwatch.Activity.report;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -13,10 +15,10 @@ import com.szip.sportwatch.R;
 import java.util.ArrayList;
 
 public class BloodOxygenPresenterImpl implements ISportPresenter{
-    private ReportActivity context;
+    private Context context;
     private ISportView iSportView;
 
-    public BloodOxygenPresenterImpl(ReportActivity context, ISportView iSportView) {
+    public BloodOxygenPresenterImpl(Context context, ISportView iSportView) {
         this.context = context;
         this.iSportView = iSportView;
     }
@@ -25,7 +27,6 @@ public class BloodOxygenPresenterImpl implements ISportPresenter{
     public void getPageView(FragmentManager fragmentManager) {
         ArrayList<Fragment> fragments = new ArrayList<>();
         BloodOxygenDayFragment dayFragment =  new BloodOxygenDayFragment();
-        dayFragment.setActivity(context);
         BloodOxygenWeekFragment weekFragment =  new BloodOxygenWeekFragment();
         BloodOxygenMonthFragment monthFragment =  new BloodOxygenMonthFragment();
         BloodOxygenYearFragment yearFragment =  new BloodOxygenYearFragment();
@@ -40,5 +41,10 @@ public class BloodOxygenPresenterImpl implements ISportPresenter{
         myPagerAdapter.setFragmentArrayList(fragments);
         if (iSportView!=null)
             iSportView.initPager(myPagerAdapter,context.getString(R.string.bloodOxygenReport));
+    }
+
+    @Override
+    public void setViewDestory() {
+        iSportView = null;
     }
 }

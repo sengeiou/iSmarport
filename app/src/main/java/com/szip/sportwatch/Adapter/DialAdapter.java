@@ -18,26 +18,24 @@ import java.util.ArrayList;
 
 public class DialAdapter extends RecyclerView.Adapter<DialAdapter.Holder> {
 
-    private int [] dials;
     private int select = 0;
     private Context mContext;
 
     private ArrayList<DialBean.Dial> dialArrayList;
+    private String faceType = "";
 
-    public DialAdapter(int[] dials) {
-        this.dials = dials;
-    }
 
     public DialAdapter(ArrayList<DialBean.Dial> dialArrayList,Context context) {
         this.dialArrayList = dialArrayList;
         mContext = context;
+        faceType = MyApplication.getInstance().getFaceType();
     }
 
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (MyApplication.getInstance().isMtk())
+        if (faceType.indexOf("320*385")<0)
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_dail, null);
         else
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_dail_06, null);

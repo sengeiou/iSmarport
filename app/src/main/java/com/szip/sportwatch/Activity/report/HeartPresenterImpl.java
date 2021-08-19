@@ -42,4 +42,9 @@ public class HeartPresenterImpl implements ISportPresenter{
         if (iSportView!=null)
             iSportView.initPager(myPagerAdapter,context.getString(R.string.heartReport));
     }
+
+    @Override
+    public void setViewDestory() {
+        iSportView = null;
+    }
 }

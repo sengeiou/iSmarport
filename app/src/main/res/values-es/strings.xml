@@ -345,14 +345,12 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="trigger_failed_due_to_low_battery">Baja batería del reloj, inténtelo de nuevo después de la carga</string>
     <string name="update_failed">Se actualiza el reloj con fracaso, ¡Por favor, inténtelo de nuevo más tarde!</string>
     <string name="send_firmware_date_success">¡Se envían los datos con éxito!！</string>
-    <string name="new_version">Ya es la última versión</string>
     <string name="downloading_fota">Descargando firmwares</string>
     <string name="read_send_fota_file">Preparando</string>
     <string name="sending_fota_file">Transmitiendo archivos</string>
     <string name="bt_disconnected_while_transfer">¡Bluetooth desconectado!</string>
     <string name="download_succeed_via_bt">Enviar completado, ¡espere hasta que se actualice con éxito!</string>
     <string name="updated_firmware">Se actualiza con éxito</string>
-    <string name="warning_updating_text">Actualizando, espere hasta terminar la actualización o acabar el tiempo (%1$d minutos)</string>
     <string name="checkGPS">Se ha detectado que el interruptor de posición de su teléfono no está activado. para asegurarse de que la aplicación funciona correctamente, encienda el interruptor de posición.</string>
     <string name="speedPerHour">viajan</string>
     <string name="training">Carrera de entrenamiento</string>
@@ -362,6 +360,5 @@ Recomendamos que los menores alienten a sus padres o tutores a leer esta políti
     <string name="started">Por favor, comience la carrera primero</string>
     <string name="touchAgain1">Pulse otra vez para salir de la carrera</string>
     <string name="unlock">Desbloquear deslizando a la derecha</string>
-    <string name="startRun">a</string>
 
 </resources>

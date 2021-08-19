@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.mediatek.wearable.WearableManager;
 import com.ctrip.standard.BrigeActivity;
 import com.szip.sportwatch.Activity.NotificationAppListActivity;
+import com.szip.sportwatch.Activity.UpdateFirmwareActivity;
 import com.szip.sportwatch.Activity.help.FaqActivity;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.Activity.AboutActivity;
@@ -486,7 +487,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 window1.showAtLocation(v, Gravity.BOTTOM, 0, 0);
                 break;
             case R.id.notificationLl:
-                Intent intent = new Intent(getActivity(), NotificationAppListActivity.class);
+                Intent intent = new Intent(getActivity(), UpdateFirmwareActivity.class);
                 startActivity(intent);
                 break;
             case R.id.findLl:

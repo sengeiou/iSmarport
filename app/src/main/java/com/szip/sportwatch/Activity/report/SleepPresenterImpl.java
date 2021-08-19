@@ -42,4 +42,9 @@ public class SleepPresenterImpl implements ISportPresenter{
         if (iSportView!=null)
             iSportView.initPager(myPagerAdapter,context.getString(R.string.sleepReport));
     }
+
+    @Override
+    public void setViewDestory() {
+        iSportView = null;
+    }
 }
