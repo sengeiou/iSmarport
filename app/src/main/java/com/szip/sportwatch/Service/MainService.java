@@ -52,6 +52,7 @@ import com.szip.sportwatch.Notification.AppList;
 import com.szip.sportwatch.Notification.NotificationReceiver;
 import com.szip.sportwatch.Notification.NotificationService;
 import com.szip.sportwatch.Notification.SmsService;
+import com.szip.sportwatch.Util.MusicUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -157,7 +158,9 @@ public class MainService extends Service {
                     EXCDController.getInstance().writeForCheckVersion();
                     EXCDController.getInstance().writeForUpdateWeather(app.getWeatherModel(),
                             app.getCity());
+                    MusicUtil.getSingle().registerNotify();
                 }else if (newState == WearableManager.STATE_CONNECT_LOST){
+                    MusicUtil.getSingle().unRegisterNotify();
                     mSevice.startForeground(0103,NotificationView.getInstance().getNotify(false));
                 }
             }
@@ -564,9 +567,8 @@ public class MainService extends Service {
     public void onDestroy() {
         Log.i(TAG, "onDestroy()");
         WearableManager manager = WearableManager.getInstance();
-//        manager.removeController(MapController.getInstance(sContext));
+        manager.removeController(MapController.getInstance(sContext));
         manager.removeController(NotificationController.getInstance(sContext));
-//        manager.removeController(RemoteMusicController.getInstance(sContext));
         manager.removeController(EXCDController.getInstance());
         EXCDController.getInstance().setReviceDataCallback(null);
         manager.unregisterWearableListener(mWearableListener);
@@ -576,7 +578,11 @@ public class MainService extends Service {
         BleClient.getInstance().setiOtaResponse(null);
         Intent intent = new Intent();
         intent.setClass(this,MainService.class);
-        startService(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent);
+        }else {
+            startService(intent);
+        }
     }
 
 
@@ -635,10 +641,9 @@ public class MainService extends Service {
         Log.i(TAG, "registerService()");
 
         WearableManager manager = WearableManager.getInstance();
-        manager.addController(MapController.getInstance(sContext));
         manager.addController(NotificationController.getInstance(sContext));
-        manager.addController(RemoteMusicController.getInstance(sContext));
         manager.addController(EXCDController.getInstance());
+        manager.addController(MapController.getInstance(sContext));
         EXCDController.getInstance().setReviceDataCallback(reviceDataCallback);
         manager.registerWearableListener(mWearableListener);
         // start SMS service

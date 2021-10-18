@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.text.format.DateFormat;
-import com.mediatek.ctrl.music.RemoteMusicController;
+
 import com.mediatek.wearable.Controller;
 import com.szip.sportwatch.Activity.camera.CameraActivity;
 import com.szip.sportwatch.Interface.OnCameraListener;
@@ -20,6 +20,7 @@ import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Util.DateUtil;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
+import com.szip.sportwatch.Util.MusicUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -144,7 +145,6 @@ public class EXCDController extends Controller {
                     if (commands[2].equals(commands[3])){//接收结束
                         StringBuffer str = new StringBuffer();
                         for (int i = 0;i<steps.size();i++){
-                            LogUtil.getInstance().logd("SZIP******","STEP = "+steps.get(i));
                             String strs[] = steps.get(i).split(",");
                             str.append(steps.get(i).substring(strs[0].length()+strs[1].length()+strs[2].length()+
                                     strs[3].length()+4));
@@ -329,52 +329,24 @@ public class EXCDController extends Controller {
                         reviceDataCallback.findPhone(0);
                 }
             }else if (commands[1].equals("43")){//收到音乐播放指令，转换成music可识别的指令
-                String str = "mtk_msctrl msctrl_apk 0 1 ";
-                String cmd = command.split(",")[2];
-                str = str+cmd+" 1 FF";
-                byte[] datas = new byte[0];
-                try {
-                    datas = str.getBytes("ASCII");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                if (commands[2].equals("4")){//暂停
+                    MusicUtil.getSingle().controlMusic(127);
+                }else if (commands[2].equals("3")){//播放
+                    MusicUtil.getSingle().controlMusic(126);
+                }else if (commands[2].equals("7")){//上一曲
+                    MusicUtil.getSingle().controlMusic(88);
+                }else if (commands[2].equals("8")){//下一曲
+                    MusicUtil.getSingle().controlMusic(87);
+                }else if (commands[2].equals("5")){//音量升
+                    MusicUtil.getSingle().setVoice(1);
+                }else if (commands[2].equals("6")){//音量降
+                    MusicUtil.getSingle().setVoice(-1);
                 }
-                RemoteMusicController.getInstance(mContext).onReceive(datas);
-                if (cmd.equals("2")){
-                    writeForRET("SET,"+commands[1]+",0");
-                }else
-                    writeForRET("SET,"+commands[1]+",1");
-            } else if (commands[1].equals("45")){//收到音乐播放指令，转换成music可识别的指令
-                String str = "mtk_msctrl msctrl_apk 0 1 ";
-                String cmd = command.split(",")[2];
-                str = str+cmd+" 1 FF";
-                byte[] datas = new byte[0];
-                try {
-                    datas = str.getBytes("ASCII");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                RemoteMusicController.getInstance(mContext).onReceive(datas);
-                if (cmd.equals("2")){
-                    writeForRET("SET,"+commands[1]+",0");
-                }else
-                    writeForRET("SET,"+commands[1]+",1");
-            } else if (commands[1].equals("46")){//收到音乐播放指令，转换成music可识别的指令
-                String str = "mtk_msctrl msctrl_apk 0 1 ";
-                String cmd = command.split(",")[2];
-                str = str+cmd+" 1 FF";
-                byte[] datas = new byte[0];
-                try {
-                    datas = str.getBytes("ASCII");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                RemoteMusicController.getInstance(mContext).onReceive(datas);
-                if (cmd.equals("2")){
+                if (commands[2].equals("2")){
                     writeForRET("SET,"+commands[1]+",0");
                 }else
                     writeForRET("SET,"+commands[1]+",1");
             }
-
         }else if (commands[0].contains("SEND")){
             if (commands[1].equals("10")){//同步计步数据
                 if (commands.length>2){//有数据
@@ -384,30 +356,15 @@ public class EXCDController extends Controller {
                         reviceDataCallback.getStepsForDay(datas);
                     writeForRET("GET,"+commands[1]);
                 }
-            }
-//            else if (commands[1].equals("11")){//同步计步详情数据
-//                if (commands.length>4){//有数据
-//                    if (steps == null){
-//                        steps = new ArrayList<>();
-//                        steps.add(command);
-//                    }else {
-//                        steps.add(command);
-//                    }
-//                    if (commands[2].equals(commands[3])){//接收结束
-//                        StringBuffer str = new StringBuffer();
-//                        for (int i = 0;i<steps.size();i++){
-//                            String strs[] = steps.get(i).split(",");
-//                            str.append(steps.get(i).substring(strs[0].length()+strs[1].length()+strs[2].length()+
-//                                    strs[3].length()+4));
-//                        }
-//                        if (reviceDataCallback!=null)
-//                            reviceDataCallback.getSteps(str.toString().split(","));
-//                        steps = null;
-//                    }
-//                    writeForRET("GET,"+commands[1]+","+commands[2]+","+commands[3]);
-//                }
-//            }
-            else if (commands[1].equals("14")){//接受心率数据
+            }else if (commands[1].equals("12")){//接受心率数据
+                if (commands.length>2){//有数据
+                    String datas[] = new String[commands.length-2];
+                    System.arraycopy(commands,2,datas,0,datas.length);
+                    if (reviceDataCallback!=null)
+                        reviceDataCallback.getHeart(datas);
+                    writeForRET("GET,"+14);
+                }
+            }else if (commands[1].equals("14")){//接受心率数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
@@ -776,6 +733,7 @@ public class EXCDController extends Controller {
         System.arraycopy(image,0,newDatas,datas.length,image.length);
         newDatas[newDatas.length-1] = 59;
         LogUtil.getInstance().logd("SZIP******","SEND IMAGE = "+str);
+        LogUtil.getInstance().logd("SZIP******","SEND FILE = "+new String(newDatas));
         this.send(cmdHead+String.format(Locale.ENGLISH,"0 0 %d ",newDatas.length),newDatas,true,false,0);
 
     }
@@ -801,6 +759,5 @@ public class EXCDController extends Controller {
             e.printStackTrace();
         }
         this.send(cmdHead+String.format(Locale.ENGLISH,"0 0 %d ",str.length()),datas,true,false,0);
-        LogUtil.getInstance().logd("SZIP******","ret = "+cmdHead+String.format(Locale.ENGLISH,"0 0 %d ",str.length())+str);
     }
 }

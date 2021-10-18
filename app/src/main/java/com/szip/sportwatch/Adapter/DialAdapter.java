@@ -22,7 +22,7 @@ public class DialAdapter extends RecyclerView.Adapter<DialAdapter.Holder> {
     private Context mContext;
 
     private ArrayList<DialBean.Dial> dialArrayList;
-    private String faceType = "";
+    private String faceType;
 
 
     public DialAdapter(ArrayList<DialBean.Dial> dialArrayList,Context context) {
@@ -35,7 +35,7 @@ public class DialAdapter extends RecyclerView.Adapter<DialAdapter.Holder> {
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (faceType.indexOf("320*385")<0)
+        if (faceType!=null&&faceType.indexOf("320*385")<0)
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_dail, null);
         else
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_dail_06, null);

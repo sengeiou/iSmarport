@@ -82,6 +82,8 @@
     <string name="setPassword">设置密码</string>
     <string name="china">中国</string>
     <string name="vistor">访客登录</string>
+    <string name="agree">同意</string>
+    <string name="disagree">暂不使用</string>
 
     <!--主页-->
     <string name="healthy">健康</string>
@@ -340,7 +342,7 @@
     <string name="launchfail">Load Application Failed</string>
 
     <!-- SettingActivity -->
-    <string name="sms_preference_title">SMS service</string>
+    <string name="sms_preference_title">短信</string>
     <string name="progress_dialog_title">加载中</string>
     <string name="progress_dialog_message">请稍等&#8230;</string>
 

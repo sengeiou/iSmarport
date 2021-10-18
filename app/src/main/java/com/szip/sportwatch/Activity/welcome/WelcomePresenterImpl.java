@@ -52,7 +52,7 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
         final SharedPreferences sharedPreferences = context.getSharedPreferences(FILE,MODE_PRIVATE);
         if (sharedPreferences.getBoolean("isFirst",true)){
             MyAlerDialog.getSingle().showAlerDialogWithPrivacy(context.getString(R.string.privacy1), context.getString(R.string.privacyTip),
-                    null, null, false, new MyAlerDialog.AlerDialogOnclickListener() {
+                    context.getString(R.string.agree), context.getString(R.string.disagree), false, new MyAlerDialog.AlerDialogOnclickListener() {
                         @Override
                         public void onDialogTouch(boolean flag) {
                             if (flag){

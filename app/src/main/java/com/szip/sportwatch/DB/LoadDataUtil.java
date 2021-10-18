@@ -1231,12 +1231,14 @@ public class LoadDataUtil {
      * 判断是否支持mtk蓝牙库
      * */
     public SportWatchAppFunctionConfigDTO getDeviceConfig(String deviceName){
-        SportWatchAppFunctionConfigDTO sportWatchAppFunctionConfigDTO = SQLite.select()
-                .from(SportWatchAppFunctionConfigDTO.class)
-                .where(SportWatchAppFunctionConfigDTO_Table.appName.is(deviceName))
-                .querySingle();
-
-        return sportWatchAppFunctionConfigDTO==null?new SportWatchAppFunctionConfigDTO():sportWatchAppFunctionConfigDTO;
+        if (deviceName!=null){
+            SportWatchAppFunctionConfigDTO sportWatchAppFunctionConfigDTO = SQLite.select()
+                    .from(SportWatchAppFunctionConfigDTO.class)
+                    .where(SportWatchAppFunctionConfigDTO_Table.appName.is(deviceName))
+                    .querySingle();
+            return sportWatchAppFunctionConfigDTO==null?new SportWatchAppFunctionConfigDTO():sportWatchAppFunctionConfigDTO;
+        }
+        return null;
     }
 
     /**

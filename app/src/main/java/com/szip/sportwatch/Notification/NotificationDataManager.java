@@ -79,6 +79,9 @@ public class NotificationDataManager {
         int watchVersion = WearableManager.getInstance().getRemoteDeviceVersion();
         Log.d(TAG, "watch version is " + watchVersion);
 
+
+
+
         NotificationData notificationData = new NotificationData();
         String[] textArray = null;
         if (android.os.Build.VERSION.SDK_INT >= 24 || packageName.contains("whatsapp")  || packageName.contains("linkedin") || packageName.contains("xiaomi.xmsf")) {      //todo ---  add 20180314   xiaomi.xmsf --- 为小米系统推送
@@ -460,7 +463,7 @@ public class NotificationDataManager {
                             int messType = msg.arg1;
                             notificationData = (NotificationData) msg.obj;
                             if (notificationData != null) {
-                                if (MainService.getInstance().getState() == 3) {    //已经连接上了
+                                if (MainService.getInstance()!=null&&MainService.getInstance().getState() == 3) {    //已经连接上了
                                     //////////////////////////////////////////////////////////////////////////////////////////////////
                                     String tickerText = null;
                                     if(!StringUtils.isEmpty(notificationData.getTickerText())) {

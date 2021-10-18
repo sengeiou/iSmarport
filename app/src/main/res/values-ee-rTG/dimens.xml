@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--登录页面的缩进以及字体大小-->
+    <dimen name="login_margin_parallel">40dp</dimen>
+    <dimen name="login_margin_each_model">20dp</dimen>
+    <dimen name="login_edit_height">38dp</dimen>
+    <dimen name="login_text_size">15sp</dimen>
+
+    <!--重置密码页面的缩进以及字体大小-->
+    <dimen name="reset_margin_parallel">40dp</dimen>
+    <dimen name="reset_margin_each_model">20dp</dimen>
+    <dimen name="reset_edit_height">38dp</dimen>
+    <dimen name="reset_text_size">15sp</dimen>
+
+    <!--注册页面的缩进以及字体大小-->
+    <dimen name="register_margin_parallel">40dp</dimen>
+    <dimen name="register_margin_each_model">20dp</dimen>
+    <dimen name="register_edit_height">38dp</dimen>
+    <dimen name="register_text_size">15sp</dimen>
+
+    <!--健康页面的缩进及字体大小-->
+    <dimen name="healthy_margin_parallel">20dp</dimen>
+    <dimen name="healthy_text_size">15sp</dimen>
+    <dimen name="healthy_data_text_size">14sp</dimen>
+    <dimen name="healthy_pad_vertical">25dp</dimen>
+    <dimen name="healthy_margin_each_model">15dp</dimen>
+
+    <!--列表视图的缩进及字体大小-->
+    <dimen name="item_margin_parallel">15dp</dimen>
+    <dimen name="item_text_size">15sp</dimen>
+    <dimen name="item_pad">10dp</dimen>
+    <dimen name="item_pad_text">15dp</dimen>
+    <dimen name="item_margin_model_right">15dp</dimen>
+    <dimen name="item_margin_model_top">5dp</dimen>
+
+    <!--报告页面的缩放及字体大小-->
+    <dimen name="tab_text_size">12sp</dimen>
+    <dimen name="report_margin_table_parallel">3dp</dimen>
+    <dimen name="report_margin">15dp</dimen>
+    <dimen name="report_margin_parallel">17dp</dimen>
+    <dimen name="report_text_size_mid">23sp</dimen>
+    <dimen name="report_text_size_big">40sp</dimen>
+    <dimen name="report_text_size_small">12sp</dimen>
+    <dimen name="report_text_size_table">12sp</dimen>
+
+    <!--标题栏到标题缩进以及标题字体大小-->
+    <dimen name="title_margin_top">25dp</dimen>
+    <dimen name="title_margin_bottom">10dp</dimen>
+    <dimen name="title_text_size">25sp</dimen>
+
+    <!--运动页面的缩放及字体大小-->
+    <dimen name="sport_margin_parallel">15dp</dimen>
+    <dimen name="sport_text_size_normal">18sp</dimen>
+    <dimen name="sport_text_size_big">40sp</dimen>
+    <dimen name="sport_text_size_small">12sp</dimen>
+
+    <dimen name="tab_weight">300dp</dimen>
+
+</resources>

@@ -6,18 +6,24 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.util.Log;
 
 import com.mediatek.wearable.WearableManager;
+import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.BuildConfig;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Service.MainService;
 import com.szip.sportwatch.Util.LogUtil;
 
+import java.util.Calendar;
+import java.util.Currency;
+
 
 public class UtilBroadcat extends BroadcastReceiver {
     private IntentFilter mIntentFilter;
     private Context context;
+    private long time;
     public UtilBroadcat(Context context) {
         this.context = context;
     }
@@ -60,6 +66,16 @@ public class UtilBroadcat extends BroadcastReceiver {
                 WearableManager.getInstance().scanDevice(true);
             }
             LogUtil.getInstance().logd("SZIP******","蓝牙连接 type = "+device.getType()+" ;address = "+device.getAddress());
+        }if (intent.getAction().equals("android.media.VOLUME_CHANGED_ACTION")) {
+            long priTime = Calendar.getInstance().getTimeInMillis();
+            if (priTime-time>50){
+                time = priTime;
+                if (MainService.getInstance()!=null&&MainService.getInstance().getState()==3&&!MyApplication.getInstance().isMtk()){
+                    BleClient.getInstance().writeForSendVolume();
+                }
+
+            }
+
         }
     }
 
@@ -67,6 +83,7 @@ public class UtilBroadcat extends BroadcastReceiver {
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         mIntentFilter.addAction("android.intent.action.ACTION_SHUTDOWN");
+        mIntentFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
         mIntentFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
         mIntentFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         return mIntentFilter;

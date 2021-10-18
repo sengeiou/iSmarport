@@ -1,17 +1,24 @@
 package com.szip.sportwatch.BLE;
 
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 
 import android.os.Message;
 import android.os.Vibrator;
-import android.util.Log;
+import android.telecom.TelecomManager;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
+
+import androidx.core.app.ActivityCompat;
 
 import com.inuker.bluetooth.library.connect.listener.BleConnectStatusListener;
 import com.inuker.bluetooth.library.connect.listener.BluetoothStateListener;
@@ -33,12 +40,12 @@ import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Interface.IDataResponse;
 import com.szip.sportwatch.Interface.IOtaResponse;
+import com.szip.sportwatch.Interface.MyPhoneCallListener;
 import com.szip.sportwatch.Interface.OnCameraListener;
 import com.szip.sportwatch.Model.BleStepModel;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
 
 import com.szip.sportwatch.Model.EvenBusModel.UpdateReport;
-import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
 import com.szip.sportwatch.Model.UpdateSportView;
@@ -53,12 +60,14 @@ import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
+import com.szip.sportwatch.Util.MusicUtil;
 import com.zhy.http.okhttp.callback.GenericsCallback;
 
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,9 +112,11 @@ public class BleClient {
     private int volume = 0;
     private IOtaResponse iOtaResponse;
 
+    TelephonyManager tm;
+    MyPhoneCallListener myPhoneCallListener = new MyPhoneCallListener();
+
     private BleClient() {
         DataParser.newInstance().setmIDataResponse(iDataResponse);
-//        ClientManager.getClient().registerBluetoothStateListener(bluetoothStateListener);
         mHandlerThread = new HandlerThread("analysis-thread");
         mHandlerThread.start();
         mAnalysisHandler = new Handler(mHandlerThread.getLooper()) {
@@ -211,6 +222,8 @@ public class BleClient {
                         writeForSetElevation();
                         writeForUpdateUserInfo();
                         writeForSetUnit();
+                        initPhoneStateListener(true);
+                        MusicUtil.getSingle().registerNotify();
 //                        writeForSendOtaFile(0,new byte[]{(byte)1,(byte)11},0,0,null);
                         MainService.getInstance().startThread();
                     }
@@ -219,6 +232,8 @@ public class BleClient {
                 timer.schedule(timerTask,300);
             }else{
                 MainService.getInstance().startForeground(0103,NotificationView.getInstance().getNotify(false));
+                MusicUtil.getSingle().unRegisterNotify();
+                initPhoneStateListener(false);
                 LogUtil.getInstance().logd("SZIP******","断开");
                 connectState = 5;
                 isSync = false;
@@ -229,6 +244,35 @@ public class BleClient {
             EventBus.getDefault().post(new ConnectState(connectState));
         }
     };
+
+    private void initPhoneStateListener(boolean flag) {
+
+        if (flag){
+            tm = (TelephonyManager) MyApplication.getInstance().getSystemService(Context.TELEPHONY_SERVICE);
+            if(tm != null) {
+                try {
+                    myPhoneCallListener.setCallListener(new MyPhoneCallListener.CallListener() {
+                        @Override
+                        public void onCallRinging(String num,String name) {
+                            if (num == null&&name==null){
+                                writeForSendPhoneCall(num,name);
+                            } else if (!num.equals("")){
+                                writeForSendPhoneCall(num,name);
+                            }
+                        }
+                    });
+                    // 注册来电监听
+                    tm.listen(myPhoneCallListener, PhoneStateListener.LISTEN_CALL_STATE);
+                } catch(Exception e) {
+                    // 异常捕捉
+                    LogUtil.getInstance().logd("DATA******",e.getMessage());
+                }
+            }
+        }else {
+            tm = null;
+            myPhoneCallListener.setCallListener(null);
+        }
+    }
 
     /**
      * 配置特征值以及接受特征值的通知
@@ -274,39 +318,7 @@ public class BleClient {
                     ClientManager.getClient().read(mMac,serviceUUID,UUID.fromString(Config.char3),bleReadResponse);
                 }
             }else {
-                if (value[1] == 0x46){
-                    if (value[9]==2){
-                        EventBus.getDefault().post(new UpdateView("2"));
-                    }else {
-                        if (value[8]==0){
-                            EventBus.getDefault().post(new UpdateView(""));
-                        }else if (value[8]==1){
-                            EventBus.getDefault().post(new UpdateView("0"));
-                        }else {
-                            EventBus.getDefault().post(new UpdateView("1"));
-                        }
-                    }
-
-                }else if (value[1] == 0x47){
-                    if (value.length==10&&value[9]==2){
-                        if (iOtaResponse!=null)
-                            iOtaResponse.onSendFail();
-                    }else {
-                        if (iOtaResponse!=null){
-                            if (value[8]==0){
-                                int address = (value[10] & 0xff) + ((value[11] & 0xFF) << 8) +
-                                        ((value[12] & 0xff) << 16) + ((value[13] & 0xFF) << 24);
-                                iOtaResponse.onStartToSendFile(value[9],address);
-                            }else if (value[8]==1){
-                                iOtaResponse.onSendProgress();
-                            }else {
-                                iOtaResponse.onSendSccuess();
-                            }
-                        }
-                    }
-                }else {
-                    DataParser.newInstance().parseData(value);
-                }
+                DataParser.newInstance().parseNotifyData(value);
             }
         }
 
@@ -326,15 +338,10 @@ public class BleClient {
             LogUtil.getInstance().logd("DATA******", "读取到蓝牙信息:" + value);
             if (data.length != 0){
                 if (data.length > 0) {
-                    if ((data.length>=2) && (data[0]==-86) && ((!(data[1]>=0x01 && data[1]<0x12))
-                            && data[1]!=0x14 && data[1]!=0x19&& data[1]!=0x21&&data[1]!=0x22&&data[1]!=0x23&&data[1]!=0x24)) {
-                        DataParser.newInstance().parseData(data);
-                    }else {
-                        Message message = mAnalysisHandler.obtainMessage();
-                        message.what = ANALYSIS_HANDLER_FLAG;
-                        message.obj = data;
-                        mAnalysisHandler.sendMessage(message);
-                    }
+                    Message message = mAnalysisHandler.obtainMessage();
+                    message.what = ANALYSIS_HANDLER_FLAG;
+                    message.obj = data;
+                    mAnalysisHandler.sendMessage(message);
                 }
             }
         }
@@ -411,7 +418,6 @@ public class BleClient {
                 }else {
                     indexData = null;
                 }
-
             }
         }
 
@@ -484,7 +490,71 @@ public class BleClient {
                 e.printStackTrace();
             }
         }
+
+        @Override
+        public void updateOtaProgress(int state, int address) {
+            if (iOtaResponse!=null){
+                if (state==0){
+                    iOtaResponse.onSendFail();
+                }else if (state == 1){
+                    iOtaResponse.onSendProgress();
+                }else if (state == 2){
+                    iOtaResponse.onSendSccuess();
+                }else {
+                    iOtaResponse.onStartToSendFile(state,address);
+                }
+            }
+
+        }
+
+        @Override
+        public void onMusicControl(int cmd, int voiceValue) {
+            if (cmd == 0){//暂停
+                MusicUtil.getSingle().controlMusic(127);
+            }else if (cmd == 1){//开始
+                MusicUtil.getSingle().controlMusic(126);
+            }else if (cmd == 2){//上一曲
+                MusicUtil.getSingle().controlMusic(88);
+            }else if (cmd == 3){//下一曲
+                MusicUtil.getSingle().controlMusic(87);
+            }else if (cmd == 4){//音量
+                MusicUtil.getSingle().setVoiceValue(voiceValue);
+            }
+        }
+
+        @Override
+        public void endCall() {
+//            toEndCall(MyApplication.getInstance().getApplicationContext());
+        }
+
+
     };
+
+//    private void toEndCall(Context paramContext) {
+//        try {
+//            if (Build.VERSION.SDK_INT >= 21) {
+//                TelecomManager telecom = (TelecomManager) paramContext.getSystemService(Context.TELECOM_SERVICE);
+//                if (ActivityCompat.checkSelfPermission(paramContext, Manifest.permission.ANSWER_PHONE_CALLS) != PackageManager.PERMISSION_GRANTED) {
+//                    return;
+//                }
+//                ((TelecomManager) telecom).endCall();
+//            }
+//            TelephonyManager systemService = (TelephonyManager) paramContext.getSystemService(Context.TELEPHONY_SERVICE);
+//            if (systemService == null)
+//                return;
+//            Method method = systemService.getClass().getDeclaredMethod("getITelephony", new Class[0]);
+//            method.setAccessible(true);
+//            Object invoke = method.invoke(paramContext, new Object[0]);
+//            if (invoke == null)
+//                return;
+//            Method localObject = paramContext.getClass().getMethod("endCall", new Class[0]);
+//            ((Method) localObject).setAccessible(true);
+//            ((Method) localObject).invoke(paramContext, new Object[0]);
+//            return;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void starVibrate(long[] pattern) {
         Vibrator vib = (Vibrator) MyApplication.getInstance().getSystemService(Service.VIBRATOR_SERVICE);
@@ -551,7 +621,7 @@ public class BleClient {
                 System.arraycopy(recvBuffer, pkg_dataLen, recvBuffer, 0, recvLength - pkg_dataLen);
                 recvLength -= pkg_dataLen;
                 recvState = 0;
-                DataParser.newInstance().parseData(pkg_type,pkg_data,pkg_timeStamp,recvLength > 0?false:true);
+                DataParser.newInstance().parseReadData(pkg_type,pkg_data,pkg_timeStamp,recvLength > 0?false:true);
             } else {
                 LogUtil.getInstance().logd("DATA******", "------");
                 return;
@@ -626,105 +696,90 @@ public class BleClient {
                     datas = CommandUtil.getCommandbyteArray(0x01, 8,
                             0, true);
                     break;
-
                 case 0x02:
                     //心率数据
                     LogUtil.getInstance().logd("DATA******", "sync heart_rate");
                     datas = CommandUtil.getCommandbyteArray(0x02, 8,
                             0, true);
                     break;
-
                 case 0x03:
                     //睡眠数据
                     LogUtil.getInstance().logd("DATA******", "sync sleep");
                     datas = CommandUtil.getCommandbyteArray(0x03, 8,
                             0, true);
                     break;
-
                 case 0x04:
                     //跑步数据
                     LogUtil.getInstance().logd("DATA******", "sync run");
                     datas = CommandUtil.getCommandbyteArray(0x04, 8,
                             0, true);
                     break;
-
                 case 0x05:
                     //徒步数据
                     LogUtil.getInstance().logd("DATA******", "sync onfoot");
                     datas = CommandUtil.getCommandbyteArray(0x05, 8,
                             0, true);
                     break;
-
                 case 0x06:
                     //马拉松
                     LogUtil.getInstance().logd("DATA******", "sync marathon");
                     datas = CommandUtil.getCommandbyteArray(0x06, 8,
                             0, true);
                     break;
-
                 case 0x07:
                     //跳绳
                     LogUtil.getInstance().logd("DATA******", "sync rope_shipping");
                     datas = CommandUtil.getCommandbyteArray(0x07, 8,
                             0, true);
                     break;
-
                 case 0x08:
                     //户外游泳
                     LogUtil.getInstance().logd("DATA******", "sync swim");
                     datas = CommandUtil.getCommandbyteArray(0x08, 8,
                             0, true);
                     break;
-
                 case 0x09:
                     //攀岩
                     LogUtil.getInstance().logd("DATA******", "sync rock_climbing");
                     datas = CommandUtil.getCommandbyteArray(0x09, 8,
                             0, true);
                     break;
-
                 case 0x0A:
                     //滑雪
                     LogUtil.getInstance().logd("DATA******", "sync skking");
                     datas = CommandUtil.getCommandbyteArray(0x0A, 8,
                             0, true);
                     break;
-
                 case 0x0B:
                     //骑行
                     LogUtil.getInstance().logd("DATA******", "sync riding");
                     datas = CommandUtil.getCommandbyteArray(0x0B, 8,
                             0, true);
                     break;
-
                 case 0x0C:
                     //划船
                     LogUtil.getInstance().logd("DATA******", "sync rowing");
                     datas = CommandUtil.getCommandbyteArray(0x0C, 8,
                             0, true);
                     break;
-
                 case 0x0D:
                     //蹦极
                     LogUtil.getInstance().logd("DATA******", "sync bungee");
                     datas = CommandUtil.getCommandbyteArray(0x0D, 8,
                             0, true);
                     break;
-
                 case 0x0E:
                     //登山
                     LogUtil.getInstance().logd("DATA******", "sync mountaineer");
                     datas = CommandUtil.getCommandbyteArray(0x0E, 8,
                             0, true);
                     break;
-
                 case 0x0F:
                     //跳伞
                     LogUtil.getInstance().logd("DATA******", "sync parachute");
                     datas = CommandUtil.getCommandbyteArray(0x0F, 8,
                             0, true);
                     break;
-
                 case 0x10:
                     //高尔夫
                     LogUtil.getInstance().logd("DATA******", "sync golf");
@@ -738,7 +793,6 @@ public class BleClient {
                     datas = CommandUtil.getCommandbyteArray(0x11, 8,
                             0, true);
                     break;
-
                 case 0x14:
                     //跑步机
                     LogUtil.getInstance().logd("DATA******", "sync treadmill");
@@ -842,6 +896,23 @@ public class BleClient {
                 CommandUtil.getCommandbyteArray(content,name,type),bleWriteResponse);
     }
 
+    public void writeForSendPhoneCall(String num,String name){
+        ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                CommandUtil.getCommandbyteArray(0x49,num,name,false),bleWriteResponse);
+    }
+
+    public void writeForSendMusicInfo(String name,String singer,boolean playState){
+        ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                CommandUtil.getCommandbyteArray(0x50,singer,name,playState),bleWriteResponse);
+
+    }
+
+    public void writeForSendVolume(){
+        ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                CommandUtil.getCommandbyteArray(0x51,9,1,true),bleWriteResponse);
+
+    }
+
     public void writeForSendPicture(int type,int clockType,int clockIndex,int num,byte[] datas){
         if (type == 0){
             ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
@@ -852,7 +923,6 @@ public class BleClient {
         }else {
             ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
                     CommandUtil.getCommandbytePicture(10,2,type,clockType,clockType,num,datas),bleWriteResponse);
-
         }
     }
 
@@ -866,7 +936,6 @@ public class BleClient {
         }else {
             ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
                     CommandUtil.getCommandbyteOtaFile(10,2,type,version,addresss,num,datas),bleWriteResponse);
-
         }
     }
 

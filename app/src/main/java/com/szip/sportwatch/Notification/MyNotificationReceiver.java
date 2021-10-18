@@ -2,6 +2,7 @@ package com.szip.sportwatch.Notification;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -12,14 +13,19 @@ import android.os.Message;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
+import android.widget.RemoteViews;
 
-import com.mediatek.ctrl.music.RemoteMusicController;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.mediatek.ctrl.notification.NotificationController;
 import com.mediatek.ctrl.notification.NotificationData;
+import com.raizlabs.android.dbflow.list.IFlowCursorIterator;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Util.LogUtil;
+import com.szip.sportwatch.Util.MusicUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,6 +33,10 @@ import java.util.List;
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class MyNotificationReceiver extends NotificationListenerService{
+    private ArrayList<String> musicList = new ArrayList<>(Arrays.asList("com.kugou.android","com.sds.android.ttpod","cn.kuwo.player",
+            "com.tencent.qqmusic","com.netease.cloudmusic","com.duomi.android","com.foobar2000.foobar2000","cmccwm.mobilemusic",
+            "com.miui.player","com.samsung.android.app.music.chn","com.htc.music","com.amazon.mp3",
+            "com.oppo.music","com.sonyericsson.music","com.lge.music","com.android.music"));
 
     private NotificationDataManager notificationDataManager = null;
     private ServiceHandler mServiceHandler;
@@ -48,7 +58,7 @@ public class MyNotificationReceiver extends NotificationListenerService{
     public void onNotificationPosted(StatusBarNotification sbn) {
         Log.i("notify******","Notification Posted, " + "ID: " + sbn.getId() + ", Package: "
                 + sbn.getPackageName());
-        configureMusicControl(sbn.getPackageName());
+        configureMusicControl(sbn);
         LogUtil.getInstance().logd("notify******", "sdk version is " + android.os.Build.VERSION.SDK_INT);
         if(android.os.Build.VERSION.SDK_INT  < 18){
             Log.i("notify******","Android platform version is lower than 18.");
@@ -60,6 +70,10 @@ public class MyNotificationReceiver extends NotificationListenerService{
             Log.e("notify******","Notification is null, return");
             return;
         }
+        RemoteViews contentView = notification.contentView;
+        PendingIntent intent = notification.contentIntent;
+        if (intent==null);
+        if (contentView == null);
         Log.i("notify******","packagename = " + sbn.getPackageName() + "tag = " +sbn.getTag()+"Id = " + sbn.getId());
         NotificationData notificationData = notificationDataManager.getNotificationData(
                 notification, sbn.getPackageName(),sbn.getTag(),sbn.getId());
@@ -70,26 +84,17 @@ public class MyNotificationReceiver extends NotificationListenerService{
     /**
      * 判断手机有几个播放器
      * */
-    private List<ResolveInfo> configureMusicControl(String packageName) {
-        PackageManager localPackageManager = MyApplication.getInstance().getPackageManager();
-        List<ResolveInfo> localList = localPackageManager.queryBroadcastReceivers(new Intent("android.intent.action.MEDIA_BUTTON"), 96);
-        for (int i = 0; i < localList.size(); i++) {
-            ResolveInfo localResolveInfo = localList.get(i);
-            String pack = localResolveInfo.activityInfo.packageName;
-            if (pack.equals(packageName)){
-                LogUtil.getInstance().logd("notifySZIP******","set musice = "+pack);
-                RemoteMusicController.getInstance(MyApplication.getInstance()).setMusicApp(pack);
-            }
-
-        }
-        return localList;
+    private void configureMusicControl(StatusBarNotification snb) {
+        if(musicList.contains(snb.getPackageName()))
+            LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent("notify_posted"));
     }
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
         Log.i("notify******","Notification Removed, " + "ID: " + sbn.getId() + ", Package: "
                 + sbn.getPackageName());
-
+        if(musicList.contains(sbn.getPackageName()))
+            LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent("notify_removed"));
         if(android.os.Build.VERSION.SDK_INT  < 18){
             Log.i("notify******","Android platform version is lower than 18.");
             return;

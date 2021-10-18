@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">iSmarport</string>
+
+    <!--Page de connexion / récupération de mot de passe / page d \'enregistrement-->
+    <string name="logo">Bienvenue à iSmarport.</string>
+    <string name="user">Numéro de compte</string>
+    <string name="phoneOrEmail">Veuillez saisir votre téléphone / courriel</string>
+    <string name="password">Mot de passe</string>
+    <string name="enterPassword">Veuillez saisir le mot de passe 6 - 20 bits.</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="enterPasswordAgain">Veuillez saisir un nouveau mot de passe.</string>
+    <string name="forget"><u>Oublier le mot de passe</u></string>
+    <string name="register"><u>Enregistrement</u></string>
+    <string name="login">Connecter</string>
+    <string name="country">Pays / région</string>
+    <string name="choseCountry">Veuillez choisir le pays ou la région</string>
+    <string name="send">Code d \'authentification</string>
+    <string name="verification">Code d \'authentification</string>
+    <string name="enterVerification">Entrez le code d \'authentification.</string>
+    <string name="newPassword">Nouveau mot de passe</string>
+    <string name="enterNewPassword">Entrez le nouveau mot de passe.</string>
+    <string name="reset">Mot de passe de remplacement</string>
+    <string name="registerTitle">Enregistrement</string>
+    <string name="next">Étape suivante</string>
+    <string name="privacy">D\'accord.《<u>User Protocol and Privacy clause</u>》</string>
+    <string name="privacy1">User Protocol and Privacy clause</string>
+    <string name="privacy2">Division I attache une grande importance à la protection de la vie privée des utilisateurs et des informations personnelles.Vous utilisez les produits / services de la Division I, la Division I peut collecter et utiliser vos informations pertinentes.Division I espère que par le biais de l \'accord sur la vie privée, ci - après dénommé "la politique", vous expliquez la ville de Shenzhen intelligent Age Technology Co., Ltd ci - après dénommée "Division I", comment vous utilisez les produits et services de la Division I pour collecter, utiliser et conserver Ces informations.\n\nJ \'espère que vous avez lu attentivement avant d\' utiliser les produits / services de la Division I et de confirmer que vous avez bien compris le contenu de cette politique.\n\nLorsque la Division I souhaite utiliser vos informations personnelles pour d \'autres utilisations non spécifiées dans la présente politique, ou pour des fins spécifiques, les informations recueillies à d\' autres fins, vous informera de la forme que vous choisirez pour obtenir votre consentement préalable.
+
+\n\nNotez que toutes les informations personnelles que vous avez fournies lors de l \'utilisation des produits / services de la Division I, à moins que vous ne supprimiez ou refusiez de les collecter par le biais de paramètres systémiques, nous continuerons d\' utiliser les produits / services de la Division I pour la durée de votre utilisation.Lorsque vous annulez le compte, la Division I cessera d \'utiliser et de supprimer vos informations personnelles.
+
+
+
+\n\n\n\n一、Vous avez autorisé la Division I à recueillir des informations personnelles:
+
+\n\nLes informations personnelles sont les informations enregistrées électroniquement ou autrement qui permettent d\'identifier une personne physique donnée, seule ou en combinaison avec d\'autres informations, ou qui reflètent les activités d\'une personne physique donnée.
+\nLes informations personnelles visées dans cette politique sont les suivantes: informations de base (y compris nom, prénom, anniversaire, sexe, numéro de téléphone personnel, adresse électronique); informations d\'identification sur le Web (y compris le compte système, l\'adresse IP, l\'adresse postale); fichiers d\'information; informations sur les équipements personnels courants; informations sur l\'emplacement personnel; informations sur la santé personnelle
+
+
+
+\n\n\n\n二、Division I peut utiliser les informations personnelles recueillies dans le cadre de votre service pour:
+
+\n\n（1）Vous fournir les produits des services;
+\n\n（2）Division I de fournir des services pour l \'identification, le service à la clientèle, la sécurité, la surveillance de la fraude, l\' archivage et de sauvegarde, afin d \'assurer la sécurité des produits et des services fournis par la Division;
+
+\n\n（3）Aider la Division I à concevoir de nouveaux services, l \'amélioration de l\' état actuel des services de la Division;
+\n\n（4）Afin de mieux comprendre comment vous avez accès aux services de la Division I et de répondre de manière ciblée à vos besoins personnalisés, tels que les paramètres linguistiques, les paramètres de localisation, l \'aide personnalisée et les instructions, ou d\' autres réponses pour vous et les autres utilisateurs;
+\n\n（5）Software certification or Management Software Upgrade;
+\n\n（6）Je vous laisse participer à l \'enquête sur les produits et les services de la Division I.
+\n\nAfin de vous permettre d \'avoir une meilleure expérience, d\' améliorer les services de la Division ou d \'autres utilisations que vous approuvez, sous réserve des lois et règlements pertinents, la Division I sera peut - être par l\' intermédiaire d \'un service de collecte d\' informations ou de manière personnalisée pour d \'autres Services de la Division.Par exemple, lorsque vous utilisez un service de la Division I, les informations collectées peuvent être utilisées dans un autre service pour vous fournir un contenu spécifique ou pour vous montrer des informations qui vous sont utiles et qui ne sont pas largement diffusées.Si la Division I offre les options correspondantes dans le service, vous pouvez également autoriser la Division I à utiliser les informations fournies et stockées dans ce service pour d \'autres services de la Division.
+
+
+
+\n\n\n\n三、Division I ne partage avec aucune autre société, Organisation et personne de partager vos informations personnelles, sauf dans les cas suivants:
+\n\n（1）Obtenir votre consentement et votre autorisation exprès à l \'avance;
+\n\n（2）Lorsque cela est n écessaire conformément aux lois et règlements applicables, aux exigences de la procédure judiciaire, aux exigences administratives ou judiciaires obligatoires;
+
+
+\n\n（3）dans la mesure où la loi le permet, il est nécessaire de mettre à la disposition de la Division, des parties intéressées ou des partenaires de la Division, de l \'intérêt public, des biens ou de la sécurité de la société;
+
+
+\n\n（4）) Seuls le partage de votre information, afin de réaliser les fonctions essentielles des produits / services de la Division I ou de fournir les services dont vous avez besoin;
+\n\n（5）régler vos différends avec d \'autres personnes à votre demande;
+\n\n（6）conformément à l \'accord pertinent ou à tout autre document juridique signé avec vous;
+
+
+\n\n（7）Être utilisées dans l\'intérêt général de la société, conformément à la loi et à la réglementation.
+
+
+\n\n\n\n四、Comment protéger et conserver ensemble vos informations personnelles
+
+
+\n\n（1）Division I met l \'accent sur la sécurité de l\' information personnelle et de prendre toutes les mesures raisonnables et pratiques de sécurité des données, de protéger votre information personnelle;
+
+\n\n（2）l \'environnement Internet n\' est pas entièrement sûr, la Division I fera tout ce qui est en son pouvoir pour assurer ou garantir la sécurité de toute information que vous enverrez à la Division I.Si la Division I des équipements physiques, techniques ou de gestion de la protection des installations, de sorte que l \'information a été rendue non autorisée, divulguée publiquement, altérée ou détruite, et que vos intérêts légitimes sont lésés, la Division I assumera la responsabilité juridique correspondante.
+\n\n（3） Si vous avez des questions sur la protection de l \'information personnelle de la Division I, je peux contacter la Division par le biais de l\' Internet.Si vous découvrez que vos informations personnelles sont confidentielles, en particulier vos informations personnelles, s\' il vous plaît contactez la Division I immédiatement pour prendre les mesures appropriées.
+
+
+
+
+
+\n\n\n\n五、Les mineurs utilisent les services de mon Département.
+\nNos parents ou tuteurs sont encouragés à savoir que les mineurs de moins de 18 ans utilisent les produits de la Division.La Division I recommande aux mineurs d\'encourager leurs parents ou tuteurs à lire cette politique et de solliciter le consentement et les conseils de leurs parents ou tuteurs avant de soumettre des informations personnelles.
+
+
+\n\n\n\n六、Champ d\'application de la politique de protection de la vie privée
+\n\n（1）À l \'exception de certains services spécifiques, tous les services de la Division I appliquent cette politique.Ces services seront régis par une politique particulière de protection de la vie privée.Pour certains services spécifiques de la politique de la vie privée, nous préciserons plus précisément comment la Division I utilise votre information dans ces services.La politique de protection de la vie privée de ce service particulier fait partie intégrante de cette politique.En cas d\'incompatibilité entre la politique de protection de la vie privée du service concerné et cette politique, c\'est la politique de protection de la vie privée du service concerné qui prévaut.
+\n\n（2）Veuillez noter que cette politique ne s\'applique pas:
+\n\n1） Les informations recueillies grâce aux services fournis par la Division I aux tiers (y compris tous les sites Web des tiers);
+\n\n2） Par l \'intermédiaire des services de la Division I par d\' autres entreprises ou institutions de services de publicité;
+\n\n3） Si vous utilisez des équipements tels que iPhone ou iPad, afin de calculer vos données de mouvement, avec votre autorisation, la Division I recevra et transmettra vos données de mouvement de la société Apple healthkit.Notre Division va lire vos données de taille, de poids et de sexe à partir de healthkit, tandis que vous générez dans l \'app des données sur le nombre de pas, la marche + distance de course, l\' énergie mobile, la distance de vélo et l \'analyse du sommeil dans Apple healthkit.Aucune donnée obtenue par le biais de healthkit ne sera partagée ni vendue à une tierce société, et la Division I n\'utilisera pas les informations obtenues de healthkit à des fins commerciales telles que la publicité, le marché, etc.
+
+
+
+\n\n\n\n七、Changer
+
+\n\nLa Division I peut réviser les dispositions de cette politique en temps réel, ces modifications faisant partie intégrante de cette politique.Si ces modifications entraînent une réduction substantielle de vos droits en vertu de la présente politique, la Division I vous informera avant l \'entrée en vigueur de la révision par des conseils d\' emplacement sur la page d \'accueil ou par courrier électronique ou par d\' autres moyens.Dans ce cas, si vous continuez à utiliser les services de la Division I, exprimez votre consentement à être lié par la politique révisée.</string>
+    <string name="checkPrivacy">Désaccord《User Protocol and Privacy clause》</string>
+    <string name="setPassword">Set password</string>
+    <string name="china">Chine</string>
+    <string name="vistor">Visiteur</string>
+
+    <!--Page d \'accueil-->
+    <string name="healthy">Santé</string>
+    <string name="sport">Mouvement</string>
+    <string name="mine">Mon</string>
+    <string name="touchAgain">Appuyez sur la procédure de retrait.</string>
+
+    <!--Page santé-->
+    <string name="planStep">Nombre cible%d</string>
+    <string name="sleep">Sommeil</string>
+    <string name="heart">Rythme cardiaque</string>
+    <string name="blood">Tension artérielle</string>
+    <string name="bloodo">Oxygène sanguin</string>
+    <string name="animal">Température corporelle</string>
+    <string name="ecg">ECG</string>
+    <string name="check">Regarder</string>
+    <string name="perfect">Yu</string>
+    <string name="good">Bon</string>
+    <string name="bad">Différence</string>
+    <string name="quick">Trop vite</string>
+    <string name="normal">Normal</string>
+    <string name="hot">Fièvre</string>
+    <string name="slow">Trop lent</string>
+    <string name="higher">Haut</string>
+    <string name="flat">Bas</string>
+    <string name="pull_to_refresh">Rafraîchir</string>
+    <string name="release_to_refresh">Mise à jour immédiate</string>
+    <string name="refreshing">Je suis en train de la rafraîchir.</string>
+    <string name="refresh_succeed">Rafraîchissement</string>
+    <string name="refresh_fail">Raté</string>
+
+
+    <!--Interface mobile-->
+    <string name="best">Record of Outdoor Run</string>
+    <string name="history">Historique</string>
+    <string name="track">Sport</string>
+    <string name="speed">Synchronisation</string>
+    <string name="kcal">Consommation</string>
+    <string name="time">Durée</string>
+    <string name="heart_rate">Taux cardiaque</string>
+    <string name="cadence">Étape taux</string>
+    <string name="distance">Mile(</string>
+    <string name="speedData">Vitesse moyenne</string>
+    <string name="heart_rateData">Moyenne cardiaque</string>
+    <string name="strideData">Average Step Frequency</string>
+    <string name="distanceData">Mile</string>
+    <string name="basket">Basket - ball</string>
+    <string name="football">Football</string>
+    <string name="pingpong">Tennis de table</string>
+    <string name="badminton">Badminton</string>
+    <string name="mountain">Alpinisme</string>
+    <string name="bike">à cheval</string>
+    <string name="swim">La natation</string>
+    <string name="walk">à pied</string>
+    <string name="treadmill">Machine de course</string>
+    <string name="runWithout">Outdoor Run</string>
+    <string name="marathon">Outdoor Run</string>
+    <string name="sufing">Surf</string>
+    <string name="boat">Ramer</string>
+    <string name="altitude">Altitude</string>
+    <string name="avarageAltitude">Hauteur de montée</string>
+    <string name="climb">Escalade</string>
+    <string name="skii">Ski</string>
+    <string name="golf">Golf</string>
+    <!--Ma page-->
+    <string name="device">Matériel</string>
+    <string name="stepPlan">Objectif de mesure</string>
+    <string name="sleepPlan">Objectif du sommeil</string>
+    <string name="find">Chercher la montre</string>
+    <string name="notification">Notification d \'application</string>
+    <string name="blePhone">Appels bluetooth</string>
+    <string name="blePhoto">Photo de bluetooth</string>
+    <string name="unit">formule unitaire</string>
+    <string name="face">Changer de table</string>
+    <string name="myDail">Ma montre.</string>
+    <string name="seeDail">Aperçu</string>
+    <string name="diyDail">Personnaliser</string>
+    <string name="diyDailing">Remplacer</string>
+    <string name="diyDailOK">Changement réussi</string>
+    <string name="diyDailError">Échec de remplacement. Essayez encore.</string>
+    <string name="upDownBackground">Téléchargez une image d\'arrière - plan.</string>
+    <string name="chooseClock">Veuillez choisir un style d \'horloge</string>
+    <string name="clock">Style d \'horloge</string>
+    <string name="background">Arrière - plan</string>
+    <string name="about">Sur</string>
+    <string name="logout">Quitter</string>
+    <string name="me">Mon</string>
+    <string name="set">Set</string>
+    <string name="other"> Autres</string>
+    <string name="cancel">Annuler</string>
+    <string name="confirm">Oui.</string>
+    <string name="tip">Avertissement</string>
+    <string name="delete">Voulez - vous vraiment supprimer les données de mouvement?</string>
+    <string name="logoutTip">Vous êtes sûr de vouloir quitter le site?？</string>
+    <string name="sendOK">Transmission réussie</string>
+    <string name="searchDevice">Dispositif de recherche</string>
+    <string name="noDevice">Pas de recherche.</string>
+    <string name="connected">Connecté</string>
+    <string name="disConnect">Non connecté</string>
+    <string name="connectting">Connexion en cours</string>
+    <string name="syceError">La montre n \'est pas connectée, les données seront synchronisées dans la montre lors de la prochaine connexion</string>
+    <string name="unBind">Dispositif de commutation</string>
+    <string name="unline">Déconnecter</string>
+    <string name="line">Connection Watch</string>
+    <string name="addDevice">Dispositif d \'ajout</string>
+
+
+    <!--Bluetooth Communication Interface-->
+    <string name="step1">1.Montre et téléphone Bluetooth</string>
+    <string name="step2">2.Désappariement</string>
+    <string name="str1">1)Entrée de la fonction Bluetooth dans la montre\n2)Search Bluetooth device - select mobile Bluetooth name\n3)On peut utiliser la montre pour les appels Bluetooth.</string>
+    <string name="str2">1)Dispositif d \'accès - Bluetooth\n2)Trouvez le dispositif, cliquez sur Supprimer le couplage et désactivez le couplage.\n\nNote: les montres ne peuvent pas utiliser la fonction Bluetooth après la déconnexion.</string>
+
+    <!--Interface-->
+    <string name="version">Version actuelle</string>
+    <string name="feedback">Observations</string>
+    <string name="feedback_hint">Votre retour / question</string>
+    <string name="tooLong">Le texte que vous avez saisi est trop long</string>
+    <string name="empty">Les avis ne sont pas vides.</string>
+    <string name="send_success">Soumission réussie</string>
+
+    <!--Interface unitaire-->
+    <string name="measureUnit">Unité de mesure</string>
+    <string name="tempUnit">Unité de température</string>
+    <string name="metric">Système public</string>
+    <string name="british">Anglais</string>
+
+    <!--Page du rapport-->
+    <string name="stepReport">Rapport d \'étape</string>
+    <string name="sleepReport">Rapport de sommeil</string>
+    <string name="heartReport">Rapport cardiaque</string>
+    <string name="bloodPressureReport">Rapport de tension</string>
+    <string name="bloodOxygenReport">Rapport d \'oxygène</string>
+    <string name="animalHeatReport">Rapport de température</string>
+    <string name="ecgReport">Rapport</string>
+    <string name="day">Jour</string>
+    <string name="week">Périmètre</string>
+    <string name="sun">Dim.</string>
+    <string name="mon">Lun.</string>
+    <string name="tues">Mar.</string>
+    <string name="wed">Mer.</string>
+    <string name="thus">Jeu.</string>
+    <string name="fri">Ven.</string>
+    <string name="sta">Sam.</string>
+    <string name="today">Aujourd\'hui.</string>
+    <string name="month">Mois</string>
+    <string name="year">Année</string>
+    <string name="allStep">Total Step Number</string>
+    <string name="averageStep">Nombre moyen de pas</string>
+    <string name="allSleep">Temps total de sommeil</string>
+    <string name="averageSleep">Temps moyen de sommeil</string>
+    <string name="light">Hypselodoris</string>
+    <string name="deep">Profondeur dormir</string>
+    <string name="averageHeart">Moyenne cardiaque</string>
+    <string name="minHeart">Minimum Cardiac rate</string>
+    <string name="maxHeart">Max Cardiac rate</string>
+    <string name="averageSBP">Pression de compression moyenne</string>
+    <string name="sbp">Compression</string>
+    <string name="averageDBP">Pression moyenne</string>
+    <string name="dbp">Pression de traction</string>
+    <string name="averageSao">Oxygène sanguin moyen</string>
+    <string name="averageTemp">Température moyenne</string>
+    <string name="maxTemp">Max.</string>
+    <string name="passRate">Taux de conformité</string>
+    <string name="ecgTip">Le test est basé uniquement sur des références et ne peut pas servir de certificat de diagnostic médical.</string>
+    <string name="noData">Néant</string>
+    <string name="tomorrow">L\'avenir n\'est pas encore là.</string>
+
+
+
+    <!--Page d \'information utilisateur-->
+    <string name="userInfo">User information</string>
+    <string name="picture">Image</string>
+    <string name="userName">Surnom</string>
+    <string name="enterUserName">Veuillez saisir votre nom</string>
+    <string name="nameLong">Les surnoms ne doivent pas dépasser 12 caractères.</string>
+    <string name="sex">Sexe</string>
+    <string name="male">Hommes</string>
+    <string name="female">Femmes</string>
+    <string name="height">Taille</string>
+    <string name="weight">Poids</string>
+    <string name="birthday">Anniversaire</string>
+    <string name="album">Album</string>
+    <string name="camera">Photographier</string>
+
+
+
+
+    <!--Slogan-->
+    <string name="tokenTimeOut">L \'accès est expiré</string>
+    <string name="enterRightEmail">Veuillez saisir le format correct</string>
+    <string name="httpError">Vérification de la connexion réseau</string>
+    <string name="logging">Connection</string>
+    <string name="waitting">Un instant.</string>
+    <string name="resetSuccess">Password result</string>
+    <string name="passwordUnSame">Double Input Password</string>
+    <string name="saved">Enregistrer le succès</string>
+    <string name="notificationlistener_prompt_title">Avis d \'ouverture</string>
+    <string name="notificationlistener_prompt_content">l faut envoyer une notification d \'application à distance.Appuyez sur \ \ déterminer \ \ pour entrer dans la page d \'avis.</string>
+    <string name="lostDevice">Dispositif non connecté</string>
+    <string name="permissionErrorForCamare">Pas d\'accès. Pas de caméra.</string>
+    <string name="findPermission">Impossible de trouver la liste des périphériques</string>
+    <string name="applyPermission">Compétence</string>
+    <string name="shareFailForPermission">Partage raté, accès refusé.</string>
+    <string name="permissionErrorForSMS">Impossible d \'ouvrir la fonction de notification de SMS</string>
+    <string name="loading">Chargement...</string>
+    <string name="privacyTip">Avant d \'utiliser nos produits, lisez attentivement et comprenez bien les accords de confidentialité des utilisateurs.\nLorsque vous cliquez sur Oui, cela signifie que vous êtes d \'accord avec les termes du Protocole.\nLa politique de protection de la vie privée des utilisateurs comprend les éléments suivants::\n1.Collecte, conservation et partage de données personnelles (images, surnoms, taille, poids, données sportives, etc.).\n2.Utilisation des droits d \'équipement (emplacement, enregistrement de communications, appareil photo, etc.).</string>
+    <string name="crop_pic_failed">Impossible d \'intercepter l\' image, sélectionnez l \'image en format JPG!</string>
+    <string name="visiter">Le mode touristique ne supporte pas cette fonction</string>
+    <string name="newVersion">Une nouvelle version du logiciel a été détectée?</string>
+
+
+    <!--Interface de partage-->
+
+    <!-- Scan & Connect -->
+    <string name="connect_error">Connect Error</string>
+
+
+    <!-- applist & appstore -->
+    <string name="launchfail">Load Application Failed</string>
+
+    <!-- SettingActivity -->
+    <string name="sms_preference_title">SMS service</string>
+    <string name="progress_dialog_title">Chargement</string>
+    <string name="progress_dialog_message">Un instant.&#8230;</string>
+
+    <!-- SelectNotifiActivity -->
+
+
+    <!-- Service -->
+    <string name="missed_call">Missed Call</string>
+    <string name="accessibility_description">Active notification service in your accessibility setting. This allows BT notification to push application notification to remote device.</string>
+    <string name="batterylow">Battery low</string>
+    <string name="pleaseconnectcharger">The battery is getting low,Please connect charger, Capacity</string>
+
+    <string name="operate_error">Failed</string>
+
+    <!--固件升级-->
+    <string name="trigger_failed_due_to_low_battery">The battery of watch is low. Please try it again after charging!</string>
+    <string name="update_failed">Watch upgrade failed,Please try again later!</string>
+    <string name="send_firmware_date_success">Succeed in data transmition!</string>
+    <string name="downloading_fota">Firmware is being downloaded</string>
+    <string name="read_send_fota_file">It is being prepared</string>
+    <string name="sending_fota_file">The file is sent now</string>
+    <string name="bt_disconnected_while_transfer">Bluetooth connection is broken!</string>
+    <string name="download_succeed_via_bt">Send completed, please wait for upgrade!</string>
+    <string name="updated_firmware">Update successfully!</string>
+    <string name="checkGPS">Il a été détecté que le commutateur de position de votre téléphone mobile n’était pas activé. pour s’assurer que l’application fonctionne correctement, allumez le commutateur de position.</string>
+    <string name="speedPerHour">La vitesse</string>
+    <string name="training">Parcours d’entraînement</string>
+    <string name="heart_switch">Mesure temporelle</string>
+    <string name="runFinsh">Veuillez déterminer si vous mettez un terme à la course actuelle?</string>
+    <string name="runShort">Les durées de parcours ou les distances parcourues sont trop courtes pour être chiffrées.</string>
+    <string name="started">S’il vous plaît, commencez la course</string>
+    <string name="touchAgain1">Appuyez à nouveau sur la touche pour sortir de la course</string>
+    <string name="unlock">Déverrouiller à droite</string>
+
+</resources>

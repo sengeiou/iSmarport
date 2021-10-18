@@ -113,8 +113,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black" />
             <RadioButton
@@ -128,8 +129,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black"/>
             <RadioButton
@@ -143,8 +145,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black"/>
 
@@ -159,8 +162,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black"/>
 
@@ -185,8 +189,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black"
                 />
@@ -201,8 +206,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black"/>
             <RadioButton
@@ -216,8 +222,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black"/>
 
@@ -232,8 +239,9 @@
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:textSize="11sp"
                 android:background="@drawable/radio_box_bg"
                 android:textColor="@color/black"/>
 

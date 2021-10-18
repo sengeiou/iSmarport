@@ -57,8 +57,12 @@ public class DIYActivity extends BaseActivity implements IDiyView{
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_diy);
+        if (MyApplication.getInstance().isMtk()){
+            iDiyPresenter = new DiyPresenterImpl(getApplicationContext(),this);
+        } else{
+            iDiyPresenter = new DiyPresenterImpl06(getApplicationContext(),this);
+        }
         faceType = MyApplication.getInstance().getFaceType();
-        iDiyPresenter = new DiyPresenterImpl(getApplicationContext(),this);
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
         EventBus.getDefault().register(this);
@@ -208,14 +212,16 @@ public class DIYActivity extends BaseActivity implements IDiyView{
 
     @Override
     public void setView(boolean isCircle) {
-        if (faceType.indexOf("320*385")>=0){
-            diyIv.setImageResource(R.mipmap.diy_06);
-            backgroundIv = findViewById(R.id.backgroundIv_r06);
-        }else if (faceType.indexOf("240*240 方")>=0){
-            backgroundIv = findViewById(R.id.backgroundIv_r);
-        }else {
+        if (isCircle){
             diyIv.setImageResource(R.mipmap.diy_c);
             backgroundIv = findViewById(R.id.backgroundIv_c);
+        }else {
+            if (faceType.indexOf("320*385")>=0){
+                diyIv.setImageResource(R.mipmap.diy_06);
+                backgroundIv = findViewById(R.id.backgroundIv_r06);
+            }else {
+                backgroundIv = findViewById(R.id.backgroundIv_r);
+            }
         }
     }
 

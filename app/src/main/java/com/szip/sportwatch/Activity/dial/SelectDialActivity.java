@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -36,14 +37,19 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     private boolean isSendPic = false;
 
     private String faceType = "";
-
+    private boolean isCircle = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_select_dial);
-        iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
+        if (MyApplication.getInstance().isMtk()) {
+            iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
+        } else{
+            iSelectDialPresenter = new SelectDialPresenterImpl06(getApplicationContext(),this);
+        }
+        isCircle = MyApplication.getInstance().isCircle();
         faceType = MyApplication.getInstance().getFaceType();
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
@@ -80,9 +86,9 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             @Override
             public void onClick(View v) {
                 //TODO 保存成功
-                if (!ProgressHudModel.newInstance().isShow()){
+                if (!ProgressHudModel.newInstance().isShow()&&pictureUrl!=null){
                     ProgressHudModel.newInstance().show(SelectDialActivity.this,getString(R.string.loading),
-                            getString(R.string.connect_error),10000);
+                            getString(R.string.connect_error),30000);
                     MainService.getInstance().downloadFirmsoft(pictureUrl,"dial.jpg");
                 }
             }
@@ -148,14 +154,16 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
 
     @Override
     public void setView(String id, String pictureId, int clock) {
-        if (faceType.indexOf("320*385")>=0){
-            changeIv.setImageResource(R.mipmap.change_watch_06);
-            dialIv = findViewById(R.id.dialIv_r06);
-        }else if (faceType.indexOf("240*240 圆")>=0){
+        if (isCircle){
             changeIv.setImageResource(R.mipmap.change_watch_c);
             dialIv = findViewById(R.id.dialIv_c);
         }else {
-            dialIv = findViewById(R.id.dialIv_r);
+            if (faceType.indexOf("320*385")>=0){
+                changeIv.setImageResource(R.mipmap.change_watch_06);
+                dialIv = findViewById(R.id.dialIv_r06);
+            }else {
+                dialIv = findViewById(R.id.dialIv_r);
+            }
         }
         this.pictureUrl = pictureId;
         this.clock = clock;

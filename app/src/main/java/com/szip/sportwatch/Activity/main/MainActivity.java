@@ -1,6 +1,7 @@
 package com.szip.sportwatch.Activity.main;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity implements IMainView{
      * 淡出
      * */
     private AlphaAnimation alphaAnimation1  = new AlphaAnimation(1f, 0f);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +67,33 @@ public class MainActivity extends BaseActivity implements IMainView{
         layout = findViewById(R.id.layout);
         iMainPrisenter = new MainPresenterImpl(this,this);
         iMainPrisenter.checkBluetoochState();
-        iMainPrisenter.checkUpdata();
         initAnimation();
         initHost();
+        checkPermission();
     }
 
+
+    private void checkPermission(){
+        if (app.isCamerable()){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+                    requestPermissions(new String[]{Manifest.permission.CAMERA,
+                    }, 101);
+                }
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_DENIED||
+                    checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED||
+                    checkSelfPermission(Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_DENIED||
+                    checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_DENIED
+            ) {
+                requestPermissions(new String[]{Manifest.permission.READ_SMS,Manifest.permission.SEND_SMS,Manifest.permission.READ_CALL_LOG
+                                ,Manifest.permission.READ_CONTACTS},
+                        102);
+            }
+        }
+    }
 
 
 
@@ -77,14 +101,6 @@ public class MainActivity extends BaseActivity implements IMainView{
     @Override
     protected void onResume() {
         super.onResume();
-        if (app.isCamerable()){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-                    requestPermissions(new String[]{Manifest.permission.CAMERA,
-                            }, 101);
-                }
-            }
-        }
         EventBus.getDefault().register(this);
     }
 
@@ -100,22 +116,6 @@ public class MainActivity extends BaseActivity implements IMainView{
         LogUtil.getInstance().logd("SZIP******","MAIN DESTROY");
         iMainPrisenter.setViewDestory();
         MainService.getInstance().stopConnect();
-    }
-
-    @Override
-    public void checkVersionFinish() {
-        iMainPrisenter.checkGPSState();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void checkGPSFinish() {
-        iMainPrisenter.initBle();
-    }
-
-    @Override
-    public void initBleFinish() {
-        iMainPrisenter.checkNotificationState();
     }
 
     @Override

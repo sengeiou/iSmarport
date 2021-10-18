@@ -34,18 +34,25 @@ public class DiyPresenterImpl implements IDiyPresenter{
         final int [] clock;
         final boolean isCircle = MyApplication.getInstance().isCircle();
         if (isCircle){
-            dials = new int[]{R.mipmap.diy_preview_c_1_1,R.mipmap.diy_preview_c_2_1,R.mipmap.diy_preview_c_3_1,
+            dials = new int[]{R.mipmap.diy_preview_c_1_1,R.mipmap.diy_preview_c_2_1,
                     R.mipmap.diy_preview_c_4_1, R.mipmap.diy_preview_c_5_1,R.mipmap.diy_preview_c_6_1, R.mipmap.diy_preview_c_7_1,
-                    R.mipmap.diy_preview_c_8_1,R.mipmap.diy_preview_c_9_1, R.mipmap.diy_preview_c_10_1, R.mipmap.diy_preview_c_11_1,
+                     R.mipmap.diy_preview_c_10_1, R.mipmap.diy_preview_c_11_1,
                     R.mipmap.diy_preview_c_12_1,R.mipmap.diy_preview_c_13_1,R.mipmap.diy_31,R.mipmap.diy_30,R.mipmap.diy_34};
 
-            clock = new int[]{15,25,11,17,18,19,20,21,22,23,24,26,27,31,30,34};
+            clock = new int[]{15,25,17,18,19,20,23,24,26,27,31,30,34};
         }else {
-            dials = new int[]{R.mipmap.diy_preview_1_1,R.mipmap.diy_preview_2_1,R.mipmap.diy_preview_3_1,R.mipmap.diy_preview_4_1,
-                    R.mipmap.diy_preview_5_1,R.mipmap.diy_preview_6_1,R.mipmap.diy_preview_7_1,R.mipmap.diy_preview_9_1,
-                    R.mipmap.diy_preview_10_1,R.mipmap.diy_preview_11_1,R.mipmap.diy_preview_13_1,R.mipmap.diy_preview_14_1,R.mipmap.diy_28};
+            if (MyApplication.getInstance().getFaceType().equals("320*385")){
+                dials = new int[]{
+                    R.mipmap.diy_10,R.mipmap.diy_19, R.mipmap.diy_20,R.mipmap.diy_23};
+                clock = new int[]{51,60,61,64};
+            }else {
+                dials = new int[]{R.mipmap.diy_preview_1_1,R.mipmap.diy_preview_2_1,R.mipmap.diy_preview_3_1,R.mipmap.diy_preview_4_1,
+                        R.mipmap.diy_preview_5_1,R.mipmap.diy_preview_6_1,R.mipmap.diy_preview_7_1,R.mipmap.diy_preview_9_1,
+                        R.mipmap.diy_preview_10_1,R.mipmap.diy_preview_11_1,R.mipmap.diy_preview_13_1,R.mipmap.diy_preview_14_1,R.mipmap.diy_28};
 
-            clock = new int[]{1,2,3,5,7,8,9,10,12,14,11,13,28};
+                clock = new int[]{1,2,3,5,7,8,9,10,12,14,11,13,28};
+            }
+
         }
         DIYAdapter diyAdapter = new DIYAdapter(dials);
         dialRv.setAdapter(diyAdapter);
@@ -99,6 +106,7 @@ public class DiyPresenterImpl implements IDiyPresenter{
     @Override
     public void cropPhoto(Uri uri) {
         try {
+            String[] spaceType = MyApplication.getInstance().getFaceType().split("\\*");
             Uri path = uri;
             //临时用一个名字用来保存裁剪后的图片
             String fileName = MyApplication.getInstance().getPrivatePath()+"crop.jpg";
@@ -110,8 +118,8 @@ public class DiyPresenterImpl implements IDiyPresenter{
             options.setStatusBarColor(context.getResources().getColor(R.color.rayblue));
             options.setActiveWidgetColor(context.getResources().getColor(R.color.rayblue));
             UCrop uCrop = UCrop.of(path, target)
-                    .withAspectRatio(1f, 1f)
-                    .withMaxResultSize(240, 240)
+                    .withAspectRatio(Float.valueOf(spaceType[0])/Float.valueOf(spaceType[1]), 1f)
+                    .withMaxResultSize(Integer.valueOf(spaceType[0]), Integer.valueOf(spaceType[1]))
                     .withOptions(options);
             if (iDiyView!=null){
                 iDiyView.getCropPhoto(uCrop);

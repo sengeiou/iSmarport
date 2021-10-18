@@ -26,7 +26,6 @@ public class DiyPresenterImpl06 implements IDiyPresenter{
     private Handler handler;
     private Context context;
     private IDiyView iDiyView;
-
     public DiyPresenterImpl06(Context context, IDiyView iDiyView) {
         this.context = context;
         this.iDiyView = iDiyView;
@@ -40,8 +39,12 @@ public class DiyPresenterImpl06 implements IDiyPresenter{
         final int [] clock;
         final boolean isCircle = MyApplication.getInstance().isCircle();
         if (isCircle){
-            dials = new int[]{R.mipmap.diy_preview_c_1_1};
-            clock = new int[]{15};
+            dials = new int[]{
+//                    R.mipmap.diy_2,
+                    R.mipmap.diy_4, R.mipmap.diy_8,R.mipmap.diy_11};
+            clock = new int[]{
+//                    2,
+                    4,8,11};
 
         }else {
             dials = new int[]{R.mipmap.clock_2523_3,R.mipmap.clock_2523_4, R.mipmap.clock_2523_6,R.mipmap.clock_2523_7};
@@ -108,6 +111,7 @@ public class DiyPresenterImpl06 implements IDiyPresenter{
     @Override
     public void cropPhoto(Uri uri) {
         try {
+            String[] spaceType = MyApplication.getInstance().getFaceType().split("\\*");
             Uri path = uri;
             //临时用一个名字用来保存裁剪后的图片
             String fileName = MyApplication.getInstance().getPrivatePath()+"crop.jpg";
@@ -120,8 +124,8 @@ public class DiyPresenterImpl06 implements IDiyPresenter{
             options.setActiveWidgetColor(context.getResources().getColor(R.color.rayblue));
             options.setCompressionQuality(80);
             UCrop uCrop = UCrop.of(path, target)
-                    .withAspectRatio(0.83f, 1f)
-                    .withMaxResultSize(320, 385)
+                    .withAspectRatio(Float.valueOf(spaceType[0])/Float.valueOf(spaceType[1]), 1f)
+                    .withMaxResultSize(Integer.valueOf(spaceType[0]), Integer.valueOf(spaceType[1]))
                     .withOptions(options);
             if (iDiyView!=null){
                 iDiyView.getCropPhoto(uCrop);

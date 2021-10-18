@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.szip.sportwatch",
+  "variantName": "processLocalReleaseResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 42,
+      "versionName": "1.42",
+      "outputFile": "app-Local-release.apk"
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 package com.szip.sportwatch.Util;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -24,6 +26,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.media.AudioManager.STREAM_MUSIC;
 
 /**
  * Created by KB on 2017/5/8.
@@ -142,15 +145,9 @@ public class CommandUtil {
                 int sex = 0;
                 if (userInfo!=null){
                     height =userInfo.getHeight();
-//                            ==0?170:userInfo.getHeight();
                     mWeight = userInfo.getWeight();
-//                            ==0?60:userInfo.getWeight();
-
                     heightInch =userInfo.getHeightBritish();
-//                            ==0?66:userInfo.getHeightBritish();
                     mWeightPound = userInfo.getWeightBritish();
-//                            ==0?132:userInfo.getHeightBritish();
-
                     plan = userInfo.getStepsPlan();
                     sex = userInfo.getSex();
                 }
@@ -227,9 +224,69 @@ public class CommandUtil {
         }else if (syncType == 0x45){
             boolean heartSwitch = MyApplication.getInstance().isHeartSwitch();
             data[8] = (byte) ((heartSwitch?1:0)&0xff);
+        }else if (syncType == 0x51){
+            AudioManager audioManager = (AudioManager) MyApplication.getInstance().getSystemService(Context.AUDIO_SERVICE);
+            int max = audioManager.getStreamMaxVolume(STREAM_MUSIC);
+            int currVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)/(max/15);
+            data[8] = (byte) (currVolume&0xff);
         }
         LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
         return data;
+    }
+
+    public static byte[] getCommandbyteArray(int cmd,String num,String name,boolean playState){
+        if (cmd==0x50)
+            num = "";
+        byte nums[] = new byte[0];
+        byte names[] = new byte[0];
+        long time = Calendar.getInstance().getTimeInMillis()/1000;
+
+        if (num==null&&name==null){
+            byte[] data = new byte[8];
+            data[0] = (byte) 0xAA;
+            data[1] = (byte) cmd;
+            data[2] = (byte) (data.length-8);
+            data[3] = 0;
+            data[4] = (byte) (time&0xff);
+            data[5] = (byte) ((time>>8)&0xff);
+            data[6] = (byte) ((time>>16)&0xff);
+            data[7] = (byte) ((time>>24)&0xff);
+            LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
+            return data;
+        }
+        try {
+            nums = num.getBytes("UnicodeBigUnmarked");
+            names = name.getBytes("UnicodeBigUnmarked");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (names.length>50){
+            byte[] mid = new byte[50];
+            System.arraycopy(names,0,mid,0,50);
+            names = mid;
+        }
+        LogUtil.getInstance().logd("DATA******","num = "+num+" ;name = "+name);
+        byte[] data = new byte[12+nums.length+names.length+(cmd==0x49?0:1)];
+        data[0] = (byte) 0xAA;
+        data[1] = (byte) cmd;
+        data[2] = (byte) (data.length-8);
+        data[3] = 0;
+        data[4] = (byte) (time&0xff);
+        data[5] = (byte) ((time>>8)&0xff);
+        data[6] = (byte) ((time>>16)&0xff);
+        data[7] = (byte) ((time>>24)&0xff);
+        data[8] = (byte) (names.length&0xff);
+        data[9] = (byte) ((names.length>>8)&0xff);
+        if (names.length!=0)
+            System.arraycopy(names,0,data,10,names.length);
+        data[10+names.length] = (byte) (nums.length&0xff);
+        data[11+names.length] = (byte) ((nums.length>>8)&0xff);
+        System.arraycopy(nums,0,data,12+names.length,nums.length);
+        if (nums.length+names.length+12!=data.length)
+            data[data.length-1] = playState?(byte) 1:0;
+        LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
+        return data;
+
     }
 
     public static byte[] getCommandbyteArray(ArrayList<WeatherBean.Condition> weatherModel,String city) {

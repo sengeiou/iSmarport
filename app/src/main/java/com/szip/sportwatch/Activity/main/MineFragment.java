@@ -487,7 +487,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 window1.showAtLocation(v, Gravity.BOTTOM, 0, 0);
                 break;
             case R.id.notificationLl:
-                Intent intent = new Intent(getActivity(), UpdateFirmwareActivity.class);
+                Intent intent = new Intent(getActivity(), NotificationAppListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.findLl:

@@ -59,6 +59,8 @@ public class MainPresenterImpl implements IMainPrisenter{
         if (!blueadapter.isEnabled()) {
             Intent bleIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             context.startActivity(bleIntent);
+        }else {
+            checkUpdata();
         }
     }
 
@@ -67,7 +69,6 @@ public class MainPresenterImpl implements IMainPrisenter{
 
         if(!BuildConfig.FLAVORS.equals("")){
             boolean isInstalled = isInstalled(BuildConfig.FLAVORS,context);
-
             if (isInstalled){
                 try {
                     String ver = context.getPackageManager().getPackageInfo("com.szip.sportwatch",
@@ -75,8 +76,7 @@ public class MainPresenterImpl implements IMainPrisenter{
                     HttpMessgeUtil.getInstance().postForCheckUpdate(ver, new GenericsCallback<CheckUpdateBean>(new JsonGenericsSerializator()) {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            if (iMainView!=null)
-                                iMainView.checkVersionFinish();
+                           checkGPSState();
                         }
 
                         @Override
@@ -110,8 +110,7 @@ public class MainPresenterImpl implements IMainPrisenter{
                                 }else {//无更新
                                     MyApplication.getInstance().setNewVersion(false);
                                 }
-                                if (iMainView!=null)
-                                    iMainView.checkVersionFinish();
+                                checkGPSState();
                             }
                         }
                     });
@@ -123,8 +122,7 @@ public class MainPresenterImpl implements IMainPrisenter{
                 }
             }
         }else {
-            if (iMainView!=null)
-                iMainView.checkVersionFinish();
+            checkGPSState();
         }
     }
 
@@ -166,8 +164,10 @@ public class MainPresenterImpl implements IMainPrisenter{
                         }
                     },context);
         }
-        if (iMainView!=null){
-            iMainView.checkGPSFinish();
+        if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+            initBle();
+        }else {
+            checkNotificationState();
         }
     }
 
@@ -189,9 +189,7 @@ public class MainPresenterImpl implements IMainPrisenter{
                 MainService.getInstance().startConnect();
             }
         }
-        if (iMainView!=null){
-            iMainView.initBleFinish();
-        }
+        checkNotificationState();
     }
 
     @Override

@@ -390,8 +390,8 @@ public class MathUitl {
      * 判断邮箱是否合法
      * */
     public static boolean isEmail(String strEmail) {
-        String strPattern = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
-        if (isEmpty(strPattern)) {
+        String strPattern = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+        if (isEmpty(strEmail)) {
             return false;
         } else {
             return strEmail.matches(strPattern);
@@ -841,6 +841,15 @@ public class MathUitl {
             case 25:
             case 26:
             case 31:
+            case 36:
+            case 38:
+            case 50:
+            case 52:
+            case 53:
+            case 55:
+            case 60:
+            case 61:
+            case 63:
                 return 0;
             default:
                 return 1;
@@ -854,11 +863,13 @@ public class MathUitl {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             int options = 100;
             bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);
-            while (baos.toByteArray().length / 1024 > 40) { // 循环判断如果压缩后图片是否大于40kb,大于继续压缩
+            while (baos.toByteArray().length>40960) { // 循环判断如果压缩后图片是否大于40kb,大于继续压缩
+                Log.i("SZIP******","lenght = "+baos.toByteArray().length);
                 baos.reset(); // 重置baos即清空baos
                 bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
                 options -= 5;// 每次都减少5
             }
+            Log.i("SZIP******","last lenght = "+baos.toByteArray().length);
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
             if (bitmap.compress(Bitmap.CompressFormat.JPEG, options, bos)) {
                 bos.flush();

@@ -32,12 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/changeIv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/change_watch"/>
-
 
             <ImageView
                 android:id="@+id/dialIv_r"
@@ -59,6 +53,12 @@
                 android:layout_gravity="center"
                 app:radius="15dp"
                 app:is_allRadius="true"/>
+
+            <ImageView
+                android:id="@+id/changeIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/change_watch"/>
         </FrameLayout>
 
     </LinearLayout>

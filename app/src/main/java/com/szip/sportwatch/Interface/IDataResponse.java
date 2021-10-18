@@ -71,4 +71,8 @@ public interface IDataResponse {
      * 更新个人信息
      * */
     void updateUserInfo();
+
+    void updateOtaProgress(int state,int address);
+    void onMusicControl(int cmd,int voiceValue);
+    void endCall();
 }

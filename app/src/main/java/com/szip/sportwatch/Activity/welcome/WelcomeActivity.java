@@ -56,7 +56,6 @@ public class WelcomeActivity extends BaseActivity implements IWelcomeView{
         }
     }
 
-
     @Override
     public void initDeviceConfigFinish() {
         isConfig = true;

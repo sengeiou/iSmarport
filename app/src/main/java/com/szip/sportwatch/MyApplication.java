@@ -36,8 +36,10 @@ import com.szip.sportwatch.Util.FileUtil;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
+import com.szip.sportwatch.Util.MusicUtil;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.TopExceptionHandler;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,10 +77,8 @@ public class MyApplication extends Application{
         return mInstance;
     }
 
-    private boolean isCircle = true;
-    private boolean isMtk = true;
-    private String dialGroupId = "0";
-    private String faceType = "320*385 方";
+
+    private SportWatchAppFunctionConfigDTO sportWatchAppFunctionConfigDTO;
     private boolean isFirst = true;
     private String BtMac;
 
@@ -136,13 +136,19 @@ public class MyApplication extends Application{
         /**
          * 把log上传到云端
          * */
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(this));
+//        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(this));
+        CrashReport.initCrashReport(getApplicationContext(), "937b55f499", true);
 
         /**
          * 把测试版的log导出到本地，上线的渠道版不需要导出
          * */
         if(BuildConfig.FLAVORS.equals(""))
             LogUtil.getInstance().init(this);
+
+        /**
+         * 初始化音乐控制器
+         * */
+        MusicUtil.getSingle().init(getApplicationContext());
 
         //初始化文件存储
         privatePath = getExternalFilesDir(null).getPath()+"/";
@@ -165,10 +171,7 @@ public class MyApplication extends Application{
          * */
         if (sharedPreferences == null)
             sharedPreferences = getSharedPreferences(FILE,MODE_PRIVATE);
-        isMtk = sharedPreferences.getBoolean("bleConfig",true);
-        isCircle = sharedPreferences.getBoolean("isCircle",true);
-        dialGroupId = sharedPreferences.getString("dialGroup","0");
-        faceType = sharedPreferences.getString("faceType","320*385 方");
+        sportWatchAppFunctionConfigDTO = LoadDataUtil.newInstance().getDeviceConfig(sharedPreferences.getString("deviceName",null));
         //获取上次退出之后剩余的倒计时上传时间
         updownTime = sharedPreferences.getInt("updownTime",3600);
         //获取手机缓存的远程拍照状态
@@ -200,7 +203,7 @@ public class MyApplication extends Application{
                     if(isFirst){
                         isFirst = false;
                     }else {
-                        if (isMtk&&WearableManager.getInstance().getConnectState()==WearableManager.STATE_CONNECTED){
+                        if (isMtk()&&WearableManager.getInstance().getConnectState()==WearableManager.STATE_CONNECTED){
                             EXCDController.getInstance().writeForEnableSend(1);
                         }
                     }
@@ -226,7 +229,7 @@ public class MyApplication extends Application{
                 if (mFinalCount == 0) {
                     //说明从前台回到了后台
                     Log.i("SZIP******", " 切换到了 后台");
-                    if (isMtk&&WearableManager.getInstance().getConnectState()==WearableManager.STATE_CONNECTED){
+                    if (isMtk()&&WearableManager.getInstance().getConnectState()==WearableManager.STATE_CONNECTED){
                         EXCDController.getInstance().writeForEnableSend(0);
                     }
                 }
@@ -394,6 +397,7 @@ public class MyApplication extends Application{
     }
 
     public void setDeviceNum(String deviceNum) {
+        Log.i("szip******","devicenum = "+deviceNum);
         this.deviceNum = deviceNum;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("deviceNum",deviceNum);
@@ -412,33 +416,25 @@ public class MyApplication extends Application{
     }
 
     public void setDeviceConfig(String deviceName) {
-        Log.d("DATA******","deviceName = "+deviceName);
-        SportWatchAppFunctionConfigDTO sportWatchAppFunctionConfigDTO = LoadDataUtil.newInstance().getDeviceConfig(deviceName);
-        isMtk = sportWatchAppFunctionConfigDTO.getUseMtkConnect()==1;
-        isCircle = sportWatchAppFunctionConfigDTO.getScreenType()==0;
-        dialGroupId = Integer.toString(sportWatchAppFunctionConfigDTO.getWatchPlateGroupId());
-        faceType = sportWatchAppFunctionConfigDTO.getScreen();
-        sharedPreferences.edit().putBoolean("bleConfig",isMtk).commit();
-        sharedPreferences.edit().putBoolean("isCircle",isCircle).commit();
-        sharedPreferences.edit().putString("dialGroup",dialGroupId).commit();
-        sharedPreferences.edit().putString("faceType",faceType).commit();
-
+        Log.d("DATA******", "deviceName = " + deviceName);
+        sharedPreferences.edit().putString("deviceName",deviceName).commit();
+        sportWatchAppFunctionConfigDTO = LoadDataUtil.newInstance().getDeviceConfig(deviceName);
     }
 
     public boolean isMtk() {
-        return isMtk;
+        return  sportWatchAppFunctionConfigDTO==null?false:sportWatchAppFunctionConfigDTO.getUseMtkConnect()==1;
     }
 
     public boolean isCircle() {
-        return isCircle;
+        return sportWatchAppFunctionConfigDTO==null?false:sportWatchAppFunctionConfigDTO.getScreenType()==0;
     }
 
     public String getDialGroupId() {
-        return dialGroupId;
+        return sportWatchAppFunctionConfigDTO==null?"0":Integer.toString(sportWatchAppFunctionConfigDTO.getWatchPlateGroupId());
     }
 
     public String getFaceType() {
-        return faceType;
+        return  sportWatchAppFunctionConfigDTO==null?"320*385":sportWatchAppFunctionConfigDTO.getScreen();
     }
 
     public boolean isNewVersion() {
