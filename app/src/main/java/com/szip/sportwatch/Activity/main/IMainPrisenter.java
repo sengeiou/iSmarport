@@ -10,8 +10,6 @@ public interface IMainPrisenter {
     void checkUpdata();
     //检查GPS状态
     void checkGPSState();
-    //检查通知状态
-    void checkNotificationState();
     //初始化工具栏
     void initHost(FragmentTabHost fragmentTabHost);
     //蓝牙重连

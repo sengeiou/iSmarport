@@ -136,8 +136,8 @@ public class MyApplication extends Application{
         /**
          * 把log上传到云端
          * */
-//        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(this));
-        CrashReport.initCrashReport(getApplicationContext(), "937b55f499", true);
+        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(this));
+//        CrashReport.initCrashReport(getApplicationContext(), "937b55f499", false);
 
         /**
          * 把测试版的log导出到本地，上线的渠道版不需要导出
@@ -329,7 +329,6 @@ public class MyApplication extends Application{
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
-        MathUitl.saveInfoData(this,userInfo).commit();
     }
 
     public boolean isCamerable() {
@@ -416,9 +415,12 @@ public class MyApplication extends Application{
     }
 
     public void setDeviceConfig(String deviceName) {
-        Log.d("DATA******", "deviceName = " + deviceName);
-        sharedPreferences.edit().putString("deviceName",deviceName).commit();
-        sportWatchAppFunctionConfigDTO = LoadDataUtil.newInstance().getDeviceConfig(deviceName);
+        if(deviceName!=null){
+            deviceName = deviceName.indexOf("_LE")>=0?deviceName.substring(0,deviceName.length()-3): deviceName;
+            Log.d("DATA******", "deviceName = " + deviceName);
+            sharedPreferences.edit().putString("deviceName",deviceName).commit();
+            sportWatchAppFunctionConfigDTO = LoadDataUtil.newInstance().getDeviceConfig(deviceName);
+        }
     }
 
     public boolean isMtk() {
@@ -434,7 +436,27 @@ public class MyApplication extends Application{
     }
 
     public String getFaceType() {
-        return  sportWatchAppFunctionConfigDTO==null?"320*385":sportWatchAppFunctionConfigDTO.getScreen();
+        if (sportWatchAppFunctionConfigDTO==null)
+            return "320*385";
+        else {
+            String type = sportWatchAppFunctionConfigDTO.getScreen();
+            if (type!=null&&type.indexOf("*")>=0){
+                int index = type.indexOf("*");
+                type = type.substring(index-3,index+4);
+                return type;
+            }else {
+                return "320*385";
+            }
+        }
+    }
+
+    public boolean checkFaceType(int width,int height){
+        String[] faceStr = getFaceType().split("\\*");
+        int faceWidth = Integer.valueOf(faceStr[0]);
+        int faceHeight = Integer.valueOf(faceStr[1]);
+        if (width!=faceWidth||height!=faceHeight)
+            return false;
+        return true;
     }
 
     public boolean isNewVersion() {

@@ -16,7 +16,6 @@
         android:src="@mipmap/launch_logo"/>
 
     <TextView
-        android:id="@+id/progress_title"
         android:layout_width="wrap_content"
         android:layout_marginTop="45dp"
         android:textColor="@android:color/black"
@@ -24,7 +23,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"/>
     <TextView
-        android:id="@+id/progress_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -33,7 +31,6 @@
         android:layout_marginTop="15dp"/>
 
     <ProgressBar
-        android:id="@+id/progress_bar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

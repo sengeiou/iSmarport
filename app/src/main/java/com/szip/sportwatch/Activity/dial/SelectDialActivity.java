@@ -14,6 +14,7 @@ import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.Activity.diy.DIYActivity;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.BLE.EXCDController;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
 import com.szip.sportwatch.Model.SendDialModel;
 import com.szip.sportwatch.MyApplication;
@@ -31,7 +32,6 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
 
     private ISelectDialPresenter iSelectDialPresenter;
     private String pictureUrl;
-    private int clock = -1;
     private ImageView dialIv,changeIv;
     private int progress = 0;
     private boolean isSendPic = false;
@@ -47,10 +47,14 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
         if (MyApplication.getInstance().isMtk()) {
             iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
         } else{
-            iSelectDialPresenter = new SelectDialPresenterImpl06(getApplicationContext(),this);
+            if (MyApplication.getInstance().getFaceType().equals("454*454"))
+                iSelectDialPresenter = new SelectDialPresenterWithFileImpl(getApplicationContext(),this);
+            else
+                iSelectDialPresenter = new SelectDialPresenterImpl06(getApplicationContext(),this);
         }
         isCircle = MyApplication.getInstance().isCircle();
         faceType = MyApplication.getInstance().getFaceType();
+        Log.i("data******","faceType = "+faceType);
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
         EventBus.getDefault().register(this);
@@ -89,8 +93,10 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
                 if (!ProgressHudModel.newInstance().isShow()&&pictureUrl!=null){
                     ProgressHudModel.newInstance().show(SelectDialActivity.this,getString(R.string.loading),
                             getString(R.string.connect_error),30000);
-                    MainService.getInstance().downloadFirmsoft(pictureUrl,"dial.jpg");
+                    MainService.getInstance().downloadFirmsoft(pictureUrl,"dial");
                 }
+
+//                BleClient.getInstance().writeForSendDialFile(3,(byte) 3,0,0,null);
             }
         });
     }
@@ -106,38 +112,43 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
      * 更新数据显示
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUpdataView(UpdateView updateView){
-        if(updateView.getState().equals("0")){//进度+1
+    public void onUpdataView(UpdateDialView updateView){
+        if(updateView.getType()==0){//进度+1
             progress++;
             iSelectDialPresenter.sendDial(null,-1);
             ProgressHudModel.newInstance().setProgress(progress);
-        }else if (updateView.getState().equals("1")){//完成
+        }else if (updateView.getType()==1){//完成
             isSendPic = false;
             progress = 0;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
-        }else if (updateView.getState().equals("2")){//失败
+        }else if (updateView.getType()==2){//失败
             if (isSendPic){
                 isSendPic = false;
                 progress = 0;
                 ProgressHudModel.newInstance().diss();
                 showToast(getString(R.string.diyDailError));
             }
-        }else {
+        }else if (updateView.getType()==3){//准备开始
+            Log.i("data******","准备发送数据");
             isSendPic = true;
             progress = 0;
             ProgressHudModel.newInstance().diss();
-            iSelectDialPresenter.sendDial(MyApplication.getInstance().getPrivatePath()+"dial.jpg",clock);
+            iSelectDialPresenter.sendDial(MyApplication.getInstance().getPrivatePath()+"dial",updateView.getData());
+        }else if (updateView.getType() == 4){//断点续传
+            iSelectDialPresenter.resumeSendDial(updateView.getData());
+        }else {
+            isSendPic = false;
+            progress = 0;
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.diyDailOK));
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSendPicture(SendDialModel sendDialModel){
         if (sendDialModel.isLoadSuccess()){
-            if (MyApplication.getInstance().isMtk())
-                EXCDController.getInstance().initDialInfo();
-            else
-                BleClient.getInstance().writeForSendPicture(0,clock,0,0,new byte[0]);
+            iSelectDialPresenter.startToSendDial();
         }else {
             showToast(getString(R.string.httpError));
             ProgressHudModel.newInstance().diss();
@@ -153,7 +164,7 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     }
 
     @Override
-    public void setView(String id, String pictureId, int clock) {
+    public void setView(String id, String pictureId) {
         if (isCircle){
             changeIv.setImageResource(R.mipmap.change_watch_c);
             dialIv = findViewById(R.id.dialIv_c);
@@ -166,18 +177,16 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             }
         }
         this.pictureUrl = pictureId;
-        this.clock = clock;
         Glide.with(this).load(id).into(dialIv);
     }
 
     @Override
-    public void setDialView(String dialId, String pictureId, int clock) {
+    public void setDialView(String dialId, String pictureId) {
         if (dialId==null){
             startActivity(new Intent(SelectDialActivity.this, DIYActivity.class));
             finish();
         }else {
             this.pictureUrl = pictureId;
-            this.clock = clock;
             Glide.with(this).load(dialId).into(dialIv);
         }
     }
@@ -185,6 +194,6 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     @Override
     public void setDialProgress(int max) {
         ProgressHudModel.newInstance().showWithPie(this,getString(R.string.diyDailing),max,
-                getString(R.string.diyDailError),100*1000);
+                getString(R.string.diyDailError),5*60*1000);
     }
 }

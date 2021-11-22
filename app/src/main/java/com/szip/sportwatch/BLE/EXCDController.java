@@ -12,6 +12,7 @@ import com.szip.sportwatch.Interface.OnCameraListener;
 import com.szip.sportwatch.Interface.ReviceDataCallback;
 import com.szip.sportwatch.Model.EvenBusModel.PlanModel;
 import com.szip.sportwatch.Model.EvenBusModel.UnitModel;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateReport;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
@@ -286,7 +287,7 @@ public class EXCDController extends Controller {
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("81")){//初始化缓存完毕
-                EventBus.getDefault().post(new UpdateView("3"));
+                EventBus.getDefault().post(new UpdateDialView(3));
             }
         }else if (commands[0].contains("SET")){//SET指令
             if (commands[1].equals("10")){//设置计步目标
@@ -421,7 +422,7 @@ public class EXCDController extends Controller {
 
         }else if (commands[0].contains("RET")){//RET指令
             if(commands[2].equals("81")){
-                EventBus.getDefault().post(new UpdateView(commands[3]));
+                EventBus.getDefault().post(new UpdateDialView(Integer.valueOf(commands[3])));
             }
         }
     }
@@ -733,7 +734,6 @@ public class EXCDController extends Controller {
         System.arraycopy(image,0,newDatas,datas.length,image.length);
         newDatas[newDatas.length-1] = 59;
         LogUtil.getInstance().logd("SZIP******","SEND IMAGE = "+str);
-        LogUtil.getInstance().logd("SZIP******","SEND FILE = "+new String(newDatas));
         this.send(cmdHead+String.format(Locale.ENGLISH,"0 0 %d ",newDatas.length),newDatas,true,false,0);
 
     }

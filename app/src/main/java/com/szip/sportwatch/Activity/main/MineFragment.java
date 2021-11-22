@@ -2,13 +2,16 @@ package com.szip.sportwatch.Activity.main;
 
 import android.Manifest;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -44,6 +47,7 @@ import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Service.MainService;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
+import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.View.CharacterPickerWindow;
@@ -51,6 +55,7 @@ import com.szip.sportwatch.View.CircularImageView;
 import com.szip.sportwatch.View.MyAlerDialog;
 import com.szip.sportwatch.View.character.OnOptionChangedListener;
 import com.szip.sportwatch.BLE.EXCDController;
+import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -65,6 +70,8 @@ import java.util.Locale;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import okhttp3.Call;
+
 import static android.content.Context.MODE_PRIVATE;
 import static com.szip.sportwatch.MyApplication.FILE;
 
@@ -72,7 +79,7 @@ import static com.szip.sportwatch.MyApplication.FILE;
  * Created by Administrator on 2019/12/1.
  */
 
-public class MineFragment extends BaseFragment implements View.OnClickListener,HttpCallbackWithBase{
+public class MineFragment extends BaseFragment implements View.OnClickListener{
     private SharedPreferences sharedPreferencesp;
     private UserInfo userInfo;
     private MyApplication app;
@@ -130,6 +137,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 stateTv.setText(getString(R.string.connected));
             }else if (MainService.getInstance().getState() == WearableManager.STATE_CONNECT_LOST||
                     MainService.getInstance().getState() == WearableManager.STATE_CONNECT_FAIL){
+                deviceTv.setText("");
                 stateTv.setText(getString(R.string.disConnect));
             }else if (MainService.getInstance().getState() == WearableManager.STATE_CONNECTING){
                 deviceTv.setText("");
@@ -146,7 +154,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
     public void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
-        HttpMessgeUtil.getInstance().setHttpCallbackWithBase(null);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -162,7 +169,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 ProgressHudModel.newInstance().diss();
                 app.getUserInfo().setDeviceCode(null);
                 MainService.getInstance().stopConnect();
-                MathUitl.saveInfoData(getContext(),app.getUserInfo()).commit();
                 SaveDataUtil.newInstance().clearDB();
                 getActivity().startActivity(new Intent(getActivity(),SeachingActivity.class));
             }else
@@ -176,10 +182,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUpdatePlan(PlanModel planModel){
        if(stepPlanTv!=null){
-           HttpMessgeUtil.getInstance().setHttpCallbackWithBase(MineFragment.this);
            try {
                isUpdatePlan = false;
-               HttpMessgeUtil.getInstance().postForSetStepsPlan(planModel.getData()+"",STEPFLAG);
+               HttpMessgeUtil.getInstance().postForSetStepsPlan(planModel.getData()+"",STEPFLAG,callback);
                stepPlan = Integer.valueOf(planModel.getData());
            } catch (IOException e) {
            }
@@ -208,7 +213,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position==1){
                     try {
-                        HttpMessgeUtil.getInstance().setHttpCallbackWithBase(MineFragment.this);
                         String datas = MathUitl.getStringWithJson(getActivity().getSharedPreferences(FILE,MODE_PRIVATE));
                         HttpMessgeUtil.getInstance().postForUpdownReportData(datas);
                         ProgressHudModel.newInstance().show(getContext(),getString(R.string.waitting),getString(R.string.httpError)
@@ -279,9 +283,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
             public void onOptionChanged(int option1, int option2, int option3) {
                 try {
                     isUpdatePlan = true;
-                    HttpMessgeUtil.getInstance().setHttpCallbackWithBase(MineFragment.this);
                     ProgressHudModel.newInstance().show(getContext(),getString(R.string.waitting),getString(R.string.httpError),3000);
-                    HttpMessgeUtil.getInstance().postForSetStepsPlan(stepList.get(option1),STEPFLAG);
+                    HttpMessgeUtil.getInstance().postForSetStepsPlan(stepList.get(option1),STEPFLAG,callback);
                     stepPlan = Integer.valueOf(stepList.get(option1));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -304,9 +307,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
             @Override
             public void onOptionChanged(int option1, int option2, int option3) {
                 try {
-                    HttpMessgeUtil.getInstance().setHttpCallbackWithBase(MineFragment.this);
                     ProgressHudModel.newInstance().show(getContext(),getString(R.string.waitting),getString(R.string.httpError),3000);
-                    HttpMessgeUtil.getInstance().postForSetSleepPlan((int)(Float.valueOf(sleepList.get(option1))*60)+"",SLEEPFLAG);
+                    HttpMessgeUtil.getInstance().postForSetSleepPlan((int)(Float.valueOf(sleepList.get(option1))*60)+"",SLEEPFLAG,callback);
                     sleepPlan = (int)(Float.valueOf(sleepList.get(option1))*60);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -414,8 +416,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
         }else {
             getView().findViewById(R.id.heartSwitchLl).setVisibility(View.VISIBLE);
         }
-
-
         if (app.isCamerable())
             blePhotoSwitch.setChecked(true);
         else
@@ -487,8 +487,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                 window1.showAtLocation(v, Gravity.BOTTOM, 0, 0);
                 break;
             case R.id.notificationLl:
-                Intent intent = new Intent(getActivity(), NotificationAppListActivity.class);
-                startActivity(intent);
+                if (!isNotificationListenerActived()){
+                    showNotifiListnerPrompt();
+                }else {
+                    Intent intent = new Intent(getActivity(), NotificationAppListActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.findLl:
                 if(MainService.getInstance().getState()!=3)
@@ -533,6 +537,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
                                     }
                                     if (sharedPreferencesp==null)
                                         sharedPreferencesp = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
+                                    app.getUserInfo().setDeviceCode(null);
                                     SharedPreferences.Editor editor = sharedPreferencesp.edit();
                                     editor.putString("token",null);
                                     editor.commit();
@@ -548,27 +553,70 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,H
         }
     }
 
-    @Override
-    public void onCallback(BaseApi baseApi, int id) {
-        if (id == STEPFLAG){
-            ProgressHudModel.newInstance().diss();
-            stepPlanTv.setText(stepPlan+"");
-            if(isUpdatePlan){
-                app.getUserInfo().setStepsPlan(stepPlan);
-                if (MainService.getInstance().getState()!=3){
-                    showToast(getString(R.string.syceError));
-                }else {
-                    if (app.isMtk())
-                        EXCDController.getInstance().writeForSetInfo(app.getUserInfo());
-                    else
-                        BleClient.getInstance().writeForUpdateUserInfo();
-                }
-            }
-        }else if (id == SLEEPFLAG){
-            ProgressHudModel.newInstance().diss();
-            sleepPlanTv.setText(String.format(Locale.ENGLISH,"%.1fh",sleepPlan/60f));
-            app.getUserInfo().setSleepPlan(sleepPlan);
+    private GenericsCallback<BaseApi> callback = new GenericsCallback<BaseApi>(new JsonGenericsSerializator()) {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
         }
-        MathUitl.saveInfoData(getContext(),app.getUserInfo()).commit();
+
+        @Override
+        public void onResponse(BaseApi response, int id) {
+            if (response.getCode()==200){
+                if (id == STEPFLAG){
+                    ProgressHudModel.newInstance().diss();
+                    stepPlanTv.setText(stepPlan+"");
+                    if(isUpdatePlan){
+                        app.getUserInfo().setStepsPlan(stepPlan);
+                        MathUitl.saveIntData(getContext(),"stepsPlan",stepPlan).commit();
+                        if (MainService.getInstance().getState()!=3){
+                            showToast(getString(R.string.syceError));
+                        }else {
+                            if (app.isMtk())
+                                EXCDController.getInstance().writeForSetInfo(app.getUserInfo());
+                            else
+                                BleClient.getInstance().writeForUpdateUserInfo();
+                        }
+                    }
+                }else if (id == SLEEPFLAG){
+                    ProgressHudModel.newInstance().diss();
+                    sleepPlanTv.setText(String.format(Locale.ENGLISH,"%.1fh",sleepPlan/60f));
+                    app.getUserInfo().setSleepPlan(sleepPlan);
+                    MathUitl.saveIntData(getContext(),"sleepPlan",sleepPlan).commit();
+                }
+            }else {
+                showToast(response.getMessage());
+            }
+        }
+    };
+
+    private boolean isNotificationListenerActived() {
+        String packageName = getActivity().getPackageName();
+        String strListener = Settings.Secure.getString(getActivity().getContentResolver(),
+                "enabled_notification_listeners");
+        return strListener != null
+                && strListener
+                .contains(packageName);
+    }
+
+    private void showNotifiListnerPrompt() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.notificationlistener_prompt_title);
+        builder.setMessage(R.string.notificationlistener_prompt_content);
+
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        // Go to notification listener settings
+        builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                getActivity().startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+            }
+        });
+        builder.create().show();
     }
 }

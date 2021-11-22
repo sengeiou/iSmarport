@@ -15,23 +15,28 @@ import android.widget.TextView;
 
 import com.szip.sportwatch.Interface.HttpCallbackWithBase;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
+import com.szip.sportwatch.Model.HttpBean.CheckVerificationBean;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
+import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.zaaach.citypicker.CityPicker;
 import com.zaaach.citypicker.adapter.OnPickListener;
 import com.zaaach.citypicker.model.City;
+import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import okhttp3.Call;
+
 import static com.szip.sportwatch.MyApplication.FILE;
 
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener,HttpCallbackWithBase{
+public class RegisterActivity extends BaseActivity implements View.OnClickListener{
 
     private boolean isPhone;
 
@@ -96,11 +101,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         super.onResume();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        HttpMessgeUtil.getInstance().setHttpCallbackWithBase(null);
-    }
 
     /**
      * 初始化界面
@@ -143,13 +143,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
      * */
     private void startTimer(){
         try {
-            HttpMessgeUtil.getInstance().setHttpCallbackWithBase(this);
             if (!MathUitl.isNumeric(userEt.getText().toString()))
                 HttpMessgeUtil.getInstance().getVerificationCode("2","","",
-                        userEt.getText().toString());
+                        userEt.getText().toString(),callback);
             else
                 HttpMessgeUtil.getInstance().getVerificationCode("1","00"+countryCodeTv.getText().toString().substring(1),
-                        userEt.getText().toString(),"");
+                        userEt.getText().toString(),"",callback);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -234,7 +233,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                 ProgressHudModel.newInstance().show(RegisterActivity.this,
                                         getString(R.string.waitting),getString(R.string.httpError),10000);
                                 HttpMessgeUtil.getInstance().postCheckVerifyCode("2","","",userEt.getText().toString(),
-                                        verifyCodeEt.getText().toString());
+                                        verifyCodeEt.getText().toString(),verificationBeanGenericsCallback);
                                 isPhone = false;
                             }
                             else
@@ -243,7 +242,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                             ProgressHudModel.newInstance().show(RegisterActivity.this,
                                     getString(R.string.waitting),getString(R.string.httpError),10000);
                             HttpMessgeUtil.getInstance().postCheckVerifyCode("1","00"+countryCodeTv.getText().toString().substring(1),
-                                    userEt.getText().toString(),"", verifyCodeEt.getText().toString());
+                                    userEt.getText().toString(),"", verifyCodeEt.getText().toString(),verificationBeanGenericsCallback);
                             isPhone = true;
                         }
                     } catch (IOException e) {
@@ -313,18 +312,45 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
     };
 
-    /**
-     * 注册网络请求回调
-     * */
-    @Override
-    public void onCallback(BaseApi baseApi, int id) {
-        ProgressHudModel.newInstance().diss();
-        Intent intent = new Intent();
-        intent.setClass(mContext,SetPasswordActivity.class);
-        intent.putExtra("isPhone",isPhone);
-        intent.putExtra("countryCode","00"+countryCodeTv.getText().toString().substring(1));
-        intent.putExtra("user",userEt.getText().toString());
-        intent.putExtra("verifyCode", verifyCodeEt.getText().toString());
-        startActivity(intent);
-    }
+    private GenericsCallback<BaseApi> callback = new GenericsCallback<BaseApi>(new JsonGenericsSerializator()) {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
+        }
+
+        @Override
+        public void onResponse(BaseApi response, int id) {
+            if (response.getCode() != 200) {
+                ProgressHudModel.newInstance().diss();
+                MathUitl.showToast(mContext,response.getMessage());
+            }
+        }
+    };
+
+    private GenericsCallback<CheckVerificationBean> verificationBeanGenericsCallback = new GenericsCallback<CheckVerificationBean>(new JsonGenericsSerializator()) {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
+        }
+
+        @Override
+        public void onResponse(CheckVerificationBean response, int id) {
+            if (response.getCode() == 200){
+                if (response.getData().isValid()){
+                    ProgressHudModel.newInstance().diss();
+                    Intent intent = new Intent();
+                    intent.setClass(mContext,SetPasswordActivity.class);
+                    intent.putExtra("isPhone",isPhone);
+                    intent.putExtra("countryCode","00"+countryCodeTv.getText().toString().substring(1));
+                    intent.putExtra("user",userEt.getText().toString());
+                    intent.putExtra("verifyCode", verifyCodeEt.getText().toString());
+                    startActivity(intent);
+                }
+            }else {
+                ProgressHudModel.newInstance().diss();
+                MathUitl.showToast(mContext,response.getMessage());
+            }
+        }
+    };
+
 }

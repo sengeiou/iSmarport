@@ -238,12 +238,13 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {
-       if (resultCode == UCrop.RESULT_ERROR){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == UCrop.RESULT_ERROR) {
             showToast(getString(R.string.crop_pic_failed));
         }
-        switch (requestCode){
-            case IMAGE_CAPTURE:{// 相机
-                File file = new File(MyApplication.getInstance().getPrivatePath()+"camera.jpg");
+        switch (requestCode) {
+            case IMAGE_CAPTURE: {// 相机
+                File file = new File(MyApplication.getInstance().getPrivatePath() + "camera");
                 if (file.exists()) {
                     Uri uri;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -254,11 +255,11 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     iUserInfoPresenter.cropPhoto(uri);
                 }
             }
-                break;
-            case IMAGE_MEDIA:{
-                if (data!=null)
+            break;
+            case IMAGE_MEDIA: {
+                if (data != null)
                     FileUtil.getInstance().writeUriSdcardFile(data.getData());
-                File file = new File(MyApplication.getInstance().getPrivatePath()+"camera.jpg");
+                File file = new File(MyApplication.getInstance().getPrivatePath() + "camera");
                 if (file.exists()) {
                     Uri uri;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -269,13 +270,13 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     iUserInfoPresenter.cropPhoto(uri);
                 }
             }
-                break;
-            case  UCrop.REQUEST_CROP:{
-                if (data!=null){
-                    iUserInfoPresenter.updownPhoto(new File(MyApplication.getInstance().getPrivatePath()+"crop.jpg"));
+            break;
+            case UCrop.REQUEST_CROP: {
+                if (data != null) {
+                    iUserInfoPresenter.updownPhoto(new File(MyApplication.getInstance().getPrivatePath() + "crop"));
                 }
             }
-                break;
+            break;
         }
     }
 

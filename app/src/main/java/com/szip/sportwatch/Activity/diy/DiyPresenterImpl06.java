@@ -40,11 +40,9 @@ public class DiyPresenterImpl06 implements IDiyPresenter{
         final boolean isCircle = MyApplication.getInstance().isCircle();
         if (isCircle){
             dials = new int[]{
-//                    R.mipmap.diy_2,
-                    R.mipmap.diy_4, R.mipmap.diy_8,R.mipmap.diy_11};
+                    R.mipmap.diy_2,R.mipmap.diy_4, R.mipmap.diy_13};
             clock = new int[]{
-//                    2,
-                    4,8,11};
+                    2,4,13};
 
         }else {
             dials = new int[]{R.mipmap.clock_2523_3,R.mipmap.clock_2523_4, R.mipmap.clock_2523_6,R.mipmap.clock_2523_7};
@@ -114,7 +112,7 @@ public class DiyPresenterImpl06 implements IDiyPresenter{
             String[] spaceType = MyApplication.getInstance().getFaceType().split("\\*");
             Uri path = uri;
             //临时用一个名字用来保存裁剪后的图片
-            String fileName = MyApplication.getInstance().getPrivatePath()+"crop.jpg";
+            String fileName = MyApplication.getInstance().getPrivatePath()+"crop";
             File file = new File(fileName);
             file.getParentFile().mkdirs();
             Uri target = Uri.fromFile(file);

@@ -67,10 +67,10 @@ public class FileUtil {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void writeFileSdcardFile(String fileName, byte[] writeStr){
-        if (context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-            Log.d("SZIP******","没授权");
-            return;
-        }
+//        if (context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+//            Log.d("SZIP******","没授权");
+//            return;
+//        }
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
@@ -94,7 +94,7 @@ public class FileUtil {
             AssetFileDescriptor audioAsset = context.getContentResolver()
                     .openAssetFileDescriptor(uri, "r");
             InputStream in = audioAsset.createInputStream();
-            OutputStream out = new FileOutputStream(MyApplication.getInstance().getPrivatePath()+"camera.jpg");
+            OutputStream out = new FileOutputStream(MyApplication.getInstance().getPrivatePath()+"camera");
             byte[] buf = new byte[1024];
             int len;
             while ((len = in.read(buf)) > 0) {

@@ -319,8 +319,6 @@ public class CommandUtil {
             LogUtil.getInstance().logd("SZIP******",weatherModel.get(i).getCode()+weatherModel.get(i).getText());
         }
 
-
-
         LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
         return data;
     }
@@ -418,6 +416,69 @@ public class CommandUtil {
         }else {
             data[8] = (byte) type;
             data[9] = 0;
+            LogUtil.getInstance().logd("DATA******","发送的OTA结束包 = "+DateUtil.byteToHexString(data));
+        }
+
+        return data;
+    }
+
+    public static byte[] getCommandbyteOtaFileTest(int byteLength,int dataLength,int type,byte[] version,int address,int num,byte[] datas){
+        byte[] data = new byte[byteLength-8];
+//        data[0] = (byte) 0xAA;
+//        data[1] = (byte) 0x47;
+//        data[2] = (byte) dataLength;
+//        data[3] = 0;
+//        data[4] = (byte) (0xF0);
+//        data[5] = (byte) (0xF0);
+//        data[6] = (byte) (0xF0);
+//        data[7] = (byte) (0xF0);
+
+        if (type == 0){
+            data[0] = (byte) type;
+            data[1] = 0;
+            data[2] = 0;
+            data[3] = 0;
+            data[4] = 0;
+            data[5] = 0;
+            LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
+        }else if (type == 1){
+            data[0] = (byte) type;
+            data[1] = (byte) (num&0xff);
+            data[2] = (byte) ((num>>8)&0xff);
+            data[3] = (byte) (address&0xff);
+            data[4] = (byte) ((address>>8)&0xff);
+            data[5] = (byte) ((address>>16)&0xff);
+            data[6] = (byte) ((address>>24)&0xff);
+            System.arraycopy(datas,0,data,7,datas.length);
+            LogUtil.getInstance().logd("DATA******","发送的OTA包序号 = "+ num+" ;写入角标号 = "+address);
+        }else {
+            data[0] = (byte) type;
+            data[1] = 0;
+            LogUtil.getInstance().logd("DATA******","发送的OTA结束包 = "+DateUtil.byteToHexString(data));
+        }
+
+        return data;
+    }
+
+    public static byte[] getCommandbyteDialFile(int byteLength,int type,byte clockId,int address,int num,byte[] datas){
+        byte[] data = new byte[byteLength];
+        if (type == 3){
+            data[0] = (byte) type;
+            data[1] = clockId;
+            LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
+        }else if (type == 4){
+            data[0] = (byte) type;
+            data[1] = (byte) (num&0xff);
+            data[2] = (byte) ((num>>8)&0xff);
+            data[3] = (byte) (address&0xff);
+            data[4] = (byte) ((address>>8)&0xff);
+            data[5] = (byte) ((address>>16)&0xff);
+            data[6] = (byte) ((address>>24)&0xff);
+            System.arraycopy(datas,0,data,7,datas.length);
+            LogUtil.getInstance().logd("DATA******","发送的OTA包序号 = "+ num+" ;写入角标号 = "+address);
+        }else {
+            data[0] = (byte) type;
+            data[1] = 0;
             LogUtil.getInstance().logd("DATA******","发送的OTA结束包 = "+DateUtil.byteToHexString(data));
         }
 

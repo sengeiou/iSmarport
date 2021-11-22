@@ -39,6 +39,7 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
     private Context context;
     private ISelectDialView iSelectDialView;
     private ArrayList<DialBean.Dial> dialArrayList = new ArrayList<>();
+    private int clock;
 
     public SelectDialPresenterImpl06(Context context, ISelectDialView iSelectDialView) {
         this.context = context;
@@ -81,36 +82,45 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
         dialRv.setHasFixedSize(true);
         dialRv.setNestedScrollingEnabled(false);
 
-        if (iSelectDialView!=null&&dialArrayList.size()!=0)
+        if (iSelectDialView!=null&&dialArrayList.size()!=0){
             iSelectDialView.setView(dialArrayList.get(0).getPreviewUrl(),
-                    dialArrayList.get(0).getPlateBgUrl(),dialArrayList.get(0).getPointerNumber());
+                    dialArrayList.get(0).getPlateBgUrl());
+            clock = dialArrayList.get(0).getPointerNumber();
+        }
+
 
         dialAdapter.setOnItemClickListener(new DialAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 if (position==-1){
                     if (iSelectDialView!=null)
-                        iSelectDialView.setDialView(null,null,-1);
+                        iSelectDialView.setDialView(null,null);
                 } else{
                     if (iSelectDialView!=null){
                         iSelectDialView.setDialView(dialArrayList.get(position).getPreviewUrl(),
-                                dialArrayList.get(position).getPlateBgUrl(),dialArrayList.get(position).getPointerNumber());
+                                dialArrayList.get(position).getPlateBgUrl());
+                        clock = dialArrayList.get(position).getPointerNumber();
                     }
                 }
             }
         });
     }
 
+    @Override
+    public void startToSendDial() {
+        BleClient.getInstance().writeForSendPicture(0,clock,0,0,new byte[0]);
+    }
+
     private int i = 0;
     private byte datas[];
 
     @Override
-    public void sendDial(String resultUri, int clock) {
+    public void sendDial(String resultUri, int address) {
         if (resultUri != null) {
             final int PAGENUM = 200;//分包长度
             InputStream in = null;
             try {
-                in = new FileInputStream(MyApplication.getInstance().getPrivatePath()+"dial.jpg");
+                in = new FileInputStream(resultUri);
                 byte[] datas =  FileUtil.getInstance().toByteArray(in);
                 in.close();
                 int num = datas.length / PAGENUM;
@@ -126,6 +136,11 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
             }
         }
         sendByte();
+    }
+
+    @Override
+    public void resumeSendDial(int page) {
+
     }
 
     @Override

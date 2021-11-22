@@ -234,6 +234,7 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
                         public void onResponse(BaseApi response, int id) {
                             if (response.getCode()==200){
                                 MyApplication.getInstance().setUserInfo(userInfo);
+                                MathUitl.saveInfoData(context,userInfo).commit();
                                 if (iUserInfoView!=null)
                                     iUserInfoView.saveSeccuss(true);
                             }
@@ -278,7 +279,7 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String photoName = MyApplication.getInstance().getPrivatePath()+"camera.jpg";
+                String photoName = MyApplication.getInstance().getPrivatePath()+"camera";
                 File file = new File(photoName);
                 Uri photoURI = null;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -314,7 +315,7 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
         try {
             Uri path = uri;
             //临时用一个名字用来保存裁剪后的图片
-            String fileName = MyApplication.getInstance().getPrivatePath()+"crop.jpg";
+            String fileName = MyApplication.getInstance().getPrivatePath()+"crop";
             File file = new File(fileName);
             file.getParentFile().mkdirs();
             Uri target = Uri.fromFile(file);
@@ -350,8 +351,8 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
                         if (iUserInfoView!=null)
                             iUserInfoView.setPhoto(response.getData().getUrl());
                         //裁剪成功之后，删掉之前拍的照片
-                        new File(MyApplication.getInstance().getPrivatePath()+"camera.jpg").delete();
-                        new File(MyApplication.getInstance().getPrivatePath()+"crop.jpg").delete();
+                        new File(MyApplication.getInstance().getPrivatePath()+"camera").delete();
+                        new File(MyApplication.getInstance().getPrivatePath()+"crop").delete();
                     }
                 }
             });

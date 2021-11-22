@@ -12,6 +12,9 @@ public class Config {
     public static final String char2 = "00002AE1-0000-1000-8000-00805f9b34fb";
     //用于回复实时数据
     public static final String char3 = "00002AE2-0000-1000-8000-00805f9b34fb";
+
     //用于回复大数据
-    public static final String char4 = "00001527-1212-efde-1523-785feabcd125";
+    public static final String char4 = "00002AE3-0000-1000-8000-00805f9b34fb";
+    //用于回复大数据
+    public static final String char5 = "000018E2-0000-1000-8000-00805f9b34fb";
 }

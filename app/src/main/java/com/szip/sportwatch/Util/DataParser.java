@@ -11,6 +11,7 @@ import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Interface.IDataResponse;
 import com.szip.sportwatch.Model.BleStepModel;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Hqs on 2018/1/4
@@ -59,6 +62,7 @@ public class DataParser {
     }
 
     public void parseNotifyData(byte[] data){
+
         if (data[1] == 0x15){
             if (mIDataResponse!=null)
                 mIDataResponse.onCamera(data[8]);
@@ -66,32 +70,49 @@ public class DataParser {
             mIDataResponse.findPhone(data[8]);
         }else if (data[1] == 0x46){
             if (data[9]==2){
-                EventBus.getDefault().post(new UpdateView("2"));
+                EventBus.getDefault().post(new UpdateDialView(2));
             }else {
                 if (data[8]==0){
-                    EventBus.getDefault().post(new UpdateView(""));
+                    EventBus.getDefault().post(new UpdateDialView(3));
                 }else if (data[8]==1){
-                    EventBus.getDefault().post(new UpdateView("0"));
+                    EventBus.getDefault().post(new UpdateDialView(0));
                 }else {
-                    EventBus.getDefault().post(new UpdateView("1"));
+                    EventBus.getDefault().post(new UpdateDialView(1));
                 }
             }
         }else if (data[1] == 0x47){
-            if (data.length==10&&data[9]==2){
-                if (mIDataResponse!=null)
-                    mIDataResponse.updateOtaProgress(0,0);
-            }else {
-                if (mIDataResponse!=null){
-                    if (data[8]==0){
+            switch (data[8]){
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:{
+                    if(data[9]==2){
+                        EventBus.getDefault().post(new UpdateDialView(5));
+                    }else if (data[9] == 5){
+                        EventBus.getDefault().post(new UpdateDialView(2));
+                    }else {
                         int address = (data[10] & 0xff) + ((data[11] & 0xFF) << 8) +
                                 ((data[12] & 0xff) << 16) + ((data[13] & 0xFF) << 24);
-                        mIDataResponse.updateOtaProgress(data[9],address);
-                    }else if (data[8]==1){
-                        mIDataResponse.updateOtaProgress(1,0);
-                    }else {
-                        mIDataResponse.updateOtaProgress(2,0);
+                        EventBus.getDefault().post(new UpdateDialView(3,address));
                     }
                 }
+                    break;
+                case 4:{
+                    if (data[9]==1)
+                        EventBus.getDefault().post(new UpdateDialView(0));
+                    else if (data[9] == 2)
+                        EventBus.getDefault().post(new UpdateDialView(4,(data[10] & 0xff) + ((data[11] & 0xFF) << 8)));
+                    else
+                        EventBus.getDefault().post(new UpdateDialView(2));
+                }
+                    break;
+                case 5:{
+                    EventBus.getDefault().post(new UpdateDialView(1));
+                }
+                break;
             }
         }else if (data[1] == 0x48){//音乐控制
             if (mIDataResponse!=null){
@@ -101,7 +122,6 @@ public class DataParser {
                     mIDataResponse.onMusicControl(data[8],data[9]);
                 }
             }
-
         }else if (data[1] == 0x50){//来电挂断
             if (mIDataResponse!=null)
                 mIDataResponse.endCall();

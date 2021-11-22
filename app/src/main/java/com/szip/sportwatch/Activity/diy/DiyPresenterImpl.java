@@ -109,7 +109,7 @@ public class DiyPresenterImpl implements IDiyPresenter{
             String[] spaceType = MyApplication.getInstance().getFaceType().split("\\*");
             Uri path = uri;
             //临时用一个名字用来保存裁剪后的图片
-            String fileName = MyApplication.getInstance().getPrivatePath()+"crop.jpg";
+            String fileName = MyApplication.getInstance().getPrivatePath()+"crop";
             File file = new File(fileName);
             file.getParentFile().mkdirs();
             Uri target = Uri.fromFile(file);

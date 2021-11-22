@@ -72,7 +72,7 @@ public interface IDataResponse {
      * */
     void updateUserInfo();
 
-    void updateOtaProgress(int state,int address);
+    void updateOtaProgress(int type,int state,int address);
     void onMusicControl(int cmd,int voiceValue);
     void endCall();
 }

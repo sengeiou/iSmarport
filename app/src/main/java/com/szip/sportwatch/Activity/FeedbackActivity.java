@@ -14,12 +14,16 @@ import com.szip.sportwatch.Interface.HttpCallbackWithBase;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
+import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
+import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import java.io.IOException;
 
-public class FeedbackActivity extends BaseActivity implements HttpCallbackWithBase {
+import okhttp3.Call;
+
+public class FeedbackActivity extends BaseActivity{
 
     private EditText feedbackEt;
     private TextView lenghtTv;
@@ -37,19 +41,6 @@ public class FeedbackActivity extends BaseActivity implements HttpCallbackWithBa
         initEvent();
 
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        HttpMessgeUtil.getInstance().setHttpCallbackWithBase(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        HttpMessgeUtil.getInstance().setHttpCallbackWithBase(null);
-    }
-
 
     private void initView() {
         setTitleText(getString(R.string.feedback));
@@ -78,7 +69,7 @@ public class FeedbackActivity extends BaseActivity implements HttpCallbackWithBa
                     try {
                         ProgressHudModel.newInstance().show(FeedbackActivity.this,getString(R.string.waitting),
                                 getString(R.string.httpError),5000);
-                        HttpMessgeUtil.getInstance().postSendFeedback(feedbackEt.getText().toString());
+                        HttpMessgeUtil.getInstance().postSendFeedback(feedbackEt.getText().toString(),callback);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -118,10 +109,17 @@ public class FeedbackActivity extends BaseActivity implements HttpCallbackWithBa
         });
     }
 
-    @Override
-    public void onCallback(BaseApi baseApi, int id) {
-        ProgressHudModel.newInstance().diss();
-        showToast(getString(R.string.send_success));
-        finish();
-    }
+    private GenericsCallback<BaseApi> callback = new GenericsCallback<BaseApi>(new JsonGenericsSerializator()) {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
+        }
+
+        @Override
+        public void onResponse(BaseApi response, int id) {
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.send_success));
+            finish();
+        }
+    };
 }

@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public interface ISelectDialPresenter {
     void getViewConfig(RecyclerView dialRv);
-    void sendDial(String resultUri, int clock);
+    void startToSendDial();
+    void sendDial(String resultUri,int address);
+    void resumeSendDial(int page);
     void setViewDestory();
 }

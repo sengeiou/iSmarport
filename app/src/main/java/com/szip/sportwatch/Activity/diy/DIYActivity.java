@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.BLE.EXCDController;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
@@ -84,8 +85,8 @@ public class DIYActivity extends BaseActivity implements IDiyView{
         super.onDestroy();
         iDiyPresenter.setViewDestory();
         EventBus.getDefault().unregister(this);
-        FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"crop.jpg");
-        FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"camera.jpg");
+        FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"crop");
+        FileUtil.getInstance().deleteFile(MyApplication.getInstance().getPrivatePath()+"camera");
     }
 
     private void initEvent() {
@@ -150,7 +151,7 @@ public class DIYActivity extends BaseActivity implements IDiyView{
                     return;
                 Log.d("SZIP******", "URI1 = " + data.getData());
                 FileUtil.getInstance().writeUriSdcardFile(data.getData());
-                File file = new File(MyApplication.getInstance().getPrivatePath() + "camera.jpg");
+                File file = new File(MyApplication.getInstance().getPrivatePath() + "camera");
                 if (file.exists()) {
                     Uri uri;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -165,7 +166,11 @@ public class DIYActivity extends BaseActivity implements IDiyView{
             break;
             case UCrop.REQUEST_CROP: {
                 if (data != null) {
-                    MathUitl.toJpgFile();
+                    if (!MathUitl.toJpgFile()){
+                        showToast(getString(R.string.crop_pic_failed1));
+                        return;
+                    }
+
                     resultUri = UCrop.getOutput(data);
                     try {
                         backgroundIv.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri));
@@ -186,17 +191,17 @@ public class DIYActivity extends BaseActivity implements IDiyView{
      * 更新数据显示
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUpdataView(UpdateView updateView){
-        if(updateView.getState().equals("0")){//进度+1
+    public void onUpdataView(UpdateDialView updateView){
+        if(updateView.getType()==0){//进度+1
             iDiyPresenter.sendDial(null,-1);
             progress++;
             ProgressHudModel.newInstance().setProgress(progress);
-        }else if (updateView.getState().equals("1")){//完成
+        }else if (updateView.getType()==1){//完成
             isSendPic = false;
             progress = 0;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
-        }else if (updateView.getState().equals("2")){//失败
+        }else if (updateView.getType()==2){//失败
             if (isSendPic){
                 isSendPic = false;
                 progress = 0;

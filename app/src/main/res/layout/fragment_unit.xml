@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.UnitSelectActivity"
+    android:background="@color/bgColor">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/rayblue"
+            android:textSize="@dimen/item_text_size"
+            android:layout_marginStart="@dimen/item_margin_parallel"
+            android:text="@string/tempUnit"
+            android:layout_marginTop="@dimen/item_margin_parallel"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin_parallel"
+            android:layout_marginEnd="@dimen/item_margin_parallel"
+            android:layout_marginStart="@dimen/item_margin_parallel">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/cTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_mine_item"
+                    android:text="°C"
+                    android:textColor="@color/rayblue"
+                    android:textSize="@dimen/item_text_size"
+                    android:padding="@dimen/item_pad_text"/>
+
+                <TextView
+                    android:id="@+id/fTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_mine_item"
+                    android:layout_marginTop="@dimen/item_margin_parallel"
+                    android:text="°F"
+                    android:textColor="@color/rayblue"
+                    android:textSize="@dimen/item_text_size"
+                    android:padding="@dimen/item_pad_text" />
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/tempRg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/item_pad_text">
+
+                <RadioButton
+                    android:id="@+id/cRb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/item_pad_text"
+                    android:paddingTop="@dimen/item_pad_text"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/fRb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_parallel"
+                    android:paddingBottom="@dimen/item_pad_text"
+                    android:paddingTop="@dimen/item_pad_text"/>
+            </RadioGroup>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/rayblue"
+            android:textSize="@dimen/item_text_size"
+            android:layout_marginStart="@dimen/item_margin_parallel"
+            android:text="@string/measureUnit"
+            android:layout_marginTop="@dimen/item_margin_parallel"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin_parallel"
+            android:layout_marginEnd="@dimen/item_margin_parallel"
+            android:layout_marginStart="@dimen/item_margin_parallel">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/metricTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_mine_item"
+                    android:text="@string/metric"
+                    android:textColor="@color/rayblue"
+                    android:textSize="@dimen/item_text_size"
+                    android:padding="@dimen/item_pad_text"/>
+
+                <TextView
+                    android:id="@+id/britishTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_mine_item"
+                    android:layout_marginTop="@dimen/item_margin_parallel"
+                    android:text="@string/british"
+                    android:textColor="@color/rayblue"
+                    android:textSize="@dimen/item_text_size"
+                    android:padding="@dimen/item_pad_text" />
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/unitRg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/item_pad_text">
+
+                <RadioButton
+                    android:id="@+id/metricRb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/item_pad_text"
+                    android:paddingTop="@dimen/item_pad_text"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/britishRb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_parallel"
+                    android:paddingBottom="@dimen/item_pad_text"
+                    android:paddingTop="@dimen/item_pad_text"/>
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_corner"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+            android:textAllCaps="false"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

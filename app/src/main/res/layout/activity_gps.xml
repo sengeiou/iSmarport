@@ -8,7 +8,6 @@
     android:background="#564f5e">
 
     <LinearLayout
-        android:id="@+id/distanceLl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

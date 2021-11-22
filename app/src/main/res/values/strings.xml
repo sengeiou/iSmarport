@@ -24,86 +24,6 @@
     <string name="next">Next step</string>
     <string name="privacy">Agree<u>"User Agreement And Privacy Policy"</u></string>
     <string name="privacy1">User Agreement And Privacy Policy</string>
-    <string name="privacy2">\t\t\tWe attach great importance to the privacy of our users and the protection of personal information. When you use our products and services, we may collect and use information about you. Our company hopes to through the 《Privacy Agreement》hereinafter referred to as "The Policy" to explain to you how and when our company collects, uses and saves this information.
-
-\n\n\t\tWe hope that you carefully read and confirm that you fully understand the content of this policy before using our products and services.
-
-\n\n\t\tYour personal information will never be used without your consent for purposes not specified in this policy.
-
-\n\n\t\tPlease note that all personal information you provide when you use our products and services, we are authorized to collect, unless you delete or do not allow our collection through system settings. When you cancel your account, our company will stop using and delete your personal information.
-
-\n\n1，The following is personal information you authorize us to collect:
-
-\n\n\t\tPersonal information refers to all kinds of information recorded in electronic or other ways that can identify a person or reflect the activity of a person, either alone or in combination with other information.
-The personal information involved in this policy includes: basic information (including personal name birthday, gender, personal phone number, email address); network identity information (including system account, IP address, and email address); contacts; personal common equipment information; personal location information; personal health information.
-
-
-
-\n\n2，Our company may use the personal information collected in the process of providing services to you for the following purposes:
-
-\n（1）To provide you with services owned by the product;
-
-\n（2）When our company provides services, it is used for identity verification, customer service, security prevention, fraud monitoring, archiving and backup purposes to ensure the security of the products and services provided by our company to you;
-
-\n（3）Help us design new services and improve our existing services
-
-\n（4）Make our company know more about how you access and use our services, so as to respond to your personalized needs, such as language settings, location settings, personalized help and instructions, or to you and other users respond in other ways;
-
-\n（5）Software certification or management software upgrade;
-
-\n（6）Let you participate in surveys about our products and services.
-
-\nIn order to allow you to have a better experience, improve our services or other uses you agree with, under the premise of complying with relevant laws and regulations, our company may use the information collected through a service to collect information or personalize way for other services of our company. For example, the information collected when you use one of our services may be used to provide you with specific content in another service or to show you non-generalized information about you. If our company provides corresponding options in related services, you can also authorize us to use the information provided and stored by this service for our other services.
-
-\n\n3，Our company will not share your personal information with any company, organization and individual other than our company, except in the following cases:
-
-\n\n（1）With your explicit consent and authorization in advance;
-
-\n\n（2）Provided in accordance with applicable laws and regulations, legal procedures, mandatory administrative or judicial requirements;
-
-\n\n（3）To the extent permitted by law, it is necessary to provide for the protection of our company, our affiliates or partners, the public interest, property or safety from damage;
-
-\n\n（4） Only by sharing your information can we achieve the core functions of our products and services or provide the services you need;
-
-\n\n（5）To handle your dispute or disputes with others at your request;
-
-\n\n（6）Provided in accordance with the relevant agreement with you or other legal documents;
-
-\n\n（7） For use in the public interest in compliance with laws and regulations.
-
-\n\n4，How we jointly protect and store your personal information:
-
-\n（1）We attach great importance to the security of personal information and take all reasonable and feasible data security technical measures to protect your personal information;
-
-\n（2）While no Internet environment is 100% secure, we do our best to ensure and guarantee the security of any information you send to us. If our physical, technical or management protection facilities are damaged, resulting in unauthorized access, public disclosure, tampering, or destruction of information, resulting in damage to your legitimate rights and interests, our company will bear the corresponding legal responsibility.
-
-\n（3）If you have any questions about the protection of your personal information, you can contact us through the contact information on our official website. If you find that your personal information is leaked, especially your personal information has been leaked, please contact us immediately so that we can take corresponding measures.
-
-
-
-\n\n5，Use of our services by minors：
-
-We recommend that minors encourage their parents or guardians to read this policy and recommend that minors seek the consent and guidance of their parents or guardians before submitting personal information.
-
-
-
-\n\n5，Application scope of privacy policy
-
- This policy applies to all our services except certain specific services. These specific services will use specific privacy policies. Specific privacy policies for certain services will more specifically describe how we use your information in those services. The privacy policy for that particular service forms part of this policy. If there is any inconsistency between the privacy policy of the relevant specific service and this policy, the privacy policy of the specific service shall prevail。
-
-\nplease note that this policy does not apply to:
-
-\n（1）Information collected by third-party services (including all third-party websites) accessed through our services;
-
-\n（2）Information collected by other companies or agencies that perform advertising services in our services;
-
-\n（3）If you use an Apple device such as an iPhone or iPad, in order to calculate your exercise data, with your authorization, we will receive and send your exercise data from Apple\'s Healthkit. Our company will read your height, weight and gender data from Healthkit. At the same time, your steps, walking + running distance, active energy, riding distance and sleep analysis data generated by iSmarport APP will be written into Apple Healthkit. Any data obtained through Healthkit will not be shared or sold to any third-party company, and our company will not use the information obtained from Healthkit for commercial purposes such as advertising and marketing.
-
-
-
-\n\n7， Update
-
-\n\n\t\tWe may update or amend the terms of this policy, and such amendments form part of this policy. If such amendments cause a substantial reduction in your rights under this policy, before the amendments take effect, we will notify you via a prominent location on the homepage or email you or otherwise. In this case, if you continue to use our services, you agree to be bound by this revised policy.</string>
     <string name="checkPrivacy">Please Confirm You’ve Read The User Agreement And Privacy Policy</string>
     <string name="setPassword">Set Password</string>
     <string name="china">China</string>
@@ -349,6 +269,7 @@ We recommend that minors encourage their parents or guardians to read this polic
 \n\n We use industry-leading security technology to protect your personal information.
 \n\n When you click "OK", you agree to the terms of this Agreement.</string>
     <string name="crop_pic_failed">Image capture failed, please select JPG image!</string>
+    <string name="crop_pic_failed1">Image capture failed, captured picture is too small and the size of the dial does not match!</string>
     <string name="visiter">Visiter mode does not support this feature</string>
     <string name="newVersion">A new APP version has been detected. Do you want to update it now?</string>
 
@@ -395,4 +316,5 @@ We recommend that minors encourage their parents or guardians to read this polic
     <string name="touchAgain1">Press again to quit running</string>
     <string name="unlock">Slide right to unlock</string>
     <string name="stride">stride</string>
+    <string name="finishInfo">Please improve the user information</string>
 </resources>

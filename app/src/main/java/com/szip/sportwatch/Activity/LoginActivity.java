@@ -16,25 +16,30 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.szip.sportwatch.Activity.initInfo.InitInfoActivity;
 import com.szip.sportwatch.Activity.main.MainActivity;
 import com.szip.sportwatch.Interface.HttpCallbackWithLogin;
 import com.szip.sportwatch.Model.HttpBean.LoginBean;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
+import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.zaaach.citypicker.CityPicker;
 import com.zaaach.citypicker.adapter.OnPickListener;
 import com.zaaach.citypicker.model.City;
+import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import java.io.IOException;
 import java.util.Calendar;
 
+import okhttp3.Call;
+
 import static com.szip.sportwatch.MyApplication.FILE;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener,HttpCallbackWithLogin{
+public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     /**
      * 用户名密码
@@ -70,7 +75,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        HttpMessgeUtil.getInstance().setHttpCallbackWithLogin(null);//注销网络回调监听
     }
 
     /**
@@ -145,19 +149,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     showToast(getString(R.string.enterPassword));
                 }else {
                     try {
-                        HttpMessgeUtil.getInstance().setHttpCallbackWithLogin(this);//注册网络回调监听
                         if (!MathUitl.isNumeric(userEt.getText().toString())){//邮箱
                             if (MathUitl.isEmail(userEt.getText().toString())){//如果是邮箱登录，判断邮箱格式是否正确
                                 ProgressHudModel.newInstance().show(mContext,getString(R.string.logging),getString(R.string.httpError),10000);
                                 HttpMessgeUtil.getInstance().postLogin("2","","",
-                                        userEt.getText().toString(),passwordEt.getText().toString(),"","");
+                                        userEt.getText().toString(),passwordEt.getText().toString(),"","",callback);
                             }else {
                                 showToast(getString(R.string.enterRightEmail));
                             }
                         }else {//电话
                             ProgressHudModel.newInstance().show(mContext,getString(R.string.logging),getString(R.string.httpError),10000);
                             HttpMessgeUtil.getInstance().postLogin("1","00"+countryCodeTv.getText().toString().substring(1),
-                                    userEt.getText().toString(), "",passwordEt.getText().toString(),"","");
+                                    userEt.getText().toString(), "",passwordEt.getText().toString(),"","",callback);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -170,9 +173,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }else {
                     ProgressHudModel.newInstance().show(mContext,getString(R.string.logging),getString(R.string.httpError),10000);
                     try {
-                        HttpMessgeUtil.getInstance().setHttpCallbackWithLogin(this);//注册网络回调监听
                         HttpMessgeUtil.getInstance().postLogin("3","",
-                                "", "","",MathUitl.getDeviceId(mContext),"1");
+                                "", "","",MathUitl.getDeviceId(mContext),"1",callback);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -277,47 +279,58 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         }
     };
 
-    /**
-     * 登录网络请求回调
-     * */
-    @Override
-    public void onLogin(LoginBean loginBean) {
-        ProgressHudModel.newInstance().diss();
-        HttpMessgeUtil.getInstance().setToken(loginBean.getData().getToken());
-        SharedPreferences.Editor editor = sharedPreferencesp.edit();
-        if (loginBean.getData().getUserInfo().getPhoneNumber()!=null||loginBean.getData().getUserInfo().getEmail()!=null)
-            editor.putString("user",loginBean.getData().getUserInfo().getPhoneNumber()!=null?
-                    loginBean.getData().getUserInfo().getPhoneNumber():
-                    loginBean.getData().getUserInfo().getEmail());
-        editor.putString("token",loginBean.getData().getToken());
-        editor.putString("phone",loginBean.getData().getUserInfo().getPhoneNumber());
-        editor.putString("mail",loginBean.getData().getUserInfo().getEmail());
-        ((MyApplication)getApplicationContext()).setUserInfo(loginBean.getData().getUserInfo());
-        editor.putString("password",passwordEt.getText().toString());
-        if (loginBean.getData().getUserInfo().getDeviceCode()!=null&&!loginBean.getData().getUserInfo().getDeviceCode().equals("")){
-            if (MyApplication.getInstance().getDialGroupId().equals("0")){
-                BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-                BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
-                BluetoothDevice device = bluetoothAdapter.getRemoteDevice(loginBean.getData().getUserInfo().getDeviceCode());
-                if (device!=null&&device.getName()!=null)
-                    MyApplication.getInstance().setDeviceConfig(device.getName().indexOf("_LE")>=0?
-                            device.getName().substring(0,device.getName().length()-3):
-                            device.getName());
-            }
+    private GenericsCallback<LoginBean> callback = new GenericsCallback<LoginBean>(new JsonGenericsSerializator()) {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
         }
 
-        if (loginBean.getData().getUserInfo().getPhoneNumber()!=null||loginBean.getData().getUserInfo().getEmail()!=null){
-            //获取云端数据
-            try {
-                HttpMessgeUtil.getInstance().getForDownloadReportData(Calendar.getInstance().getTimeInMillis()/1000+"",30+"");
-            } catch (IOException e) {
-                e.printStackTrace();
+        @Override
+        public void onResponse(LoginBean loginBean, int id) {
+            ProgressHudModel.newInstance().diss();
+            if (loginBean.getCode()==200){
+                HttpMessgeUtil.getInstance().setToken(loginBean.getData().getToken());
+                SharedPreferences.Editor editor = sharedPreferencesp.edit();
+                if (loginBean.getData().getUserInfo().getPhoneNumber()!=null||loginBean.getData().getUserInfo().getEmail()!=null)
+                    editor.putString("user",loginBean.getData().getUserInfo().getPhoneNumber()!=null?
+                            loginBean.getData().getUserInfo().getPhoneNumber():
+                            loginBean.getData().getUserInfo().getEmail());
+                editor.putString("phone",loginBean.getData().getUserInfo().getPhoneNumber());
+                editor.putString("mail",loginBean.getData().getUserInfo().getEmail());
+                ((MyApplication)getApplicationContext()).setUserInfo(loginBean.getData().getUserInfo());
+                editor.putString("password",passwordEt.getText().toString());
+
+                if (loginBean.getData().getUserInfo().getBirthday()==null){
+                    startActivity(new Intent(mContext, InitInfoActivity.class));
+                }else {
+                    if (loginBean.getData().getUserInfo().getDeviceCode()!=null&&!loginBean.getData().getUserInfo().getDeviceCode().equals("")){
+                        if (MyApplication.getInstance().getDialGroupId().equals("0")){
+                            BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+                            BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+                            BluetoothDevice device = bluetoothAdapter.getRemoteDevice(loginBean.getData().getUserInfo().getDeviceCode());
+                            if (device!=null&&device.getName()!=null)
+                                MyApplication.getInstance().setDeviceConfig(device.getName().indexOf("_LE")>=0?
+                                        device.getName().substring(0,device.getName().length()-3):
+                                        device.getName());
+                        }
+                    }
+
+                    if (loginBean.getData().getUserInfo().getPhoneNumber()!=null||loginBean.getData().getUserInfo().getEmail()!=null){
+                        //获取云端数据
+                        try {
+                            HttpMessgeUtil.getInstance().getForDownloadReportData(Calendar.getInstance().getTimeInMillis()/1000+"",30+"");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    editor.putString("token",loginBean.getData().getToken());
+                    startActivity(new Intent(mContext, MainActivity.class));
+                    finish();
+                }
+                editor.commit();
+            }else {
+                showToast(loginBean.getMessage());
             }
         }
-
-        startActivity(new Intent(mContext, MainActivity.class));
-
-        editor.commit();
-        finish();
-    }
+    };
 }

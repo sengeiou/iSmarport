@@ -164,11 +164,9 @@ public class MainPresenterImpl implements IMainPrisenter{
                         }
                     },context);
         }
-        if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+        if (BluetoothAdapter.getDefaultAdapter().isEnabled())
             initBle();
-        }else {
-            checkNotificationState();
-        }
+
     }
 
     @Override
@@ -189,7 +187,6 @@ public class MainPresenterImpl implements IMainPrisenter{
                 MainService.getInstance().startConnect();
             }
         }
-        checkNotificationState();
     }
 
     @Override
@@ -197,11 +194,8 @@ public class MainPresenterImpl implements IMainPrisenter{
         iMainView = null;
     }
 
-    @Override
-    public void checkNotificationState() {
-        if (!isNotificationListenerActived())
-            showNotifiListnerPrompt();
-    }
+
+
 
     @Override
     public void initHost(FragmentTabHost fragmentTabHost) {
@@ -248,37 +242,5 @@ public class MainPresenterImpl implements IMainPrisenter{
 
         if (iMainView!=null)
             iMainView.initHostFinish(mTableItemList);
-    }
-
-    private boolean isNotificationListenerActived() {
-        String packageName = context.getPackageName();
-        String strListener = Settings.Secure.getString(context.getContentResolver(),
-                "enabled_notification_listeners");
-        return strListener != null
-                && strListener
-                .contains(packageName);
-    }
-
-    private void showNotifiListnerPrompt() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(R.string.notificationlistener_prompt_title);
-        builder.setMessage(R.string.notificationlistener_prompt_content);
-
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        // Go to notification listener settings
-        builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                context.startActivity(new Intent(
-                        "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
-            }
-        });
-        builder.create().show();
     }
 }

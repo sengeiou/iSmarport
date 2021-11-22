@@ -255,7 +255,6 @@ public class NotificationAppListActivity extends BaseActivity {
             HashSet<CharSequence> blockList = BlockList.getInstance().getBlockList();
             HashSet<String> exclusionList = IgnoreList.getInstance().getExclusionList();
             List<PackageInfo> packagelist = getPackageManager().getInstalledPackages(0);
-
             for (PackageInfo packageInfo : packagelist) {
                 if (packageInfo != null) {
                     // Whether this package should be exclude;

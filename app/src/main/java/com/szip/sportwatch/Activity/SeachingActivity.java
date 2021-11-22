@@ -226,34 +226,33 @@ public class SeachingActivity extends BaseActivity implements View.OnClickListen
 
                         @Override
                         public void onResponse(BindBean response, int id) {
+                            if (response.getCode() == 200){
+                                //停止蓝牙扫描
+                                searchDevice(false);
+                                BluetoothDevice device = deviceAdapter.getDevice(selectPos);
+                                //缓存蓝牙mac地址
+                                MyApplication app = (MyApplication) getApplicationContext();
+                                app.getUserInfo().setDeviceCode(device.getAddress());
+                                MathUitl.saveStringData(SeachingActivity.this,"deviceCode",device.getAddress()).commit();
+                                ProgressHudModel.newInstance().diss();
 
-                            //停止蓝牙扫描
-                            searchDevice(false);
-                            BluetoothDevice device = deviceAdapter.getDevice(selectPos);
-                            //缓存蓝牙mac地址
-                            MyApplication app = (MyApplication) getApplicationContext();
-                            app.getUserInfo().setDeviceCode(device.getAddress());
-                            app.setUserInfo(app.getUserInfo());
-                            ProgressHudModel.newInstance().diss();
+                                //启动后台自动连接线程
+                                app.setDeviceConfig(device.getName());
+                                WearableManager.getInstance().setRemoteDevice(device);
+                                MainService.getInstance().startConnect();
 
-                            app.getUserInfo().setBindId(response.getData().getBindId());
-                            MathUitl.saveInfoData(SeachingActivity.this,app.getUserInfo()).commit();
-
-                            //启动后台自动连接线程
-                            app.setDeviceConfig(device.getName().indexOf("_LE")>=0?device.getName().substring(0,device.getName().length()-3):
-                                    device.getName());
-                            WearableManager.getInstance().setRemoteDevice(device);
-                            MainService.getInstance().startConnect();
-
-                            if (app.getUserInfo().getPhoneNumber()!=null||app.getUserInfo().getEmail()!=null){
-                                //获取云端数据
-                                try {
-                                    HttpMessgeUtil.getInstance().getForDownloadReportData(Calendar.getInstance().getTimeInMillis()/1000+"",30+"");
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                if (app.getUserInfo().getPhoneNumber()!=null||app.getUserInfo().getEmail()!=null){
+                                    //获取云端数据
+                                    try {
+                                        HttpMessgeUtil.getInstance().getForDownloadReportData(Calendar.getInstance().getTimeInMillis()/1000+"",30+"");
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
+                                finish();
+                            }else {
+                                showToast(response.getMessage());
                             }
-                            finish();
                         }
                     });
                 } catch (IOException e) {

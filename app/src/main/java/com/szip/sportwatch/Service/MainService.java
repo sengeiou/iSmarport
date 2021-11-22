@@ -63,6 +63,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.media.AudioManager.FLAG_PLAY_SOUND;
 import static android.media.AudioManager.STREAM_MUSIC;
@@ -183,11 +185,15 @@ public class MainService extends Service {
             }
         }
 
+
         @Override
         public void onModeSwitch(int newMode) {
             LogUtil.getInstance().logd(TAG, "onModeSwitch newMode = " + newMode);
         }
     };
+
+
+
 
 
     /**
@@ -707,6 +713,7 @@ public class MainService extends Service {
      * */
     public void downloadFirmsoft(String dialUrl, String versionName) {
         if (!dialUrl.equals(app.getDiadUrl())){
+            Log.i("SZIP******","dialUrl = "+dialUrl+" ;path = "+(app.getPrivatePath() + versionName));
             File file = new File(app.getPrivatePath() + versionName);
             if (file.exists()){
                 file.delete();
@@ -765,8 +772,9 @@ public class MainService extends Service {
                     EventBus.getDefault().post(new SendDialModel(true));
                     break;
                 case DownloadManager.STATUS_FAILED:
+
                     EventBus.getDefault().post(new SendDialModel(false));
-                    //Log.d("SZIP******",">>>下载失败");
+                    Log.d("SZIP******",">>>下载失败");
                     break;
             }
         }
@@ -794,7 +802,14 @@ public class MainService extends Service {
                 }catch (IOException e) {
                     e.printStackTrace();
                 }
-                sendByte();
+                timer = new Timer();
+                sendDataTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        sendByte();
+                    }
+                };
+                timer.schedule(sendDataTask,0,20);
             }else {
 
             }
@@ -802,7 +817,7 @@ public class MainService extends Service {
 
         @Override
         public void onSendProgress() {
-            sendByte();
+
         }
 
         @Override
@@ -813,17 +828,30 @@ public class MainService extends Service {
         @Override
         public void onSendFail() {
             Log.d("DATA******","发送数据失败");
+            if(timer!=null){
+                timer.cancel();
+                timer = null;
+            }
         }
     };
 
+    private Timer timer;
+    private TimerTask sendDataTask;
+
     private void sendByte(){
         byte[] newDatas;
-        int len = (fileDatas.length-index- page >240)?240:(fileDatas.length-index- page);
+        int len = (fileDatas.length-index- page >175)?175:(fileDatas.length-index- page);
+        if (len<0)
+            return;
         newDatas = new byte[len];
         System.arraycopy(fileDatas, page+index,newDatas,0,len);
-        BleClient.getInstance().writeForSendOtaFile(1,null,index+page, page/240,newDatas);
-        page+=240;
+        BleClient.getInstance().writeForSendOtaFile(1,null,index+page, page/175,newDatas);
+        page+=175;
         if (page>=fileDatas.length-index){
+            if(timer!=null){
+                timer.cancel();
+                timer = null;
+            }
             BleClient.getInstance().writeForSendOtaFile(2,null,0,0,null);
         }
     }

@@ -26,7 +26,6 @@
             android:layout_marginStart="@dimen/item_margin_parallel"/>
 
         <ImageView
-            android:id="@+id/shareIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

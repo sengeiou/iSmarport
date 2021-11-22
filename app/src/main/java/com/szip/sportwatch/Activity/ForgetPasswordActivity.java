@@ -18,20 +18,24 @@ import com.szip.sportwatch.Interface.HttpCallbackWithBase;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
+import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.zaaach.citypicker.CityPicker;
 import com.zaaach.citypicker.adapter.OnPickListener;
 import com.zaaach.citypicker.model.City;
+import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import okhttp3.Call;
+
 import static com.szip.sportwatch.MyApplication.FILE;
 import static com.szip.sportwatch.Util.MathUitl.isEmail;
 
-public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener,HttpCallbackWithBase{
+public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener{
 
     /**
      * 国家与地区以及国家代码
@@ -88,12 +92,6 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     protected void onResume() {
         super.onResume();
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        HttpMessgeUtil.getInstance().setHttpCallbackWithBase(null);//注册网络回调监听
     }
 
     /**
@@ -154,13 +152,12 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
      * */
     private void startTimer(){
         try {
-            HttpMessgeUtil.getInstance().setHttpCallbackWithBase(this);
             if (userEt.getText().toString().contains("@"))
                 HttpMessgeUtil.getInstance().getVerificationCode("2","","",
-                        userEt.getText().toString());
+                        userEt.getText().toString(),callback);
             else
                 HttpMessgeUtil.getInstance().getVerificationCode("1","00"+countryCodeTv.getText().toString().substring(1),
-                        userEt.getText().toString(),"");
+                        userEt.getText().toString(),"",callback);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -243,7 +240,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                                 ProgressHudModel.newInstance().show(ForgetPasswordActivity.this,getString(R.string.waitting)
                                         ,getString(R.string.httpError),10000);
                                 HttpMessgeUtil.getInstance().postForgotPassword("2","",""
-                                        ,userEt.getText().toString(), verifyCodeEt.getText().toString(),passwordEt.getText().toString());
+                                        ,userEt.getText().toString(), verifyCodeEt.getText().toString(),passwordEt.getText().toString(),callback);
                             }else
                                 showToast(getString(R.string.enterRightEmail));
 
@@ -251,7 +248,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                             ProgressHudModel.newInstance().show(ForgetPasswordActivity.this,getString(R.string.waitting)
                                     ,getString(R.string.httpError),10000);
                             HttpMessgeUtil.getInstance().postForgotPassword("1","00"+countryCodeTv.getText().toString().substring(1),
-                                    userEt.getText().toString(),"", verifyCodeEt.getText().toString(),passwordEt.getText().toString());
+                                    userEt.getText().toString(),"", verifyCodeEt.getText().toString(),passwordEt.getText().toString(),callback);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -334,13 +331,18 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         }
     };
 
-    /**
-     * 重置密码的网络请求回调
-     * */
-    @Override
-    public void onCallback(BaseApi baseApi, int id) {
-        ProgressHudModel.newInstance().diss();
-        showToast(getString(R.string.resetSuccess));
-        finish();
-    }
+    private GenericsCallback<BaseApi> callback = new GenericsCallback<BaseApi>(new JsonGenericsSerializator()) {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
+        }
+
+        @Override
+        public void onResponse(BaseApi response, int id) {
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.resetSuccess));
+            finish();
+        }
+    };
+
 }

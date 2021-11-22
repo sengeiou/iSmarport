@@ -12,17 +12,21 @@ import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Service.MainService;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
+import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.szip.sportwatch.BLE.EXCDController;
+import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import java.io.IOException;
 
+import okhttp3.Call;
+
 import static com.szip.sportwatch.Util.HttpMessgeUtil.UPDATA_USERINFO;
 
-public class UnitSelectActivity extends BaseActivity implements View.OnClickListener,HttpCallbackWithBase{
+public class UnitSelectActivity extends BaseActivity implements View.OnClickListener{
 
     private MyApplication app;
     private RadioGroup unitRg,tempRg;
@@ -43,12 +47,6 @@ public class UnitSelectActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        HttpMessgeUtil.getInstance().setHttpCallbackWithBase(null);
     }
 
     private void initView() {
@@ -117,11 +115,10 @@ public class UnitSelectActivity extends BaseActivity implements View.OnClickList
                     showToast(getString(R.string.saved));
                     finish();
                 }else {//如果制式发生变化，则清空原来的数据
-                    HttpMessgeUtil.getInstance().setHttpCallbackWithBase(this);
                     ProgressHudModel.newInstance().show(UnitSelectActivity.this,getString(R.string.waitting),getString(R.string.httpError),
                             3000);
                     try {
-                        HttpMessgeUtil.getInstance().postForSetUnit(unit+"",temp+"");
+                        HttpMessgeUtil.getInstance().postForSetUnit(unit+"",temp+"",callback);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -130,24 +127,39 @@ public class UnitSelectActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public void onCallback(BaseApi baseApi, int id) {
-        ProgressHudModel.newInstance().diss();
-        if (id==UPDATA_USERINFO)
-            finish();
-        else {
-            showToast(getString(R.string.saved));
-            app.getUserInfo().setUnit(unit);
-            app.getUserInfo().setTempUnit(temp);
-            MathUitl.saveInfoData(UnitSelectActivity.this,app.getUserInfo()).commit();
-            if (MainService.getInstance().getState()!=3){
-                showToast(getString(R.string.syceError));
-            }else {
-                if(app.isMtk())
-                    EXCDController.getInstance().writeForSetUnit(app.getUserInfo());
-                else
-                    BleClient.getInstance().writeForSetUnit();
-            }
+
+    private GenericsCallback<BaseApi> callback = new GenericsCallback<BaseApi>(new JsonGenericsSerializator()) {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+
         }
-    }
+
+        @Override
+        public void onResponse(BaseApi response, int id) {
+            ProgressHudModel.newInstance().diss();
+            if (response.getCode()==200){
+                if (id==UPDATA_USERINFO)
+                    finish();
+                else {
+                    showToast(getString(R.string.saved));
+                    app.getUserInfo().setUnit(unit);
+                    app.getUserInfo().setTempUnit(temp);
+                    MathUitl.saveIntData(UnitSelectActivity.this,"unit1",unit).commit();
+                    MathUitl.saveIntData(UnitSelectActivity.this,"temp",temp).commit();
+                    if (MainService.getInstance().getState()!=3){
+                        showToast(getString(R.string.syceError));
+                    }else {
+                        if(app.isMtk())
+                            EXCDController.getInstance().writeForSetUnit(app.getUserInfo());
+                        else
+                            BleClient.getInstance().writeForSetUnit();
+                    }
+                }
+            }else {
+                showToast(response.getMessage());
+            }
+
+        }
+    };
+
 }

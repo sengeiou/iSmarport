@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.userInfo.UserInfoActivity"
+    android:background="@color/bgColor">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <RelativeLayout
+            android:id="@+id/sexRl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="@dimen/item_margin_parallel"
+            android:layout_marginStart="@dimen/item_margin_parallel"
+            android:background="@drawable/bg_mine_item"
+            android:layout_marginTop="@dimen/item_margin_model_top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/sex"
+                android:textColor="@color/rayblue"
+                android:textSize="@dimen/item_text_size"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/item_pad_text"/>
+
+            <TextView
+                android:id="@+id/sexTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/item_text_size"
+                android:layout_toStartOf="@+id/arrow1"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:textColor="@color/black1"/>
+
+
+            <ImageView
+                android:id="@+id/arrow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/my_icon_arrow"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/heightRl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="@dimen/item_margin_parallel"
+            android:layout_marginStart="@dimen/item_margin_parallel"
+            android:background="@drawable/bg_mine_item"
+            android:layout_marginTop="@dimen/item_margin_model_top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/height"
+                android:textColor="@color/rayblue"
+                android:textSize="@dimen/item_text_size"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/item_pad_text"/>
+
+            <TextView
+                android:id="@+id/heightTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/item_text_size"
+                android:layout_toStartOf="@+id/arrow2"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:textColor="@color/black1"/>
+
+
+            <ImageView
+                android:id="@+id/arrow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/my_icon_arrow"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/weightRl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="@dimen/item_margin_parallel"
+            android:layout_marginStart="@dimen/item_margin_parallel"
+            android:background="@drawable/bg_mine_item"
+            android:layout_marginTop="@dimen/item_margin_model_top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/weight"
+                android:textColor="@color/rayblue"
+                android:textSize="@dimen/item_text_size"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/item_pad_text"/>
+
+            <TextView
+                android:id="@+id/weightTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/item_text_size"
+                android:layout_toStartOf="@+id/arrow3"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:textColor="@color/black1"/>
+
+
+            <ImageView
+                android:id="@+id/arrow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/my_icon_arrow"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/birthdayRl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="@dimen/item_margin_parallel"
+            android:layout_marginStart="@dimen/item_margin_parallel"
+            android:background="@drawable/bg_mine_item"
+            android:layout_marginTop="@dimen/item_margin_model_top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/birthday"
+                android:textColor="@color/rayblue"
+                android:textSize="@dimen/item_text_size"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/item_pad_text"/>
+
+            <TextView
+                android:id="@+id/birthdayTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/item_text_size"
+                android:layout_toStartOf="@+id/arrow4"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:textColor="@color/black1"/>
+
+
+            <ImageView
+                android:id="@+id/arrow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/item_margin_model_right"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/my_icon_arrow"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_corner"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

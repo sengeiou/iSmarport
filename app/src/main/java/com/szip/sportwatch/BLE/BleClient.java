@@ -170,7 +170,6 @@ public class BleClient {
 
     public void disConnect(){
         if (mMac!=null){
-            LogUtil.getInstance().logd("SZIP******","断开蓝牙设备mac = "+mMac);
             connectState = 5;
             ClientManager.getClient().disconnect(mMac);
             EventBus.getDefault().post(new ConnectState(connectState));
@@ -224,7 +223,6 @@ public class BleClient {
                         writeForSetUnit();
                         initPhoneStateListener(true);
                         MusicUtil.getSingle().registerNotify();
-//                        writeForSendOtaFile(0,new byte[]{(byte)1,(byte)11},0,0,null);
                         MainService.getInstance().startThread();
                     }
                 };
@@ -234,7 +232,6 @@ public class BleClient {
                 MainService.getInstance().startForeground(0103,NotificationView.getInstance().getNotify(false));
                 MusicUtil.getSingle().unRegisterNotify();
                 initPhoneStateListener(false);
-                LogUtil.getInstance().logd("SZIP******","断开");
                 connectState = 5;
                 isSync = false;
                 recvLength = 0;
@@ -492,13 +489,13 @@ public class BleClient {
         }
 
         @Override
-        public void updateOtaProgress(int state, int address) {
+        public void updateOtaProgress(int type,int state, int address) {
             if (iOtaResponse!=null){
-                if (state==0){
+                if (type==0){
                     iOtaResponse.onSendFail();
-                }else if (state == 1){
+                }else if (type == 1){
                     iOtaResponse.onSendProgress();
-                }else if (state == 2){
+                }else if (type == 2){
                     iOtaResponse.onSendSccuess();
                 }else {
                     iOtaResponse.onStartToSendFile(state,address);
@@ -529,32 +526,6 @@ public class BleClient {
 
 
     };
-
-//    private void toEndCall(Context paramContext) {
-//        try {
-//            if (Build.VERSION.SDK_INT >= 21) {
-//                TelecomManager telecom = (TelecomManager) paramContext.getSystemService(Context.TELECOM_SERVICE);
-//                if (ActivityCompat.checkSelfPermission(paramContext, Manifest.permission.ANSWER_PHONE_CALLS) != PackageManager.PERMISSION_GRANTED) {
-//                    return;
-//                }
-//                ((TelecomManager) telecom).endCall();
-//            }
-//            TelephonyManager systemService = (TelephonyManager) paramContext.getSystemService(Context.TELEPHONY_SERVICE);
-//            if (systemService == null)
-//                return;
-//            Method method = systemService.getClass().getDeclaredMethod("getITelephony", new Class[0]);
-//            method.setAccessible(true);
-//            Object invoke = method.invoke(paramContext, new Object[0]);
-//            if (invoke == null)
-//                return;
-//            Method localObject = paramContext.getClass().getMethod("endCall", new Class[0]);
-//            ((Method) localObject).setAccessible(true);
-//            ((Method) localObject).invoke(paramContext, new Object[0]);
-//            return;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private void starVibrate(long[] pattern) {
         Vibrator vib = (Vibrator) MyApplication.getInstance().getSystemService(Service.VIBRATOR_SERVICE);
@@ -800,7 +771,7 @@ public class BleClient {
                             0, true);
                     break;
                 case 0x19:
-                    //跑步机
+                    //总计步
                     LogUtil.getInstance().logd("DATA******", "sync step on day");
                     datas = CommandUtil.getCommandbyteArray(0x19, 8,
                             0, true);
@@ -928,14 +899,27 @@ public class BleClient {
 
     public void writeForSendOtaFile(int type,byte[] version,int addresss,int num,byte[] datas){
         if (type == 0){
-            ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
-                    CommandUtil.getCommandbyteOtaFile(14,6,type,version,addresss,num,datas),bleWriteResponse);
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteOtaFileTest(14,6,type,version,addresss,num,datas),bleWriteResponse);
         }else if (type == 1){
-            ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
-                    CommandUtil.getCommandbyteOtaFile(datas.length+15,datas.length+7,type,version,addresss,num,datas),bleWriteResponse);
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteOtaFileTest(datas.length+15,datas.length+7,type,version,addresss,num,datas),bleWriteResponse);
         }else {
-            ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
-                    CommandUtil.getCommandbyteOtaFile(10,2,type,version,addresss,num,datas),bleWriteResponse);
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteOtaFileTest(10,2,type,version,addresss,num,datas),bleWriteResponse);
+        }
+    }
+
+    public void writeForSendDialFile(int type,byte clockId,int addresss,int num,byte[] datas){
+        if (type == 3){
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteDialFile(2,type,clockId,addresss,num,datas),bleWriteResponse);
+        }else if (type == 4){
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteDialFile(datas.length+7,type,clockId,addresss,num,datas),bleWriteResponse);
+        }else {
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteDialFile(2,type,clockId,addresss,num,datas),bleWriteResponse);
         }
     }
 

@@ -805,7 +805,21 @@ public class MathUitl {
         editor.putInt("id",info.getId());
         editor.putString("deviceCode",info.getDeviceCode());
         editor.putString("avatar",info.getAvatar());
-        editor.putString("bindId",info.getBindId());
+//        editor.putString("bindId",info.getBindId());
+        return editor;
+    }
+
+    public static SharedPreferences.Editor saveStringData(Context context,String dataKey,String data){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(FILE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(dataKey,data);
+        return editor;
+    }
+
+    public static SharedPreferences.Editor saveIntData(Context context,String dataKey,int data){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(FILE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(dataKey,data);
         return editor;
     }
 
@@ -827,7 +841,7 @@ public class MathUitl {
         info.setAvatar(sharedPreferences.getString("avatar",null));
         info.setPhoneNumber(sharedPreferences.getString("phoneNumber",null));
         info.setEmail(sharedPreferences.getString("email",null));
-        info.setBindId(sharedPreferences.getString("bindId",null));
+//        info.setBindId(sharedPreferences.getString("bindId",null));
         return info;
     }
 
@@ -856,20 +870,20 @@ public class MathUitl {
         }
     }
 
-    public static void toJpgFile(){
-        String filePath = MyApplication.getInstance().getPrivatePath()+"crop.jpg";
+    public static boolean toJpgFile(){
+        String filePath = MyApplication.getInstance().getPrivatePath()+"crop";
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        if (!MyApplication.getInstance().checkFaceType(bitmap.getWidth(),bitmap.getHeight()))
+            return false;
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             int options = 100;
             bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);
             while (baos.toByteArray().length>40960) { // 循环判断如果压缩后图片是否大于40kb,大于继续压缩
-                Log.i("SZIP******","lenght = "+baos.toByteArray().length);
                 baos.reset(); // 重置baos即清空baos
                 bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
                 options -= 5;// 每次都减少5
             }
-            Log.i("SZIP******","last lenght = "+baos.toByteArray().length);
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
             if (bitmap.compress(Bitmap.CompressFormat.JPEG, options, bos)) {
                 bos.flush();
@@ -880,6 +894,7 @@ public class MathUitl {
         } finally {
             bitmap.recycle();
         }
+        return true;
     }
 
 

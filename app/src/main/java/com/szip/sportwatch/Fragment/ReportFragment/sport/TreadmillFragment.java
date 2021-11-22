@@ -1,6 +1,8 @@
 package com.szip.sportwatch.Fragment.ReportFragment.sport;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.szip.sportwatch.Fragment.BaseFragment;
@@ -54,5 +56,8 @@ public class TreadmillFragment extends BaseFragment {
         tableView1.addData(sportData.getHeartArray().equals("")?null:sportData.getHeartArray().split(","));
         tableView2.addData(sportData.getStrideArray().equals("")?null:sportData.getStrideArray().split(","));
 
+        if(sportData.stride==0){
+            getView().findViewById(R.id.strideLl).setVisibility(View.GONE);
+        }
     }
 }

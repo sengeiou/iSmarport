@@ -32,6 +32,7 @@ import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
+import static android.content.Context.BATTERY_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 import static com.szip.sportwatch.MyApplication.FILE;
 
@@ -44,9 +45,6 @@ public class HttpMessgeUtil {
     private String time;
 
     private Context mContext;
-
-    private HttpCallbackWithBase httpCallbackWithBase;
-    private HttpCallbackWithLogin httpCallbackWithLogin;
 
     private int GET_VERIFICATION = 100;
     public static int UPDOWN_LOG = 101;
@@ -81,12 +79,8 @@ public class HttpMessgeUtil {
         this.token = token;
     }
 
-    public void setHttpCallbackWithBase(HttpCallbackWithBase httpCallbackWithBase) {
-        this.httpCallbackWithBase = httpCallbackWithBase;
-    }
-
-    public void setHttpCallbackWithLogin(HttpCallbackWithLogin httpCallbackWithLogin) {
-        this.httpCallbackWithLogin = httpCallbackWithLogin;
+    public String getToken() {
+        return token;
     }
 
     /**
@@ -99,7 +93,7 @@ public class HttpMessgeUtil {
      * @param password               密码
      * */
     private void _postRegister(String type,String areaCode,String phoneNumber,String email,String verifyCode,String password,
-                               String phoneId,String phoneSystem) throws IOException {
+                               String phoneId,String phoneSystem,GenericsCallback<BaseApi> callback) throws IOException {
         String url = this.url+"user/signUp";
         OkHttpUtils
                 .jpost()
@@ -115,7 +109,7 @@ public class HttpMessgeUtil {
                 .addParams("phoneId",phoneId)
                 .addParams("phoneSystem",phoneSystem)
                 .build()
-                .execute(baseApiGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
@@ -125,7 +119,7 @@ public class HttpMessgeUtil {
      * @param phoneNumber           手机号码
      * @param email                 邮箱
      * */
-    private void _getVerificationCode(String type,String areaCode,String phoneNumber,String email)throws IOException{
+    private void _getVerificationCode(String type,String areaCode,String phoneNumber,String email,GenericsCallback<BaseApi> callback)throws IOException{
         final String url = this.url+"user/sendVerifyCode";
         OkHttpUtils
                 .jpost()
@@ -138,7 +132,7 @@ public class HttpMessgeUtil {
                 .addParams("phoneNumber",phoneNumber)
                 .addParams("email",email)
                 .build()
-                .execute(baseApiGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
@@ -149,7 +143,7 @@ public class HttpMessgeUtil {
      * @param email                 邮箱
      * @param verifyCode            验证码
      * */
-    private void _postCheckVerifyCode(String type,String areaCode,String phoneNumber,String email,String verifyCode)throws IOException{
+    private void _postCheckVerifyCode(String type,String areaCode,String phoneNumber,String email,String verifyCode,GenericsCallback<CheckVerificationBean> callback)throws IOException{
         final String url = this.url+"user/checkVerifyCode";
         OkHttpUtils
                 .jpost()
@@ -161,7 +155,7 @@ public class HttpMessgeUtil {
                 .addParams("email",email)
                 .addParams("verifyCode",verifyCode)
                 .build()
-                .execute(verificationBeanGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
@@ -172,7 +166,7 @@ public class HttpMessgeUtil {
      * @param email                  邮箱
      * @param password               密码
      * */
-    private void _postLogin(String type,String areaCode, String phoneNumber, String email, String password,String phoneId,String phoneSystem)throws IOException{
+    private void _postLogin(String type,String areaCode, String phoneNumber, String email, String password,String phoneId,String phoneSystem,GenericsCallback<LoginBean> callback)throws IOException{
         String url = this.url+"v2/user/login";
         OkHttpUtils
                 .jpost()
@@ -187,7 +181,7 @@ public class HttpMessgeUtil {
                 .addParams("phoneId",phoneId)
                 .addParams("phoneSystem",phoneSystem)
                 .build()
-                .execute(loginBeanGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
@@ -200,7 +194,7 @@ public class HttpMessgeUtil {
      * @param password           密码
      * */
     private void _postForgotPassword(String type,String areaCode,String phoneNumber,String email,String verifyCode,
-                                     String password)throws IOException{
+                                     String password,GenericsCallback<BaseApi> callback)throws IOException{
         String url = this.url+"user/retrievePassword";
         OkHttpUtils
                 .jpost()
@@ -214,13 +208,13 @@ public class HttpMessgeUtil {
                 .addParams("verifyCode",verifyCode)
                 .addParams("password",password)
                 .build()
-                .execute(baseApiGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
      * 发送意见反馈接口
      * */
-    private void _postSendFeedback(String content)throws IOException{
+    private void _postSendFeedback(String content,GenericsCallback<BaseApi> callback)throws IOException{
         String url = this.url+"user/uploadFeedback";
         OkHttpUtils
                 .jpost()
@@ -230,7 +224,7 @@ public class HttpMessgeUtil {
                 .addHeader("Accept-Language",language)
                 .addParams("content",content)
                 .build()
-                .execute(baseApiGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
@@ -301,7 +295,7 @@ public class HttpMessgeUtil {
                 .execute(callback,new TokenInterceptor());
     }
 
-    private void _postForSetSleepPlan(String sleepPlan,int id)throws IOException{
+    private void _postForSetSleepPlan(String sleepPlan,int id,GenericsCallback<BaseApi> callback)throws IOException{
         String url = this.url+"user/updateSleepPlan";
         OkHttpUtils
                 .jpost()
@@ -312,7 +306,7 @@ public class HttpMessgeUtil {
                 .addHeader("Accept-Language",language)
                 .addParams("sleepPlan",sleepPlan)
                 .build()
-                .execute(baseApiGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     private void _postForSetUnit(String unit,String temp,GenericsCallback<BaseApi>callback)throws IOException{
@@ -414,7 +408,7 @@ public class HttpMessgeUtil {
     /**
      * 上传log数据
      * */
-    private void _postAppCrashLog(String appName,String appVersion,String systemInfo,String stackTrace)throws IOException{
+    private void _postAppCrashLog(String appName,String appVersion,String systemInfo,String stackTrace,GenericsCallback<BaseApi> callback)throws IOException{
         String url = this.url+"appCrashLog/upload";
         OkHttpUtils
                 .jpost()
@@ -425,13 +419,13 @@ public class HttpMessgeUtil {
                 .addParams("systemInfo",systemInfo)
                 .addParams("stackTrace",stackTrace)
                 .build()
-                .execute(baseApiGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
      * 上传数据到服务器
      * */
-    private void _postForUpdownReportData(String data)throws IOException{
+    private void _postForUpdownReportData(String data,GenericsCallback<BaseApi> callback)throws IOException{
         String url = this.url+"data/upload";
         OkHttpUtils
                 .listpost()
@@ -442,7 +436,7 @@ public class HttpMessgeUtil {
                 .addHeader("Accept-Language",language)
                 .addParams("data",data)
                 .build()
-                .execute(baseApiGenericsCallback,new TokenInterceptor());
+                .execute(callback,new TokenInterceptor());
     }
 
     /**
@@ -525,8 +519,8 @@ public class HttpMessgeUtil {
         _getDeviceConfig(callback);
     }
 
-    public void postAppCrashLog(String appName,String appVersion,String systemInfo,String stackTrace)throws IOException{
-        _postAppCrashLog(appName,appVersion,systemInfo,stackTrace);
+    public void postAppCrashLog(String appName,String appVersion,String systemInfo,String stackTrace,GenericsCallback<BaseApi> callback)throws IOException{
+        _postAppCrashLog(appName,appVersion,systemInfo,stackTrace,callback);
     }
 
 
@@ -534,26 +528,27 @@ public class HttpMessgeUtil {
      * 提供给用户的方法
      * */
     public void postRegister(String type,String areaCode,String phoneNumber,String email,String verifyCode,String password,
-                             String phoneId,String phoneSystem) throws IOException{
-        _postRegister(type,areaCode,phoneNumber,email,verifyCode,password, phoneId, phoneSystem);
+                             String phoneId,String phoneSystem,GenericsCallback<BaseApi> callback) throws IOException{
+        _postRegister(type,areaCode,phoneNumber,email,verifyCode,password, phoneId, phoneSystem,callback);
     }
 
-    public void getVerificationCode(String type,String areaCode,String phoneNumber,String email)throws IOException{
+    public void getVerificationCode(String type,String areaCode,String phoneNumber,String email,GenericsCallback<BaseApi> callback)throws IOException{
 
-        _getVerificationCode(type,areaCode,phoneNumber,email);
+        _getVerificationCode(type,areaCode,phoneNumber,email,callback);
     }
 
-    public void postCheckVerifyCode(String type,String areaCode,String phoneNumber,String email,String verifyCode)throws IOException{
-        _postCheckVerifyCode(type,areaCode,phoneNumber,email,verifyCode);
+    public void postCheckVerifyCode(String type,String areaCode,String phoneNumber,String email,String verifyCode,GenericsCallback<CheckVerificationBean> callback)throws IOException{
+        _postCheckVerifyCode(type,areaCode,phoneNumber,email,verifyCode,callback);
     }
 
-    public void postLogin(String type, String areaCode,String phoneNumber, String email, String password,String phoneId,String phoneSystem)throws IOException{
-        _postLogin(type,areaCode,phoneNumber,email,password,phoneId,phoneSystem);
+    public void postLogin(String type, String areaCode,String phoneNumber, String email, String password,String phoneId,String phoneSystem
+            ,GenericsCallback<LoginBean> callback)throws IOException{
+        _postLogin(type,areaCode,phoneNumber,email,password,phoneId,phoneSystem,callback);
     }
 
     public void postForgotPassword(String type,String areaCode,String phoneNumber,String email,String verifyCode,
-                                   String password)throws IOException{
-        _postForgotPassword(type,areaCode,phoneNumber,email,verifyCode,password);
+                                   String password,GenericsCallback<BaseApi> callback)throws IOException{
+        _postForgotPassword(type,areaCode,phoneNumber,email,verifyCode,password,callback);
     }
 
     public void postForSetUserInfo(String name,String sex,String birthday,String height,String weight,
@@ -570,16 +565,20 @@ public class HttpMessgeUtil {
         _getForGetInfo(callback);
     }
 
+    public void postForSetStepsPlan(String stepsPlan,int id,GenericsCallback<BaseApi> callback)throws IOException{
+        _postForSetStepsPlan(stepsPlan,id,callback);
+    }
+
     public void postForSetStepsPlan(String stepsPlan,int id)throws IOException{
         _postForSetStepsPlan(stepsPlan,id,baseApiGenericsCallback);
     }
 
-    public void postForSetSleepPlan(String sleepPlan,int id)throws IOException{
-        _postForSetSleepPlan(sleepPlan,id);
+    public void postForSetSleepPlan(String sleepPlan,int id,GenericsCallback<BaseApi> callback)throws IOException{
+        _postForSetSleepPlan(sleepPlan,id,callback);
     }
 
-    public void postForSetUnit(String unit,String temp)throws IOException{
-        _postForSetUnit(unit,temp,baseApiGenericsCallback);
+    public void postForSetUnit(String unit,String temp,GenericsCallback<BaseApi> callback)throws IOException{
+        _postForSetUnit(unit,temp,callback);
     }
 
     public void getBindDevice(String deviceCode,String product,GenericsCallback<BindBean> callback)throws IOException{
@@ -591,7 +590,7 @@ public class HttpMessgeUtil {
     }
 
     public void postForUpdownReportData(String data)throws IOException{
-        _postForUpdownReportData(data);
+        _postForUpdownReportData(data,baseApiGenericsCallback);
     }
 
     public void getForDownloadReportData(String time, String size)throws IOException{
@@ -602,8 +601,8 @@ public class HttpMessgeUtil {
         _postUpdownAvatar(avatar,callback);
     }
 
-    public void postSendFeedback(String content)throws IOException{
-        _postSendFeedback(content);
+    public void postSendFeedback(String content,GenericsCallback<BaseApi> callback)throws IOException{
+        _postSendFeedback(content,callback);
     }
 
     public void getWeather(String lat,String lon,GenericsCallback<WeatherBean> callback)throws IOException{
@@ -628,50 +627,8 @@ public class HttpMessgeUtil {
         @Override
         public void onResponse(BaseApi response, int id) {
             if (response.getCode() == 200){
-                if (id == UPDOWN_DATA){
+                if (id == UPDOWN_DATA)
                     MathUitl.saveLastTime(mContext.getSharedPreferences(FILE,MODE_PRIVATE));
-                }else if (id != GET_VERIFICATION){//如果不是获取验证码的回调，则返回回调数据
-                    if (httpCallbackWithBase != null)
-                        httpCallbackWithBase.onCallback(response,id);
-                }
-            }else {
-                ProgressHudModel.newInstance().diss();
-                MathUitl.showToast(mContext,response.getMessage());
-            }
-        }
-    };
-
-    private GenericsCallback<CheckVerificationBean> verificationBeanGenericsCallback = new GenericsCallback<CheckVerificationBean>(new JsonGenericsSerializator()) {
-        @Override
-        public void onError(Call call, Exception e, int id) {
-
-        }
-
-        @Override
-        public void onResponse(CheckVerificationBean response, int id) {
-            if (response.getCode() == 200){
-                if (response.getData().isValid()){
-                    if (httpCallbackWithBase!=null)
-                        httpCallbackWithBase.onCallback(new BaseApi(),0);
-                }
-            }else {
-                ProgressHudModel.newInstance().diss();
-                MathUitl.showToast(mContext,response.getMessage());
-            }
-        }
-    };
-
-    private GenericsCallback<LoginBean> loginBeanGenericsCallback = new GenericsCallback<LoginBean>(new JsonGenericsSerializator()) {
-        @Override
-        public void onError(Call call, Exception e, int id) {
-
-        }
-
-        @Override
-        public void onResponse(LoginBean response, int id) {
-            if (response.getCode() == 200){
-                if (httpCallbackWithLogin!=null)
-                    httpCallbackWithLogin.onLogin(response);
             }else {
                 ProgressHudModel.newInstance().diss();
                 MathUitl.showToast(mContext,response.getMessage());
