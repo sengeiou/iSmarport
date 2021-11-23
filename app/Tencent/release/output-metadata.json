@@ -10,8 +10,8 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 49,
-      "versionName": "1.49",
+      "versionCode": 50,
+      "versionName": "1.50",
       "outputFile": "app-Tencent-release.apk"
     }
   ]

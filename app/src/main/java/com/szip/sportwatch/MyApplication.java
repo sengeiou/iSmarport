@@ -136,8 +136,8 @@ public class MyApplication extends Application{
         /**
          * 把log上传到云端
          * */
-        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(this));
-//        CrashReport.initCrashReport(getApplicationContext(), "937b55f499", false);
+//        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(this));
+        CrashReport.initCrashReport(getApplicationContext(), "937b55f499", true);
 
         /**
          * 把测试版的log导出到本地，上线的渠道版不需要导出

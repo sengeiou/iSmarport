@@ -111,7 +111,8 @@ public class SelectDialPresenterWithFileImpl implements ISelectDialPresenter{
     @Override
     public void sendDial(String resultUri, int address) {
         if (resultUri != null) {
-            InputStream in = null;
+            resultUri = MyApplication.getInstance().getPrivatePath()+resultUri;
+            InputStream in;
             try {
                 in = new FileInputStream(resultUri);
                 byte[] datas =  FileUtil.getInstance().toByteArray(in);

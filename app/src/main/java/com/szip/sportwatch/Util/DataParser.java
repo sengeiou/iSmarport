@@ -69,7 +69,7 @@ public class DataParser {
         }else if (data[1] == 0x16){
             mIDataResponse.findPhone(data[8]);
         }else if (data[1] == 0x46){
-            if (data[9]==2){
+            if (data[9]==2||data[9]==5){
                 EventBus.getDefault().post(new UpdateDialView(2));
             }else {
                 if (data[8]==0){

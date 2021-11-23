@@ -743,6 +743,42 @@ public class MainService extends Service {
         }
     }
 
+    /**
+     * 下载文件
+     * */
+    public boolean downloadFirmsoft(String dialUrl) {
+            Log.i("SZIP******","dialUrl = "+dialUrl);
+
+        String[] fileNames = dialUrl.split("/");
+        String fileName = fileNames[fileNames.length-1];
+        Log.i("SZIP******","fileName = "+fileName);
+        File file = new File(app.getPrivatePath() + fileName);
+        if (file.exists()){
+            return true;
+        }
+        //创建下载任务
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(dialUrl));
+        request.setAllowedOverRoaming(true);//漫游网络是否可以下载
+
+        //在通知栏中显示，默认就是显示的
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
+
+        //sdcard的目录下的download文件夹，必须设置
+        request.setDestinationInExternalFilesDir(MainService.this, "/",fileName);
+
+        //将下载请求加入下载队列
+        downloadManager = (DownloadManager) MainService.this.getSystemService(Context.DOWNLOAD_SERVICE);
+        //加入下载队列后会给该任务返回一个long型的id，
+        //通过该id可以取消任务，重启任务等等
+        mTaskId = downloadManager.enqueue(request);
+
+        //注册广播接收者，监听下载状态
+        MainService.this.registerReceiver(receiver,
+                new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        app.setDialUrl(dialUrl);
+        return false;
+    }
+
     //广播接受者，接收下载状态
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override

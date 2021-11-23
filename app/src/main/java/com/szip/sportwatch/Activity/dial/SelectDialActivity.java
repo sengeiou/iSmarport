@@ -91,12 +91,14 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             public void onClick(View v) {
                 //TODO 保存成功
                 if (!ProgressHudModel.newInstance().isShow()&&pictureUrl!=null){
-                    ProgressHudModel.newInstance().show(SelectDialActivity.this,getString(R.string.loading),
-                            getString(R.string.connect_error),30000);
-                    MainService.getInstance().downloadFirmsoft(pictureUrl,"dial");
+                    boolean hasFile = MainService.getInstance().downloadFirmsoft(pictureUrl);
+                    if(hasFile){
+                        iSelectDialPresenter.startToSendDial();
+                    }else {
+                        ProgressHudModel.newInstance().show(SelectDialActivity.this,getString(R.string.loading),
+                                getString(R.string.connect_error),30000);
+                    }
                 }
-
-//                BleClient.getInstance().writeForSendDialFile(3,(byte) 3,0,0,null);
             }
         });
     }
@@ -134,7 +136,8 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             isSendPic = true;
             progress = 0;
             ProgressHudModel.newInstance().diss();
-            iSelectDialPresenter.sendDial(MyApplication.getInstance().getPrivatePath()+"dial",updateView.getData());
+            String fileNames[] = pictureUrl.split("/");
+            iSelectDialPresenter.sendDial(fileNames[fileNames.length-1],updateView.getData());
         }else if (updateView.getType() == 4){//断点续传
             iSelectDialPresenter.resumeSendDial(updateView.getData());
         }else {

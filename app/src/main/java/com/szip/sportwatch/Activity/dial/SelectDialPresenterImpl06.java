@@ -117,6 +117,7 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
     @Override
     public void sendDial(String resultUri, int address) {
         if (resultUri != null) {
+            resultUri = MyApplication.getInstance().getPrivatePath()+resultUri;
             final int PAGENUM = 200;//分包长度
             InputStream in = null;
             try {
