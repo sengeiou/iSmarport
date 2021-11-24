@@ -32,17 +32,20 @@ public class MyPhoneCallListener extends PhoneStateListener {
             switch (state) {
                 case TelephonyManager.CALL_STATE_IDLE:// 电话挂断
                     Log.d(TAG ,"电话挂断...");
-                    listener.onCallRinging(null,null);
+                    if (listener!=null)
+                        listener.onCallRinging(null,null);
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK: //电话通话的状态
                     Log.d(TAG ,"正在通话...");
-                    listener.onCallRinging(null,null);
+                    if (listener!=null)
+                        listener.onCallRinging(null,null);
                     break;
                 case TelephonyManager.CALL_STATE_RINGING: //电话响铃的状态
                     Log.d(TAG ,"电话响铃");
                     LogUtil.getInstance().logd("data******","num = "+incomingNumber);
                     String name = getContactNameFromPhoneBook(MyApplication.getInstance(),incomingNumber);
-                    listener.onCallRinging(incomingNumber,name);
+                    if (listener!=null)
+                        listener.onCallRinging(incomingNumber,name);
                     break;
             }
         }else {
@@ -72,14 +75,12 @@ public class MyPhoneCallListener extends PhoneStateListener {
                 cursor.close();
                 LogUtil.getInstance().logd("data******","contactName = "+contactName);
                 return contactName;
-            }
-            else{
+            } else{
                 return "";
             }
         }catch (SecurityException e){
 
         }
-
         return "";
     }
 }

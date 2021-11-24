@@ -113,6 +113,9 @@ public class DateUtil {
     public static String getCurrentYear() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy",Locale.ENGLISH);
         Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR,-14);
+        date.setTime(calendar.getTimeInMillis());
         return sdf.format(date);
     }
 
