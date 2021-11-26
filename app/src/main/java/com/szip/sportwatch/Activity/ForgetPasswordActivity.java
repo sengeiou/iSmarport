@@ -14,7 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.szip.sportwatch.Interface.HttpCallbackWithBase;
+
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.HttpMessgeUtil;

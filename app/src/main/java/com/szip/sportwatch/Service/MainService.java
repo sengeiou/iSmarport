@@ -21,7 +21,6 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.mediatek.ctrl.map.MapController;
-import com.mediatek.ctrl.music.RemoteMusicController;
 import com.mediatek.ctrl.notification.NotificationController;
 import com.mediatek.wearable.WearableListener;
 import com.mediatek.wearable.WearableManager;
@@ -36,7 +35,7 @@ import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Interface.IOtaResponse;
-import com.szip.sportwatch.Interface.ReviceDataCallback;
+import com.szip.sportwatch.Interface.ReceiveDataCallback;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
 import com.szip.sportwatch.Model.SendDialModel;
 import com.szip.sportwatch.Model.UpdateSportView;
@@ -199,7 +198,7 @@ public class MainService extends Service {
     /**
      * 处理手表返回来的数据
      * */
-    private ReviceDataCallback reviceDataCallback = new ReviceDataCallback() {
+    private ReceiveDataCallback receiveDataCallback = new ReceiveDataCallback() {
         @Override
         public void checkVersion(boolean stepNum, boolean deltaStepNum, boolean sleepNum, boolean deltaSleepNum,
                                  boolean heart, boolean bloodPressure, boolean bloodOxygen,boolean ecg,boolean animalHeat,String deviceNum) {
@@ -576,7 +575,7 @@ public class MainService extends Service {
         manager.removeController(MapController.getInstance(sContext));
         manager.removeController(NotificationController.getInstance(sContext));
         manager.removeController(EXCDController.getInstance());
-        EXCDController.getInstance().setReviceDataCallback(null);
+        EXCDController.getInstance().setReceiveDataCallback(null);
         manager.unregisterWearableListener(mWearableListener);
         mIsMainServiceActive = false;
         stopNotificationService();
@@ -650,7 +649,7 @@ public class MainService extends Service {
         manager.addController(NotificationController.getInstance(sContext));
         manager.addController(EXCDController.getInstance());
         manager.addController(MapController.getInstance(sContext));
-        EXCDController.getInstance().setReviceDataCallback(reviceDataCallback);
+        EXCDController.getInstance().setReceiveDataCallback(receiveDataCallback);
         manager.registerWearableListener(mWearableListener);
         // start SMS service
         if (checkSelfPermission(Manifest.permission.READ_SMS)== PackageManager.PERMISSION_GRANTED)

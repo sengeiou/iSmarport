@@ -136,7 +136,6 @@ public class MyApplication extends Application{
         /**
          * 把log上传到云端
          * */
-//        Thread.setDefaultUncaughtExceptionHandler(new TopExceptionHandler(this));
         CrashReport.initCrashReport(getApplicationContext(), "937b55f499", true);
 
         /**

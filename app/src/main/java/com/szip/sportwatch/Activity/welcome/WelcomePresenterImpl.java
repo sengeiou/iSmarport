@@ -84,7 +84,6 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
         }
         if (iWelcomeView!=null)
             iWelcomeView.initBleFinish();
-        LogUtil.getInstance().logd("SZIP******","初始化蓝牙");
     }
 
     @Override
@@ -99,7 +98,9 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
 
                 @Override
                 public void onResponse(DeviceConfigBean response, int id) {
+                    Log.i("DATA******","获取到数据 = "+response.getMessage());
                     if (response.getCode()==200){
+                        Log.i("DATA******","获取到数据");
                         ArrayList<HealthyConfig> data = new ArrayList<>();
                         SaveDataUtil.newInstance().saveConfigListData(response.getData());
                         for (SportWatchAppFunctionConfigDTO configDTO:response.getData()){
@@ -107,6 +108,7 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
                             data.add(configDTO.getHealthMonitorConfig());
                         }
                         SaveDataUtil.newInstance().saveHealthyConfigListData(data);
+                        Log.i("DATA******","保存成功");
                         if (iWelcomeView!=null)
                             iWelcomeView.initDeviceConfigFinish();
                     }

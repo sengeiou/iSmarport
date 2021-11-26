@@ -14,9 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.szip.sportwatch.Activity.initInfo.InitInfoActivity;
-import com.szip.sportwatch.Activity.main.MainActivity;
-import com.szip.sportwatch.Interface.HttpCallbackWithBase;
-import com.szip.sportwatch.Interface.HttpCallbackWithLogin;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.Model.HttpBean.LoginBean;
 import com.szip.sportwatch.MyApplication;

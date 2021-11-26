@@ -89,15 +89,12 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
         findViewById(R.id.rightIv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 保存成功
                 if (!ProgressHudModel.newInstance().isShow()&&pictureUrl!=null){
+                    ProgressHudModel.newInstance().show(SelectDialActivity.this,getString(R.string.loading),
+                            getString(R.string.connect_error),30000);
                     boolean hasFile = MainService.getInstance().downloadFirmsoft(pictureUrl);
-                    if(hasFile){
+                    if(hasFile)
                         iSelectDialPresenter.startToSendDial();
-                    }else {
-                        ProgressHudModel.newInstance().show(SelectDialActivity.this,getString(R.string.loading),
-                                getString(R.string.connect_error),30000);
-                    }
                 }
             }
         });

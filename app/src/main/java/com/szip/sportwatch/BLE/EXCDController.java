@@ -9,12 +9,11 @@ import android.text.format.DateFormat;
 import com.mediatek.wearable.Controller;
 import com.szip.sportwatch.Activity.camera.CameraActivity;
 import com.szip.sportwatch.Interface.OnCameraListener;
-import com.szip.sportwatch.Interface.ReviceDataCallback;
+import com.szip.sportwatch.Interface.ReceiveDataCallback;
 import com.szip.sportwatch.Model.EvenBusModel.PlanModel;
 import com.szip.sportwatch.Model.EvenBusModel.UnitModel;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateReport;
-import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
@@ -43,7 +42,7 @@ public class EXCDController extends Controller {
 
     private Context mContext = MyApplication.getInstance().getApplicationContext();
 
-    private ReviceDataCallback reviceDataCallback;
+    private ReceiveDataCallback receiveDataCallback;
 
     public static final String EXTRA_DATA = "EXTRA_DATA";
 
@@ -69,8 +68,8 @@ public class EXCDController extends Controller {
         return mInstance;
     }
 
-    public void setReviceDataCallback(ReviceDataCallback reviceDataCallback) {
-        this.reviceDataCallback = reviceDataCallback;
+    public void setReceiveDataCallback(ReceiveDataCallback receiveDataCallback) {
+        this.receiveDataCallback = receiveDataCallback;
     }
 
     public void setOnCameraListener(OnCameraListener onCameraListener) {
@@ -122,16 +121,16 @@ public class EXCDController extends Controller {
                 if(commands.length>23)
                     animalHeat = commands[23];
                 LogUtil.getInstance().logd("SZIP******","animal = "+animalHeat);
-                if (reviceDataCallback!=null)
-                    reviceDataCallback.checkVersion(!step[0].equals("0"),!step[1].equals("0"),
+                if (receiveDataCallback !=null)
+                    receiveDataCallback.checkVersion(!step[0].equals("0"),!step[1].equals("0"),
                             !sleep[0].equals("0"),!sleep[1].equals("0"),!heart.equals("0"),
                             !bloodPressure.equals("0"),!bloodOxygen.equals("0"),!ecg.equals("0"),(animalHeat==null)?false:!animalHeat.equals("0"),commands[17]);
             }else if (commands[1].equals("10")){//同步计步数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getStepsForDay(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getStepsForDay(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("11")){//同步计步详情数据
@@ -151,8 +150,8 @@ public class EXCDController extends Controller {
                                     strs[3].length()+4));
                         }
                         LogUtil.getInstance().logd("SZIP******","STEP str = "+str);
-                        if (reviceDataCallback!=null)
-                            reviceDataCallback.getSteps(str.toString().split(","));
+                        if (receiveDataCallback !=null)
+                            receiveDataCallback.getSteps(str.toString().split(","));
                         steps = null;
                     }
                     writeForRET("GET,"+commands[1]+","+commands[2]+","+commands[3]);
@@ -161,8 +160,8 @@ public class EXCDController extends Controller {
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getSleepForDay(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getSleepForDay(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("13")){//接收睡眠详情数据
@@ -181,8 +180,8 @@ public class EXCDController extends Controller {
                             str.append(sleeps.get(i).substring(strs[0].length()+strs[1].length()+strs[2].length()+
                                     strs[3].length()+4));
                         }
-                        if (reviceDataCallback!=null)
-                            reviceDataCallback.getSleep(str.toString().split(","));
+                        if (receiveDataCallback !=null)
+                            receiveDataCallback.getSleep(str.toString().split(","));
                         sleeps = null;
                     }
                     writeForRET("GET,"+commands[1]+","+commands[2]+","+commands[3]);
@@ -191,8 +190,8 @@ public class EXCDController extends Controller {
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getHeart(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getHeart(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("17")){
@@ -222,8 +221,8 @@ public class EXCDController extends Controller {
                             str.append(sports.get(i).substring(strs[0].length()+strs[1].length()+strs[2].length()+
                                     strs[3].length()+strs[4].length()+5));
                         }
-                        if (reviceDataCallback!=null)
-                            reviceDataCallback.getSport(str.toString().split(","));
+                        if (receiveDataCallback !=null)
+                            receiveDataCallback.getSport(str.toString().split(","));
                         if (sportList.size()!=0){
                             writeForSport(sportList.get(0));
                             sportList.remove(0);
@@ -256,8 +255,8 @@ public class EXCDController extends Controller {
                             str.append(ecgs.get(i).substring(strs[0].length()+strs[1].length()+strs[2].length()+
                                     strs[3].length()+5));
                         }
-                        if (reviceDataCallback!=null)
-                            reviceDataCallback.getEcg(str.toString().split("#"));
+                        if (receiveDataCallback !=null)
+                            receiveDataCallback.getEcg(str.toString().split("#"));
                         ecgs = null;
                     }
                     writeForRET("GET,"+commands[1]+","+commands[2]+","+commands[3]);
@@ -266,24 +265,24 @@ public class EXCDController extends Controller {
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getBloodPressure(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getBloodPressure(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("52")){//接受血氧数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getBloodOxygen(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getBloodOxygen(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("80")){//接受血氧数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getAnimalHeat(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getAnimalHeat(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("81")){//初始化缓存完毕
@@ -323,11 +322,11 @@ public class EXCDController extends Controller {
                 writeForRET("SET,"+commands[1]);
             }else if (commands[1].equals("40")){//找手机
                 if (commands[2].equals("1")){//开始找手机
-                   if (reviceDataCallback!=null)
-                       reviceDataCallback.findPhone(1);
+                   if (receiveDataCallback !=null)
+                       receiveDataCallback.findPhone(1);
                 }else {
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.findPhone(0);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.findPhone(0);
                 }
             }else if (commands[1].equals("43")){//收到音乐播放指令，转换成music可识别的指令
                 if (commands[2].equals("4")){//暂停
@@ -353,24 +352,24 @@ public class EXCDController extends Controller {
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getStepsForDay(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getStepsForDay(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("12")){//接受心率数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getHeart(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getHeart(datas);
                     writeForRET("GET,"+14);
                 }
             }else if (commands[1].equals("14")){//接受心率数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getHeart(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getHeart(datas);
                     writeForRET("GET,"+14);
                 }
             }else if (commands[1].equals("20")){//接受心电数据
@@ -388,8 +387,8 @@ public class EXCDController extends Controller {
                             str.append(ecgs.get(i).substring(strs[0].length()+strs[1].length()+strs[2].length()+
                                     strs[3].length()+5));
                         }
-                        if (reviceDataCallback!=null)
-                            reviceDataCallback.getEcg(str.toString().split("#"));
+                        if (receiveDataCallback !=null)
+                            receiveDataCallback.getEcg(str.toString().split("#"));
                         ecgs = null;
                     }
                     writeForRET("GET,"+commands[1]+","+commands[2]+","+commands[3]);
@@ -398,24 +397,24 @@ public class EXCDController extends Controller {
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getBloodPressure(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getBloodPressure(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("52")){//接受血氧数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getBloodOxygen(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getBloodOxygen(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }else if (commands[1].equals("80")){//接受血氧数据
                 if (commands.length>2){//有数据
                     String datas[] = new String[commands.length-2];
                     System.arraycopy(commands,2,datas,0,datas.length);
-                    if (reviceDataCallback!=null)
-                        reviceDataCallback.getAnimalHeat(datas);
+                    if (receiveDataCallback !=null)
+                        receiveDataCallback.getAnimalHeat(datas);
                     writeForRET("GET,"+commands[1]);
                 }
             }

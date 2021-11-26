@@ -35,8 +35,6 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.szp
-            minifyEnabled true
-            shrinkResources true
         }
         debug {
             signingConfig signingConfigs.szp

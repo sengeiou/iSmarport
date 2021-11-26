@@ -9,47 +9,36 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+
 import android.view.Gravity;
-import android.view.LayoutInflater;
+
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.BLE.BleClient;
-import com.szip.sportwatch.Interface.HttpCallbackWithBase;
-import com.szip.sportwatch.Model.HttpBean.AvatarBean;
-import com.szip.sportwatch.Model.HttpBean.BaseApi;
+
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Service.MainService;
-import com.szip.sportwatch.Util.DateUtil;
+
 import com.szip.sportwatch.Util.FileUtil;
-import com.szip.sportwatch.Util.HttpMessgeUtil;
-import com.szip.sportwatch.Util.JsonGenericsSerializator;
-import com.szip.sportwatch.Util.MathUitl;
+
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
 import com.szip.sportwatch.View.CharacterPickerWindow;
 import com.szip.sportwatch.View.MyAlerDialog;
-import com.szip.sportwatch.View.character.OnOptionChangedListener;
+
 import com.szip.sportwatch.BLE.EXCDController;
 import com.yalantis.ucrop.UCrop;
-import com.zhy.http.okhttp.callback.GenericsCallback;
+
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

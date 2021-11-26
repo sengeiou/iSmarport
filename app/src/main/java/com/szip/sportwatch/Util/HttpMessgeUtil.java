@@ -5,9 +5,6 @@ import android.content.Context;
 
 import com.szip.sportwatch.BuildConfig;
 import com.szip.sportwatch.DB.SaveDataUtil;
-import com.szip.sportwatch.Interface.HttpCallbackWithBase;
-import com.szip.sportwatch.Interface.HttpCallbackWithLogin;
-import com.szip.sportwatch.Interface.HttpCallbackWithUserInfo;
 import com.szip.sportwatch.Model.HttpBean.AvatarBean;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.Model.HttpBean.BindBean;

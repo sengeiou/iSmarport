@@ -38,7 +38,6 @@ import com.szip.sportwatch.Activity.UnitSelectActivity;
 import com.szip.sportwatch.Activity.userInfo.UserInfoActivity;
 import com.szip.sportwatch.DB.SaveDataUtil;
 import com.szip.sportwatch.Fragment.BaseFragment;
-import com.szip.sportwatch.Interface.HttpCallbackWithBase;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
 import com.szip.sportwatch.Model.EvenBusModel.PlanModel;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;

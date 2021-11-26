@@ -3,10 +3,8 @@ package com.szip.sportwatch.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.szip.sportwatch.BLE.BleClient;
-import com.szip.sportwatch.Interface.HttpCallbackWithBase;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
