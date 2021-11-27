@@ -98,15 +98,5 @@ public class MountainFragment extends BaseFragment {
         if(sportData.speed==0){
             getView().findViewById(R.id.speedLl).setVisibility(View.GONE);
         }
-
-
-//        if (MyApplication.getInstance().isMtk()){
-//            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
-//        }else {
-//            getView().findViewById(R.id.speedLl).setVisibility(View.GONE);
-//            getView().findViewById(R.id.strideLl).setVisibility(View.GONE);
-//        }
-
     }
-
 }

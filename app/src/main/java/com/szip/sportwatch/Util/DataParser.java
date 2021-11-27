@@ -705,7 +705,9 @@ public class DataParser {
                     ((data[29+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xFF) << 24);
 
             sportData.height = (data[30+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xff) +
-                    ((data[31+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xFF) << 8);
+                    ((data[31+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xFF) << 8)+
+                    ((data[32+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xFF) << 16) +
+                    ((data[33+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xFF) << 24);
 
             sportDataArrayList.add(sportData);
             LogUtil.getInstance().logd("DATA******","解析到的骑行数据 : "+time+" ;运动时长 = "+sportData.sportTime+
@@ -789,6 +791,15 @@ public class DataParser {
             int longLenght = (data[24] & 0xff) + ((data[25] & 0xFF) << 8);
             int latLenght = (data[24+2+longLenght] & 0xff) + ((data[25+2+longLenght] & 0xFF) << 8);
             int speedPerHourLenght = (data[24+4+longLenght+latLenght] & 0xff) + ((data[25+4+longLenght+latLenght] & 0xFF) << 8);
+            byte[] speedHourDatas = new byte[speedPerHourLenght];
+            if (speedPerHourLenght!=0)
+                System.arraycopy(data,24+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
+            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            for (int key:dataHash.keySet()){
+                sportData.speedPerHour = key;
+                sportData.speedPerHourArray = dataHash.get(key);
+            }
+
             int altitudeLenght = (data[24+6+longLenght+latLenght+speedPerHourLenght] & 0xff) + ((data[25+6+longLenght+latLenght+speedPerHourLenght] & 0xFF) << 8);
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)

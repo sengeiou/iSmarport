@@ -105,12 +105,5 @@ public class OnfootFragment extends BaseFragment {
         if(sportData.speedPerHour==0){
             getView().findViewById(R.id.speedPerHourLl).setVisibility(View.GONE);
         }
-
-//        if (MyApplication.getInstance().isMtk()){
-//            getView().findViewById(R.id.speedPerHourLl).setVisibility(View.GONE);
-//            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
-//        }else {
-//            getView().findViewById(R.id.strideLl).setVisibility(View.GONE);
-//        }
     }
 }

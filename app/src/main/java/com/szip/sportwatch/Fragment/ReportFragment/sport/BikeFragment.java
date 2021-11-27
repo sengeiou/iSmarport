@@ -96,12 +96,5 @@ public class BikeFragment extends BaseFragment {
         if(sportData.speedPerHour==0){
             getView().findViewById(R.id.speedPerHourLl).setVisibility(View.GONE);
         }
-
-//        if (MyApplication.getInstance().isMtk()){
-//            getView().findViewById(R.id.altitudeLl).setVisibility(View.GONE);
-//            getView().findViewById(R.id.speedLl).setVisibility(View.GONE);
-//            getView().findViewById(R.id.speedPerHourLl).setVisibility(View.GONE);
-//        }
-
     }
 }

@@ -410,8 +410,8 @@ public class BleClient {
             if (indexData==null){
                 indexData = dataIndex;
                 if (indexData.size()>0){
-                    isSync = false;
-                    synSmartDeviceData(0);
+                    isSync = true;
+//                    synSmartDeviceData(0);
                 }else {
                     indexData = null;
                 }
@@ -620,16 +620,15 @@ public class BleClient {
      * 依次去同步运动数据
      */
     private void syncSportDataByOrder() {
-            //0表示只同步心率，记步，睡眠
-        if (indexData==null||mSportIndex == indexData.size()-1) {
+        if (indexData==null||mSportIndex == indexData.size()) {
             //说明所有的运动都同步完了
             isSync = false;
             indexData = null;
             mSportIndex = 0;
             EventBus.getDefault().post(new UpdateReport());
         } else {
-            mSportIndex++;
             synSmartDeviceData(mSportIndex);
+            mSportIndex++;
         }
 
 
