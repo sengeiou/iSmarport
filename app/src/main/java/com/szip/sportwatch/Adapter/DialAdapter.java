@@ -35,7 +35,7 @@ public class DialAdapter extends RecyclerView.Adapter<DialAdapter.Holder> {
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (faceType!=null&&faceType.indexOf("320*385")<0)
+        if (faceType!=null&&!faceType.equals("320*385"))
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_dail, null);
         else
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaper_dail_06, null);

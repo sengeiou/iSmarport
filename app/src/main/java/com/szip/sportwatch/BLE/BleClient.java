@@ -1,24 +1,18 @@
 package com.szip.sportwatch.BLE;
 
 
-import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 
 import android.os.Message;
 import android.os.Vibrator;
-import android.telecom.TelecomManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-
-import androidx.core.app.ActivityCompat;
 
 import com.inuker.bluetooth.library.connect.listener.BleConnectStatusListener;
 import com.inuker.bluetooth.library.connect.listener.BluetoothStateListener;
@@ -67,7 +61,6 @@ import com.zhy.http.okhttp.callback.GenericsCallback;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -216,7 +209,7 @@ public class BleClient {
                         MainService.getInstance().startForeground(0103,NotificationView.getInstance().getNotify(true));
                         writeForSyncTime();
                         writeForSyncTimeStyle();
-                        writeForSetLanuage();
+                        writeForSetLanguage();
                         writeForSetWeather(MyApplication.getInstance().getWeatherModel(),MyApplication.getInstance().getCity());
                         writeForSetElevation();
                         writeForUpdateUserInfo();
@@ -827,7 +820,7 @@ public class BleClient {
                 CommandUtil.getCommandbyteArray(0x38, 9, 1, true),bleWriteResponse);
     }
 
-    public void writeForSetLanuage(){
+    public void writeForSetLanguage(){
         ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
                 CommandUtil.getCommandbyteArray(0x39, 13, 5, true),bleWriteResponse);
     }
@@ -841,7 +834,7 @@ public class BleClient {
     }
 
     public void writeForSetWeather(ArrayList<WeatherBean.Condition> weatherModel,String city){
-        if (weatherModel!=null  )
+        if (weatherModel!=null)
         ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
                 CommandUtil.getCommandbyteArray(weatherModel,city),bleWriteResponse);
     }

@@ -202,12 +202,12 @@ public class DIYActivity extends BaseActivity implements IDiyView{
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
         }else if (updateView.getType()==2){//失败
-            if (isSendPic){
+//            if (isSendPic){
                 isSendPic = false;
                 progress = 0;
                 ProgressHudModel.newInstance().diss();
-                showToast(getString(R.string.diyDailError));
-            }
+                showToast(getString(R.string.diyDailError1));
+//            }
         }else {
             isSendPic = true;
             ProgressHudModel.newInstance().diss();
@@ -221,7 +221,7 @@ public class DIYActivity extends BaseActivity implements IDiyView{
             diyIv.setImageResource(R.mipmap.diy_c);
             backgroundIv = findViewById(R.id.backgroundIv_c);
         }else {
-            if (faceType.indexOf("320*385")>=0){
+            if (faceType.equals("320*385")){
                 diyIv.setImageResource(R.mipmap.diy_06);
                 backgroundIv = findViewById(R.id.backgroundIv_r06);
             }else {

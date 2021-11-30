@@ -117,6 +117,7 @@
     <string name="diyDailing">更换中...</string>
     <string name="diyDailOK">更换成功</string>
     <string name="diyDailError">更换失败,请重试</string>
+    <string name="diyDailError1">手表SD卡正在使用，终止传输</string>
     <string name="upDownBackground">请上传一张背景图片</string>
     <string name="chooseClock">请选择一个时钟样式</string>
     <string name="clock">时钟样式</string>

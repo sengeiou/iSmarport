@@ -54,7 +54,6 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
         }
         isCircle = MyApplication.getInstance().isCircle();
         faceType = MyApplication.getInstance().getFaceType();
-        Log.i("data******","faceType = "+faceType);
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
         EventBus.getDefault().register(this);
@@ -122,12 +121,10 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
         }else if (updateView.getType()==2){//失败
-            if (isSendPic){
-                isSendPic = false;
-                progress = 0;
-                ProgressHudModel.newInstance().diss();
-                showToast(getString(R.string.diyDailError));
-            }
+            isSendPic = false;
+            progress = 0;
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.diyDailError1));
         }else if (updateView.getType()==3){//准备开始
             Log.i("data******","准备发送数据");
             isSendPic = true;
@@ -169,7 +166,7 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             changeIv.setImageResource(R.mipmap.change_watch_c);
             dialIv = findViewById(R.id.dialIv_c);
         }else {
-            if (faceType.indexOf("320*385")>=0){
+            if (faceType.equals("320*385")){
                 changeIv.setImageResource(R.mipmap.change_watch_06);
                 dialIv = findViewById(R.id.dialIv_r06);
             }else {

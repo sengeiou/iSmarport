@@ -1,7 +1,5 @@
 package com.szip.sportwatch.Util;
 
-import android.util.Log;
-
 
 import com.szip.sportwatch.DB.dbModel.AnimalHeatData;
 import com.szip.sportwatch.DB.dbModel.BloodOxygenData;
@@ -12,7 +10,6 @@ import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Interface.IDataResponse;
 import com.szip.sportwatch.Model.BleStepModel;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
-import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
 
@@ -22,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Hqs on 2018/1/4
@@ -250,7 +245,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,32+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -260,7 +255,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,32+8+longLenght+latLenght+speedPerHourLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -270,7 +265,7 @@ public class DataParser {
             byte[] speedDatas = new byte[speedLenght*2];
             if (speedLenght!=0)
                 System.arraycopy(data,32+10+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2,speedDatas,0,speedLenght*2);
-            dataHash = CommandUtil.getAvenrage(speedDatas,2);
+            dataHash = CommandUtil.getAverage(speedDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.speed = key;
                 sportData.speedArray = dataHash.get(key);
@@ -282,7 +277,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,32+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -294,7 +289,7 @@ public class DataParser {
             if (strideLenght!=0)
                 System.arraycopy(data,32+14+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght,
                         strideArray,0,strideLenght*2);
-            dataHash = CommandUtil.getAvenrage(strideArray,2);
+            dataHash = CommandUtil.getAverage(strideArray,2);
             for (int key:dataHash.keySet()){
                 sportData.stride = key;
                 sportData.strideArray = dataHash.get(key);
@@ -336,7 +331,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,28+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -346,7 +341,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,28+8+longLenght+latLenght+speedPerHourLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -356,7 +351,7 @@ public class DataParser {
             byte[] speedDatas = new byte[speedLenght*2];
             if (speedLenght!=0)
                 System.arraycopy(data,28+10+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2,speedDatas,0,speedLenght*2);
-            dataHash = CommandUtil.getAvenrage(speedDatas,2);
+            dataHash = CommandUtil.getAverage(speedDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.speed = key;
                 sportData.speedArray = dataHash.get(key);
@@ -367,10 +362,22 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,28+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
+            }
+
+            int strideLenght = (data[28+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xff) +
+                    ((data[29+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght] & 0xFF) << 8);
+            byte[] strideArray = new byte[strideLenght*2];
+            if (strideLenght!=0)
+                System.arraycopy(data,28+14+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght,
+                        strideArray,0,strideLenght*2);
+            dataHash = CommandUtil.getAverage(strideArray,2);
+            for (int key:dataHash.keySet()){
+                sportData.stride = key;
+                sportData.strideArray = dataHash.get(key);
             }
             sportDataArrayList.add(sportData);
             LogUtil.getInstance().logd("DATA******","解析到的徒步数据 : "+time+" ;时长 = "+sportData.sportTime+" ;卡路里 = "+sportData.calorie+
@@ -402,7 +409,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,32+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -413,7 +420,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,32+8+longLenght+latLenght+speedPerHourLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -423,7 +430,7 @@ public class DataParser {
             byte[] speedDatas = new byte[speedLenght*2];
             if (speedLenght!=0)
                 System.arraycopy(data,32+10+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2,speedDatas,0,speedLenght*2);
-            dataHash = CommandUtil.getAvenrage(speedDatas,2);
+            dataHash = CommandUtil.getAverage(speedDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.speed = key;
                 sportData.speedArray = dataHash.get(key);
@@ -434,7 +441,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,32+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -446,7 +453,7 @@ public class DataParser {
             if (strideLenght!=0)
                 System.arraycopy(data,32+14+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2+heartLenght,
                         strideArray,0,strideLenght*2);
-            dataHash = CommandUtil.getAvenrage(strideArray,2);
+            dataHash = CommandUtil.getAverage(strideArray,2);
             for (int key:dataHash.keySet()){
                 sportData.stride = key;
                 sportData.strideArray = dataHash.get(key);
@@ -484,7 +491,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,16+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -495,7 +502,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -540,7 +547,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,8,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -555,7 +562,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,14+heartLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -590,7 +597,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,16+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -600,7 +607,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -612,7 +619,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,16+10+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -627,7 +634,7 @@ public class DataParser {
             byte[] speedDatas = new byte[speedLenght*2];
             if (speedLenght!=0)
                 System.arraycopy(data,16+16+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+heartLenght,speedDatas,0,speedLenght*2);
-            dataHash = CommandUtil.getAvenrage(speedDatas,2);
+            dataHash = CommandUtil.getAverage(speedDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.speed = key;
                 sportData.speedArray = dataHash.get(key);
@@ -660,7 +667,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,26+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -670,7 +677,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,26+8+longLenght+latLenght+speedPerHourLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -681,7 +688,7 @@ public class DataParser {
             byte[] speedDatas = new byte[speedLenght*2];
             if (speedLenght!=0)
                 System.arraycopy(data,26+10+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2,speedDatas,0,speedLenght*2);
-            dataHash = CommandUtil.getAvenrage(speedDatas,2);
+            dataHash = CommandUtil.getAverage(speedDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.speed = key;
                 sportData.speedArray = dataHash.get(key);
@@ -693,7 +700,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,26+12+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2+speedLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -738,7 +745,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,20+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -750,7 +757,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,20+8+longLenght+latLenght+speedPerHourLenght,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -794,7 +801,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,24+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -804,7 +811,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,24+8+longLenght+latLenght+speedPerHourLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -815,7 +822,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,24+10+longLenght+latLenght+speedPerHourLenght+altitudeLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -859,7 +866,7 @@ public class DataParser {
             byte[] altitudeDatas = new byte[altitudeLenght*2];
             if (altitudeLenght!=0)
                 System.arraycopy(data,20+6+longLenght+latLenght,altitudeDatas,0,altitudeLenght*2);
-            dataHash = CommandUtil.getAvenrage(altitudeDatas,2);
+            dataHash = CommandUtil.getAverage(altitudeDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.altitude = key;
                 sportData.altitudeArray = dataHash.get(key);
@@ -870,7 +877,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,20+8+longLenght+latLenght+altitudeLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -902,7 +909,7 @@ public class DataParser {
             byte[] speedHourDatas = new byte[speedPerHourLenght];
             if (speedPerHourLenght!=0)
                 System.arraycopy(data,16+6+longLenght+latLenght,speedHourDatas,0,speedPerHourLenght);
-            dataHash = CommandUtil.getAvenrage(speedHourDatas,1);
+            dataHash = CommandUtil.getAverage(speedHourDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.speedPerHour = key;
                 sportData.speedPerHourArray = dataHash.get(key);
@@ -915,7 +922,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -953,7 +960,7 @@ public class DataParser {
             if (strideLenght!=0)
                 System.arraycopy(data,12+2,
                         strideDatas,0,strideLenght*2);
-            dataHash = CommandUtil.getAvenrage(strideDatas,2);
+            dataHash = CommandUtil.getAverage(strideDatas,2);
             for (int key:dataHash.keySet()){
                 sportData.stride = key;
                 sportData.strideArray = dataHash.get(key);
@@ -965,7 +972,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,12+4+strideLenght*2,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -1046,7 +1053,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -1082,7 +1089,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);
@@ -1118,7 +1125,7 @@ public class DataParser {
             if (heartLenght!=0)
                 System.arraycopy(data,16+8+longLenght+latLenght+speedPerHourLenght,
                         heartDatas,0,heartLenght);
-            dataHash = CommandUtil.getAvenrage(heartDatas,1);
+            dataHash = CommandUtil.getAverage(heartDatas,1);
             for (int key:dataHash.keySet()){
                 sportData.heart = key;
                 sportData.heartArray = dataHash.get(key);

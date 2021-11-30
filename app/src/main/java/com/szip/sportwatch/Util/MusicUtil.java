@@ -240,7 +240,6 @@ public class MusicUtil{
                         }catch (Exception e){
                             e.printStackTrace();
                         }
-                        Log.i("data******","musicTitle = "+musicTitle);
                         if (musicTitle==null||"".equals(musicTitle.trim()))
                             return;
                         BleClient.getInstance().writeForSendMusicInfo(musicTitle,musicSinger,playState);

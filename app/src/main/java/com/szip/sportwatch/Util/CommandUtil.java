@@ -599,189 +599,29 @@ public class CommandUtil {
         return null;
     }
 
-//    /**
-//     * 获取3天天气信息byte[]文件
-//     *
-//     * @param syncType
-//     * @param info
-//     * @param type     0表示今天天气，1表示明天天气，2表示后天天气
-//     * @return
-//     */
-//    public static byte[] get3DaysWeather(int syncType, WeatherInfo info, int type) {
-//        try {
-//            long time = System.currentTimeMillis() / 1000;
-//            int mMinTmp = Integer.valueOf(info.getMin());
-//            int mMaxTmp = Integer.valueOf(info.getMax());
-//            int mPress = Integer.valueOf(info.getPres());
-//            int mWeatherCode = Integer.valueOf(info.getCode());
-//            int mMP25 = Integer.valueOf(info.getPm25());
-//            int windDeg = Integer.valueOf(info.getWindDeg());//风向360角
-//            //int sc = Integer.valueOf(info.getWindSc());//风力
-//            String sc = info.getWindSc();//风力
-//            byte[] scbyte = sc.getBytes(Charset.forName("UTF-8"));
-//            int windSpd = Integer.valueOf(info.getWindSpd());//风速
-//
-//            byte[] data = new byte[24];
-//            data[0] = (byte) 0xAA;
-//            data[1] = (byte) syncType;
-//            data[2] = (byte) 0x10;
-//            data[3] = 0;
-//            data[4] = (byte) (time & 0xFF);
-//            data[5] = (byte) ((time >> 8) & 0xFF);
-//            data[6] = (byte) ((time >> 16) & 0xFF);
-//            data[7] = (byte) ((time >> 24) & 0xFF);
-//            data[8] = (byte) mMinTmp;
-//            data[9] = (byte) mMaxTmp;
-//            data[10] = 0;//当前气温
-//            data[11] = (byte) type;//由于表示日期
-//            //气压
-//            data[12] = (byte) (mPress & 0xff);
-//            data[13] = (byte) ((mPress >> 8) & 0xff);
-//            data[14] = (byte) ((mPress >> 16) & 0xff);
-//            data[15] = (byte) ((mPress >> 24) & 0xff);
-//            //图片编码
-//            data[16] = (byte) (mWeatherCode & 0xff);
-//            data[17] = (byte) ((mWeatherCode >> 8) & 0xff);
-//            //MP25
-//            data[18] = (byte) (mMP25 & 0xff);
-//            data[19] = (byte) ((mMP25 >> 8) & 0xff);
-//            //风向
-//            data[20] = (byte) (windDeg & 0xff);
-//            data[21] = (byte) ((windDeg >> 8) & 0xff);
-//            //风力
-//            //data[22] = (byte) (sc & 0xff);
-//            data[22] = scbyte[0];
-//            //风速
-//            data[23] = (byte) (windSpd);
-//
-//            return data;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-//    /**
-//     * 将巡航坐标信息转为byte[]
-//     *
-//     * @param type
-//     * @param infos
-//     * @return
-//     */
-//    public static byte[] getCoordinateBytes(int type, ArrayList<CruiseCoordinateInfo> infos) {
-//        int size = infos.size();
-//        int dataLength = 0;
-//        if (size > 0) {
-//            dataLength = 4 + size * 2 * 4;
-//        }
-//        long time = System.currentTimeMillis() / 1000;
-//        byte[] data = new byte[8 + dataLength];
-//        data[0] = (byte) 0xAA;
-//        data[1] = (byte) type;
-//        data[2] = (byte) (dataLength & 0xff);
-//        data[3] = (byte) (((dataLength >> 8)) & 0xff);
-//        data[4] = (byte) (time & 0xFF);
-//        data[5] = (byte) ((time >> 8) & 0xFF);
-//        data[6] = (byte) ((time >> 16) & 0xFF);
-//        data[7] = (byte) ((time >> 24) & 0xFF);
-//        if (size > 0) {
-//            data[8] = (byte) (size & 0xFF);
-//            data[9] = (byte) ((size >> 8) & 0xFF);
-//            data[10] = (byte) ((size >> 16) & 0xFF);
-//            data[11] = (byte) ((size >> 24) & 0xFF);
-//            for (int i = 0; i < size; i++) {
-//                CruiseCoordinateInfo info = infos.get(i);
-//                int lat = (int) (Float.valueOf(info.getLat()) * 100000);
-//                int lng = (int) (Float.valueOf(info.getLng()) * 100000);
-//                data[12 + i * 4] = (byte) (lng & 0xFF);
-//                data[13 + i * 4] = (byte) ((lng >> 8) & 0xff);
-//                data[14 + i * 4] = (byte) ((lng >> 16) & 0xff);
-//                data[15 + i * 4] = (byte) ((lng >> 24) & 0xff);
-//
-//                data[12 + (size + i) * 4] = (byte) (lat & 0xFF);
-//                data[13 + (size + i) * 4] = (byte) ((lat >> 8) & 0xFF);
-//                data[14 + (size + i) * 4] = (byte) ((lat >> 16) & 0xFF);
-//                data[15 + (size + i) * 4] = (byte) ((lat >> 24) & 0xFF);
-//            }
-//        }
-//        return data;
-//    }
-//
-//
-//    /**
-//     * 将闹钟信息，转为byte[]
-//     *
-//     * @param type
-//     * @param info
-//     * @return
-//     */
-//    public static byte[] getAlarmClockType(int type, AlarmClockInfo info, int sortNum) {
-//        int alarmDataLength = 5;
-//        int dataLength = 8 + alarmDataLength;
-//        long time = System.currentTimeMillis() / 1000;
-//
-//        int cycle = info.getAlarmCycle();
-//        boolean state = info.isAlarmState();
-//        int[] hm = DateUtil.getHHmm(info.getAlarmTime());
-//        byte[] data = new byte[dataLength];
-//        data[0] = (byte) 0xAA;
-//        data[1] = (byte) type;
-//        data[2] = (byte) (alarmDataLength & 0xff);
-//        data[3] = (byte) (((alarmDataLength >> 8)) & 0xff);
-//        data[4] = (byte) (time & 0xFF);
-//        data[5] = (byte) ((time >> 8) & 0xFF);
-//        data[6] = (byte) ((time >> 16) & 0xFF);
-//        data[7] = (byte) ((time >> 24) & 0xFF);
-//
-//        //闹钟序号
-//        data[8] = (byte) sortNum;
-//        //重复周期
-//        if (!state) {
-//            cycle = 0xff;
-//        } else {
-//            if (cycle == 127) {
-//                cycle = 0x80;
-//            }
-//        }
-//        data[9] = (byte) cycle;
-//        //小时
-//        data[10] = (byte) (hm[0]);
-//        //分钟
-//        data[11] = (byte) (hm[1]);
-//        //备注
-//        data[12] = 0;
-//
-//        return data;
-//
-//    }
-
 
     /**
      * 计算列表平均值Integer:平均值  String:详情数据列表
      * */
-    public static HashMap<Integer,String> getAvenrage(byte[] datas, int lenght){
+    public static HashMap<Integer,String> getAverage(byte[] datas, int lenght){
         HashMap<Integer,String> hashMap = new HashMap<>();
-        int sum = 0;
-        int allData = 0;
-        int data = 0;
         StringBuffer str = new StringBuffer();
-        for (int i = 0;i<datas.length;i+=lenght){
-            if (lenght==1){
-                data = datas[i]&0xff;
-                if (data == 0)
-                    continue;
-                allData+=data;
-                str.append(String.format(Locale.ENGLISH,",%d",datas[i]&0xff));
-            }else {
-                data = (datas[i] & 0xff) + ((datas[i+1] & 0xFF) << 8);
-                if (data == 0)
-                    continue;
-                allData+=data;
-                str.append(String.format(Locale.ENGLISH,",%d",((datas[i] & 0xff) + ((datas[i+1] & 0xFF) << 8))));
+        int average = 0;
+        if (datas.length!=0){
+            for (int i = 0;i<datas.length-lenght;i+=lenght){
+                if (lenght==1){
+                    str.append(String.format(Locale.ENGLISH,",%d",datas[i]&0xff));
+                }else {
+                    str.append(String.format(Locale.ENGLISH,",%d",((datas[i] & 0xff) + ((datas[i+1] & 0xFF) << 8))));
+                }
             }
-            sum++;
+            if (lenght==1)
+                average = datas[datas.length-1]&0xff;
+            else
+                average = ((datas[datas.length-2] & 0xff) + ((datas[datas.length-1] & 0xFF) << 8));
         }
-        hashMap.put(sum==0?0:allData/sum,str.length()==0?"":str.substring(1));
+
+        hashMap.put(average,str.length()==0?"":str.substring(1));
         return hashMap;
     }
 
