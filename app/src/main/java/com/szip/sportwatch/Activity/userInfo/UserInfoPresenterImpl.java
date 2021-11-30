@@ -62,6 +62,7 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
     public void getSex(final CharacterPickerWindow window, final UserInfo userInfo) {
         final List<String> sexList =new ArrayList<>(Arrays.asList(context.getString(R.string.female),context.getString(R.string.male)));
         window.setTitleTv(context.getString(R.string.sex));
+        window.getPickerView().setText("","");
         //初始化选项数据
         window.getPickerView().setPicker(sexList);
         //设置默认选中的三级项目

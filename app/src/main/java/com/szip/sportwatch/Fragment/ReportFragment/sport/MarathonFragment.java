@@ -74,7 +74,7 @@ public class MarathonFragment extends BaseFragment {
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
             unitTv.setText("mile");
         }
-        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f", sportData.calorie/1000f));
+        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
         averageTv1.setText(sportData.heart+"");
         averageTv2.setText(sportData.stride+"");
         averageTv3.setText(sportData.height+"");

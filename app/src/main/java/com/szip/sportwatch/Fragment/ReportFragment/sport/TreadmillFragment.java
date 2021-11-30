@@ -48,7 +48,7 @@ public class TreadmillFragment extends BaseFragment {
         timeTv.setText(DateUtil.getStringDateFromSecond(sportData.time,"MM/dd HH:mm:ss"));
         stepTv.setText(sportData.step+"");
 
-        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f", sportData.calorie/1000f));
+        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
         averageTv1.setText(sportData.heart+"");
         averageTv2.setText(sportData.stride+"");
         sportTimeTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,

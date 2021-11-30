@@ -3,6 +3,7 @@ package com.szip.sportwatch.Fragment.ReportFragment.sport;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,7 +41,7 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
     private IMapUtil iMapUtil;
     private View mapBackView;
 
-    private TextView dataTv,timeTv,distanceTv,unitTv,kcalTv,sportTimeTv,averageTv1, averageTv2,averageTv3,averageTv4,averageTv5;
+    private TextView dataTv,timeTv,distanceTv,unitTv,kcalTv,sportTimeTv,stepTv,averageTv1, averageTv2,averageTv3,averageTv4,averageTv5;
     private SportReportView tableView1, tableView2,tableView3, tableView4;
     private SportData sportData;
     private SportSpeedView sportSpeed;
@@ -54,6 +55,7 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
     public RunFragment(SportData sportData) {
         this.sportData = sportData;
     }
+
 
     @Override
     protected int getLayoutId() {
@@ -94,6 +96,7 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
         distanceTv = getView().findViewById(R.id.distanceTv);
         unitTv = getView().findViewById(R.id.unitTv);
         kcalTv = getView().findViewById(R.id.kcalTv);
+        stepTv = getView().findViewById(R.id.stepTv);
         averageTv1 = getView().findViewById(R.id.averageTv1);
         averageTv2 = getView().findViewById(R.id.averageTv2);
         averageTv3 = getView().findViewById(R.id.averageTv3);
@@ -104,7 +107,6 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
         tableView3 = getView().findViewById(R.id.tableView3);
         tableView4 = getView().findViewById(R.id.tableView4);
         sportSpeed = getView().findViewById(R.id.sportSpeed);
-        dataTv = getView().findViewById(R.id.dataTv);
 
         if(sportData.type==6){
             ((TextView)getView().findViewById(R.id.sportIdTv)).setText(R.string.training);
@@ -147,7 +149,7 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
         speedArray = sportData.getSpeedArray().split(",");
         speedPerHourArray = sportData.getSpeedPerHourArray().split(",");
         altitudeArray = sportData.getAltitudeArray().split(",");
-        dataTv.setText(sportData.step+"");
+        stepTv.setText(sportData.step+"");
         timeTv.setText(DateUtil.getStringDateFromSecond(sportData.time,"MM/dd HH:mm:ss"));
         sportTimeTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                 sportData.sportTime%3600/60,sportData.sportTime%3600%60));
@@ -158,7 +160,8 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
             unitTv.setText("mile");
         }
-        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f", sportData.calorie/1000f));
+        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
+        stepTv.setText(String.format(Locale.ENGLISH,"%d", sportData.step));
         averageTv1.setText(sportData.heart+"");
         averageTv2.setText(sportData.stride+"");
         averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));

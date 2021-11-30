@@ -57,7 +57,7 @@ public class SwimFragment extends BaseFragment {
         timeTv.setText(DateUtil.getStringDateFromSecond(sportData.time,"MM/dd HH:mm:ss"));
         sportTimeTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                 sportData.sportTime%3600/60,sportData.sportTime%3600%60));
-        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f", sportData.calorie/1000f));
+        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
         if (MyApplication.getInstance().getUserInfo().getUnit()==0){
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",sportData.distance/1000f));
             unitTv.setText("km");

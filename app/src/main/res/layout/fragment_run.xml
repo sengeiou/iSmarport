@@ -84,15 +84,14 @@
 
 
                 <TextView
-                    android:id="@+id/dataTv"
+                    android:id="@+id/stepTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
                     android:layout_alignParentEnd="true"
-                    android:textSize="25sp"
-                    android:visibility="gone"/>
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -102,8 +101,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_alignParentEnd="true"
                     android:text="steps"
-                    android:textSize="12sp"
-                    android:visibility="gone"/>
+                    android:textSize="12sp" />
 
 
                 <LinearLayout

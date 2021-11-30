@@ -85,7 +85,7 @@ public class SportDataAdapter extends BaseAdapter {
                 holder.dataTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 2:{//跑步
@@ -94,7 +94,7 @@ public class SportDataAdapter extends BaseAdapter {
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 5:{//马拉松
@@ -103,7 +103,7 @@ public class SportDataAdapter extends BaseAdapter {
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 6:{
@@ -112,7 +112,7 @@ public class SportDataAdapter extends BaseAdapter {
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 7:
@@ -121,7 +121,7 @@ public class SportDataAdapter extends BaseAdapter {
                 holder.dataTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 4:{//登山
@@ -130,7 +130,7 @@ public class SportDataAdapter extends BaseAdapter {
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
 
             }
             break;
@@ -143,7 +143,7 @@ public class SportDataAdapter extends BaseAdapter {
                 holder.dataTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 10:{//篮球
@@ -151,7 +151,7 @@ public class SportDataAdapter extends BaseAdapter {
                 holder.dataTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 11:{//骑行
@@ -160,7 +160,7 @@ public class SportDataAdapter extends BaseAdapter {
                             sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 12:{//滑冰
@@ -169,7 +169,7 @@ public class SportDataAdapter extends BaseAdapter {
                             sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 13:{//健身房
@@ -189,7 +189,7 @@ public class SportDataAdapter extends BaseAdapter {
                 holder.dataTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 17:{//足球
@@ -197,7 +197,7 @@ public class SportDataAdapter extends BaseAdapter {
                 holder.dataTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 18:{//游泳
@@ -206,7 +206,7 @@ public class SportDataAdapter extends BaseAdapter {
                             sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 19:{//攀岩
@@ -215,7 +215,7 @@ public class SportDataAdapter extends BaseAdapter {
                             sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 20:{//划船
@@ -224,7 +224,7 @@ public class SportDataAdapter extends BaseAdapter {
                             sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 21:{//高尔夫
@@ -232,7 +232,7 @@ public class SportDataAdapter extends BaseAdapter {
                 holder.dataTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                         sportData.sportTime%3600/60,sportData.sportTime%3600%60));
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
             case 22:{//冲浪
@@ -241,7 +241,7 @@ public class SportDataAdapter extends BaseAdapter {
                             sportData.sportTime%3600/60,sportData.sportTime%3600%60));
 
                 holder.buttonFirstIv.setImageResource(R.mipmap.sport_list_icon_kcal);
-                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+                holder.buttonFirstTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
             }
             break;
         }
