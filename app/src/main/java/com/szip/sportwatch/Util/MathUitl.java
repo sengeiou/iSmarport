@@ -448,9 +448,6 @@ public class MathUitl {
      * 公制转英制
      * */
     public static double metric2Miles(int height){
-//        int data;
-//        data = ;
-//        Log.d("SZIP******","height = "+height+" ;mile = "+(height *  0.00006214));
         return (height *  0.00006214);
     }
 

@@ -59,7 +59,7 @@ public class SwimFragment extends BaseFragment {
                 sportData.sportTime%3600/60,sportData.sportTime%3600%60));
         kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
         if (MyApplication.getInstance().getUserInfo().getUnit()==0){
-            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",sportData.distance/1000f));
+            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
             unitTv.setText("km");
         } else{
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));

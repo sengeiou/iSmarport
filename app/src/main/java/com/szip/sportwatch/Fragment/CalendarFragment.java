@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,6 +97,7 @@ public class CalendarFragment extends AppCompatDialogFragment {
             @Override
             public void onCalendarChange(BaseCalendar baseCalendar, int year, int month, LocalDate localDate,boolean isTouch) {
                 dateTv.setText(String.format(Locale.ENGLISH,"%d-%02d",year,month));
+                Log.i("data******","local = "+localDate+" ;isTouch = "+isTouch);
                 if (localDate!=null&&calendarListener!=null&&isTouch){
                     calendarListener.onClickDate(localDate.toString());
                     dismiss();

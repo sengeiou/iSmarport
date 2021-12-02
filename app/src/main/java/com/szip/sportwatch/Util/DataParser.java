@@ -381,7 +381,7 @@ public class DataParser {
             }
             sportDataArrayList.add(sportData);
             LogUtil.getInstance().logd("DATA******","解析到的徒步数据 : "+time+" ;时长 = "+sportData.sportTime+" ;卡路里 = "+sportData.calorie+
-                    " ;步数 = "+sportData.step+" ;徒步里程"+sportData.distance+" ;平均时速 = "+sportData.speed+" ;时速数组"+sportData.speedArray
+                    " ;步数 = "+sportData.step+" ;徒步里程"+sportData.distance+" ;平均时速 = "+sportData.speedPerHour+" ;时速数组"+sportData.speedPerHourArray
                     +" ;平均配速 = "+sportData.speed+" ;配速数组"+sportData.speedArray+ " ;平均心率 = "+sportData.heart+" ;心率数组"+sportData.heartArray+
                     " ;平均海拔 = "+sportData.altitude+" ;海拔数组 = "+sportData.altitudeArray);
             if (isEnd){

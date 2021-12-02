@@ -145,16 +145,16 @@ public class SportFragment extends BaseFragment implements View.OnClickListener{
                 break;
         }
         sportTypeIv.setImageResource(typeId);
-        dataTv.setText(String.format(Locale.ENGLISH,"%.1f",sportData.calorie/1000f));
+        dataTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
         if (app.getUserInfo().getUnit()==0){
-            distanceTv1.setText(String.format(Locale.ENGLISH,"%.2f",sportData.distance/1000f));
+            distanceTv1.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
             ((TextView)getView().findViewById(R.id.deistanceUnitTv)).setText(getString(R.string.distance)+"km)");
         } else{
             distanceTv1.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
             ((TextView)getView().findViewById(R.id.deistanceUnitTv)).setText(getString(R.string.distance)+"Mi)");
         }
         speedTv.setText(String.format(Locale.ENGLISH,"%02d'%02d''",sportData.speed/60,sportData.speed%60));
-        calorieTv.setText(String.format(Locale.ENGLISH,"%.1f", sportData.calorie/1000f));
+        calorieTv.setText(String.format(Locale.ENGLISH,"%.1f", ((sportData.calorie+55)/100)/10f));
         sportTimeTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600, sportData.sportTime%3600/60,sportData.sportTime%3600%60));
         if (sportData.heart!=0)
             heartTv.setText(sportData.heart+"");

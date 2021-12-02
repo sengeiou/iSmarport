@@ -64,7 +64,7 @@ public class StepDayFragment extends BaseFragment implements View.OnClickListene
     private void updateView() {
         reportView.addData(reportDataBean.getDrawDataBeans());
         allStepTv.setText(reportDataBean.getValue()+"");
-        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",reportDataBean.getValue2()/1000f));
+        kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((reportDataBean.getValue2()+55)/100)/10f));
         if (((MyApplication)getActivity().getApplicationContext()).getUserInfo().getUnit()==0){
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",reportDataBean.getValue1()/10000f));
             ((TextView)getView().findViewById(R.id.unitTv)).setText("km");

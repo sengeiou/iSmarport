@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -232,6 +233,7 @@ public abstract class BaseCalendar extends ViewPager implements ICalendar {
             callBack();
         } else {
             //单选  集合中有且只有一个元素 ，不包含就清空集合添加，包含该元素不做处理，因为前面已经绘制
+            Log.i("data******","onClickCurrectMonthOrWeekDate");
             if (!mAllSelectDateList.contains(localDate)) {
                 isTouch = true;
                 mAllSelectDateList.clear();
@@ -246,12 +248,14 @@ public abstract class BaseCalendar extends ViewPager implements ICalendar {
 
     public void onClickLastMonthDate(LocalDate localDate) {
         if (mIsLastNextMonthClickEnable) {
+            isTouch = true;
             jump(localDate, true);
         }
     }
 
     public void onClickNextMonthDate(LocalDate localDate) {
         if (mIsLastNextMonthClickEnable) {
+            isTouch = true;
             jump(localDate, true);
         }
     }

@@ -71,7 +71,7 @@ public class MountainFragment extends BaseFragment {
         timeTv.setText(DateUtil.getStringDateFromSecond(sportData.time,"MM/dd HH:mm:ss"));
         dataTv.setText(sportData.step+"");
         if (MyApplication.getInstance().getUserInfo().getUnit()==0){
-            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",sportData.distance/1000f));
+            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
             unitTv.setText("km");
         } else{
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
