@@ -33,6 +33,7 @@ import java.util.TimerTask;
 import okhttp3.Call;
 
 import static com.szip.sportwatch.MyApplication.FILE;
+import static com.szip.sportwatch.Util.HttpMessgeUtil.GET_VERIFICATION;
 import static com.szip.sportwatch.Util.MathUitl.isEmail;
 
 public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener{
@@ -339,9 +340,11 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
 
         @Override
         public void onResponse(BaseApi response, int id) {
-            ProgressHudModel.newInstance().diss();
-            showToast(getString(R.string.resetSuccess));
-            finish();
+            if(id!=GET_VERIFICATION){
+                ProgressHudModel.newInstance().diss();
+                showToast(getString(R.string.resetSuccess));
+                finish();
+            }
         }
     };
 

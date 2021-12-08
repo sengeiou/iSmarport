@@ -150,7 +150,7 @@ public class SportFragment extends BaseFragment implements View.OnClickListener{
             distanceTv1.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
             ((TextView)getView().findViewById(R.id.deistanceUnitTv)).setText(getString(R.string.distance)+"km)");
         } else{
-            distanceTv1.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
+            distanceTv1.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
             ((TextView)getView().findViewById(R.id.deistanceUnitTv)).setText(getString(R.string.distance)+"Mi)");
         }
         speedTv.setText(String.format(Locale.ENGLISH,"%02d'%02d''",sportData.speed/60,sportData.speed%60));

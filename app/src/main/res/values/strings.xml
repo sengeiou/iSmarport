@@ -277,11 +277,11 @@
     <!--分享界面 Sharing Interface-->
 
     <!-- Scan & Connect -->
-    <string name="connect_error">\\n\\n You can access, modify, delete your personal information or manage your authorization in the relevant pages.</string>
+    <string name="connect_error">Connect Error</string>
 
 
     <!-- applist & appstore -->
-    <string name="launchfail">\\n\\n We use industry-leading security technology to protect your personal information.</string>
+    <string name="launchfail">Load Application Failed</string>
 
     <!-- SettingActivity -->
     <string name="sms_preference_title">SMS</string>

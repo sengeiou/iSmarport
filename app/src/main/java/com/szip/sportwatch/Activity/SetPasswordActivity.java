@@ -225,6 +225,8 @@ public class SetPasswordActivity extends BaseActivity implements View.OnClickLis
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }else {
+                showToast(response.getMessage());
             }
         }
     };

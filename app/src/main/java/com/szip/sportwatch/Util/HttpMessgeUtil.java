@@ -43,7 +43,7 @@ public class HttpMessgeUtil {
 
     private Context mContext;
 
-    private int GET_VERIFICATION = 100;
+    public static int GET_VERIFICATION = 100;
     public static int UPDOWN_LOG = 101;
     public static int UPDOWN_DATA = 102;
     public static int UPDOWN_AVATAR = 103;

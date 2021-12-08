@@ -72,10 +72,13 @@ public class MountainFragment extends BaseFragment {
         dataTv.setText(sportData.step+"");
         if (MyApplication.getInstance().getUserInfo().getUnit()==0){
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
+            averageTv5.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));
             unitTv.setText("km");
         } else{
-            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
+            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
+            averageTv5.setText(String.format(Locale.ENGLISH,"%.1f",MathUitl.kmPerHour2MilesPerHour(sportData.speedPerHour)/10f));
             unitTv.setText("mile");
+            ((TextView)getView().findViewById(R.id.speedUnitTv)).setText("mile/h");
         }
         sportTimeTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,
                 sportData.sportTime%3600/60,sportData.sportTime%3600%60));
@@ -84,7 +87,6 @@ public class MountainFragment extends BaseFragment {
         averageTv2.setText(sportData.height+"");
         averageTv3.setText(sportData.stride+"");
         averageTv4.setText(String.format(Locale.ENGLISH,"%02d'%02d''",sportData.speed/60,sportData.speed%60));
-        averageTv5.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));
         tableView1.addData(heartArray);
         tableView2.addData(altitudeArray);
         tableView3.addData(strideArray);

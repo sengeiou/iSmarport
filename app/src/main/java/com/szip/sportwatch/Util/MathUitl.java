@@ -451,6 +451,24 @@ public class MathUitl {
         return (height *  0.00006214);
     }
 
+
+    /**
+     * 公制转英制
+     * */
+    public static double km2Miles(int height){
+        int mile = height*3281/5280;
+        return ((mile+5)/10)/100f;
+    }
+
+
+    /**
+     * 公制转英制
+     * */
+    public static int kmPerHour2MilesPerHour(int speed){
+        int mile = (speed*3281+2640)/5280;
+        return mile;
+    }
+
     /**
      * dip 转换成px
      *

@@ -155,16 +155,18 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
                 sportData.sportTime%3600/60,sportData.sportTime%3600%60));
         if (MyApplication.getInstance().getUserInfo().getUnit()==0){
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
+            averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));
             unitTv.setText("km");
         } else{
-            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
+            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
+            averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",MathUitl.kmPerHour2MilesPerHour(sportData.speedPerHour)/10f));
             unitTv.setText("mile");
+            ((TextView)getView().findViewById(R.id.speedUnitTv)).setText("mile/h");
         }
         kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
         stepTv.setText(String.format(Locale.ENGLISH,"%d", sportData.step));
         averageTv1.setText(sportData.heart+"");
         averageTv2.setText(sportData.stride+"");
-        averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));
         averageTv4.setText(sportData.height+"");
         averageTv5.setText(String.format(Locale.ENGLISH,"%02d'%02d''",sportData.speed/60,sportData.speed%60));
         tableView1.addData(heartArray);

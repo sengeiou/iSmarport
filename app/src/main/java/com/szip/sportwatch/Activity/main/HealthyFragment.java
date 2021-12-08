@@ -246,11 +246,12 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
             stepPb.setMaxValues(app.getUserInfo().getStepsPlan());
             stepPb.setCurrentValues(healthyDataModel.getStepsData());
             stepTv.setText(healthyDataModel.getStepsData()+"");
+            Log.i("data******","distance = "+healthyDataModel.getDistanceData());
             if (app.getUserInfo().getUnit()==0){
-                distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",healthyDataModel.getDistanceData()/10000f));
+                distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",(healthyDataModel.getDistanceData()+55)/100/100f));
                 ((TextView)getView().findViewById(R.id.unitTv)).setText("km");
             } else{
-                distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",MathUitl.metric2Miles(healthyDataModel.getDistanceData())));
+                distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",MathUitl.km2Miles(healthyDataModel.getDistanceData()/10)));
                 ((TextView)getView().findViewById(R.id.unitTv)).setText("mile");
             }
             kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((healthyDataModel.getKcalData()+55)/100)/10f));

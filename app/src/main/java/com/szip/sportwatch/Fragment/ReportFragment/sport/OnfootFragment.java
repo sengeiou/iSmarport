@@ -1,6 +1,7 @@
 package com.szip.sportwatch.Fragment.ReportFragment.sport;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -69,11 +70,15 @@ public class OnfootFragment extends BaseFragment {
         altitudeArray = sportData.getAltitudeArray().split(",");
         timeTv.setText(DateUtil.getStringDateFromSecond(sportData.time,"MM/dd HH:mm:ss"));
         dataTv.setText(sportData.step+"");
+        Log.i("DATA******","distance = "+sportData.distance);
         if (MyApplication.getInstance().getUserInfo().getUnit()==0){
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
+            averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));
             unitTv.setText("km");
         } else{
-            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(sportData.distance*10)));
+            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
+            averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",MathUitl.kmPerHour2MilesPerHour(sportData.speedPerHour)/10f));
+            ((TextView)getView().findViewById(R.id.speedUnitTv)).setText("mile/h");
             unitTv.setText("mile");
         }
         kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
@@ -81,7 +86,6 @@ public class OnfootFragment extends BaseFragment {
                 sportData.sportTime%3600/60,sportData.sportTime%3600%60));
         averageTv1.setText(sportData.heart+"");
         averageTv2.setText(sportData.stride+"");
-        averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));
         averageTv4.setText(sportData.height+"");
         averageTv5.setText(String.format(Locale.ENGLISH,"%02d'%02d''",sportData.speed/60,sportData.speed%60));
         tableView1.addData(heartArray);

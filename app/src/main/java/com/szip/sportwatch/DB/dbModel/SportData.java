@@ -184,7 +184,8 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 for (int i = 0;i<sportTime/30+(sportTime%30==0?0:1);i++){
                     heartArray += ((new Random().nextInt(10)-5)+heart+",");
                 }
-                heartArray = heartArray.substring(0,heartArray.length()-1);
+                if (heartArray.length()>1)
+                    heartArray = heartArray.substring(0,heartArray.length()-1);
             }
         }
         if (altitude!=0){
@@ -195,7 +196,8 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 for (int i = 0; i< sportTime/(5*60)+(sportTime%(5*60)==0?0:1); i++){
                     altitudeArray += ((new Random().nextInt(20)-10)+altitude+",");
                 }
-                altitudeArray = altitudeArray.substring(0,altitudeArray.length()-1);
+                if (altitudeArray.length()>1)
+                    altitudeArray = altitudeArray.substring(0,altitudeArray.length()-1);
             }
         }
 
@@ -207,6 +209,7 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 for (int i = 0; i< sportTime/60+(sportTime%60==0?0:1); i++){
                     strideArray += ((new Random().nextInt(10)-5)+stride+",");
                 }
+                if (strideArray.length()>1)
                 strideArray = strideArray.substring(0,strideArray.length()-1);
             }
         }
@@ -219,6 +222,7 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 for (int i = 0;i<distance/1000+(distance%1000==0?0:1);i++){
                     speedArray += ((new Random().nextInt(20)-10)+speed+",");
                 }
+                if (speedArray.length()>1)
                 speedArray = speedArray.substring(0,speedArray.length()-1);
             }
         }
