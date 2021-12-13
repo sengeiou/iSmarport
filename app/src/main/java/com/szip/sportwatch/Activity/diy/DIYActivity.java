@@ -141,7 +141,7 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == UCrop.RESULT_ERROR) {
-            Log.d("SZIP******", "URI = " + data.getData());
+            Log.d("DATA******", "URI = " + data.getData());
             showToast(getString(R.string.crop_pic_failed));
             return;
         }
@@ -149,7 +149,7 @@ public class DIYActivity extends BaseActivity implements IDiyView{
             case 1: {
                 if (data == null || data.getData() == null)
                     return;
-                Log.d("SZIP******", "URI1 = " + data.getData());
+                Log.d("DATA******", "URI1 = " + data.getData());
                 FileUtil.getInstance().writeUriSdcardFile(data.getData());
                 File file = new File(MyApplication.getInstance().getPrivatePath() + "camera");
                 if (file.exists()) {

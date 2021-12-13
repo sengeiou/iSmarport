@@ -17,7 +17,7 @@ import com.szip.sportwatch.MyApplication;
  */
 public class SmsService extends BroadcastReceiver {
     // Debugging
-    private static final String TAG = "SmsServiceSZIP******";
+    private static final String TAG = "SmsServiceDATA******";
 
     private static final String SMS_RECEIVED = "com.mtk.btnotification.SMS_RECEIVED";
 

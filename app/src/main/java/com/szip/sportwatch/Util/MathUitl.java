@@ -434,24 +434,6 @@ public class MathUitl {
         return data;
     }
 
-
-    /**
-     * 英制转公制
-     * */
-    public static int british2MetricWeight(int weight){
-        float data;
-        data = (weight / 2.2046226f);
-        return (int)data+(data-(int)data>0.44444?1:0);
-    }
-
-    /**
-     * 公制转英制
-     * */
-    public static double metric2Miles(int height){
-        return (height *  0.00006214);
-    }
-
-
     /**
      * 公制转英制
      * */
@@ -467,6 +449,24 @@ public class MathUitl {
     public static int kmPerHour2MilesPerHour(int speed){
         int mile = (speed*3281+2640)/5280;
         return mile;
+    }
+
+    /**
+     * 公制转英制
+     * */
+    public static String[] kmPerHour2MilesPerHour(String[] speed){
+        StringBuffer inchSpeed = new StringBuffer();
+        if (speed.length>0){
+            for (int i = 0;i<speed.length;i++){
+                if(speed[i].equals(""))
+                    continue;
+                inchSpeed.append(String.format(",%d",kmPerHour2MilesPerHour(Integer.valueOf(speed[i]))));
+            }
+            if (inchSpeed.length()>0)
+                return inchSpeed.toString().substring(1).split(",");
+        }
+
+        return new String[0];
     }
 
     /**
@@ -508,7 +508,7 @@ public class MathUitl {
         String data[] = new String[0];
         for (int i = 0;i<steps.size();i++){
             data = steps.get(i).split("\\|");
-            Log.d("SZIP******","DATE = "+steps.get(i));
+            Log.d("DATA******","DATE = "+steps.get(i));
             hour[Integer.valueOf(data[1].substring(0,data[1].indexOf(':')))==24?23:
                     Integer.valueOf(data[1].substring(0,data[1].indexOf(':')))] += Integer.valueOf(data[3]);
         }
@@ -519,7 +519,7 @@ public class MathUitl {
             }
         }
         String step = stepString.toString();
-        Log.d("SZIP******","详情计步数据 = "+"time = "+DateUtil.getTimeScopeForDay(data[0],"yyyy-MM-dd")+"str = "+step.substring(1));
+        Log.d("DATA******","详情计步数据 = "+"time = "+DateUtil.getTimeScopeForDay(data[0],"yyyy-MM-dd")+"str = "+step.substring(1));
         return new StepData(DateUtil.getTimeScopeForDay(data[0],"yyyy-MM-dd"),0,0,
                 0,step.equals("")?null:step.substring(1));
     }
@@ -544,7 +544,7 @@ public class MathUitl {
             sleepString.append(String.format(Locale.ENGLISH,",%d:",time)+data[2]);
 
         }
-        Log.d("SZIP******","详情睡眠数据 = "+"time = "+DateUtil.getTimeScopeForDay(date,"yyyy-MM-dd")+"str = "+sleepString.toString());
+        Log.d("DATA******","详情睡眠数据 = "+"time = "+DateUtil.getTimeScopeForDay(date,"yyyy-MM-dd")+"str = "+sleepString.toString());
         return new SleepData(DateUtil.getTimeScopeForDay(date,"yyyy-MM-dd"),0,0,
                 sleepString.toString().equals("")?null:sleepString.toString());
     }
@@ -565,7 +565,7 @@ public class MathUitl {
                 heartStr.append(","+data[1]);
             }
         }
-        Log.d("SZIP******","心率数据 = "+"time = "+DateUtil.getTimeScopeForDay(hearts.get(0).split(" ")[0],"yyyy-MM-dd")
+        Log.d("DATA******","心率数据 = "+"time = "+DateUtil.getTimeScopeForDay(hearts.get(0).split(" ")[0],"yyyy-MM-dd")
                 +"heart = "+(sum==0?0:heart/sum)+" ;heartStr = "+heartStr.toString().substring(1));
         return new HeartData(DateUtil.getTimeScopeForDay(hearts.get(0).split(" ")[0],"yyyy-MM-dd"),sum==0?0:heart/sum,
                 heartStr.toString().substring(1));
@@ -730,7 +730,7 @@ public class MathUitl {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("TOKENSZIP******","array = "+data.toString());
+        Log.d("TOKENDATA******","array = "+data.toString());
         return data.toString();
     }
 

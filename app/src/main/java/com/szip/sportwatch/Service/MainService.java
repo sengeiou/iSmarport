@@ -118,14 +118,14 @@ public class MainService extends Service {
         @Override
         public void onConnectChange(int oldState, int newState) {
             if (app.isMtk()){
-                LogUtil.getInstance().logd("SZIP******","STATE = "+newState);
+                LogUtil.getInstance().logd("DATA******","STATE = "+newState);
                 EventBus.getDefault().post(new ConnectState(newState));
                 if (newState == WearableManager.STATE_CONNECTED){//连接成功，发送同步数据指令
                     mSevice.startForeground(0103,NotificationView.getInstance().getNotify(true));
                     startThread();//使能线程
                     reconnectTimes = 0;
                     String str = getResources().getConfiguration().locale.getLanguage();
-                    LogUtil.getInstance().logd("SZIP******","lau = "+str+" loc = "+getResources().getConfiguration().locale.getCountry());
+                    LogUtil.getInstance().logd("DATA******","lau = "+str+" loc = "+getResources().getConfiguration().locale.getCountry());
                     if (str.equals("en"))
                         EXCDController.getInstance().writeForSetLanuage("en_US");
                     else if (str.equals("de"))
@@ -176,7 +176,7 @@ public class MainService extends Service {
         public void onDeviceScan(BluetoothDevice device) {
             if (getState()!=3&&getState()!=2){
                 if (device.getAddress().equals(app.getUserInfo().getDeviceCode())){
-                    LogUtil.getInstance().logd("SZIP******","正在搜索="+device.getAddress());
+                    LogUtil.getInstance().logd("DATA******","正在搜索="+device.getAddress());
                     WearableManager.getInstance().scanDevice(false);
                     WearableManager.getInstance().setRemoteDevice(device);
                     startConnect();
@@ -202,7 +202,7 @@ public class MainService extends Service {
         @Override
         public void checkVersion(boolean stepNum, boolean deltaStepNum, boolean sleepNum, boolean deltaSleepNum,
                                  boolean heart, boolean bloodPressure, boolean bloodOxygen,boolean ecg,boolean animalHeat,String deviceNum) {
-            LogUtil.getInstance().logd("SZIP******","收到心跳包step = "+stepNum+" ;stepD = "+deltaStepNum+" ;sleep = "+sleepNum+
+            LogUtil.getInstance().logd("DATA******","收到心跳包step = "+stepNum+" ;stepD = "+deltaStepNum+" ;sleep = "+sleepNum+
                     " ;sleepD = "+deltaSleepNum+" ;heart = "+heart+ " ;bloodPressure = "+bloodPressure+
                     " ;bloodOxygen = "+heart+" ;ecg = "+ecg+" ;animalHeat = "+animalHeat);
             if (stepNum)
@@ -233,7 +233,7 @@ public class MainService extends Service {
 
         @Override
         public void getStepsForDay(String[] stepsForday) {
-            LogUtil.getInstance().logd("SZIP******","收到计步数据条数 = "+stepsForday.length);
+            LogUtil.getInstance().logd("DATA******","收到计步数据条数 = "+stepsForday.length);
             ArrayList<StepData> dataArrayList = new ArrayList<>();
             for (int i =0;i<stepsForday.length;i++){
                 String datas[] = stepsForday[i].split("\\|");
@@ -241,7 +241,7 @@ public class MainService extends Service {
                 int steps = Integer.valueOf(datas[1]);
                 int distance = Integer.valueOf(datas[2]);
                 int calorie = Integer.valueOf(datas[3])*100;
-                LogUtil.getInstance().logd("SZIP******","计步数据 = "+"time = "+time+" ;steps = "+steps+" ;distance = "+distance+" ;calorie = "+calorie);
+                LogUtil.getInstance().logd("DATA******","计步数据 = "+"time = "+time+" ;steps = "+steps+" ;distance = "+distance+" ;calorie = "+calorie);
                 dataArrayList.add(new StepData(time,steps,distance,calorie,null));
             }
             SaveDataUtil.newInstance().saveStepDataListData(dataArrayList);
@@ -249,7 +249,7 @@ public class MainService extends Service {
 
         @Override
         public void getSteps(String[] steps) {
-            Log.d("SZIP******","详情计步数据条数 = "+steps.length);
+            Log.d("DATA******","详情计步数据条数 = "+steps.length);
             ArrayList<StepData> dataArrayList = new ArrayList<>();
             ArrayList<String> list = null;//用来保存同一天的数据的数组
             String date = null;//用来判断现在保存数据的日期
@@ -276,14 +276,14 @@ public class MainService extends Service {
 
         @Override
         public void getSleepForDay(String[] sleepForday) {
-            Log.d("SZIP******","收到睡眠数据条数 = "+sleepForday.length);
+            Log.d("DATA******","收到睡眠数据条数 = "+sleepForday.length);
             ArrayList<SleepData> dataArrayList = new ArrayList<>();
             for (int i =0;i<sleepForday.length;i++){
                 String datas[] = sleepForday[i].split("\\|");
                 long time = DateUtil.getTimeScopeForDay(datas[0],"yyyy-MM-dd")+24*60*60;
                 int deepTime = DateUtil.getMinue(datas[1]);
                 int lightTime = DateUtil.getMinue(datas[2]);
-                Log.d("SZIP******","睡眠数据 = "+"time = "+time+" ;deep = "+deepTime+" ;light = "+lightTime);
+                Log.d("DATA******","睡眠数据 = "+"time = "+time+" ;deep = "+deepTime+" ;light = "+lightTime);
                 dataArrayList.add(new SleepData(time,deepTime,lightTime,null));
             }
             SaveDataUtil.newInstance().saveSleepDataListData(dataArrayList);
@@ -291,7 +291,7 @@ public class MainService extends Service {
 
         @Override
         public void getSleep(String[] sleep) {
-            Log.d("SZIP******","收到详情睡眠数据条数 = "+sleep.length);
+            Log.d("DATA******","收到详情睡眠数据条数 = "+sleep.length);
             ArrayList<SleepData> dataArrayList = new ArrayList<>();
             ArrayList<String> list = null;//用来保存同一天的数据的数组
             String date = null;//用来判断现在保存数据的日期
@@ -320,7 +320,7 @@ public class MainService extends Service {
 
         @Override
         public void getHeart(String[] heart) {
-            Log.d("SZIP******","收到心率数据条数 = "+heart.length);
+            Log.d("DATA******","收到心率数据条数 = "+heart.length);
             ArrayList<HeartData> dataArrayList = new ArrayList<>();
             ArrayList<String> list = null;//用来保存同一天的数据的数组
             String date = null;//用来判断现在保存数据的日期
@@ -347,14 +347,14 @@ public class MainService extends Service {
 
         @Override
         public void getBloodPressure(String[] bloodPressure) {
-            Log.d("SZIP******","收到血压数据条数 = "+bloodPressure.length);
+            Log.d("DATA******","收到血压数据条数 = "+bloodPressure.length);
             ArrayList<BloodPressureData> dataArrayList = new ArrayList<>();
             for (int i =0;i<bloodPressure.length;i++){
                 String datas[] = bloodPressure[i].split("\\|");
                 long time = DateUtil.getTimeScope(datas[0],"yyyy-MM-dd HH:mm:ss");
                 int sbp = Integer.valueOf(datas[1]);
                 int dbp = Integer.valueOf(datas[2]);
-                Log.d("SZIP******","血压数据 = "+"time = "+time+" ;sbp = "+sbp+" ;dbp = "+dbp);
+                Log.d("DATA******","血压数据 = "+"time = "+time+" ;sbp = "+sbp+" ;dbp = "+dbp);
                 dataArrayList.add(new BloodPressureData(time,sbp,dbp));
             }
             SaveDataUtil.newInstance().saveBloodPressureDataListData(dataArrayList);
@@ -362,13 +362,13 @@ public class MainService extends Service {
 
         @Override
         public void getBloodOxygen(String[] bloodOxygen) {
-            Log.d("SZIP******","收到血氧数据条数 = "+bloodOxygen.length);
+            Log.d("DATA******","收到血氧数据条数 = "+bloodOxygen.length);
             ArrayList<BloodOxygenData> dataArrayList = new ArrayList<>();
             for (int i =0;i<bloodOxygen.length;i++){
                 String datas[] = bloodOxygen[i].split("\\|");
                 long time = DateUtil.getTimeScope(datas[0],"yyyy-MM-dd HH:mm:ss");
                 int data = Integer.valueOf(datas[1]);
-                Log.d("SZIP******","血氧数据 = "+"time = "+time+" ;oxygen = "+data);
+                Log.d("DATA******","血氧数据 = "+"time = "+time+" ;oxygen = "+data);
                 dataArrayList.add(new BloodOxygenData(time,data));
             }
             SaveDataUtil.newInstance().saveBloodOxygenDataListData(dataArrayList);
@@ -376,13 +376,13 @@ public class MainService extends Service {
 
         @Override
         public void getAnimalHeat(String[] animalHeat) {
-            Log.d("SZIP******","收到体温数据条数 = "+animalHeat.length);
+            Log.d("DATA******","收到体温数据条数 = "+animalHeat.length);
             ArrayList<AnimalHeatData> dataArrayList = new ArrayList<>();
             for (int i =0;i<animalHeat.length;i++){
                 String datas[] = animalHeat[i].split("\\|");
                 long time = DateUtil.getTimeScope(datas[0],"yyyy-MM-dd HH:mm:ss");
                 int data = Integer.valueOf(datas[1])*10+Integer.valueOf(datas[2]);
-                Log.d("SZIP******","体温数据 = "+"time = "+time+" ;animalHeat = "+data);
+                Log.d("DATA******","体温数据 = "+"time = "+time+" ;animalHeat = "+data);
                 dataArrayList.add(new AnimalHeatData(time,data));
             }
             SaveDataUtil.newInstance().saveAnimalHeatDataListData(dataArrayList);
@@ -390,12 +390,12 @@ public class MainService extends Service {
 
         @Override
         public void getEcg(String[] ecg) {
-            Log.d("SZIP******","收到ecg数据条数 = "+ecg.length);
+            Log.d("DATA******","收到ecg数据条数 = "+ecg.length);
             ArrayList<EcgData> dataArrayList = new ArrayList<>();
             for (int i =0;i<ecg.length;i++){
                 String datas[] = ecg[i].split("\\|");
                 long time = DateUtil.getTimeScope(datas[0]+" "+datas[1],"yyyy-MM-dd HH:mm:ss");
-                Log.d("SZIP******","ecg数据 = "+"time = "+time+" ;heart = "+datas[2]);
+                Log.d("DATA******","ecg数据 = "+"time = "+time+" ;heart = "+datas[2]);
                 dataArrayList.add(new EcgData(time,datas[2]));
             }
             SaveDataUtil.newInstance().saveEcgDataListData(dataArrayList);
@@ -466,7 +466,7 @@ public class MainService extends Service {
         // updateConnectionStatus(false);
 
         super.onCreate();
-        Log.d("SZIP******","service start");
+        Log.d("DATA******","service start");
         mSevice = this;
         app = MyApplication.getInstance();
         mIsMainServiceActive = true;
@@ -504,7 +504,7 @@ public class MainService extends Service {
                     getState()==WearableManager.STATE_CONNECT_LOST ||
                     getState()==WearableManager.STATE_NONE) ){//如果设备未连接，这连接设备
                 //如果没有连接，则连接
-                Log.d("SZIP******","连接设备BLE");
+                Log.d("DATA******","连接设备BLE");
                 BleClient.getInstance().connect(app.getUserInfo().getDeviceCode());
             }
         }else {
@@ -513,7 +513,7 @@ public class MainService extends Service {
                     getState()==WearableManager.STATE_NONE||
                     getState()==WearableManager.STATE_LISTEN) ){//如果设备未连接，这连接设备
                 //如果没有连接，则连接
-                Log.d("SZIP******","连接设备MTK");
+                Log.d("DATA******","连接设备MTK");
                 WearableManager.getInstance().connect();
             }
         }
@@ -540,7 +540,7 @@ public class MainService extends Service {
                         if (getState()==WearableManager.STATE_CONNECT_FAIL||
                                 getState()==WearableManager.STATE_CONNECT_LOST ||
                                 getState()==WearableManager.STATE_NONE){
-                            Log.d("SZIP******","断线重连");
+                            Log.d("DATA******","断线重连");
                             if (getState()==0||getState()==5){
                                 if (reconnectTimes<3){
                                     reconnectTimes++;
@@ -712,7 +712,7 @@ public class MainService extends Service {
      * */
     public void downloadFirmsoft(String dialUrl, String versionName) {
         if (!dialUrl.equals(app.getDiadUrl())){
-            Log.i("SZIP******","dialUrl = "+dialUrl+" ;path = "+(app.getPrivatePath() + versionName));
+            Log.i("DATA******","dialUrl = "+dialUrl+" ;path = "+(app.getPrivatePath() + versionName));
             File file = new File(app.getPrivatePath() + versionName);
             if (file.exists()){
                 file.delete();
@@ -746,11 +746,11 @@ public class MainService extends Service {
      * 下载文件
      * */
     public boolean downloadFirmsoft(String dialUrl) {
-            Log.i("SZIP******","dialUrl = "+dialUrl);
+            Log.i("DATA******","dialUrl = "+dialUrl);
 
         String[] fileNames = dialUrl.split("/");
         String fileName = fileNames[fileNames.length-1];
-        Log.i("SZIP******","fileName = "+fileName);
+        Log.i("DATA******","fileName = "+fileName);
         File file = new File(app.getPrivatePath() + fileName);
         if (file.exists()){
             return true;
@@ -796,20 +796,20 @@ public class MainService extends Service {
             int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
             switch (status) {
                 case DownloadManager.STATUS_PAUSED:
-                    //Log.d("SZIP******",">>>下载暂停");
+                    //Log.d("DATA******",">>>下载暂停");
                 case DownloadManager.STATUS_PENDING:
-                    //Log.d("SZIP******",">>>下载延迟");
+                    //Log.d("DATA******",">>>下载延迟");
                 case DownloadManager.STATUS_RUNNING:
-                    //Log.d("SZIP******",">>>正在下载");
+                    //Log.d("DATA******",">>>正在下载");
                     break;
                 case DownloadManager.STATUS_SUCCESSFUL:
-                    Log.d("SZIP******",">>>下载完成");
+                    Log.d("DATA******",">>>下载完成");
                     EventBus.getDefault().post(new SendDialModel(true));
                     break;
                 case DownloadManager.STATUS_FAILED:
 
                     EventBus.getDefault().post(new SendDialModel(false));
-                    Log.d("SZIP******",">>>下载失败");
+                    Log.d("DATA******",">>>下载失败");
                     break;
             }
         }

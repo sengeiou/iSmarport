@@ -71,6 +71,7 @@ public class OnfootFragment extends BaseFragment {
         timeTv.setText(DateUtil.getStringDateFromSecond(sportData.time,"MM/dd HH:mm:ss"));
         dataTv.setText(sportData.step+"");
         Log.i("DATA******","distance = "+sportData.distance);
+        Log.i("DATA******","speed = "+sportData.speed);
         if (MyApplication.getInstance().getUserInfo().getUnit()==0){
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",((sportData.distance+5)/10)/100f));
             averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",sportData.speedPerHour/10f));
@@ -79,6 +80,7 @@ public class OnfootFragment extends BaseFragment {
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
             averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",MathUitl.kmPerHour2MilesPerHour(sportData.speedPerHour)/10f));
             ((TextView)getView().findViewById(R.id.speedUnitTv)).setText("mile/h");
+            speedPerHourArray = MathUitl.kmPerHour2MilesPerHour(speedPerHourArray);
             unitTv.setText("mile");
         }
         kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));

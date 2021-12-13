@@ -173,7 +173,7 @@ public class MainPresenterImpl implements IMainPrisenter{
     public void initBle() {
         if (MyApplication.getInstance().getUserInfo().getDeviceCode()!=null){//已绑定
             //连接设备
-            LogUtil.getInstance().logd("SZIP******","state = "+ WearableManager.getInstance().getConnectState());
+            LogUtil.getInstance().logd("DATA******","state = "+ WearableManager.getInstance().getConnectState());
             if (MainService.getInstance().getState()==WearableManager.STATE_NONE){
                 WearableManager.getInstance().scanDevice(true);
             }else if (MainService.getInstance().getState() == WearableManager.STATE_CONNECT_LOST||

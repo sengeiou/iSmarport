@@ -113,7 +113,7 @@ public class MainActivity extends BaseActivity implements IMainView{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtil.getInstance().logd("SZIP******","MAIN DESTROY");
+        LogUtil.getInstance().logd("DATA******","MAIN DESTROY");
         iMainPrisenter.setViewDestory();
         MainService.getInstance().stopConnect();
     }

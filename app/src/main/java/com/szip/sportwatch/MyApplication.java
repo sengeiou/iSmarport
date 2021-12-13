@@ -94,7 +94,7 @@ public class MyApplication extends Application{
             BtMac = String.format("%02X:%02X:%02X:%02X:%02X:%02X",Integer.valueOf(buff[0],16),Integer.valueOf(buff[1],16),
                     Integer.valueOf(buff[2],16),Integer.valueOf(buff[3],16),Integer.valueOf(buff[4],16)
                     ,Integer.valueOf(buff[5],16));
-            Log.d("SZIP******","MAC = "+BtMac);
+            Log.d("DATA******","MAC = "+BtMac);
         }
         if (BtMac.equals("00:00:00:00:00:00"))
             return;
@@ -108,12 +108,12 @@ public class MyApplication extends Application{
                     //利用反射方法调用BluetoothDevice.createBond(BluetoothDevice remoteDevice);
                     Method createBondMethod = BluetoothDevice.class
                             .getMethod("createBond");
-                    Log.d("SZIP******", "开始配对");
+                    Log.d("DATA******", "开始配对");
                     returnValue = (Boolean) createBondMethod.invoke(btDev);
                 }
             }
         }catch (IllegalArgumentException e){
-            Log.e("SZIP******",e.getMessage());
+            Log.e("DATA******",e.getMessage());
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -198,7 +198,7 @@ public class MyApplication extends Application{
                 Log.e("onActivityStarted", mFinalCount + "");
                 if (mFinalCount == 1) {
                     //说明从后台回到了前台
-                    Log.i("SZIP******", " 返回到了 前台");
+                    Log.i("DATA******", " 返回到了 前台");
                     if(isFirst){
                         isFirst = false;
                     }else {
@@ -227,7 +227,7 @@ public class MyApplication extends Application{
                 Log.i("onActivityStopped", mFinalCount + "");
                 if (mFinalCount == 0) {
                     //说明从前台回到了后台
-                    Log.i("SZIP******", " 切换到了 后台");
+                    Log.i("DATA******", " 切换到了 后台");
                     if (isMtk()&&WearableManager.getInstance().getConnectState()==WearableManager.STATE_CONNECTED){
                         EXCDController.getInstance().writeForEnableSend(0);
                     }
@@ -395,7 +395,7 @@ public class MyApplication extends Application{
     }
 
     public void setDeviceNum(String deviceNum) {
-        Log.i("szip******","devicenum = "+deviceNum);
+        Log.i("DATA******","devicenum = "+deviceNum);
         this.deviceNum = deviceNum;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("deviceNum",deviceNum);

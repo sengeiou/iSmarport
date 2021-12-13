@@ -25,7 +25,7 @@ public class BaseActivity extends Activity implements AppInterface {
     @Override
     public void attach(Activity activity) {
         //上下文注入进来了
-        Log.d("SZIP******","上下文注入进来了");
+        Log.d("DATA******","上下文注入进来了");
         this.that = activity;
     }
 

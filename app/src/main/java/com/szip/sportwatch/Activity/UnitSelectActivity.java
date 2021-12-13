@@ -108,7 +108,7 @@ public class UnitSelectActivity extends BaseActivity implements View.OnClickList
                 temp = 1;
                 break;
             case R.id.rightIv:
-                LogUtil.getInstance().logd("SZIP******","UNIT = "+unit+" ;unit = "+app.getUserInfo().getUnit());
+                LogUtil.getInstance().logd("DATA******","UNIT = "+unit+" ;unit = "+app.getUserInfo().getUnit());
                 if (unit==app.getUserInfo().getUnit() && temp == app.getUserInfo().getTempUnit()){
                     showToast(getString(R.string.saved));
                     finish();

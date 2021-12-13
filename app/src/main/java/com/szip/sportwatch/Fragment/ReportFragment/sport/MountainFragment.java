@@ -78,6 +78,7 @@ public class MountainFragment extends BaseFragment {
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
             averageTv5.setText(String.format(Locale.ENGLISH,"%.1f",MathUitl.kmPerHour2MilesPerHour(sportData.speedPerHour)/10f));
             unitTv.setText("mile");
+            speedPerHourArray = MathUitl.kmPerHour2MilesPerHour(speedPerHourArray);
             ((TextView)getView().findViewById(R.id.speedUnitTv)).setText("mile/h");
         }
         sportTimeTv.setText(String.format(Locale.ENGLISH,"%02d:%02d:%02d",sportData.sportTime/3600,

@@ -168,14 +168,14 @@ public class SeachingActivity extends BaseActivity implements View.OnClickListen
      * */
     private void searchDevice(boolean enable) {
         if (enable){
-            LogUtil.getInstance().logd("SZIP******","开始搜索");
+            LogUtil.getInstance().logd("DATA******","开始搜索");
             searchIv.startAnimation(rotateRight);
             mHandler.removeCallbacks(mStopRunnable);
             mHandler.postDelayed(mStopRunnable, 20*1000);
             deviceAdapter.clearList();
             WearableManager.getInstance().scanDevice(true);
         }else {
-            LogUtil.getInstance().logd("SZIP******","搜索停止");
+            LogUtil.getInstance().logd("DATA******","搜索停止");
             searchIv.clearAnimation();
             mHandler.removeCallbacks(mStopRunnable);
             WearableManager.getInstance().scanDevice(false);

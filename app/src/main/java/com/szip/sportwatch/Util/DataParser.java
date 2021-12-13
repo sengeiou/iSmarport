@@ -1158,13 +1158,11 @@ public class DataParser {
             for (int i = 2;i<data.length-12;i++){
                 if (data[i]!=0){
                     datas.add(i-1);
-                    if(i==2){
-                        datas.add(0x19);
-                    }
                 }
             }
             if (data[19]!=0)
                 datas.add(0x14);
+
             if (data.length>20)
                 MyApplication.getInstance().setHeartSwitch(data[20]==1);
             if (data.length>21){
@@ -1181,6 +1179,7 @@ public class DataParser {
             if (data.length>30&&data[30]==1){
                 datas.add(0x24);
             }
+            datas.add(0x19);
             if (mIDataResponse!=null)
                 mIDataResponse.onGetDataIndex(deviceNum+"",datas);
         }

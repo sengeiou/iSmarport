@@ -36,7 +36,7 @@ public class EXCDController extends Controller {
 
     private static final String sControllerTag = "EXCDController";
 
-    private static final String TAG = "SZIP******";
+    private static final String TAG = "DATA******";
 
     private static EXCDController mInstance;
 
@@ -120,7 +120,7 @@ public class EXCDController extends Controller {
                 String animalHeat = null;
                 if(commands.length>23)
                     animalHeat = commands[23];
-                LogUtil.getInstance().logd("SZIP******","animal = "+animalHeat);
+                LogUtil.getInstance().logd("DATA******","animal = "+animalHeat);
                 if (receiveDataCallback !=null)
                     receiveDataCallback.checkVersion(!step[0].equals("0"),!step[1].equals("0"),
                             !sleep[0].equals("0"),!sleep[1].equals("0"),!heart.equals("0"),
@@ -149,7 +149,7 @@ public class EXCDController extends Controller {
                             str.append(steps.get(i).substring(strs[0].length()+strs[1].length()+strs[2].length()+
                                     strs[3].length()+4));
                         }
-                        LogUtil.getInstance().logd("SZIP******","STEP str = "+str);
+                        LogUtil.getInstance().logd("DATA******","STEP str = "+str);
                         if (receiveDataCallback !=null)
                             receiveDataCallback.getSteps(str.toString().split(","));
                         steps = null;
@@ -604,7 +604,7 @@ public class EXCDController extends Controller {
         int gmt = DateUtil.getGMT();
         boolean is24Hour = DateFormat.is24HourFormat(MyApplication.getInstance());
         String str = "SET,45,"+(is24Hour?"1|":"0|")+(gmt>0?"+":"-")+String.format(Locale.ENGLISH,"%04.1f|%d",Math.abs(gmt)/60f, Calendar.getInstance().getTimeInMillis()/1000);
-        LogUtil.getInstance().logd("SZIP******","DATA STR = "+str);
+        LogUtil.getInstance().logd("DATA******","DATA STR = "+str);
         byte[] datas = new byte[0];
         try {
             datas = str.getBytes("ASCII");
@@ -638,7 +638,7 @@ public class EXCDController extends Controller {
         }
         String str = "SET,10,"+String.format(Locale.ENGLISH,"%d|%d|%d|%d",info.getStepsPlan(),info.getSex(),height,weight);
 
-        LogUtil.getInstance().logd("SZIP******","STR = "+str);
+        LogUtil.getInstance().logd("DATA******","STR = "+str);
         byte[] datas = new byte[0];
         try {
             datas = str.getBytes("ASCII");
@@ -701,7 +701,7 @@ public class EXCDController extends Controller {
 
             datas = str.getBytes();
 
-            LogUtil.getInstance().logd("SZIP******","DATA = "+new String(datas));
+            LogUtil.getInstance().logd("DATA******","DATA = "+new String(datas));
             this.send(cmdHead+String.format(Locale.ENGLISH,"0 0 %d ",datas.length),datas,true,false,0);
         }
     }
@@ -732,7 +732,7 @@ public class EXCDController extends Controller {
         System.arraycopy(datas,0,newDatas,0,datas.length);
         System.arraycopy(image,0,newDatas,datas.length,image.length);
         newDatas[newDatas.length-1] = 59;
-        LogUtil.getInstance().logd("SZIP******","SEND IMAGE = "+str);
+        LogUtil.getInstance().logd("DATA******","SEND IMAGE = "+str);
         this.send(cmdHead+String.format(Locale.ENGLISH,"0 0 %d ",newDatas.length),newDatas,true,false,0);
 
     }

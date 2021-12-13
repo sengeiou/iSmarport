@@ -68,7 +68,7 @@ public class FileUtil {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void writeFileSdcardFile(String fileName, byte[] writeStr){
 //        if (context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-//            Log.d("SZIP******","没授权");
+//            Log.d("DATA******","没授权");
 //            return;
 //        }
         ContentValues values = new ContentValues();
@@ -77,13 +77,13 @@ public class FileUtil {
         values.put(MediaStore.Images.Media.DATE_MODIFIED, System.currentTimeMillis() / 1000);
 
         Uri uri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        Log.d("SZIP******","路径 = "+uri);
+        Log.d("DATA******","路径 = "+uri);
         try {
             OutputStream fout = context.getContentResolver().openOutputStream(uri);
             fout.write(writeStr);
             fout.close();
         } catch (Exception e) {
-            Log.d("SZIP******","保存失败 = "+e.getMessage());
+            Log.d("DATA******","保存失败 = "+e.getMessage());
             e.printStackTrace();
         }
     }

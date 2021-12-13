@@ -273,7 +273,7 @@ public class j {
             try{
                 var18.sendMultipartTextMessage(var3, (String)null, var19, var11, var20);
             }catch (SecurityException error){
-                Log.e("SZIP******","ERROR = "+error.getMessage());
+                Log.e("DATA******","ERROR = "+error.getMessage());
             }
 
         }

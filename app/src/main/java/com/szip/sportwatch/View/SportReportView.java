@@ -116,7 +116,7 @@ public class SportReportView extends View {
             mInterval = (valueWidth -mBarWidth*data_num)/(data_num-1);
             tableWidth = width- yTextWidth;
             tableHeight = height- textHeight -pad10;
-            Log.e("SZIP******","本页面宽： " + width +"  高:" + height);
+            Log.e("DATA******","本页面宽： " + width +"  高:" + height);
         }
 
         super.onLayout(changed, left, top, right, bottom);

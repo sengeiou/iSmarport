@@ -48,7 +48,7 @@ public class PluginManager {
         PackageInfo packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
         //得到插件app的入口activity名称
         entryName = "com.szip.run.MainActivity";
-        Log.d("SZIP******",entryName);
+        Log.d("DATA******",entryName);
     }
 
     private String entryName;
@@ -66,9 +66,9 @@ public class PluginManager {
         //dex的缓存路径
         File dexOutFile = context.getDir("dex", Context.MODE_PRIVATE);
         String librarySearchPath = ((BaseDexClassLoader) context.getClassLoader()).findLibrary("Command");
-        Log.d("szip******","librarySearchPath1 = "+context.getExternalFilesDir(null));
+        Log.d("DATA******","librarySearchPath1 = "+context.getExternalFilesDir(null));
         librarySearchPath = librarySearchPath.substring(0, librarySearchPath.lastIndexOf('/'));
-        Log.d("szip******","librarySearchPath2 = "+context.getExternalFilesDir(null));
+        Log.d("DATA******","librarySearchPath2 = "+context.getExternalFilesDir(null));
         dexClassLoader = new DexClassLoader(path, dexOutFile.getAbsoluteFile().getAbsolutePath(), null, context.getClassLoader());
     }
 

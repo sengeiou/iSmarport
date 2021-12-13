@@ -137,7 +137,7 @@ public class ReportScorllView extends View implements GestureDetector.OnGestureL
             valueHeight = height- textHeight -pad10;
             if (data_num>7)//滑到最右边
                 mSliding = -(data_num-7)*(mInterval+mBarWidth);
-            Log.e("SZIP******","本页面宽： " + width +"  高:" + height);
+            Log.e("DATA******","本页面宽： " + width +"  高:" + height);
         }
 
         super.onLayout(changed, left, top, right, bottom);

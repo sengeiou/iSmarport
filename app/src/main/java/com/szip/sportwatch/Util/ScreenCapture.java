@@ -49,7 +49,7 @@ public class ScreenCapture {
 	public static Uri  getBitmap(Activity activity, View layout){
 
 		if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-			Log.d("SZIP******","没授权");
+			Log.d("DATA******","没授权");
 			return null;
 		}
 
@@ -102,7 +102,7 @@ public class ScreenCapture {
 	public static Uri  getScollerBitmap(Activity activity, ScrollView layout){
 
 		if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-			Log.d("SZIP******","没授权");
+			Log.d("DATA******","没授权");
 			return null;
 		}
 

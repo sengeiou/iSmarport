@@ -53,7 +53,7 @@ public class BaseActivity extends AppCompatActivity {
         Uri str = ScreenCapture.getBitmap
                 (this, view);
 
-        Log.d("SZIP******","str = "+str);
+        Log.d("DATA******","str = "+str);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("image/jpeg");
         intent.putExtra(Intent.EXTRA_STREAM, str);
@@ -85,7 +85,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtil.getInstance().logd("SZIP******","退出保存");
+        LogUtil.getInstance().logd("DATA******","退出保存");
         ProgressHudModel.newInstance().diss();
         getSharedPreferences(FILE,MODE_PRIVATE).edit().putInt("updownTime",((MyApplication)getApplication()).getUpdownTime()).commit();
     }

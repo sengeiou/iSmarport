@@ -33,7 +33,7 @@ public class BrigeActivity extends AppCompatActivity {
          * 现实场景中是有服务端下发
          */
         File file = this.getExternalFilesDir( "/fotaplugin-release.apk");
-        Log.d("SZIP******","FILE = "+file.getAbsoluteFile().getPath());
+        Log.d("DATA******","FILE = "+file.getAbsoluteFile().getPath());
         PluginManager.getInstance().loadPath(file.getAbsoluteFile().getPath());
     }
 }

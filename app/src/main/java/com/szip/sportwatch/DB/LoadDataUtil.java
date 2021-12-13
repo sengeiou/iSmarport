@@ -91,7 +91,7 @@ public class LoadDataUtil {
             reportDataBean.setValue(sqlData.steps);
             reportDataBean.setValue1(sqlData.distance);
             reportDataBean.setValue2(sqlData.calorie);
-            Log.d("SZIP******","steps = "+sqlData.steps+" ;hour = "+sqlData.dataForHour);
+            Log.d("DATA******","steps = "+sqlData.steps+" ;hour = "+sqlData.dataForHour);
         }else {
             for (int i = 0;i<24;i++){
                 drawData.add(new DrawDataBean(0,0,0));
@@ -306,7 +306,7 @@ public class LoadDataUtil {
      * 取心率日报告
      * */
     public ReportDataBean getHeartWithDay(long time){
-        Log.d("SZIP******","获取心率报告");
+        Log.d("DATA******","获取心率报告");
         //绘图数据-40传入控件
         ReportDataBean reportDataBean = null;
 
@@ -323,7 +323,7 @@ public class LoadDataUtil {
                 if (Integer.valueOf(heartArray[i])!=0)
                 drawData.add(new DrawDataBean(Integer.valueOf(heartArray[i])-40<0?0:(Integer.valueOf(heartArray[i])-40),0,0));
             }
-            Log.d("SZIP******","heart = "+sqlData.heartArray);
+            Log.d("DATA******","heart = "+sqlData.heartArray);
             reportDataBean.setDrawDataBeans(drawData);
             reportDataBean.setValue(sqlData.averageHeart);
             int data[];
@@ -411,7 +411,7 @@ public class LoadDataUtil {
                             HeartData_Table.time.greaterThanOrEq(startMonth))
                     .queryList();
             for (int j = 0;j<list.size();j++){
-                Log.d("SZIP******","time = "+ DateUtil.getStringDateFromSecond(list.get(j).time,"yyyy-MM-dd"));
+                Log.d("DATA******","time = "+ DateUtil.getStringDateFromSecond(list.get(j).time,"yyyy-MM-dd"));
                     heartSum+=list.get(j).averageHeart;
                     sum++;
             }
@@ -443,7 +443,7 @@ public class LoadDataUtil {
 //                .orderBy(OrderBy.fromString(BloodPressureData_Table.time+OrderBy.DESCENDING))
                 .queryList();
         for (int i = 0;i<list.size();i++){
-            Log.d("SZIP******","SBP = "+list.get(i).sbpDate+" ;DBP = "+list.get(i).dbpDate);
+            Log.d("DATA******","SBP = "+list.get(i).sbpDate+" ;DBP = "+list.get(i).dbpDate);
             drawData.add(new DrawDataBean(list.get(i).sbpDate-45,
                     list.get(i).dbpDate-45,list.get(i).time));
         }
@@ -1204,12 +1204,12 @@ public class LoadDataUtil {
     }
 
     public HealthyConfig getConfig(int deviceNum){
-        Log.d("SZIP******","获取ID = "+deviceNum);
+        Log.d("DATA******","获取ID = "+deviceNum);
         HealthyConfig config = SQLite.select()
                 .from(HealthyConfig.class)
                 .where(HealthyConfig_Table.identifier.is(deviceNum))
                 .querySingle();
-        Log.d("SZIP******","获取ID = "+config);
+        Log.d("DATA******","获取ID = "+config);
         return config;
     }
 
@@ -1252,7 +1252,7 @@ public class LoadDataUtil {
                 min = dataBeans.get(i).getValue();
             if (max<dataBeans.get(i).getValue()&&dataBeans.get(i).getValue()!=0)
                 max = dataBeans.get(i).getValue();
-            Log.d("SZIP******","max = "+max+" ;data = "+dataBeans.get(i).getValue());
+            Log.d("DATA******","max = "+max+" ;data = "+dataBeans.get(i).getValue());
         }
         data[0] = max;
         data[1] = min==1000?0:min;

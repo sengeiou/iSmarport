@@ -161,6 +161,7 @@ public class RunFragment extends BaseFragment implements OnMapReadyCallback {
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
             averageTv3.setText(String.format(Locale.ENGLISH,"%.1f",MathUitl.kmPerHour2MilesPerHour(sportData.speedPerHour)/10f));
             unitTv.setText("mile");
+            speedPerHourArray = MathUitl.kmPerHour2MilesPerHour(speedPerHourArray);
             ((TextView)getView().findViewById(R.id.speedUnitTv)).setText("mile/h");
         }
         kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));

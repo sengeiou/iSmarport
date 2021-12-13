@@ -134,7 +134,7 @@ public class NotificationAppListActivity extends BaseActivity {
         @Override
         public void onSmsStateChange(boolean check) {
             if (check) {
-                LogUtil.getInstance().logd("SZIP******","进入回调");
+                LogUtil.getInstance().logd("DATA******","进入回调");
                 checkPermission();
             } else {
                 MainService.getInstance().stopSmsService();
@@ -149,11 +149,11 @@ public class NotificationAppListActivity extends BaseActivity {
          * */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (checkSelfPermission(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_DENIED){
-                LogUtil.getInstance().logd("SZIP******","申请权限");
+                LogUtil.getInstance().logd("DATA******","申请权限");
                 requestPermissions(new String[]{Manifest.permission.READ_SMS},
                         100);
             }else {
-                LogUtil.getInstance().logd("SZIP******","申请已经打开");
+                LogUtil.getInstance().logd("DATA******","申请已经打开");
                 MainService.getInstance().startSmsService();
             }
         }else {

@@ -57,7 +57,7 @@ public class UtilBroadcat extends BroadcastReceiver {
                     break;
             }
         }else if (intent.getAction().equals("android.intent.action.ACTION_SHUTDOWN")){
-            LogUtil.getInstance().logd("SZIP******","关机");
+            LogUtil.getInstance().logd("DATA******","关机");
             WearableManager.getInstance().disconnect();
         }else if (intent.getAction().equals(BluetoothDevice.ACTION_ACL_CONNECTED)){
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -65,7 +65,7 @@ public class UtilBroadcat extends BroadcastReceiver {
                     &&MainService.getInstance().getState()!=2){
                 WearableManager.getInstance().scanDevice(true);
             }
-            LogUtil.getInstance().logd("SZIP******","蓝牙连接 type = "+device.getType()+" ;address = "+device.getAddress());
+            LogUtil.getInstance().logd("DATA******","蓝牙连接 type = "+device.getType()+" ;address = "+device.getAddress());
         }if (intent.getAction().equals("android.media.VOLUME_CHANGED_ACTION")) {
             long priTime = Calendar.getInstance().getTimeInMillis();
             if (priTime-time>50){

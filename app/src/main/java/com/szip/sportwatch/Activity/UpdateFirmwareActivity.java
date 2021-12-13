@@ -216,25 +216,25 @@ public class UpdateFirmwareActivity extends BaseActivity{
         Sensor stepCounter1 = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         if(stepCounter != null&&stepCounter1 != null){
             // 如果sensor找到，则注册监听器
-            Log.e("SZIP******","注册计步器");
+            Log.e("DATA******","注册计步器");
             mSensorManager.registerListener(sensorEventListener,stepCounter,1000);
         }
         else{
-            Log.e("SZIP******","no step counter sensor found");
+            Log.e("DATA******","no step counter sensor found");
         }
     }
 
     private SensorEventListener sensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            Log.d("SZIP******","步数有变");
+            Log.d("DATA******","步数有变");
             mSteps = event.values[0];
             steps.setText("你已经走了"+String.valueOf((int)mSteps)+"步");
         }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
-            Log.d("SZIP******","步数精确度有变");
+            Log.d("DATA******","步数精确度有变");
         }
     };
 

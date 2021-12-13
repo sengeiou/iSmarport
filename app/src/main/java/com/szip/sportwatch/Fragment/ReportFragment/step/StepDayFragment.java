@@ -66,10 +66,10 @@ public class StepDayFragment extends BaseFragment implements View.OnClickListene
         allStepTv.setText(reportDataBean.getValue()+"");
         kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((reportDataBean.getValue2()+55)/100)/10f));
         if (((MyApplication)getActivity().getApplicationContext()).getUserInfo().getUnit()==0){
-            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",reportDataBean.getValue1()/10000f));
+            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",(reportDataBean.getValue1()+55)/100/100f));
             ((TextView)getView().findViewById(R.id.unitTv)).setText("km");
         } else{
-            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.metric2Miles(reportDataBean.getValue1())));
+            distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",MathUitl.km2Miles(reportDataBean.getValue1()/10)));
             ((TextView)getView().findViewById(R.id.unitTv)).setText("mile");
         }
         if (DateUtil.getTimeOfToday()==((ReportActivity)getActivity()).reportDate)

@@ -153,7 +153,7 @@ public class BleClient {
     public void connect(String mac){
         this.mMac = mac;
         if (connectState == 5){
-            LogUtil.getInstance().logd("SZIP******","开始连接蓝牙设备mac = "+mMac);
+            LogUtil.getInstance().logd("DATA******","开始连接蓝牙设备mac = "+mMac);
             connectState = 2;
             ClientManager.getClient().connect(mMac,bleConnectResponse);
             ClientManager.getClient().registerConnectStatusListener(mMac,connectStatusListener);
@@ -181,7 +181,7 @@ public class BleClient {
                 });
                 setGattProfile(data);
             }else{
-                LogUtil.getInstance().logd("SZIP******","连接蓝牙失败");
+                LogUtil.getInstance().logd("DATA******","连接蓝牙失败");
                 connectState = 5;
                 isSync = false;
                 recvLength = 0;
@@ -200,7 +200,7 @@ public class BleClient {
             LogUtil.getInstance().logd("connectStatus",status+"");
             if( status == 0x10){
                 connectState = 3;
-                LogUtil.getInstance().logd("SZIP******","连接");
+                LogUtil.getInstance().logd("DATA******","连接");
                 MainService.getInstance().setReconnectTimes(0);
                 //连接成功，获取设备信息
                 TimerTask timerTask= new TimerTask() {

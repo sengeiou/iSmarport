@@ -86,7 +86,7 @@ public class ReportTableView extends View {
             textHeight = MathUitl.dipToPx(6,getContext());
             tableWidth = width- textWidth -pad10*2;
             tableHeight = height- textHeight -pad10;
-            Log.e("SZIP******","本页面宽： " + width +"  高:" + height);
+            Log.e("DATA******","本页面宽： " + width +"  高:" + height);
         }
 
         super.onLayout(changed, left, top, right, bottom);

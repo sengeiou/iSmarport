@@ -98,7 +98,7 @@ public class SportSpeedView extends View {
             width = getWidth();
             height = getHeight();
             textHeight = MathUitl.dipToPx(6,getContext());
-            Log.e("SZIP******","本页面宽： " + width +"  高:" + height);
+            Log.e("DATA******","本页面宽： " + width +"  高:" + height);
         }
 
         super.onLayout(changed, left, top, right, bottom);

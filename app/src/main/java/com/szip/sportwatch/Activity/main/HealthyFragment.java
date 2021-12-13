@@ -246,7 +246,6 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
             stepPb.setMaxValues(app.getUserInfo().getStepsPlan());
             stepPb.setCurrentValues(healthyDataModel.getStepsData());
             stepTv.setText(healthyDataModel.getStepsData()+"");
-            Log.i("data******","distance = "+healthyDataModel.getDistanceData());
             if (app.getUserInfo().getUnit()==0){
                 distanceTv.setText(String.format(Locale.ENGLISH,"%.2f",(healthyDataModel.getDistanceData()+55)/100/100f));
                 ((TextView)getView().findViewById(R.id.unitTv)).setText("km");
@@ -416,7 +415,7 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
                             new GenericsCallback<WeatherBean>(new JsonGenericsSerializator()) {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
-                                    Log.d("SZIP******","error = "+e.getMessage());
+                                    Log.d("DATA******","error = "+e.getMessage());
                                 }
 
                                 @Override
@@ -446,7 +445,7 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
                                 }
                             });
                 } catch (IOException e) {
-                    Log.d("SZIP******","error = "+e.getMessage());
+                    Log.d("DATA******","error = "+e.getMessage());
                     e.printStackTrace();
                 }
                 locationManager.removeUpdates(locationListener);

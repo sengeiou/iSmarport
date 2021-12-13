@@ -201,7 +201,7 @@ public class CommandUtil {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            LogUtil.getInstance().logd("SZIP******","datas = "+datas.length);
+            LogUtil.getInstance().logd("DATA******","datas = "+datas.length);
             for (int i = 0;i<datas.length;i++){
                 data[8+i] = datas[i];
             }
@@ -316,7 +316,7 @@ public class CommandUtil {
             data[i*(14+locationLenght)+12] = (byte) (weatherModel.get(i).getCode()&0xff);
             data[i*(14+locationLenght)+13] = (byte) ((weatherModel.get(i).getCode()>>8)&0xff);
             System.arraycopy(location,0,data,i*(14+locationLenght)+14,locationLenght);
-            LogUtil.getInstance().logd("SZIP******",weatherModel.get(i).getCode()+weatherModel.get(i).getText());
+            LogUtil.getInstance().logd("DATA******",weatherModel.get(i).getCode()+weatherModel.get(i).getText());
         }
 
         LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));

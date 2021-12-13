@@ -171,6 +171,8 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
     }
 
 
+    private int oldRandom = 0;
+
     /**
      * 如果没有数组数据，则造假数据
      *
@@ -182,10 +184,13 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 heartArray = String.valueOf(heart);
             }else {
                 for (int i = 0;i<sportTime/30+(sportTime%30==0?0:1);i++){
-                    heartArray += ((new Random().nextInt(10)-5)+heart+",");
+                    int random = new Random().nextInt(10)-5;
+                    heartArray += (random-oldRandom+heart+",");
+                    oldRandom = random;
                 }
                 if (heartArray.length()>1)
                     heartArray = heartArray.substring(0,heartArray.length()-1);
+                oldRandom = 0;
             }
         }
         if (altitude!=0){
@@ -194,10 +199,13 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 altitudeArray = String.valueOf(altitude);
             }else {
                 for (int i = 0; i< sportTime/(5*60)+(sportTime%(5*60)==0?0:1); i++){
-                    altitudeArray += ((new Random().nextInt(20)-10)+altitude+",");
+                    int random = new Random().nextInt(20)-10;
+                    altitudeArray += (random-oldRandom+altitude+",");
+                    oldRandom = random;
                 }
                 if (altitudeArray.length()>1)
                     altitudeArray = altitudeArray.substring(0,altitudeArray.length()-1);
+                oldRandom = 0;
             }
         }
 
@@ -207,10 +215,13 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 strideArray = String.valueOf(stride);
             }else {
                 for (int i = 0; i< sportTime/60+(sportTime%60==0?0:1); i++){
-                    strideArray += ((new Random().nextInt(10)-5)+stride+",");
+                    int random = new Random().nextInt(10)-5;
+                    strideArray += ((random-oldRandom+stride)<0?0:(random-oldRandom+stride)+",");
+                    oldRandom = random;
                 }
                 if (strideArray.length()>1)
-                strideArray = strideArray.substring(0,strideArray.length()-1);
+                    strideArray = strideArray.substring(0,strideArray.length()-1);
+                oldRandom = 0;
             }
         }
 
@@ -220,14 +231,18 @@ public class SportData extends BaseModel implements Comparable<SportData>,Serial
                 speedArray = String.valueOf(speed);
             }else {
                 for (int i = 0;i<distance/1000+(distance%1000==0?0:1);i++){
-                    speedArray += ((new Random().nextInt(20)-10)+speed+",");
+                    int random = new Random().nextInt(20)-10;
+                    speedArray += (random-oldRandom+speed+",");
                 }
                 if (speedArray.length()>1)
-                speedArray = speedArray.substring(0,speedArray.length()-1);
+                    speedArray = speedArray.substring(0,speedArray.length()-1);
+                oldRandom = 0;
             }
         }
 
     }
+
+
 
 
     @Override

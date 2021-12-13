@@ -74,6 +74,7 @@ public class BikeFragment extends BaseFragment {
         } else{
             distanceTv.setText(String.format(Locale.ENGLISH,"%.2f", MathUitl.km2Miles(sportData.distance)));
             averageTv2.setText(String.format(Locale.ENGLISH,"%.1f",MathUitl.kmPerHour2MilesPerHour(sportData.speedPerHour)/10f));
+            speedPerHourArray = MathUitl.kmPerHour2MilesPerHour(speedPerHourArray);
             unitTv.setText("mile");
         }
         kcalTv.setText(String.format(Locale.ENGLISH,"%.1f",((sportData.calorie+55)/100)/10f));
