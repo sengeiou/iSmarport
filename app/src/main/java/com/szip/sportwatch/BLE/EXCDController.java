@@ -21,6 +21,7 @@ import com.szip.sportwatch.Util.DateUtil;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.MusicUtil;
+import com.szip.sportwatch.Util.ProgressHudModel;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -298,7 +299,7 @@ public class EXCDController extends Controller {
                 }
                 writeForRET("SET,"+commands[1]);
             }else if (commands[1].equals("14")){//操作相机指令
-                if (((MyApplication)mContext.getApplicationContext()).isCamerable())
+                if (((MyApplication)mContext.getApplicationContext()).isCamerable()&&!ProgressHudModel.newInstance().isShow())
                     if (commands[2].equals("1")){//打开相机
                         Intent intent1=new Intent(mContext, CameraActivity.class);
                         intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);

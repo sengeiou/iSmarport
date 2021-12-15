@@ -55,6 +55,7 @@ import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.MusicUtil;
+import com.szip.sportwatch.Util.ProgressHudModel;
 import com.zhy.http.okhttp.callback.GenericsCallback;
 
 
@@ -413,7 +414,7 @@ public class BleClient {
 
         @Override
         public void onCamera(int flag) {
-            if (MyApplication.getInstance().isCamerable())
+            if (MyApplication.getInstance().isCamerable()&& !ProgressHudModel.newInstance().isShow())
                 if (flag == 1){//打开相机
                     Intent intent1=new Intent(MyApplication.getInstance().getApplicationContext(), CameraActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
