@@ -165,11 +165,11 @@ public class SportFragment extends BaseFragment implements View.OnClickListener{
         else
             ((TextView)getView().findViewById(R.id.time)).setText("----/--/-- --:--:--");
         Log.d("DATA******","time = "+sportData.time);
-        if (app.getUserInfo().getAvatar()!=null)
-            Glide.with(this).load(app.getUserInfo().getAvatar()).into(pictureIv);
-        else
-            pictureIv.setImageResource(app.getUserInfo().getSex()==1?R.mipmap.my_head_male_52:R.mipmap.my_head_female_52);
-        userNameTv.setText(app.getUserInfo().getUserName());
+        Glide.with(this).load(app.getUserInfo().getAvatar())
+                    .fallback(R.mipmap.my_head_male_52)
+                    .error(R.mipmap.my_head_male_52)
+                    .into(pictureIv);
+          userNameTv.setText(app.getUserInfo().getUserName());
     }
 
     @Override

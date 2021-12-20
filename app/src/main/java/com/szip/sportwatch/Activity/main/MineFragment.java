@@ -404,12 +404,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         userNameTv.setText(userInfo.getUserName());
         stepPlanTv.setText(userInfo.getStepsPlan()+"");
         sleepPlanTv.setText(String.format(Locale.ENGLISH,"%.1fh",userInfo.getSleepPlan()/60f));
-
-        if (app.getUserInfo().getAvatar()!=null)
-            Glide.with(this).load(app.getUserInfo().getAvatar()).into(pictureIv);
-        else
-            pictureIv.setImageResource(userInfo.getSex()==1?R.mipmap.my_head_male_52:R.mipmap.my_head_female_52);
-
+        Glide.with(this).load(app.getUserInfo().getAvatar())
+                .fallback(R.mipmap.my_head_male_36)
+                .error(R.mipmap.my_head_male_36)
+                .into(pictureIv);
         if (app.isMtk()){
             getView().findViewById(R.id.heartSwitchLl).setVisibility(View.GONE);
         }else {

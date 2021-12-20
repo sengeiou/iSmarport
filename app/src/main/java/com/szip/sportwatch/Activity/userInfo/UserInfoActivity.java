@@ -130,11 +130,12 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
         userNameTv.setText(userInfo.getUserName());
         sexTv.setText(userInfo.getSex()==1?getString(R.string.male):getString(R.string.female));
-        if (app.getUserInfo().getAvatar()!=null)
-            Glide.with(this).load(app.getUserInfo().getAvatar()).into(pictureIv);
-        else
-            pictureIv.setImageResource(app.getUserInfo().getSex()==1?R.mipmap.my_head_male_52: R.mipmap.my_head_female_52);
-        if (userInfo.getUnit() == 0){
+        Glide.with(this).load(app.getUserInfo().getAvatar())
+                    .fallback(R.mipmap.my_head_male_52)
+                    .error(R.mipmap.my_head_male_52)
+                    .into(pictureIv);
+        if (userInfo.getUnit() == 0)
+        {
             heightTv.setText(userInfo.getHeight()+"cm");
             weightTv.setText(userInfo.getWeight()+"kg");
         }else {

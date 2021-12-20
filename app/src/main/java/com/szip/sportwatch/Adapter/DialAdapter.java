@@ -80,10 +80,11 @@ public class DialAdapter extends RecyclerView.Adapter<DialAdapter.Holder> {
         } else {
             holder.fruitView.findViewById(R.id.diyRl).setVisibility(View.GONE);
             holder.fruitView.findViewById(R.id.dailRl).setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(dialArrayList.get(position).getPreviewUrl()).into(holder.imageView);
+            Glide.with(mContext).load(dialArrayList.get(position).getPreviewUrl())
+                    .placeholder(R.mipmap.dial_default)
+                    .into(holder.imageView);
 //            holder.imageView.setImageResource(dials[position]);
         }
-
     }
 
     @Override

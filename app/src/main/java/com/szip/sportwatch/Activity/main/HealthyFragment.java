@@ -317,11 +317,12 @@ public class HealthyFragment extends BaseFragment implements View.OnClickListene
             ecgDataTv.setText("--bpm");
         }
 
-        if (app.getUserInfo().getAvatar()!=null)
-            Glide.with(this).load(app.getUserInfo().getAvatar()).into( ((CircularImageView)getView().findViewById(R.id.pictureIv)));
-        else
-            ((CircularImageView)getView().findViewById(R.id.pictureIv)).setImageResource(app.getUserInfo().getSex()==1?R.mipmap.my_head_male_52:
-                    R.mipmap.my_head_female_52);
+
+        Glide.with(this).load(app.getUserInfo().getAvatar())
+                .fallback(R.mipmap.my_head_male_52)
+                .error(R.mipmap.my_head_male_52)
+                .into( ((CircularImageView)getView().findViewById(R.id.pictureIv)));
+
     }
 
 
