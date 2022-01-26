@@ -40,8 +40,10 @@ import com.szip.sportwatch.Model.BleStepModel;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
 
 import com.szip.sportwatch.Model.EvenBusModel.UpdateReport;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateSchedule;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
+import com.szip.sportwatch.Model.ScheduleData;
 import com.szip.sportwatch.Model.UpdateSportView;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Notification.NotificationView;
@@ -132,7 +134,6 @@ public class BleClient {
                         }
                     }
                     phaserRecvBuffer();
-
                 }
             }
         };
@@ -275,7 +276,6 @@ public class BleClient {
                 serviceUUID = service.getUUID();
                 List<BleGattCharacter> characters = service.getCharacters();
                 for(BleGattCharacter character : characters){
-                    String uuidCharacteristic = character.getUuid().toString();
                     if( character.getUuid().toString().equalsIgnoreCase(Config.char2)){     // 主要用于回复等操作
                         openid(serviceUUID,character.getUuid());
                     }
@@ -388,6 +388,18 @@ public class BleClient {
         @Override
         public void onSaveRunDatas(ArrayList<SportData> datas) {
             SaveDataUtil.newInstance().saveSportDataListData(datas);
+        }
+
+        @Override
+        public void onSaveScheduleData(ArrayList<ScheduleData> datas) {
+            if (datas==null||datas.size()==0)
+                return;
+            EventBus.getDefault().post(new UpdateSchedule(datas));
+        }
+
+        @Override
+        public void onScheduleCallback(int type, int state) {
+            EventBus.getDefault().post(new UpdateSchedule(type,state));
         }
 
         @Override
@@ -914,6 +926,26 @@ public class BleClient {
             ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
                     CommandUtil.getCommandbyteDialFile(2,type,clockId,addresss,num,datas),bleWriteResponse);
         }
+    }
+
+    public void writeForGetSchedule(){
+        ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                CommandUtil.getCommandbyteArray(0x55, 8, 0, true),bleWriteResponse);
+    }
+
+    public void writeForAddSchedule(ScheduleData scheduleData){
+        ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                CommandUtil.getCommandByteSchedule(0x52, scheduleData),bleWriteResponse);
+    }
+
+    public void writeForDeleteSchedule(ScheduleData scheduleData){
+        ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                CommandUtil.getCommandByteSchedule(0x53, scheduleData),bleWriteResponse);
+    }
+
+    public void writeForEditSchedule(ScheduleData scheduleData){
+        ClientManager.getClient().write(mMac,serviceUUID,UUID.fromString(Config.char1),
+                CommandUtil.getCommandByteSchedule(0x54, scheduleData),bleWriteResponse);
     }
 
     public int getConnectState() {

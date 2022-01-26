@@ -498,6 +498,14 @@ public class MathUitl {
         return list;
     }
 
+    public static ArrayList<String> getNumberList(int num){
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0;i<num;i++){
+            list.add(String.format("%02d",i));
+        }
+        return list;
+    }
+
     /**
      * 统计日计步数据,日详情计步格式
      * str = hour1:step,hour2:step,....

@@ -12,6 +12,7 @@ import android.util.Log;
 import com.mediatek.ctrl.notification.NotificationData;
 import com.szip.sportwatch.BLE.EXCDController;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
+import com.szip.sportwatch.Model.ScheduleData;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Notification.AppList;
@@ -247,10 +248,10 @@ public class CommandUtil {
             data[1] = (byte) cmd;
             data[2] = (byte) (data.length-8);
             data[3] = 0;
-            data[4] = (byte) (time&0xff);
-            data[5] = (byte) ((time>>8)&0xff);
-            data[6] = (byte) ((time>>16)&0xff);
-            data[7] = (byte) ((time>>24)&0xff);
+            data[4] = (byte)0xf0;
+            data[5] = (byte)0xf0;
+            data[6] = (byte)0xf0;
+            data[7] = (byte)0xf0;
             LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
             return data;
         }
@@ -271,10 +272,10 @@ public class CommandUtil {
         data[1] = (byte) cmd;
         data[2] = (byte) (data.length-8);
         data[3] = 0;
-        data[4] = (byte) (time&0xff);
-        data[5] = (byte) ((time>>8)&0xff);
-        data[6] = (byte) ((time>>16)&0xff);
-        data[7] = (byte) ((time>>24)&0xff);
+        data[4] = (byte)0xf0;
+        data[5] = (byte)0xf0;
+        data[6] = (byte)0xf0;
+        data[7] = (byte)0xf0;
         data[8] = (byte) (names.length&0xff);
         data[9] = (byte) ((names.length>>8)&0xff);
         if (names.length!=0)
@@ -339,10 +340,10 @@ public class CommandUtil {
         data[1] = (byte) 0x40;
         data[2] = (byte) (data.length-8);
         data[3] = 0;
-        data[4] = (byte) (time&0xff);
-        data[5] = (byte) ((time>>8)&0xff);
-        data[6] = (byte) ((time>>16)&0xff);
-        data[7] = (byte) ((time>>24)&0xff);
+        data[4] = (byte)0xf0;
+        data[5] = (byte)0xf0;
+        data[6] = (byte)0xf0;
+        data[7] = (byte)0xf0;
         data[8] = (byte) type;
         data[9] = (byte) (names.length>30?30:names.length);
         data[10] = 0;
@@ -482,6 +483,80 @@ public class CommandUtil {
             LogUtil.getInstance().logd("DATA******","发送的OTA结束包 = "+DateUtil.byteToHexString(data));
         }
 
+        return data;
+    }
+
+    public static byte[] getCommandByteSchedule(int type, ScheduleData scheduleData){
+        byte[] data = new byte[0];
+        long time = scheduleData.getTime();
+        if (type == 0x52){
+            byte msgs[] = null;
+            try {
+                msgs = scheduleData.getMsg().getBytes("UnicodeBigUnmarked");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            if (msgs==null||msgs.length==0)
+                return new byte[0];
+            data = new byte[15+msgs.length];
+            data[0] = (byte) 0xAA;
+            data[1] = (byte) type;
+            data[2] = (byte) (7+msgs.length);
+            data[3] = 0;
+            data[4] = (byte)0xf0;
+            data[5] = (byte)0xf0;
+            data[6] = (byte)0xf0;
+            data[7] = (byte)0xf0;
+            data[8] = 0;
+            data[9] = (byte) (time&0xff);
+            data[10] = (byte) ((time>>8)&0xff);
+            data[11] = (byte) ((time>>16)&0xff);
+            data[12] = (byte) ((time>>24)&0xff);
+            data[13] = (byte) (msgs.length&0xff);
+            data[14] = (byte) ((msgs.length>>8)&0xff);
+            System.arraycopy(msgs,0,data,15,msgs.length);
+        }else if (type == 0x53){
+            data = new byte[9];
+            data[0] = (byte) 0xAA;
+            data[1] = (byte) type;
+            data[2] = (byte) (data.length-8);
+            data[3] = 0;
+            data[4] = (byte)0xf0;
+            data[5] = (byte)0xf0;
+            data[6] = (byte)0xf0;
+            data[7] = (byte)0xf0;
+            data[8] = (byte) scheduleData.getIndex();
+        }else if (type == 0x54){
+            byte msgs[] = null;
+            try {
+                msgs = scheduleData.getMsg().getBytes("UnicodeBigUnmarked");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            if (msgs==null||msgs.length==0)
+                return new byte[0];
+            data = new byte[16+msgs.length];
+            data[0] = (byte) 0xAA;
+            data[1] = (byte) type;
+            data[2] = (byte) (8+msgs.length);
+            data[3] = 0;
+            data[4] = (byte)0xf0;
+            data[5] = (byte)0xf0;
+            data[6] = (byte)0xf0;
+            data[7] = (byte)0xf0;
+            data[8] = (byte) scheduleData.getIndex();
+            data[9] = 0;
+            data[10] = (byte) (time&0xff);
+            data[11] = (byte) ((time>>8)&0xff);
+            data[12] = (byte) ((time>>16)&0xff);
+            data[13] = (byte) ((time>>24)&0xff);
+            data[14] = (byte) (msgs.length&0xff);
+            data[15] = (byte) ((msgs.length>>8)&0xff);
+            System.arraycopy(msgs,0,data,16,msgs.length);
+        }
+
+        LogUtil.getInstance().logd("data******","index = "+scheduleData.getIndex()+" ;msg = "+scheduleData.getMsg());
+        LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
         return data;
     }
 

@@ -159,16 +159,6 @@ public class ColorArcProgressBar extends View
 
     }
 
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-//    {
-//        int width  = (int) (2 * (longDegree + DEGREE_PROGRESS_DISTANCE) + progressWidth + diameter);
-//        int height = (int) (2 * (longDegree + DEGREE_PROGRESS_DISTANCE) + progressWidth + diameter);
-//        Log.v("ColorArcProgressBar", "onMeasure: width:"+width+" height:"+height);
-//        setMeasuredDimension(width, height);
-//    }
-
-
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {

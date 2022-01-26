@@ -42,7 +42,6 @@ public class DIYActivity extends BaseActivity implements IDiyView{
 
     private RecyclerView clockRv;
     private Uri resultUri;
-    private int progress = 0;
 
     private CircularImageView backgroundIv;
     private ImageView clockIv,diyIv;
@@ -75,7 +74,6 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     protected void onResume() {
         super.onResume();
         if(!isSendPic){
-            progress = 0;
             ProgressHudModel.newInstance().diss();
         }
     }
@@ -194,17 +192,14 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     public void onUpdataView(UpdateDialView updateView){
         if(updateView.getType()==0){//进度+1
             iDiyPresenter.sendDial(null,-1);
-            progress++;
-            ProgressHudModel.newInstance().setProgress(progress);
+            ProgressHudModel.newInstance().setProgress();
         }else if (updateView.getType()==1){//完成
             isSendPic = false;
-            progress = 0;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
         }else if (updateView.getType()==2){//失败
 //            if (isSendPic){
                 isSendPic = false;
-                progress = 0;
                 ProgressHudModel.newInstance().diss();
                 showToast(getString(R.string.diyDailError1));
 //            }
@@ -244,6 +239,6 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     @Override
     public void setDialProgress(int num) {
         ProgressHudModel.newInstance().showWithPie(DIYActivity.this,getString(R.string.diyDailing),num,
-                getString(R.string.diyDailError),100*1000);
+                getString(R.string.diyDailError),30*1000);
     }
 }

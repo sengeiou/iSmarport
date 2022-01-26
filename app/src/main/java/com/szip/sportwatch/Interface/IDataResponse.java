@@ -7,6 +7,7 @@ import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Model.BleStepModel;
+import com.szip.sportwatch.Model.ScheduleData;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,16 @@ public interface IDataResponse {
      * 接收完成跑步数据
      */
     void onSaveRunDatas(ArrayList<SportData> datas);
+
+    /**
+     * 接收完成日程表
+     */
+    void onSaveScheduleData(ArrayList<ScheduleData> datas);
+
+    /**
+     * 接收日程表增删改操作回调
+     */
+    void onScheduleCallback(int type,int state);
 
     /**
      * 接收完成血氧数据

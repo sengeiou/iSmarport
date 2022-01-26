@@ -33,7 +33,6 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     private ISelectDialPresenter iSelectDialPresenter;
     private String pictureUrl;
     private ImageView dialIv,changeIv;
-    private int progress = 0;
     private boolean isSendPic = false;
 
     private String faceType = "";
@@ -64,7 +63,6 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     protected void onResume() {
         super.onResume();
         if(!isSendPic){
-            progress = 0;
             ProgressHudModel.newInstance().diss();
         }
     }
@@ -90,7 +88,7 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             public void onClick(View v) {
                 if (!ProgressHudModel.newInstance().isShow()&&pictureUrl!=null){
                     ProgressHudModel.newInstance().show(SelectDialActivity.this,getString(R.string.loading),
-                            getString(R.string.connect_error),30000);
+                            getString(R.string.connect_error),40000);
                     boolean hasFile = MainService.getInstance().downloadFirmsoft(pictureUrl);
                     if(hasFile)
                         iSelectDialPresenter.startToSendDial();
@@ -112,23 +110,19 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUpdataView(UpdateDialView updateView){
         if(updateView.getType()==0){//进度+1
-            progress++;
             iSelectDialPresenter.sendDial(null,-1);
-            ProgressHudModel.newInstance().setProgress(progress);
+            ProgressHudModel.newInstance().setProgress();
         }else if (updateView.getType()==1){//完成
             isSendPic = false;
-            progress = 0;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
         }else if (updateView.getType()==2){//失败
             isSendPic = false;
-            progress = 0;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailError1));
         }else if (updateView.getType()==3){//准备开始
             Log.i("data******","准备发送数据");
             isSendPic = true;
-            progress = 0;
             ProgressHudModel.newInstance().diss();
             String fileNames[] = pictureUrl.split("/");
             iSelectDialPresenter.sendDial(fileNames[fileNames.length-1],updateView.getData());
@@ -136,7 +130,6 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
             iSelectDialPresenter.resumeSendDial(updateView.getData());
         }else {
             isSendPic = false;
-            progress = 0;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
         }
@@ -191,6 +184,6 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     @Override
     public void setDialProgress(int max) {
         ProgressHudModel.newInstance().showWithPie(this,getString(R.string.diyDailing),max,
-                getString(R.string.diyDailError),5*60*1000);
+                getString(R.string.diyDailError),30*1000);
     }
 }

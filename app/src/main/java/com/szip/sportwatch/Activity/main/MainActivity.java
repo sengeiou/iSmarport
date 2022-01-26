@@ -30,6 +30,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -63,6 +64,7 @@ public class MainActivity extends BaseActivity implements IMainView{
         setContentView(R.layout.activity_main);
         StatusBarCompat.translucentStatusBar(MainActivity.this,true);
         app = (MyApplication) getApplicationContext();
+
 
         layout = findViewById(R.id.layout);
         iMainPrisenter = new MainPresenterImpl(this,this);

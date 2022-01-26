@@ -941,10 +941,6 @@ public class LoadDataUtil {
         calendar.set(Calendar.MILLISECOND,0);
         long startTime = calendar.getTimeInMillis()/1000;//月报告的起始天数的第一秒
 
-        ArrayList<DrawDataBean> drawData = new ArrayList<>();
-
-
-
         List<SportData> list = SQLite.select()
                 .from(SportData.class)
                 .where(SportData_Table.time.lessThanOrEq(time+24*60*60-1),

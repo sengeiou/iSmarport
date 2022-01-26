@@ -32,7 +32,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <application
         android:name=".MyApplication"
@@ -41,7 +41,9 @@
         android:roundIcon="@mipmap/sport_map_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.initInfo.InitInfoActivity"></activity>
+        <activity android:name=".Activity.schedule.ScheduleEditActivity"></activity>
+        <activity android:name=".Activity.schedule.ScheduleActivity" />
+        <activity android:name=".Activity.initInfo.InitInfoActivity" />
         <activity android:name=".Activity.help.GuideActivity" />
         <activity android:name=".Activity.help.ServicePrivacyActivity" />
         <activity android:name=".Activity.help.FaqActivity" />

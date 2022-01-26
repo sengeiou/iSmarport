@@ -70,7 +70,7 @@
     <string name="track">运动详情</string>
     <string name="speed">配速</string>
     <string name="kcal">消耗(kcal)</string>
-    <string name="time">时长</string>
+    <string name="time">时间</string>
     <string name="heart_rate">心率(bpm)</string>
     <string name="cadence">步频</string>
     <string name="distance">里程(</string>
@@ -323,5 +323,13 @@
     <string name="training">训练跑</string>
     <string name="heart_switch">自动测量心率</string>
     <string name="stride">步频</string>
-
+    <string name="schedule">我的日程</string>
+    <string name="deleteSchedule">删除日程</string>
+    <string name="schedule_info">日程详情</string>
+    <string name="schedule_fall">手表可添加的日程已经达到上限，请清理后再添加</string>
+    <string name="schedule_add_fail">添加日程失败</string>
+    <string name="schedule_edit_fail">修改日程失败</string>
+    <string name="schedule_delete_fail">删除日程失败</string>
+    <string name="schedule_past">无法设置已经过去的时间点作为日程时间点</string>
+    <string name="schedule_msg">填写日程详情</string>
 </resources>

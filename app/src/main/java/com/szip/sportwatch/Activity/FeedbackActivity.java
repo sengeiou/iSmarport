@@ -25,7 +25,7 @@ import okhttp3.Call;
 public class FeedbackActivity extends BaseActivity{
 
     private EditText feedbackEt;
-    private TextView lenghtTv;
+    private TextView lengthTv;
     private RelativeLayout feedbackRl;
 
 
@@ -45,7 +45,7 @@ public class FeedbackActivity extends BaseActivity{
         setTitleText(getString(R.string.feedback));
 
         feedbackEt = findViewById(R.id.feedbackEt);
-        lenghtTv = findViewById(R.id.wordLenghtTv);
+        lengthTv = findViewById(R.id.wordLenghtTv);
         feedbackRl = findViewById(R.id.feedbackRl);
 
     }
@@ -89,11 +89,11 @@ public class FeedbackActivity extends BaseActivity{
             @Override
             public void afterTextChanged(Editable s) {
                 int len = s.toString().length();
-                lenghtTv.setText(String.format("%d/300",len));
+                lengthTv.setText(String.format("%d/300",len));
                 if (len>300)
-                    lenghtTv.setTextColor(Color.RED);
+                    lengthTv.setTextColor(Color.RED);
                 else
-                    lenghtTv.setTextColor(getResources().getColor(R.color.black1));
+                    lengthTv.setTextColor(getResources().getColor(R.color.black1));
             }
         });
 

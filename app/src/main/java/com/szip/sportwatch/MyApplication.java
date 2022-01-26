@@ -39,7 +39,6 @@ import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.MusicUtil;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.TopExceptionHandler;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,11 +131,6 @@ public class MyApplication extends Application{
          * */
         UtilBroadcat broadcat = new UtilBroadcat(getApplicationContext());
         broadcat.onRegister();
-
-        /**
-         * 把log上传到云端
-         * */
-        CrashReport.initCrashReport(getApplicationContext(), "937b55f499", true);
 
         /**
          * 把测试版的log导出到本地，上线的渠道版不需要导出

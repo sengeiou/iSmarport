@@ -469,6 +469,42 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/scheduleLl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginEnd="@dimen/item_margin_parallel"
+                android:layout_marginStart="@dimen/item_margin_parallel"
+                android:background="@drawable/bg_mine_item"
+                android:layout_marginTop="@dimen/item_margin_model_top">
+
+                <ImageView
+                    android:id="@+id/image11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/my_icon_schedule"
+                    android:padding="@dimen/item_pad"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/schedule"
+                    android:textColor="@color/rayblue"
+                    android:textSize="@dimen/item_text_size"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/image11"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/item_margin_model_right"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/my_icon_arrow"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"

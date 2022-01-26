@@ -146,9 +146,12 @@ public class MainService extends Service {
                         EXCDController.getInstance().writeForSetLanuage("ar_SA");
                     else if (str.equals("th"))
                         EXCDController.getInstance().writeForSetLanuage("th_TH");
-                    else if (str.equals("zh"))
-                        EXCDController.getInstance().writeForSetLanuage("zh_CN");
-                    else if (str.equals("ja"))
+                    else if (str.equals("zh")){
+                        if (MyApplication.getInstance().getResources().getConfiguration().locale.getCountry().equals("CN"))
+                            EXCDController.getInstance().writeForSetLanuage("zh_CN");
+                        else
+                            EXCDController.getInstance().writeForSetLanuage("zh_TW");
+                    } else if (str.equals("ja"))
                         EXCDController.getInstance().writeForSetLanuage("ja_jp");
                     else if (str.equals("iw"))
                         EXCDController.getInstance().writeForSetLanuage("he_IL");

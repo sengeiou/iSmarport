@@ -73,9 +73,7 @@ public class UtilBroadcat extends BroadcastReceiver {
                 if (MainService.getInstance()!=null&&MainService.getInstance().getState()==3&&!MyApplication.getInstance().isMtk()){
                     BleClient.getInstance().writeForSendVolume();
                 }
-
             }
-
         }
     }
 

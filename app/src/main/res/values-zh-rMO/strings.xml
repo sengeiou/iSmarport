@@ -93,7 +93,7 @@
     <string name="skii">滑雪</string>
     <string name="golf">高爾夫</string>
     <!--我的頁面-->
-    <string name="device">如果您不同意調用以上權限，將導致該功能無法正常使用，擔不影響您使用本應用的基本功能。您可隨時前往“設置”&gt;“權限管理”，選擇關閉以上權限調用以撤回您的同意</string>
+    <string name="device">設備</string>
     <string name="stepPlan">計步目標</string>
     <string name="sleepPlan">睡眠目標</string>
     <string name="find">尋找手錶</string>
@@ -273,5 +273,8 @@
     <string name="touchAgain1">再按一次退出跑步</string>
     <string name="unlock">向右滑動解鎖</string>
     <string name="finishInfo">請完善用戶信息</string>
+    <string name="schedule">我的日程</string>
+    <string name="deleteSchedule">刪除日程</string>
+    <string name="schedule_info">日程詳情</string>
 
 </resources>

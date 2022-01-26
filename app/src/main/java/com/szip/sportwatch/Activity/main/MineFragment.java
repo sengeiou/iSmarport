@@ -29,6 +29,7 @@ import com.ctrip.standard.BrigeActivity;
 import com.szip.sportwatch.Activity.NotificationAppListActivity;
 import com.szip.sportwatch.Activity.UpdateFirmwareActivity;
 import com.szip.sportwatch.Activity.help.FaqActivity;
+import com.szip.sportwatch.Activity.schedule.ScheduleActivity;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.Activity.AboutActivity;
 import com.szip.sportwatch.Activity.LoginActivity;
@@ -335,6 +336,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         }else{
             updateView.setVisibility(View.GONE);
         }
+        if (app.isMtk()){
+            getView().findViewById(R.id.scheduleLl).setVisibility(View.GONE);
+        }else{
+            getView().findViewById(R.id.scheduleLl).setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -353,6 +359,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         getView().findViewById(R.id.aboutLl).setOnClickListener(this);
         getView().findViewById(R.id.faceLl).setOnClickListener(this);
         getView().findViewById(R.id.logoutLl).setOnClickListener(this);
+        getView().findViewById(R.id.scheduleLl).setOnClickListener(this);
         blePhotoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -507,6 +514,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case R.id.unitLl:
                 startActivity(new Intent(getActivity(), UnitSelectActivity.class));
+                break;
+            case R.id.scheduleLl:
+                if(MainService.getInstance().getState()!=3)
+                    showToast(getString(R.string.lostDevice));
+                else{
+                    startActivity(new Intent(getActivity(), ScheduleActivity.class));
+                }
                 break;
             case R.id.aboutLl:
                 startActivity(new Intent(getActivity(), AboutActivity.class));

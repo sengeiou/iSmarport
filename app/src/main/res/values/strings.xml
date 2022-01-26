@@ -154,6 +154,8 @@
     <string name="saverBettery">Do not open (power saving mode) :</string>
     <string name="bettyContent">If the power-saving mode is turned on, it may cause problems such as unstable Bluetooth connection, abnormal movement trajectory and reduced power distance. It is recommended to turn off the power-saving mode while in use.</string>
     <string name="protect">Set the method of background protection::</string>
+    <string name="schedule">Schedule</string>
+    <string name="schedule_info">Schedule Information</string>
     <!--蓝牙通话界面 Bluetooth Call Interface-->
     <string name="step1">1.Pair watch With Mobile Phone</string>
     <string name="step2">2.Unmatch</string>
@@ -318,4 +320,12 @@
     <string name="unlock">Slide right to unlock</string>
     <string name="stride">stride</string>
     <string name="finishInfo">Please improve the user information</string>
+    <string name="deleteSchedule">Delete</string>
+
+    <string name="schedule_fall">The number of schedules that can be added to the watch has reached the upper limit</string>
+    <string name="schedule_add_fail">Failed to add schedule</string>
+    <string name="schedule_edit_fail">Failed to modify schedule</string>
+    <string name="schedule_delete_fail">Failed to delete schedule</string>
+    <string name="schedule_past">A past time point cannot be set as a schedule point</string>
+    <string name="schedule_msg">Fill in schedule Details</string>
 </resources>
