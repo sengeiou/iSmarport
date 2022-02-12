@@ -17,6 +17,8 @@ import com.szip.sportwatch.DB.dbModel.HealthyConfig;
 import com.szip.sportwatch.DB.dbModel.HealthyConfig_Table;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.HeartData_Table;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData_Table;
 import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SleepData_Table;
 import com.szip.sportwatch.DB.dbModel.SportData;
@@ -1235,6 +1237,27 @@ public class LoadDataUtil {
             return sportWatchAppFunctionConfigDTO==null?new SportWatchAppFunctionConfigDTO():sportWatchAppFunctionConfigDTO;
         }
         return null;
+    }
+
+    /**
+     * 取计划表数据
+     * */
+    public List<ScheduleData> getScheduleData(long time){
+        List<ScheduleData> list = SQLite.select()
+                .from(ScheduleData.class)
+                .where(ScheduleData_Table.time.greaterThanOrEq(time))
+                .orderBy(OrderBy.fromString(ScheduleData_Table.time+OrderBy.DESCENDING))
+                .queryList();
+        return list;
+    }
+
+    public boolean scheduleCanAdd(long time){
+        ScheduleData data = SQLite.select()
+                .from(ScheduleData.class)
+                .where(ScheduleData_Table.time.is(time))
+                .querySingle();
+
+        return data==null;
     }
 
     /**

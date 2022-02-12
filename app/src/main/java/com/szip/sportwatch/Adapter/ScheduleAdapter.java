@@ -5,14 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.szip.sportwatch.DB.dbModel.SportData;
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.DateUtil;
-import com.szip.sportwatch.Util.MathUitl;
 
 import java.util.ArrayList;
 import java.util.List;

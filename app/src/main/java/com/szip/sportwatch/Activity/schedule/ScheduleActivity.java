@@ -1,7 +1,6 @@
 package com.szip.sportwatch.Activity.schedule;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,17 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.szip.sportwatch.Activity.AboutActivity;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.Adapter.ScheduleAdapter;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.DB.LoadDataUtil;
-import com.szip.sportwatch.Model.EvenBusModel.UpdateReport;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateSchedule;
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.LogUtil;
-import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,14 +25,16 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.List;
 
 public class ScheduleActivity extends BaseActivity {
 
     private ImageView rightIv;
     private ListView listView;
     private ScheduleAdapter scheduleAdapter;
-    private ArrayList<ScheduleData> list = new ArrayList<>();
+    private List<ScheduleData> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +43,29 @@ public class ScheduleActivity extends BaseActivity {
         StatusBarCompat.translucentStatusBar(ScheduleActivity.this,true);
         setAndroidNativeLightStatusBar(this,true);
         setTitleText(getString(R.string.schedule));
+        SQLite.delete()
+                .from(ScheduleData.class)
+                .execute();
         initView();
         initEvent();
+        BleClient.getInstance().writeForGetSchedule();
+    }
+
+    private void initData() {
+        list = LoadDataUtil.newInstance().getScheduleData(Calendar.getInstance().getTimeInMillis()/1000);
+        if(list!=null&&list.size()!=0)
+            findViewById(R.id.listEmptyTv).setVisibility(View.GONE);
+        else {
+            findViewById(R.id.listEmptyTv).setVisibility(View.VISIBLE);
+        }
+        scheduleAdapter.setList(list);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
+        initData();
     }
 
     @Override
@@ -62,9 +76,7 @@ public class ScheduleActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateList(UpdateSchedule updateSchedule){
-        list = updateSchedule.getScheduleDataArrayList();
-        Collections.sort(list);
-        scheduleAdapter.setList(list);
+       initData();
     }
 
 
@@ -74,7 +86,6 @@ public class ScheduleActivity extends BaseActivity {
         listView = findViewById(R.id.listView);
         scheduleAdapter = new ScheduleAdapter(getApplicationContext());
         listView.setAdapter(scheduleAdapter);
-        BleClient.getInstance().writeForGetSchedule();
     }
 
     private void initEvent() {
@@ -108,27 +119,28 @@ public class ScheduleActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LogUtil.getInstance().logd("data******","request = "+requestCode+" ;result = "+resultCode);
         if (requestCode == 100){
             if (resultCode==101){
                 ScheduleData scheduleData = (ScheduleData) data.getSerializableExtra("schedule");
                 if (scheduleData==null)
                     return;
+                findViewById(R.id.listEmptyTv).setVisibility(View.GONE);
                 list.add(scheduleData);
                 scheduleAdapter.setList(list);
             }else if (resultCode == 102){
                 int index = data.getIntExtra("index",-1);
-                LogUtil.getInstance().logd("data******","index = "+index+" ;size = "+list.size());
+                LogUtil.getInstance().logd("data******","index = "+index);
                 if (index == -1)
                     return;
                 for (int i = 0;i<list.size();i++){
                     if (list.get(i).getIndex()==index){
-                        list.remove(index);
+                        list.remove(i);
                         break;
                     }
                 }
-                LogUtil.getInstance().logd("data******","index = "+index+" ;size = "+list.size());
                 scheduleAdapter.setList(list);
+                if (list.size()==0)
+                    findViewById(R.id.listEmptyTv).setVisibility(View.VISIBLE);
             }else if (resultCode == 103){
                 ScheduleData scheduleData = (ScheduleData) data.getSerializableExtra("schedule");
                 if (scheduleData == null)

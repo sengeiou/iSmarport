@@ -1,4 +1,4 @@
-package com.szip.sportwatch.Util;
+package com.szip.sportwatch.Interface;
 
 import android.os.Bundle;
 import android.view.MotionEvent;

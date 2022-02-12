@@ -1,32 +1,22 @@
 package com.szip.sportwatch.Util;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.util.Log;
 
-import com.mediatek.ctrl.notification.NotificationData;
-import com.szip.sportwatch.BLE.EXCDController;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
-import com.szip.sportwatch.Notification.AppList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static android.content.Context.MODE_PRIVATE;
 import static android.media.AudioManager.STREAM_MUSIC;
 
 /**

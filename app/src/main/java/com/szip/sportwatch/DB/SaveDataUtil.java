@@ -21,6 +21,8 @@ import com.szip.sportwatch.DB.dbModel.EcgData_Table;
 import com.szip.sportwatch.DB.dbModel.HealthyConfig;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.HeartData_Table;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData_Table;
 import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SleepData_Table;
 import com.szip.sportwatch.DB.dbModel.SportData;
@@ -30,12 +32,14 @@ import com.szip.sportwatch.DB.dbModel.SportWatchAppFunctionConfigDTO_Table;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.DB.dbModel.StepData_Table;
 import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateSchedule;
 import com.szip.sportwatch.Util.DateUtil;
 import com.szip.sportwatch.Util.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -612,6 +616,39 @@ public class SaveDataUtil {
                     " ;speed = "+sportData.speed+" ;sportTime = "+sportData.sportTime+" type = "+sportData.type);
         }
     }
+
+    /**
+     * 批量保存计划表数据
+     * */
+    public void saveScheduleListData(List<ScheduleData> scheduleDataList){
+        FlowManager.getDatabase(AppDatabase.class)
+                .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
+                        new ProcessModelTransaction.ProcessModel<ScheduleData>() {
+                            @Override
+                            public void processModel(ScheduleData scheduleData, DatabaseWrapper wrapper) {
+                                ScheduleData sqlData = SQLite.select()
+                                        .from(ScheduleData.class)
+                                        .where(ScheduleData_Table.time.is(scheduleData.time))
+                                        .querySingle();
+                                if (sqlData == null){//为null则代表数据库没有保存
+                                    scheduleData.save();
+                                }
+                            }
+                        }).addAll(scheduleDataList).build())  // add elements (can also handle multiple)
+                .error(new Transaction.Error() {
+                    @Override
+                    public void onError(Transaction transaction, Throwable error) {
+
+                    }
+                }).success(new Transaction.Success() {
+            @Override
+            public void onSuccess(Transaction transaction) {
+                LogUtil.getInstance().logd("DATA******","计划表数据保存成功");
+                EventBus.getDefault().post(new UpdateSchedule(new ArrayList<ScheduleData>()));
+            }
+        }).build().execute();
+    }
+
     /**
      * 清除数据库
      * */

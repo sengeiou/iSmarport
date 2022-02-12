@@ -1,10 +1,6 @@
 package com.szip.sportwatch.Fragment.ReportFragment.sport;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,7 +17,7 @@ import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.DateUtil;
-import com.szip.sportwatch.Util.IMapUtil;
+import com.szip.sportwatch.Interface.IMapUtil;
 import com.szip.sportwatch.Util.MapUtilGaodeImp;
 import com.szip.sportwatch.Util.MapUtilGoogleImp;
 import com.szip.sportwatch.Util.MathUitl;

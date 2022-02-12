@@ -10,7 +10,7 @@ import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Interface.IDataResponse;
 import com.szip.sportwatch.Model.BleStepModel;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
 

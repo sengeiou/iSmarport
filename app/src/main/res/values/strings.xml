@@ -327,5 +327,7 @@
     <string name="schedule_edit_fail">Failed to modify schedule</string>
     <string name="schedule_delete_fail">Failed to delete schedule</string>
     <string name="schedule_past">A past time point cannot be set as a schedule point</string>
+    <string name="schedule_same">The selected time point has an existing schedule and cannot be set repeatedly</string>
     <string name="schedule_msg">Fill in schedule Details</string>
+    <string name="schedule_empty">The current watch has no schedule, please add a new schedule</string>
 </resources>

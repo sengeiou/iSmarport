@@ -2,7 +2,6 @@ package com.szip.sportwatch.Util;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MotionEvent;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -12,12 +11,13 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
+import com.szip.sportwatch.Interface.IMapUtil;
 import com.szip.sportwatch.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapUtilGaodeImp implements IMapUtil{
+public class MapUtilGaodeImp implements IMapUtil {
     private MapView mapView;
     private AMap aMap;
     double [] option;

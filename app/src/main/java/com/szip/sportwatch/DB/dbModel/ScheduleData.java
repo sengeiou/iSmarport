@@ -1,14 +1,27 @@
-package com.szip.sportwatch.Model;
+package com.szip.sportwatch.DB.dbModel;
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.szip.sportwatch.DB.AppDatabase;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
 
-public class ScheduleData implements Comparable<ScheduleData> , Serializable {
-    private String msg;
-    private long time;
-    private int index;
-    private int type;
+@Table(database = AppDatabase.class)
+public class ScheduleData extends BaseModel implements Comparable<ScheduleData> , Serializable {
+
+    @PrimaryKey(autoincrement = true)
+    public long id;
+
+    @Column
+    public String msg;
+    @Column
+    public long time;
+    @Column
+    public int index;
+    @Column
+    public int type;
 
     public ScheduleData() {
     }

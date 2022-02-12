@@ -10,165 +10,183 @@
 
     <include layout="@layout/title"/>
 
-    <EditText
-        android:id="@+id/msgEt"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/bg_item_normal"
-        android:maxLines="1"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="15dp"
-        android:paddingStart="15dp"
-        android:hint="@string/schedule_msg"/>
-
-    <TextView
-        android:id="@+id/lengthTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="30dp"
-        android:gravity="end" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_item_normal"
-        android:layout_margin="15dp">
-
-        <RelativeLayout
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/lastMonthIv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/report_calenda_icon_arrowleft"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:padding="15dp"/>
+            <EditText
+                android:id="@+id/msgEt"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_item_normal"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
+                android:paddingStart="15dp"
+                android:hint="@string/schedule_msg"/>
 
             <TextView
-                android:id="@+id/dateTv"
-                android:layout_width="wrap_content"
+                android:id="@+id/lengthTv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/rayblue"
-                android:textSize="20sp"
-                android:layout_centerHorizontal="true"
-                android:text="10-30"
-                android:layout_centerVertical="true"/>
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="30dp"
+                android:gravity="end" />
 
-            <ImageView
-                android:id="@+id/nextMonthIv"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/report_calenda_icon_arrowright"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
-                android:padding="15dp"/>
+                android:orientation="vertical"
+                android:background="@drawable/bg_item_normal"
+                android:layout_margin="15dp">
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
 
-        <com.necer.view.WeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp" />
+                    <ImageView
+                        android:id="@+id/lastMonthIv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/report_calenda_icon_arrowleft"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:padding="15dp"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray"
-            android:layout_marginTop="10dp"/>
+                    <TextView
+                        android:id="@+id/dateTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/rayblue"
+                        android:textSize="20sp"
+                        android:layout_centerHorizontal="true"
+                        android:text="10-30"
+                        android:layout_centerVertical="true"/>
 
-        <com.necer.calendar.MonthCalendar
-            android:id="@+id/monthCalendar"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            app:isShowLunar="false"
-            app:isShowHoliday="false"/>
+                    <ImageView
+                        android:id="@+id/nextMonthIv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/report_calenda_icon_arrowright"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:padding="15dp"/>
 
+                </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray"
-            android:layout_marginTop="10dp" />
+                <com.necer.view.WeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="10dp"/>
 
-        <RelativeLayout
-            android:id="@+id/timeRl"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/schedule_icon_time"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="15dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/time"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="45dp"/>
-
-            <TextView
-                android:id="@+id/timeTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="35dp"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/my_icon_arrow"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="15dp"/>
-
-        </RelativeLayout>
+                <com.necer.calendar.MonthCalendar
+                    android:id="@+id/monthCalendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    app:isShowLunar="false"
+                    app:isShowHoliday="false"/>
 
 
-    </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="10dp" />
 
-    <LinearLayout
-        android:id="@+id/deleteLl"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/bg_item_normal"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:visibility="gone">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/schedule_icon_del"/>
+                <RelativeLayout
+                    android:id="@+id/timeRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deleteSchedule"
-            android:layout_marginStart="15dp"
-            android:textColor="@android:color/holo_red_light"/>
-    </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/schedule_icon_time"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="@string/time"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="45dp"/>
+
+                    <TextView
+                        android:id="@+id/timeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="35dp"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/my_icon_arrow"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/deleteLl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_item_normal"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/schedule_icon_del"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deleteSchedule"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@android:color/holo_red_light"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
 
 </LinearLayout>

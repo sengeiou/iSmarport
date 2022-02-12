@@ -7,7 +7,7 @@ import com.szip.sportwatch.DB.dbModel.SleepData;
 import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Model.BleStepModel;
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 
 import java.util.ArrayList;
 

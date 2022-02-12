@@ -1,6 +1,6 @@
 package com.szip.sportwatch.Model.EvenBusModel;
 
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 
 import java.util.ArrayList;
 

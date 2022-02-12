@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.amap.api.location.AMapLocationClient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mediatek.wearable.WearableManager;
@@ -252,6 +253,8 @@ public class MyApplication extends Application{
         }
 
        startUpdownThread();
+        AMapLocationClient.updatePrivacyShow(this, true, true);
+        AMapLocationClient.updatePrivacyAgree(this,true);
     }
 
     public String getPrivatePath() {

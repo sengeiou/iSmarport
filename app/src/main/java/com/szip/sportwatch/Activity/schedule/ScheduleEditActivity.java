@@ -1,7 +1,5 @@
 package com.szip.sportwatch.Activity.schedule;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,20 +9,22 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.necer.calendar.BaseCalendar;
 import com.necer.calendar.MonthCalendar;
 import com.necer.listener.OnCalendarChangedListener;
+import com.necer.utils.CalendarUtil;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.BLE.BleClient;
+import com.szip.sportwatch.DB.LoadDataUtil;
+import com.szip.sportwatch.DB.dbModel.ScheduleData_Table;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateSchedule;
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.DateUtil;
-import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
@@ -38,7 +38,6 @@ import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -62,6 +61,7 @@ public class ScheduleEditActivity extends BaseActivity implements View.OnClickLi
         setTitleText(getString(R.string.schedule_info));
         scheduleData = (ScheduleData) getIntent().getSerializableExtra("schedule");
         if (scheduleData!=null){
+            Log.i("data******","index = "+scheduleData.getIndex());
             date = DateUtil.getStringDateFromSecond(scheduleData.getTime(),"yyyy-MM-dd");
         } else{
             date = DateUtil.getStringDateFromSecond(DateUtil.getTimeOfToday(),"yyyy-MM-dd");
@@ -89,25 +89,22 @@ public class ScheduleEditActivity extends BaseActivity implements View.OnClickLi
         ProgressHudModel.newInstance().diss();
         if (updateSchedule.getType() == 0x52){//添加
             if (updateSchedule.getState()!=0xff){
-                Intent intent = new Intent();
-                intent.putExtra("schedule",scheduleData);
-                setResult(101,intent);
+                scheduleData.setIndex(updateSchedule.getState());
+                scheduleData.save();
             }else {
                 showToast(getString(R.string.schedule_add_fail));
             }
         }else if (updateSchedule.getType() == 0x53){//删除
             if (updateSchedule.getState()==1){
-                Intent intent = new Intent();
-                intent.putExtra("index",scheduleData.getIndex());
-                setResult(102,intent);
+                SQLite.delete().from(ScheduleData.class)
+                        .where(ScheduleData_Table.id.is(scheduleData.id))
+                        .execute();
             }else {
                 showToast(getString(R.string.schedule_delete_fail));
             }
         }else if (updateSchedule.getType() == 0x54){//修改
             if (updateSchedule.getState()==1){
-                Intent intent = new Intent();
-                intent.putExtra("schedule",scheduleData);
-                setResult(103,intent);
+                scheduleData.update();
             }else {
                 showToast(getString(R.string.schedule_edit_fail));
             }
@@ -132,6 +129,7 @@ public class ScheduleEditActivity extends BaseActivity implements View.OnClickLi
             lengthTv.setText("0/30");
         }
         monthCalendar = findViewById(R.id.monthCalendar);
+        CalendarUtil.setPointList(new ArrayList<LocalDate>());
         monthCalendar.setInitializeDate(date);
     }
 
@@ -197,7 +195,7 @@ public class ScheduleEditActivity extends BaseActivity implements View.OnClickLi
                 timeTv.setText(String.format("%02d:%02d",option1,option2));
             }
         });
-
+        window.setCyclic(true);
     }
 
     @Override
@@ -216,6 +214,14 @@ public class ScheduleEditActivity extends BaseActivity implements View.OnClickLi
                     return;
                 if(time<Calendar.getInstance().getTimeInMillis()/1000){
                     showToast(getString(R.string.schedule_past));
+                    return;
+                }
+                if(msgEt.getText().toString().trim().equals("")){
+                    showToast(getString(R.string.schedule_msg));
+                    return;
+                }
+                if (!LoadDataUtil.newInstance().scheduleCanAdd(time)){
+                    showToast(getString(R.string.schedule_same));
                     return;
                 }
                 ProgressHudModel.newInstance().show(ScheduleEditActivity.this,getString(R.string.loading),

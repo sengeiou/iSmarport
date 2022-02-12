@@ -43,7 +43,7 @@ import com.szip.sportwatch.Model.EvenBusModel.UpdateReport;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateSchedule;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
-import com.szip.sportwatch.Model.ScheduleData;
+import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.Model.UpdateSportView;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Notification.NotificationView;
@@ -327,6 +327,9 @@ public class BleClient {
         public void onResponse(int code, byte[] data) {
             String value = DateUtil.byteToHexString(data);
             LogUtil.getInstance().logd("DATA******", "读取到蓝牙信息:" + value);
+            if (value.contains("AA550000")&&value.length()==16){//手表返回空的日程列表的时候，特殊处理
+                EventBus.getDefault().post(new UpdateSchedule(new ArrayList<ScheduleData>()));
+            }
             if (data.length != 0){
                 if (data.length > 0) {
                     Message message = mAnalysisHandler.obtainMessage();
@@ -394,7 +397,7 @@ public class BleClient {
         public void onSaveScheduleData(ArrayList<ScheduleData> datas) {
             if (datas==null||datas.size()==0)
                 return;
-            EventBus.getDefault().post(new UpdateSchedule(datas));
+            SaveDataUtil.newInstance().saveScheduleListData(datas);
         }
 
         @Override
