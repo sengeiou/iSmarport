@@ -133,7 +133,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
-    public void saveSeccuss(boolean isSeccuss) {
+    public void saveSuccess(boolean isSeccuss) {
         ProgressHudModel.newInstance().diss();
         if (isSeccuss){
             showToast(getString(R.string.saved));

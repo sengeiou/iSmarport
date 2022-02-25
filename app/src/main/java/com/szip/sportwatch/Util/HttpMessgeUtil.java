@@ -29,7 +29,6 @@ import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-import static android.content.Context.BATTERY_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 import static com.szip.sportwatch.MyApplication.FILE;
 
@@ -337,7 +336,7 @@ public class HttpMessgeUtil {
     /**
      * 上传头像
      * */
-    private void _postUpdownAvatar(File avatar, GenericsCallback<AvatarBean> callback)throws IOException{
+    private void _postUploadAvatar(File avatar, GenericsCallback<AvatarBean> callback)throws IOException{
         String url = this.url+"user/setProfilePicture";
         OkHttpUtils
                 .fpost()
@@ -595,7 +594,7 @@ public class HttpMessgeUtil {
     }
 
     public void postUpdownAvatar(File avatar,GenericsCallback<AvatarBean> callback)throws IOException{
-        _postUpdownAvatar(avatar,callback);
+        _postUploadAvatar(avatar,callback);
     }
 
     public void postSendFeedback(String content,GenericsCallback<BaseApi> callback)throws IOException{

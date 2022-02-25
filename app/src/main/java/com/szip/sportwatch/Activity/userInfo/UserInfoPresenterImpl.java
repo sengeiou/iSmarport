@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +17,11 @@ import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
 
-import com.szip.sportwatch.BLE.BleClient;
-import com.szip.sportwatch.BLE.EXCDController;
 import com.szip.sportwatch.Model.HttpBean.AvatarBean;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
-import com.szip.sportwatch.Service.MainService;
 import com.szip.sportwatch.Util.DateUtil;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.JsonGenericsSerializator;
@@ -39,7 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -228,7 +223,7 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
                         @Override
                         public void onError(Call call, Exception e, int id) {
                             if (iUserInfoView!=null)
-                                iUserInfoView.saveSeccuss(false);
+                                iUserInfoView.saveSuccess(false);
                         }
 
                         @Override
@@ -237,7 +232,7 @@ public class UserInfoPresenterImpl implements IUserInfoPresenter{
                                 MyApplication.getInstance().setUserInfo(userInfo);
                                 MathUitl.saveInfoData(context,userInfo).commit();
                                 if (iUserInfoView!=null)
-                                    iUserInfoView.saveSeccuss(true);
+                                    iUserInfoView.saveSuccess(true);
                             }
                         }
                     });

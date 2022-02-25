@@ -27,6 +27,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import static com.szip.sportwatch.MyApplication.FILE;
+
 public class SelectDialActivity extends BaseActivity implements ISelectDialView{
 
 
@@ -46,7 +48,7 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
         if (MyApplication.getInstance().isMtk()) {
             iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
         } else{
-            if (MyApplication.getInstance().getFaceType().equals("454*454"))
+            if (MyApplication.getInstance().getFaceType().equals("454*454")||isFileDial())
                 iSelectDialPresenter = new SelectDialPresenterWithFileImpl(getApplicationContext(),this);
             else
                 iSelectDialPresenter = new SelectDialPresenterImpl06(getApplicationContext(),this);
@@ -58,6 +60,15 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
         EventBus.getDefault().register(this);
     }
 
+    private boolean isFileDial(){
+        String name = getSharedPreferences(FILE,MODE_PRIVATE).getString("deviceName",null);
+        if (name==null)
+            return false;
+        else if (name.equals("QT06N"))
+            return true;
+        else
+            return false;
+    }
 
     @Override
     protected void onResume() {

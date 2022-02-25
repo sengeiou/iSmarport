@@ -9,7 +9,7 @@ public interface IUserInfoView {
     void setHeight(String heightStr,int height,int unit);
     void setWeight(String weightStr,int weight,int unit);
     void setBirthday(String birthday);
-    void saveSeccuss(boolean isSeccuss);
+    void saveSuccess(boolean isSeccuss);
     void getPhotoPath(Intent intent,boolean isCamera);
     void getCropPhoto(UCrop uCrop);
     void setPhoto(String pictureUrl);

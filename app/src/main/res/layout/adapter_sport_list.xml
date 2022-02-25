@@ -37,7 +37,8 @@
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@color/rayblue"
-                    android:text="00:03:14"/>
+                    android:text="00:03:14"
+                    android:layout_gravity="center"/>
 
 
             </LinearLayout>
