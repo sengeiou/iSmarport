@@ -4,7 +4,7 @@ import com.yalantis.ucrop.UCrop;
 
 public interface IDiyView {
     void setView(boolean isCircle);
-    void setDialView(int dial, int clock);
+    void setDialView(String dial,String pictureUrl, int clock);
     void getCropPhoto(UCrop uCrop);
-    void setDialProgress(int num);
+    void setDialProgress(int num,String str);
 }

@@ -10,8 +10,8 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 56,
-      "versionName": "1.56",
+      "versionCode": 57,
+      "versionName": "1.57",
       "outputFile": "app-Huawei-release.apk"
     }
   ]

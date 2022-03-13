@@ -118,6 +118,8 @@
     <string name="diyDailOK">更换成功</string>
     <string name="diyDailError">更换失败,请重试</string>
     <string name="diyDailError1">手表SD卡正在使用，终止传输</string>
+    <string name="diy_send_background">正在发送背景...</string>
+    <string name="diy_send_bin">正在发送表盘</string>
     <string name="upDownBackground">请上传一张背景图片</string>
     <string name="chooseClock">请选择一个时钟样式</string>
     <string name="clock">时钟样式</string>
@@ -334,4 +336,5 @@
     <string name="schedule_same">当前选中的时间点已经存在日程，无法重复设置</string>
     <string name="schedule_msg">请填写日程详情</string>
     <string name="schedule_empty">当前手表无日程，请添加新的日程吧</string>
+
 </resources>

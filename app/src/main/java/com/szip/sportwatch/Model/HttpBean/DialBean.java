@@ -1,5 +1,6 @@
 package com.szip.sportwatch.Model.HttpBean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DialBean extends BaseApi{
@@ -23,12 +24,13 @@ public class DialBean extends BaseApi{
         }
     }
 
-    public class Dial{
+    public class Dial implements Serializable {
         String watchModel;
         int screen;
         int pointerNumber;
         String previewUrl;
         String plateBgUrl;
+        String pointerImg;
 
         public String getWatchModel() {
             return watchModel;
@@ -48,6 +50,10 @@ public class DialBean extends BaseApi{
 
         public String getPlateBgUrl() {
             return plateBgUrl;
+        }
+
+        public String getPointerImg() {
+            return pointerImg;
         }
     }
 }

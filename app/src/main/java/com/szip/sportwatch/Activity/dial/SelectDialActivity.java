@@ -12,22 +12,27 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.Activity.diy.DIYActivity;
-import com.szip.sportwatch.BLE.BleClient;
-import com.szip.sportwatch.BLE.EXCDController;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
-import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
+import com.szip.sportwatch.Model.FileSendConst;
+import com.szip.sportwatch.Model.HttpBean.DialBean;
 import com.szip.sportwatch.Model.SendDialModel;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Service.MainService;
+import com.szip.sportwatch.Util.HttpMessgeUtil;
+import com.szip.sportwatch.Util.JsonGenericsSerializator;
 import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
+import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import static com.szip.sportwatch.MyApplication.FILE;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.Call;
 
 public class SelectDialActivity extends BaseActivity implements ISelectDialView{
 
@@ -35,39 +40,31 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     private ISelectDialPresenter iSelectDialPresenter;
     private String pictureUrl;
     private ImageView dialIv,changeIv;
-    private boolean isSendPic = false;
 
     private String faceType = "";
     private boolean isCircle = false;
+    private boolean isSendPic = false;
+
+    private ArrayList<DialBean.Dial> dialArrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_select_dial);
-        if (MyApplication.getInstance().isMtk()) {
-            iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
-        } else{
-            if (MyApplication.getInstance().getFaceType().equals("454*454")||isFileDial())
-                iSelectDialPresenter = new SelectDialPresenterWithFileImpl(getApplicationContext(),this);
-            else
-                iSelectDialPresenter = new SelectDialPresenterImpl06(getApplicationContext(),this);
-        }
-        isCircle = MyApplication.getInstance().isCircle();
-        faceType = MyApplication.getInstance().getFaceType();
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
+        isCircle = MyApplication.getInstance().isCircle();
+        faceType = MyApplication.getInstance().getFaceType();
+        getDialList();
         EventBus.getDefault().register(this);
     }
 
     private boolean isFileDial(){
-        String name = getSharedPreferences(FILE,MODE_PRIVATE).getString("deviceName",null);
-        if (name==null)
+        if (dialArrayList.get(0).getPlateBgUrl().indexOf(".bin")<0)
             return false;
-        else if (name.equals("QT06N"))
-            return true;
         else
-            return false;
+            return true;
     }
 
     @Override
@@ -81,7 +78,7 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        iSelectDialPresenter.setViewDestory();
+        iSelectDialPresenter.setViewDeStory();
         EventBus.getDefault().unregister(this);
     }
 
@@ -112,7 +109,7 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
         setTitleText(getString(R.string.face));
         RecyclerView dialRv = findViewById(R.id.dialRv);
         changeIv = findViewById(R.id.changeIv);
-        iSelectDialPresenter.getViewConfig(dialRv);
+        iSelectDialPresenter.getViewConfig(dialRv,dialArrayList);
     }
 
     /**
@@ -120,24 +117,24 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUpdataView(UpdateDialView updateView){
-        if(updateView.getType()==0){//进度+1
+        if(updateView.getType()== FileSendConst.PROGRESS){//进度+1
             iSelectDialPresenter.sendDial(null,-1);
             ProgressHudModel.newInstance().setProgress();
-        }else if (updateView.getType()==1){//完成
+        }else if (updateView.getType()==FileSendConst.FINISH){//完成
             isSendPic = false;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
-        }else if (updateView.getType()==2){//失败
+        }else if (updateView.getType()==FileSendConst.ERROR){//失败
             isSendPic = false;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailError1));
-        }else if (updateView.getType()==3){//准备开始
+        }else if (updateView.getType()==FileSendConst.START_SEND){//准备开始
             Log.i("data******","准备发送数据");
             isSendPic = true;
             ProgressHudModel.newInstance().diss();
             String fileNames[] = pictureUrl.split("/");
             iSelectDialPresenter.sendDial(fileNames[fileNames.length-1],updateView.getData());
-        }else if (updateView.getType() == 4){//断点续传
+        }else if (updateView.getType() == FileSendConst.CONTINUE){//断点续传
             iSelectDialPresenter.resumeSendDial(updateView.getData());
         }else {
             isSendPic = false;
@@ -160,6 +157,16 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     public void initList(boolean initSuccess) {
         if (!initSuccess)
             showToast(getString(R.string.httpError));
+        if (MyApplication.getInstance().isMtk()) {
+            iSelectDialPresenter = new SelectDialPresenterImpl(getApplicationContext(),this);
+        } else{
+            if (dialArrayList!=null&&dialArrayList.size()!=0){
+                if (isFileDial())
+                    iSelectDialPresenter = new SelectDialPresenterWithFileImpl(getApplicationContext(),this);
+                else
+                    iSelectDialPresenter = new SelectDialPresenterImpl06(getApplicationContext(),this);
+            }
+        }
         initView();
         initEvent();
     }
@@ -184,7 +191,16 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     @Override
     public void setDialView(String dialId, String pictureId) {
         if (dialId==null){
-            startActivity(new Intent(SelectDialActivity.this, DIYActivity.class));
+            ArrayList<DialBean.Dial> list = new ArrayList<>();
+            for (DialBean.Dial dial:dialArrayList){
+                if (dial.getPointerImg()!=null)
+                    list.add(dial);
+            }
+            Intent intent = new Intent(SelectDialActivity.this, DIYActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("list",list);
+            intent.putExtra("data",bundle);
+            startActivity(intent);
             finish();
         }else {
             this.pictureUrl = pictureId;
@@ -196,5 +212,28 @@ public class SelectDialActivity extends BaseActivity implements ISelectDialView{
     public void setDialProgress(int max) {
         ProgressHudModel.newInstance().showWithPie(this,getString(R.string.diyDailing),max,
                 getString(R.string.diyDailError),30*1000);
+    }
+
+    private void getDialList() {
+        try {
+            HttpMessgeUtil.getInstance().getDialList(MyApplication.getInstance().getDialGroupId(),
+                    new GenericsCallback<DialBean>(new JsonGenericsSerializator()) {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            initList(false);
+                        }
+                        @Override
+                        public void onResponse(DialBean response, int id) {
+                            if (response.getCode() == 200){
+                                dialArrayList = response.getData().getList();
+                                initList(true);
+                            }else {
+                                initList(false);
+                            }
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

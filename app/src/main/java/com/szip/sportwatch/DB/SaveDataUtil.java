@@ -621,6 +621,9 @@ public class SaveDataUtil {
      * 批量保存计划表数据
      * */
     public void saveScheduleListData(List<ScheduleData> scheduleDataList){
+        SQLite.delete()
+                .from(ScheduleData.class)
+                .execute();
         FlowManager.getDatabase(AppDatabase.class)
                 .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
                         new ProcessModelTransaction.ProcessModel<ScheduleData>() {

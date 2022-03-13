@@ -114,6 +114,8 @@
     <string name="diyDailOK">Update Successful</string>
     <string name="diyDailError">Update failed,please try again</string>
     <string name="diyDailError1">Watch SD card in use, terminate transmission</string>
+    <string name="diy_send_background">Sending background...</string>
+    <string name="diy_send_bin">Sending dial...</string>
     <string name="upDownBackground">Please upload a background picture</string>
     <string name="chooseClock">Please select a clock style</string>
     <string name="clock">Clock Style</string>

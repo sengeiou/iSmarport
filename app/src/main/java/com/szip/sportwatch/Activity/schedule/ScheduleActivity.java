@@ -76,7 +76,7 @@ public class ScheduleActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateList(UpdateSchedule updateSchedule){
-       initData();
+        initData();
     }
 
 

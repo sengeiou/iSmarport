@@ -1,6 +1,8 @@
 package com.szip.sportwatch.Util;
 
 
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.DB.dbModel.AnimalHeatData;
 import com.szip.sportwatch.DB.dbModel.BloodOxygenData;
 import com.szip.sportwatch.DB.dbModel.HeartData;
@@ -9,8 +11,11 @@ import com.szip.sportwatch.DB.dbModel.SportData;
 import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.Interface.IDataResponse;
 import com.szip.sportwatch.Model.BleStepModel;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateDIYView;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
 import com.szip.sportwatch.DB.dbModel.ScheduleData;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateSchedule;
+import com.szip.sportwatch.Model.FileSendConst;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
 
@@ -67,14 +72,16 @@ public class DataParser {
             mIDataResponse.findPhone(data[8]);
         }else if (data[1] == 0x46){
             if (data[9]==2||data[9]==5){
-                EventBus.getDefault().post(new UpdateDialView(2));
+                EventBus.getDefault().post(new UpdateDialView(FileSendConst.ERROR));
+            }else if (data[9]==6){
+                EventBus.getDefault().post(new UpdateDialView(FileSendConst.SEND_BIN));
             }else {
                 if (data[8]==0){
-                    EventBus.getDefault().post(new UpdateDialView(3));
+                    EventBus.getDefault().post(new UpdateDialView(FileSendConst.START_SEND));
                 }else if (data[8]==1){
-                    EventBus.getDefault().post(new UpdateDialView(0));
+                    EventBus.getDefault().post(new UpdateDialView(FileSendConst.PROGRESS));
                 }else {
-                    EventBus.getDefault().post(new UpdateDialView(1));
+                    EventBus.getDefault().post(new UpdateDialView(FileSendConst.FINISH));
                 }
             }
         }else if (data[1] == 0x47){
@@ -87,27 +94,52 @@ public class DataParser {
                     break;
                 case 3:{
                     if(data[9]==2){
-                        EventBus.getDefault().post(new UpdateDialView(5));
+                        EventBus.getDefault().post(new UpdateDialView(FileSendConst.FINISH));
                     }else if (data[9] == 5){
-                        EventBus.getDefault().post(new UpdateDialView(2));
-                    }else {
+                        EventBus.getDefault().post(new UpdateDialView(FileSendConst.ERROR));
+                    }else{
                         int address = (data[10] & 0xff) + ((data[11] & 0xFF) << 8) +
                                 ((data[12] & 0xff) << 16) + ((data[13] & 0xFF) << 24);
-                        EventBus.getDefault().post(new UpdateDialView(3,address));
+                        EventBus.getDefault().post(new UpdateDialView(FileSendConst.START_SEND,address));
                     }
                 }
                     break;
                 case 4:{
                     if (data[9]==1)
-                        EventBus.getDefault().post(new UpdateDialView(0));
+                        EventBus.getDefault().post(new UpdateDialView(FileSendConst.PROGRESS));
                     else if (data[9] == 2)
-                        EventBus.getDefault().post(new UpdateDialView(4,(data[10] & 0xff) + ((data[11] & 0xFF) << 8)));
+                        EventBus.getDefault().post(new UpdateDialView(FileSendConst.CONTINUE,(data[10] & 0xff) + ((data[11] & 0xFF) << 8)));
                     else
-                        EventBus.getDefault().post(new UpdateDialView(2));
+                        EventBus.getDefault().post(new UpdateDialView(FileSendConst.ERROR));
                 }
                     break;
                 case 5:{
-                    EventBus.getDefault().post(new UpdateDialView(1));
+                    EventBus.getDefault().post(new UpdateDialView(FileSendConst.FINISH));
+                }
+                break;
+                case 6:{
+                    if(data[9]==2){
+                        EventBus.getDefault().post(new UpdateDIYView(FileSendConst.FINISH));
+                    }else if (data[9] == 5){
+                        EventBus.getDefault().post(new UpdateDIYView(FileSendConst.ERROR));
+                    }else{
+                        int address = (data[10] & 0xff) + ((data[11] & 0xFF) << 8) +
+                                ((data[12] & 0xff) << 16) + ((data[13] & 0xFF) << 24);
+                        EventBus.getDefault().post(new UpdateDIYView(FileSendConst.START_SEND,address));
+                    }
+                }
+                break;
+                case 7:{
+                    if (data[9]==1)
+                        EventBus.getDefault().post(new UpdateDIYView(FileSendConst.PROGRESS));
+                    else if (data[9] == 2)
+                        EventBus.getDefault().post(new UpdateDIYView(FileSendConst.CONTINUE,(data[10] & 0xff) + ((data[11] & 0xFF) << 8)));
+                    else
+                        EventBus.getDefault().post(new UpdateDIYView(FileSendConst.ERROR));
+                }
+                break;
+                case 8:{
+                    EventBus.getDefault().post(new UpdateDIYView(FileSendConst.FINISH));
                 }
                 break;
             }
@@ -126,6 +158,13 @@ public class DataParser {
             if (mIDataResponse!=null){
                 mIDataResponse.onScheduleCallback(data[1]&0xff,data[8]&0xff);
             }
+        }else if (data[1] == 0x55){//手表返回空的日程列表的时候，特殊处理
+            SQLite.delete()
+                    .from(ScheduleData.class)
+                    .execute();
+            EventBus.getDefault().post(new UpdateSchedule(new ArrayList<ScheduleData>()));
+        }else if (data[1] == 0x56){//手表返回空的日程列表的时候，特殊处理
+            BleClient.getInstance().writeForGetSchedule();
         }
     }
 

@@ -327,10 +327,11 @@ public class BleClient {
         public void onResponse(int code, byte[] data) {
             String value = DateUtil.byteToHexString(data);
             LogUtil.getInstance().logd("DATA******", "读取到蓝牙信息:" + value);
-            if (value.contains("AA550000")&&value.length()==16){//手表返回空的日程列表的时候，特殊处理
-                EventBus.getDefault().post(new UpdateSchedule(new ArrayList<ScheduleData>()));
-            }
             if (data.length != 0){
+                if (data.length==8&&(data[1] == 0x56||data[1] == 0x55)){
+                    DataParser.newInstance().parseNotifyData(data);
+                    return;
+                }
                 if (data.length > 0) {
                     Message message = mAnalysisHandler.obtainMessage();
                     message.what = ANALYSIS_HANDLER_FLAG;
@@ -925,7 +926,16 @@ public class BleClient {
         }else if (type == 4){
             ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
                     CommandUtil.getCommandbyteDialFile(datas.length+7,type,clockId,addresss,num,datas),bleWriteResponse);
-        }else {
+        }else if (type == 5){
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteDialFile(2,type,clockId,addresss,num,datas),bleWriteResponse);
+        }else if (type == 6){
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteDialFile(2,type,clockId,addresss,num,datas),bleWriteResponse);
+        }else if (type == 7){
+            ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
+                    CommandUtil.getCommandbyteDialFile(datas.length+7,type,clockId,addresss,num,datas),bleWriteResponse);
+        }else if (type == 8){
             ClientManager.getClient().write(mMac,UUID.fromString(Config.char5),UUID.fromString(Config.char4),
                     CommandUtil.getCommandbyteDialFile(2,type,clockId,addresss,num,datas),bleWriteResponse);
         }

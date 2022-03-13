@@ -4,26 +4,29 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.szip.sportwatch.Activity.BaseActivity;
 import com.szip.sportwatch.BLE.BleClient;
 import com.szip.sportwatch.BLE.EXCDController;
+import com.szip.sportwatch.Model.EvenBusModel.UpdateDIYView;
 import com.szip.sportwatch.Model.EvenBusModel.UpdateDialView;
-import com.szip.sportwatch.Model.EvenBusModel.UpdateView;
+import com.szip.sportwatch.Model.FileSendConst;
+import com.szip.sportwatch.Model.HttpBean.DialBean;
+import com.szip.sportwatch.Model.SendDialModel;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
+import com.szip.sportwatch.Service.MainService;
 import com.szip.sportwatch.Util.FileUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.ProgressHudModel;
@@ -37,11 +40,13 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DIYActivity extends BaseActivity implements IDiyView{
 
     private RecyclerView clockRv;
     private Uri resultUri;
+    private String pictureUrl;
 
     private CircularImageView backgroundIv;
     private ImageView clockIv,diyIv;
@@ -51,6 +56,7 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     private int clock = -1;
 
     private String faceType = "";
+    private ArrayList<DialBean.Dial> dialArrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +72,8 @@ public class DIYActivity extends BaseActivity implements IDiyView{
         StatusBarCompat.translucentStatusBar(this,true);
         setAndroidNativeLightStatusBar(this,true);
         EventBus.getDefault().register(this);
+        Bundle bundle = getIntent().getBundleExtra("data");
+        dialArrayList = (ArrayList<DialBean.Dial>) bundle.getSerializable("list");
         initView();
         initEvent();
     }
@@ -114,13 +122,21 @@ public class DIYActivity extends BaseActivity implements IDiyView{
                     showToast(getString(R.string.chooseClock));
                     return;
                 }
+
+                if (pictureUrl==null)
+                    return;
+
                 if (!ProgressHudModel.newInstance().isShow()){
                     ProgressHudModel.newInstance().show(DIYActivity.this,getString(R.string.loading),
                             getString(R.string.connect_error),10000);
                     if (MyApplication.getInstance().isMtk())
                         EXCDController.getInstance().initDialInfo();
-                    else
-                        BleClient.getInstance().writeForSendPicture(0,clock,0,0,new byte[0]);
+                    else{
+                        boolean hasFile = MainService.getInstance().downloadFirmsoft(pictureUrl);
+                        if(hasFile)
+                            BleClient.getInstance().writeForSendPicture(0,clock,0,0,new byte[0]);
+                    }
+
                 }
             }
         });
@@ -131,10 +147,9 @@ public class DIYActivity extends BaseActivity implements IDiyView{
         clockRv = findViewById(R.id.clockRv);
         clockIv = findViewById(R.id.clockIv);
         diyIv = findViewById(R.id.diyIv);
-        iDiyPresenter.getViewConfig(clockRv);
+        iDiyPresenter.getViewConfig(clockRv,dialArrayList);
     }
 
-    String[] proj = { MediaStore.Images.Media.DATA };
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -189,24 +204,72 @@ public class DIYActivity extends BaseActivity implements IDiyView{
      * 更新数据显示
      * */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUpdataView(UpdateDialView updateView){
-        if(updateView.getType()==0){//进度+1
+    public void onUpdateView(UpdateDialView updateView){
+        if(updateView.getType()== FileSendConst.PROGRESS){//进度+1
             iDiyPresenter.sendDial(null,-1);
             ProgressHudModel.newInstance().setProgress();
-        }else if (updateView.getType()==1){//完成
+        }else if (updateView.getType()==FileSendConst.FINISH){//完成
             isSendPic = false;
             ProgressHudModel.newInstance().diss();
             showToast(getString(R.string.diyDailOK));
-        }else if (updateView.getType()==2){//失败
-//            if (isSendPic){
-                isSendPic = false;
-                ProgressHudModel.newInstance().diss();
-                showToast(getString(R.string.diyDailError1));
-//            }
+        }else if (updateView.getType()==FileSendConst.ERROR){//失败
+            isSendPic = false;
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.diyDailError1));
+        }else if (updateView.getType()==FileSendConst.SEND_BIN){//开始发送bin文件
+            ProgressHudModel.newInstance().diss();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    iDiyPresenter.startToSendDial();
+                }
+            },100);
+
         }else {
             isSendPic = true;
             ProgressHudModel.newInstance().diss();
             iDiyPresenter.sendDial(resultUri,clock);
+        }
+    }
+
+    /**
+     * 更新数据显示
+     * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdateDIYView(UpdateDIYView updateView){
+        if(updateView.getType()== FileSendConst.PROGRESS){//进度+1
+            iDiyPresenter.sendDialDiy(null,-1);
+            ProgressHudModel.newInstance().setProgress();
+        }else if (updateView.getType()==FileSendConst.FINISH){//完成
+            isSendPic = false;
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.diyDailOK));
+        }else if (updateView.getType()==FileSendConst.ERROR){//失败
+            isSendPic = false;
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.diyDailError1));
+        }else if (updateView.getType()==FileSendConst.START_SEND){//准备开始
+            Log.i("data******","准备发送数据");
+            isSendPic = true;
+            ProgressHudModel.newInstance().diss();
+            String fileNames[] = pictureUrl.split("/");
+            iDiyPresenter.sendDialDiy(fileNames[fileNames.length-1],updateView.getData());
+        }else if (updateView.getType() == FileSendConst.CONTINUE){//断点续传
+            iDiyPresenter.resumeSendDial(updateView.getData());
+        }else {
+            isSendPic = false;
+            ProgressHudModel.newInstance().diss();
+            showToast(getString(R.string.diyDailOK));
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSendPicture(SendDialModel sendDialModel){
+        if (sendDialModel.isLoadSuccess()){
+            BleClient.getInstance().writeForSendPicture(0,clock,0,0,new byte[0]);
+        }else {
+            showToast(getString(R.string.httpError));
+            ProgressHudModel.newInstance().diss();
         }
     }
 
@@ -226,8 +289,9 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     }
 
     @Override
-    public void setDialView(int dial, int clock) {
-        clockIv.setImageResource(dial);
+    public void setDialView(String dial,String pictureUrl, int clock) {
+        Glide.with(this).load(dial).into(clockIv);
+        this.pictureUrl = pictureUrl;
         this.clock = clock;
     }
 
@@ -237,8 +301,8 @@ public class DIYActivity extends BaseActivity implements IDiyView{
     }
 
     @Override
-    public void setDialProgress(int num) {
-        ProgressHudModel.newInstance().showWithPie(DIYActivity.this,getString(R.string.diyDailing),num,
+    public void setDialProgress(int num,String str) {
+        ProgressHudModel.newInstance().showWithPie(DIYActivity.this,str,num,
                 getString(R.string.diyDailError),30*1000);
     }
 }

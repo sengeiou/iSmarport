@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.szip.sportwatch.Adapter.DIYAdapter;
 import com.szip.sportwatch.BLE.EXCDController;
+import com.szip.sportwatch.Model.HttpBean.DialBean;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.MathUitl;
@@ -15,6 +16,7 @@ import com.yalantis.ucrop.UCrop;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 public class DiyPresenterImpl implements IDiyPresenter{
     private Handler handler;
@@ -28,33 +30,10 @@ public class DiyPresenterImpl implements IDiyPresenter{
     }
 
     @Override
-    public void getViewConfig(RecyclerView dialRv) {
+    public void getViewConfig(RecyclerView dialRv, final ArrayList<DialBean.Dial> dialArrayList) {
         dialRv.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
-        final int [] dials;
-        final int [] clock;
         final boolean isCircle = MyApplication.getInstance().isCircle();
-        if (isCircle){
-            dials = new int[]{R.mipmap.diy_preview_c_1_1,R.mipmap.diy_preview_c_2_1,
-                    R.mipmap.diy_preview_c_4_1, R.mipmap.diy_preview_c_5_1,R.mipmap.diy_preview_c_6_1, R.mipmap.diy_preview_c_7_1,
-                     R.mipmap.diy_preview_c_10_1, R.mipmap.diy_preview_c_11_1,
-                    R.mipmap.diy_preview_c_12_1,R.mipmap.diy_preview_c_13_1,R.mipmap.diy_31,R.mipmap.diy_30,R.mipmap.diy_34};
-
-            clock = new int[]{15,25,17,18,19,20,23,24,26,27,31,30,34};
-        }else {
-            if (MyApplication.getInstance().getFaceType().equals("320*385")){
-                dials = new int[]{
-                    R.mipmap.diy_10,R.mipmap.diy_19, R.mipmap.diy_20,R.mipmap.diy_23};
-                clock = new int[]{51,60,61,64};
-            }else {
-                dials = new int[]{R.mipmap.diy_preview_1_1,R.mipmap.diy_preview_2_1,R.mipmap.diy_preview_3_1,R.mipmap.diy_preview_4_1,
-                        R.mipmap.diy_preview_5_1,R.mipmap.diy_preview_6_1,R.mipmap.diy_preview_7_1,R.mipmap.diy_preview_9_1,
-                        R.mipmap.diy_preview_10_1,R.mipmap.diy_preview_11_1,R.mipmap.diy_preview_13_1,R.mipmap.diy_preview_14_1,R.mipmap.diy_28};
-
-                clock = new int[]{1,2,3,5,7,8,9,10,12,14,11,13,28};
-            }
-
-        }
-        DIYAdapter diyAdapter = new DIYAdapter(dials);
+        DIYAdapter diyAdapter = new DIYAdapter(dialArrayList,context);
         dialRv.setAdapter(diyAdapter);
         dialRv.setHasFixedSize(true);
         dialRv.setNestedScrollingEnabled(false);
@@ -62,12 +41,11 @@ public class DiyPresenterImpl implements IDiyPresenter{
         if (iDiyView!=null)
             iDiyView.setView(isCircle);
 
-
         diyAdapter.setOnItemClickListener(new DIYAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 if (iDiyView!=null){
-                    iDiyView.setDialView(dials[position],clock[position]);
+                    iDiyView.setDialView(dialArrayList.get(position).getPointerImg(),"",dialArrayList.get(position).getPointerNumber());
                 }
             }
         });
@@ -92,7 +70,7 @@ public class DiyPresenterImpl implements IDiyPresenter{
             int num = datas.length/PAGENUM;
             num = datas.length%PAGENUM==0?num:num+1;
             if (iDiyView!=null)
-                iDiyView.setDialProgress(num);
+                iDiyView.setDialProgress(num,context.getString(R.string.diyDailing));
             byte[] newDatas;
             for (int i=0;i<datas.length;i+=PAGENUM){
                 int len = (datas.length-i>PAGENUM)?PAGENUM:(datas.length-i);
@@ -132,5 +110,20 @@ public class DiyPresenterImpl implements IDiyPresenter{
     @Override
     public void setViewDestory() {
         iDiyView = null;
+    }
+
+    @Override
+    public void startToSendDial() {
+
+    }
+
+    @Override
+    public void sendDialDiy(String resultUri, int address) {
+
+    }
+
+    @Override
+    public void resumeSendDial(int page) {
+
     }
 }

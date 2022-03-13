@@ -467,7 +467,25 @@ public class CommandUtil {
             data[6] = (byte) ((address>>24)&0xff);
             System.arraycopy(datas,0,data,7,datas.length);
             LogUtil.getInstance().logd("DATA******","发送的OTA包序号 = "+ num+" ;写入角标号 = "+address);
-        }else {
+        }else if (type == 5){
+            data[0] = (byte) type;
+            data[1] = 0;
+            LogUtil.getInstance().logd("DATA******","发送的OTA结束包 = "+DateUtil.byteToHexString(data));
+        }else if (type == 6){
+            data[0] = (byte) type;
+            data[1] = clockId;
+            LogUtil.getInstance().logd("DATA******","发送的蓝牙数据:"+ DateUtil.byteToHexString(data));
+        }else if (type == 7){
+            data[0] = (byte) type;
+            data[1] = (byte) (num&0xff);
+            data[2] = (byte) ((num>>8)&0xff);
+            data[3] = (byte) (address&0xff);
+            data[4] = (byte) ((address>>8)&0xff);
+            data[5] = (byte) ((address>>16)&0xff);
+            data[6] = (byte) ((address>>24)&0xff);
+            System.arraycopy(datas,0,data,7,datas.length);
+            LogUtil.getInstance().logd("DATA******","发送的OTA包序号 = "+ num+" ;写入角标号 = "+address);
+        }else if (type == 8){
             data[0] = (byte) type;
             data[1] = 0;
             LogUtil.getInstance().logd("DATA******","发送的OTA结束包 = "+DateUtil.byteToHexString(data));

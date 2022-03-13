@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.szip.sportwatch.Model.HttpBean.DialBean;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.View.CircularImageView;
@@ -12,13 +14,17 @@ import com.szip.sportwatch.View.CircularImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class DIYAdapter extends RecyclerView.Adapter<DIYAdapter.Holder>{
 
-    private int [] dials = new int[0];
+    private ArrayList<DialBean.Dial> dialArrayList = new ArrayList<>();
+    private Context context;
     private int select = -1;
 
-    public DIYAdapter(int[] dials) {
-        this.dials = dials;
+    public DIYAdapter(ArrayList<DialBean.Dial> dials,Context context) {
+        this.context = context;
+        this.dialArrayList = dials;
     }
     @NonNull
     @Override
@@ -61,12 +67,14 @@ public class DIYAdapter extends RecyclerView.Adapter<DIYAdapter.Holder>{
         }else {
             holder.selectView.setVisibility(View.GONE);
         }
-        holder.imageView.setImageResource(dials[position]);
+        Glide.with(context).load(dialArrayList.get(position).getPointerImg())
+                .placeholder(R.mipmap.dial_default)
+                .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return dials.length;
+        return dialArrayList.size();
     }
 
 

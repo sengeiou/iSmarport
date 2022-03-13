@@ -38,44 +38,15 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
 
     private Context context;
     private ISelectDialView iSelectDialView;
-    private ArrayList<DialBean.Dial> dialArrayList = new ArrayList<>();
     private int clock;
 
     public SelectDialPresenterImpl06(Context context, ISelectDialView iSelectDialView) {
         this.context = context;
         this.iSelectDialView = iSelectDialView;
-        getDialList();
-    }
-
-    private void getDialList() {
-        try {
-            HttpMessgeUtil.getInstance().getDialList(MyApplication.getInstance().getDialGroupId(),
-                    new GenericsCallback<DialBean>(new JsonGenericsSerializator()) {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-                    if (iSelectDialView!=null)
-                        iSelectDialView.initList(false);
-                }
-
-                @Override
-                public void onResponse(DialBean response, int id) {
-                    if (response.getCode() == 200){
-                        dialArrayList = response.getData().getList();
-                        if (iSelectDialView!=null)
-                            iSelectDialView.initList(true);
-                    }else {
-                        if (iSelectDialView!=null)
-                            iSelectDialView.initList(false);
-                    }
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
-    public void getViewConfig(RecyclerView dialRv) {
+    public void getViewConfig(RecyclerView dialRv, final ArrayList<DialBean.Dial> dialArrayList) {
         dialRv.setLayoutManager(new GridLayoutManager(context, 3));
         DialAdapter dialAdapter = new DialAdapter(dialArrayList,context);
         dialRv.setAdapter(dialAdapter);
@@ -145,7 +116,7 @@ public class SelectDialPresenterImpl06 implements ISelectDialPresenter{
     }
 
     @Override
-    public void setViewDestory() {
+    public void setViewDeStory() {
         iSelectDialView = null;
     }
 
