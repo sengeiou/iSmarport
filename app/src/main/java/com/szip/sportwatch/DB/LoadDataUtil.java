@@ -1242,10 +1242,9 @@ public class LoadDataUtil {
     /**
      * 取计划表数据
      * */
-    public List<ScheduleData> getScheduleData(long time){
+    public List<ScheduleData> getScheduleData(){
         List<ScheduleData> list = SQLite.select()
                 .from(ScheduleData.class)
-                .where(ScheduleData_Table.time.greaterThanOrEq(time))
                 .orderBy(OrderBy.fromString(ScheduleData_Table.time+OrderBy.DESCENDING))
                 .queryList();
         return list;

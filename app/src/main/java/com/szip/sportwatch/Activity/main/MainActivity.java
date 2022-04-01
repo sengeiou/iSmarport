@@ -1,7 +1,6 @@
 package com.szip.sportwatch.Activity.main;
 
 import android.Manifest;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,11 +29,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentTabHost;
 
 import static com.szip.sportwatch.MyApplication.FILE;
@@ -46,7 +43,7 @@ public class MainActivity extends BaseActivity implements IMainView{
     private RelativeLayout layout;
     private FragmentTabHost fragmentTabHost;
     private boolean isVisiable = false;
-    private long firstime = 0;
+    private long firstTime = 0;
     private IMainPrisenter iMainPrisenter;
     /**
      * 淡入
@@ -209,10 +206,10 @@ public class MainActivity extends BaseActivity implements IMainView{
         // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             long secondtime = System.currentTimeMillis();
-            if (secondtime - firstime > 3000) {
+            if (secondtime - firstTime > 3000) {
                 Toast.makeText(this, getString(R.string.touchAgain),
                         Toast.LENGTH_SHORT).show();
-                firstime = System.currentTimeMillis();
+                firstTime = System.currentTimeMillis();
                 return true;
             } else {
                 finish();

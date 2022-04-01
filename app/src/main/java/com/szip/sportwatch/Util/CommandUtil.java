@@ -330,10 +330,10 @@ public class CommandUtil {
         data[1] = (byte) 0x40;
         data[2] = (byte) (data.length-8);
         data[3] = 0;
-        data[4] = (byte)0xf0;
-        data[5] = (byte)0xf0;
-        data[6] = (byte)0xf0;
-        data[7] = (byte)0xf0;
+        data[4] = (byte) (time & 0xFF);
+        data[5] = (byte) ((time >> 8) & 0xFF);
+        data[6] = (byte) ((time >> 16) & 0xFF);
+        data[7] = (byte) ((time >> 24) & 0xFF);
         data[8] = (byte) type;
         data[9] = (byte) (names.length>30?30:names.length);
         data[10] = 0;

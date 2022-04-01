@@ -14,8 +14,10 @@ import android.os.Vibrator;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
+import com.inuker.bluetooth.library.Code;
 import com.inuker.bluetooth.library.connect.listener.BleConnectStatusListener;
 import com.inuker.bluetooth.library.connect.listener.BluetoothStateListener;
+import com.inuker.bluetooth.library.connect.options.BleConnectOptions;
 import com.inuker.bluetooth.library.connect.response.BleConnectResponse;
 import com.inuker.bluetooth.library.connect.response.BleMtuResponse;
 import com.inuker.bluetooth.library.connect.response.BleNotifyResponse;
@@ -157,6 +159,7 @@ public class BleClient {
         if (connectState == 5){
             LogUtil.getInstance().logd("DATA******","开始连接蓝牙设备mac = "+mMac);
             connectState = 2;
+
             ClientManager.getClient().connect(mMac,bleConnectResponse);
             ClientManager.getClient().registerConnectStatusListener(mMac,connectStatusListener);
             EventBus.getDefault().post(new ConnectState(connectState));
@@ -174,8 +177,8 @@ public class BleClient {
     private BleConnectResponse bleConnectResponse = new BleConnectResponse() {
         @Override
         public void onResponse(int code, BleGattProfile data) {
-            LogUtil.getInstance().logd("SZIP","code = "+code);
             if( code == 0 ){        // 0 成功
+                LogUtil.getInstance().logd("data******","连接成功，配置MTU");
                 ClientManager.getClient().requestMtu(mMac, 512, new BleMtuResponse() {
                     @Override
                     public void onResponse(int code, Integer data) {

@@ -52,7 +52,7 @@ public class ScheduleActivity extends BaseActivity {
     }
 
     private void initData() {
-        list = LoadDataUtil.newInstance().getScheduleData(Calendar.getInstance().getTimeInMillis()/1000);
+        list = LoadDataUtil.newInstance().getScheduleData();
         if(list!=null&&list.size()!=0)
             findViewById(R.id.listEmptyTv).setVisibility(View.GONE);
         else {
