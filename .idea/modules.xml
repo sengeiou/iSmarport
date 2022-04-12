@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ismarport.iml" filepath="$PROJECT_DIR$/ismarport.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ismarport.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ismarport.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/citypicker/ismarport.citypicker.iml" filepath="$PROJECT_DIR$/.idea/modules/citypicker/ismarport.citypicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fotaplugin/ismarport.fotaplugin.iml" filepath="$PROJECT_DIR$/.idea/modules/fotaplugin/ismarport.fotaplugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/ismarport.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/ismarport.library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ncalendar/ismarport.ncalendar.iml" filepath="$PROJECT_DIR$/.idea/modules/ncalendar/ismarport.ncalendar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/okhttputils/ismarport.okhttputils.iml" filepath="$PROJECT_DIR$/.idea/modules/okhttputils/ismarport.okhttputils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/standard/ismarport.standard.iml" filepath="$PROJECT_DIR$/.idea/modules/standard/ismarport.standard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/iSmarport.iml" filepath="$PROJECT_DIR$/.idea/modules/iSmarport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/iSmarport.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/iSmarport.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/citypicker/iSmarport.citypicker.iml" filepath="$PROJECT_DIR$/.idea/modules/citypicker/iSmarport.citypicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fotaplugin/iSmarport.fotaplugin.iml" filepath="$PROJECT_DIR$/.idea/modules/fotaplugin/iSmarport.fotaplugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/iSmarport.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/iSmarport.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ncalendar/iSmarport.ncalendar.iml" filepath="$PROJECT_DIR$/.idea/modules/ncalendar/iSmarport.ncalendar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/okhttputils/iSmarport.okhttputils.iml" filepath="$PROJECT_DIR$/.idea/modules/okhttputils/iSmarport.okhttputils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/standard/iSmarport.standard.iml" filepath="$PROJECT_DIR$/.idea/modules/standard/iSmarport.standard.iml" />
     </modules>
   </component>
 </project>
