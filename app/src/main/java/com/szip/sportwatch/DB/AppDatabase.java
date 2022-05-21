@@ -6,7 +6,7 @@ import com.raizlabs.android.dbflow.annotation.Database;
 public class AppDatabase {
 
     //版本号
-    public static final int VERSION = 11;
+    public static final int VERSION = 12;
     //数据库名称
     public static final String NAME = "iSmarportDatabase";
 

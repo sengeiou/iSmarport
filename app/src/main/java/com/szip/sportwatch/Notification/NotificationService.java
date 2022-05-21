@@ -16,14 +16,6 @@ public class NotificationService implements NotificationEventListener {
 
     public void notifyBlockListChanged(String appId) {
 
-        Map<Object, Object> applist = AppList.getInstance().getAppList();
-        CharSequence appPackageName = (CharSequence) applist.get(Integer.parseInt(appId));
-        Log.i(TAG, "notifyBlockListChanged, appPackageName is :" + appPackageName+" ;appID = "+appId);
-        HashSet<CharSequence> blockList = BlockList.getInstance().getBlockList();
-        if (!(blockList.contains(appPackageName)) && appPackageName != null) {
-            BlockList.getInstance().addBlockItem(appPackageName);
-            BlockList.getInstance().saveBlockList();
-        } 
     }
 
     @Override

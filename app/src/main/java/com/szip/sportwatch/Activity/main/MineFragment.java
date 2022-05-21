@@ -25,9 +25,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mediatek.wearable.WearableManager;
-import com.ctrip.standard.BrigeActivity;
-import com.szip.sportwatch.Activity.NotificationAppListActivity;
-import com.szip.sportwatch.Activity.UpdateFirmwareActivity;
+import com.szip.sportwatch.Activity.NotificationActivity;
 import com.szip.sportwatch.Activity.help.FaqActivity;
 import com.szip.sportwatch.Activity.schedule.ScheduleActivity;
 import com.szip.sportwatch.BLE.BleClient;
@@ -494,7 +492,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 if (!isNotificationListenerActived()){
                     showNotifiListnerPrompt();
                 }else {
-                    Intent intent = new Intent(getActivity(), NotificationAppListActivity.class);
+                    Intent intent = new Intent(getActivity(), NotificationActivity.class);
                     startActivity(intent);
                 }
                 break;

@@ -332,4 +332,13 @@
     <string name="schedule_same">The selected time point has an existing schedule and cannot be set repeatedly</string>
     <string name="schedule_msg">Fill in schedule Details</string>
     <string name="schedule_empty">The current watch has no schedule, please add a new schedule</string>
+
+    <string name="wechat">WeChat</string>
+    <string name="message">Message</string>
+    <string name="qq">QQ</string>
+    <string name="facebook">Facebook</string>
+    <string name="facebook_massage">Facebook Message</string>
+    <string name="twitter">Twitter</string>
+    <string name="whatsApp">WhatsApp</string>
+    <string name="instagram">instagram</string>
 </resources>

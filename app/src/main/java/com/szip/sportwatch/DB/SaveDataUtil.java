@@ -21,6 +21,7 @@ import com.szip.sportwatch.DB.dbModel.EcgData_Table;
 import com.szip.sportwatch.DB.dbModel.HealthyConfig;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.HeartData_Table;
+import com.szip.sportwatch.DB.dbModel.NotificationData;
 import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.DB.dbModel.ScheduleData_Table;
 import com.szip.sportwatch.DB.dbModel.SleepData;
@@ -648,6 +649,32 @@ public class SaveDataUtil {
             public void onSuccess(Transaction transaction) {
                 LogUtil.getInstance().logd("DATA******","计划表数据保存成功");
                 EventBus.getDefault().post(new UpdateSchedule(new ArrayList<ScheduleData>()));
+            }
+        }).build().execute();
+    }
+
+    public void saveNotificationList(final List<NotificationData> notificationDataList){
+        List<NotificationData> saveList = SQLite.select()
+                .from(NotificationData.class)
+                .queryList();
+        if (saveList!=null&&saveList.size()!=0)
+            return;
+        FlowManager.getDatabase(AppDatabase.class)
+                .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
+                        new ProcessModelTransaction.ProcessModel<NotificationData>() {
+                            @Override
+                            public void processModel(NotificationData notificationData, DatabaseWrapper wrapper) {
+                                notificationData.save();
+                            }
+                        }).addAll(notificationDataList).build())  // add elements (can also handle multiple)
+                .error(new Transaction.Error() {
+                    @Override
+                    public void onError(Transaction transaction, Throwable error) {
+
+                    }
+                }).success(new Transaction.Success() {
+            @Override
+            public void onSuccess(Transaction transaction) {
             }
         }).build().execute();
     }

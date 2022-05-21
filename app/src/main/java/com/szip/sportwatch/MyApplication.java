@@ -9,7 +9,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,10 +25,10 @@ import com.szip.sportwatch.Broadcat.UtilBroadcat;
 import com.szip.sportwatch.Activity.LoginActivity;
 import com.szip.sportwatch.DB.LoadDataUtil;
 import com.szip.sportwatch.DB.SaveDataUtil;
+import com.szip.sportwatch.DB.dbModel.NotificationData;
 import com.szip.sportwatch.DB.dbModel.SportWatchAppFunctionConfigDTO;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
 import com.szip.sportwatch.Model.UserInfo;
-import com.szip.sportwatch.Notification.IgnoreList;
 import com.szip.sportwatch.Notification.MyNotificationReceiver;
 import com.szip.sportwatch.Notification.NotificationView;
 import com.szip.sportwatch.Service.MainService;
@@ -39,7 +38,6 @@ import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.Util.MusicUtil;
 import com.szip.sportwatch.Util.ProgressHudModel;
-import com.szip.sportwatch.Util.TopExceptionHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +45,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -173,10 +170,7 @@ public class MyApplication extends Application{
         heartSwitch = sharedPreferences.getBoolean("heartSwitch",false);
         //获取手机缓存的自动更新信息
         isNewVersion = sharedPreferences.getBoolean("version",false);
-        if (sharedPreferences.getBoolean("first",true)){
-            initIgnoreList();
-            sharedPreferences.edit().putBoolean("first",false).commit();
-        }
+        initNotifyList();
 
 
 
@@ -295,28 +289,17 @@ public class MyApplication extends Application{
         updownDataThread.start();
     }
 
-    private void initIgnoreList() {
-        HashSet<String> exclusionList = IgnoreList.getInstance().getExclusionList();
-        List<PackageInfo> packagelist = getPackageManager().getInstalledPackages(0);
-
-        for (PackageInfo packageInfo : packagelist) {
-            if (packageInfo != null) {
-                // Whether this package should be exclude;
-                if (exclusionList.contains(packageInfo.packageName)) {
-                    continue;
-                }
-                // Add app name
-                String appName = packageInfo.packageName;
-                // Add to package list
-                if (MathUitl.isSystemApp(packageInfo.applicationInfo)) {
-                    IgnoreList.getInstance().addIgnoreItem(appName);
-                }else {
-                    if (!(appName.equals("com.tencent.mm")||appName.equals("com.tencent.mobileqq")))
-                        IgnoreList.getInstance().addIgnoreItem(appName);
-                }
-            }
-        }
-        IgnoreList.getInstance().saveIgnoreList();
+    private void initNotifyList() {
+        List<NotificationData> list = new ArrayList<>();
+        list.add(new NotificationData("massage", R.mipmap.cp_icon_empty, getString(R.string.message), true));
+        list.add(new NotificationData("com.tencent.mm", R.mipmap.cp_icon_empty, getString(R.string.wechat), true));
+        list.add(new NotificationData("com.tencent.mobileqq", R.mipmap.cp_icon_empty, getString(R.string.qq), true));
+        list.add(new NotificationData("com.facebook.katana", R.mipmap.cp_icon_empty, getString(R.string.facebook), true));
+        list.add(new NotificationData("com.facebook.orca", R.mipmap.cp_icon_empty, getString(R.string.facebook_massage), true));
+        list.add(new NotificationData("com.twitter.android", R.mipmap.cp_icon_empty, getString(R.string.twitter), true));
+        list.add(new NotificationData("com.whatsapp", R.mipmap.cp_icon_empty, getString(R.string.whatsApp), true));
+        list.add(new NotificationData("com.instagram.android", R.mipmap.cp_icon_empty, getString(R.string.instagram), true));
+        SaveDataUtil.newInstance().saveNotificationList(list);
     }
 
     public UserInfo getUserInfo() {

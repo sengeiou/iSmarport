@@ -17,6 +17,8 @@ import com.szip.sportwatch.DB.dbModel.HealthyConfig;
 import com.szip.sportwatch.DB.dbModel.HealthyConfig_Table;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.HeartData_Table;
+import com.szip.sportwatch.DB.dbModel.NotificationData;
+import com.szip.sportwatch.DB.dbModel.NotificationData_Table;
 import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.DB.dbModel.ScheduleData_Table;
 import com.szip.sportwatch.DB.dbModel.SleepData;
@@ -30,6 +32,7 @@ import com.szip.sportwatch.DB.dbModel.StepData_Table;
 import com.szip.sportwatch.Model.DrawDataBean;
 import com.szip.sportwatch.Model.HealthyDataModel;
 import com.szip.sportwatch.Model.ReportDataBean;
+import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.DateUtil;
 
 import org.joda.time.LocalDate;
@@ -1331,6 +1334,33 @@ public class LoadDataUtil {
             data[1] = sum1/b;
 
         return data;
+    }
+
+    public List<NotificationData> getNotificationList(){
+        List<NotificationData> list = SQLite.select()
+                .from(NotificationData.class)
+                .queryList();
+        return list;
+    }
+
+    public boolean needNotify(String packageName){
+       NotificationData notificationData = SQLite.select()
+                .from(NotificationData.class)
+               .where(NotificationData_Table.packageName.is(packageName))
+               .querySingle();
+       if (notificationData == null)
+           return false;
+        return notificationData.state;
+    }
+
+    public String getNotifyName(String packageName){
+        NotificationData notificationData = SQLite.select()
+                .from(NotificationData.class)
+                .where(NotificationData_Table.packageName.is(packageName))
+                .querySingle();
+        if (notificationData == null)
+            return "";
+        return notificationData.name;
     }
 
 }

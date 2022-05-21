@@ -22,6 +22,7 @@ import com.mediatek.ctrl.notification.NotificationController;
 import com.mediatek.ctrl.notification.NotificationData;
 import com.mediatek.wearable.WearableManager;
 import com.szip.sportwatch.BLE.BleClient;
+import com.szip.sportwatch.DB.LoadDataUtil;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Service.MainService;
 import com.szip.sportwatch.Util.LogUtil;
@@ -55,12 +56,8 @@ public class NotificationDataManager {
     }
 
     public void sendNotificationData(NotificationData notificationData){
-        // Filter notification according to ignore list and exclusion list
-        HashSet<CharSequence> blockList = BlockList.getInstance().getBlockList();
-        HashSet<String> ignoreList = IgnoreList.getInstance().getIgnoreList();
-        HashSet<String> exclusionList = IgnoreList.getInstance().getExclusionList();
-        if (!blockList.contains(notificationData.getPackageName()) && !ignoreList.contains(notificationData.getPackageName())
-                && !exclusionList.contains(notificationData.getPackageName())) {
+
+        if (LoadDataUtil.newInstance().needNotify(notificationData.getPackageName())) {
             Log.i(TAG, "Notice: notification need send, package name=" + notificationData.getPackageName());
             // mSNThread.sendNotfications();
             Message message = new Message();
@@ -137,7 +134,7 @@ public class NotificationDataManager {
             // notificationData.setGroupKey(getGroupKey(notification));
             notificationData.setActionsList(null);
             notificationData.setPackageName(packageName);
-            notificationData.setAppID(MathUitl.getKeyFromValue(notificationData.getPackageName()));
+            notificationData.setAppID("");
             notificationData.setWhen(notification.when);
         }
 
@@ -444,7 +441,6 @@ public class NotificationDataManager {
     private long msgTime;
     private static long time1 = 0;
     private static long time2 = 0;
-    Map<Object, Object> applist = AppList.getInstance().getAppList();
     private class SendNotficationDataThread extends Thread {
         public static final int MESSAGE_SEND_NOTIFICATION = 1;
         private NotificationData notificationData = null;
@@ -482,23 +478,6 @@ public class NotificationDataManager {
                                     }
                                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                    //mtk
-                                        try {
-                                            if (!applist.containsValue(notificationData.getPackageName())) {
-                                                int max = Integer.parseInt(applist.get(AppList.MAX_APP).toString());
-                                                if (!applist.equals("[]")) {
-                                                    applist.remove(AppList.MAX_APP);
-                                                    max = max + 1;
-                                                } else {
-                                                    max = 1;
-                                                }
-                                                applist.put(AppList.MAX_APP, max);
-                                                applist.put(max, notificationData.getPackageName());
-                                                notificationData.setAppID(max + "");
-                                                AppList.getInstance().saveAppList(applist);
-                                            }
-                                        } catch (Exception E) {
-                                            E.printStackTrace();
-                                        }
                                         if (null != notificationData && null != notificationData.getPackageName()) {
                                             if (notificationData.getPackageName().contains("incallui")) {
                                                 MainService mainService = MainService.getInstance();
@@ -510,17 +489,8 @@ public class NotificationDataManager {
                                                         NotificationController.getInstance(mContext)
                                                                 .sendNotfications(notificationData);
                                                     }else {
-                                                        PackageInfo info = null;
-                                                        PackageManager pm = mContext.getPackageManager();
-                                                        try {
-                                                            info = pm.getPackageInfo(notificationData.getPackageName(),PackageManager.GET_ACTIVITIES);
-                                                            BleClient.getInstance().writeForSendNotify(notificationData.getTickerText(),
-                                                                    info.applicationInfo.loadLabel(pm).toString(),MathUitl.getApplicationCode(notificationData.getPackageName()));
-                                                        } catch (PackageManager.NameNotFoundException e) {
-                                                            e.printStackTrace();
-                                                        } catch (RuntimeException e){
-                                                            e.printStackTrace();
-                                                        }
+                                                        BleClient.getInstance().writeForSendNotify(notificationData.getTickerText(),
+                                                               LoadDataUtil.newInstance().getNotifyName(notificationData.getPackageName()),MathUitl.getApplicationCode(notificationData.getPackageName()));
                                                     }
                                                     notificationData = null;
                                                 }

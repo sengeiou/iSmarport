@@ -337,4 +337,13 @@
     <string name="schedule_msg">请填写日程详情</string>
     <string name="schedule_empty">当前手表无日程，请添加新的日程吧</string>
 
+
+    <string name="wechat">微信</string>
+    <string name="message">短信</string>
+    <string name="qq">QQ</string>
+    <string name="facebook">脸书</string>
+    <string name="facebook_massage">脸书信息</string>
+    <string name="twitter">推特</string>
+    <string name="whatsApp">WhatsApp</string>
+    <string name="instagram">instagram</string>
 </resources>

@@ -2,10 +2,7 @@ package com.szip.sportwatch.Util;
 
 import android.annotation.TargetApi;
 import android.app.KeyguardManager;
-import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothProfile;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -15,7 +12,6 @@ import android.content.pm.ApplicationInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -29,8 +25,6 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.widget.Toast;
-
-import androidx.core.content.FileProvider;
 
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;
@@ -54,7 +48,6 @@ import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.DB.dbModel.StepData_Table;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
-import com.szip.sportwatch.Notification.AppList;
 
 
 import org.json.JSONArray;
@@ -62,27 +55,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
-import static android.content.Context.AUDIO_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
-import static android.text.TextUtils.concat;
 import static android.text.TextUtils.isEmpty;
 import static com.szip.sportwatch.MyApplication.FILE;
 
@@ -320,24 +300,7 @@ public class MathUitl {
         return isSystemApp;
     }
 
-    public static String getKeyFromValue(CharSequence charSequence) {
-        Map<Object, Object> appList = AppList.getInstance().getAppList();
-        for (Object ob:appList.keySet()){
-            Log.d("key******","key = "+ob.toString()+" ;value = "+appList.get(ob).toString());
-        }
-        Set<?> set = appList.entrySet();
-        Iterator<?> it = set.iterator();
-        String key = "";
-        while (it.hasNext()) {
-            @SuppressWarnings("rawtypes")
-            Map.Entry entry = (Map.Entry) it.next();
-            if (entry.getValue() != null && entry.getValue().equals(charSequence)) {
-                key = entry.getKey().toString();
-                break;
-            }
-        }
-        return key;
-    }
+
 
     /**
      * Array转换成Stirng

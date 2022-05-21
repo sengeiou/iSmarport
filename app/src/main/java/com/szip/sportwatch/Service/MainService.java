@@ -47,7 +47,6 @@ import com.szip.sportwatch.Util.FileUtil;
 import com.szip.sportwatch.Util.LogUtil;
 import com.szip.sportwatch.Util.MathUitl;
 import com.szip.sportwatch.BLE.EXCDController;
-import com.szip.sportwatch.Notification.AppList;
 import com.szip.sportwatch.Notification.NotificationReceiver;
 import com.szip.sportwatch.Notification.NotificationService;
 import com.szip.sportwatch.Notification.SmsService;
@@ -61,7 +60,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -473,30 +471,6 @@ public class MainService extends Service {
         mSevice = this;
         app = MyApplication.getInstance();
         mIsMainServiceActive = true;
-
-        Map<Object, Object> applist = AppList.getInstance().getAppList();
-        if (applist.size() == 0) {
-            applist.put(AppList.MAX_APP, (int) AppList.CREATE_LENTH);
-            applist.put(AppList.CREATE_LENTH, AppList.BATTERYLOW_APPID);
-            applist.put(AppList.CREATE_LENTH, AppList.SMSRESULT_APPID);
-            AppList.getInstance().saveAppList(applist);
-        }
-        if (!applist.containsValue(AppList.BATTERYLOW_APPID)) {
-            int max = Integer.parseInt(applist.get(AppList.MAX_APP).toString());
-            applist.remove(AppList.MAX_APP);
-            max = max + 1;
-            applist.put(AppList.MAX_APP, max);
-            applist.put(max, AppList.BATTERYLOW_APPID);
-            AppList.getInstance().saveAppList(applist);
-        }
-        if (!applist.containsValue(AppList.SMSRESULT_APPID)) {
-            int max = Integer.parseInt(applist.get(AppList.MAX_APP).toString());
-            applist.remove(AppList.MAX_APP);
-            max = max + 1;
-            applist.put(AppList.MAX_APP, max);
-            applist.put(max, AppList.SMSRESULT_APPID);
-            AppList.getInstance().saveAppList(applist);
-        }
 
         registerService();
     }
