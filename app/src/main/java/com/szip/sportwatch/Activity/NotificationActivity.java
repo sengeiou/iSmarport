@@ -48,6 +48,7 @@ public class NotificationActivity extends BaseActivity {
         switchList.setAdapter(notificationAdapter);
 
 
+        findViewById(R.id.rightIv).setVisibility(View.GONE);
         findViewById(R.id.backIv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

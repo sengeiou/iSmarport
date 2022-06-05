@@ -22,6 +22,7 @@ import com.szip.sportwatch.DB.dbModel.HealthyConfig;
 import com.szip.sportwatch.DB.dbModel.HeartData;
 import com.szip.sportwatch.DB.dbModel.HeartData_Table;
 import com.szip.sportwatch.DB.dbModel.NotificationData;
+import com.szip.sportwatch.DB.dbModel.NotificationData_Table;
 import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.DB.dbModel.ScheduleData_Table;
 import com.szip.sportwatch.DB.dbModel.SleepData;
@@ -654,17 +655,21 @@ public class SaveDataUtil {
     }
 
     public void saveNotificationList(final List<NotificationData> notificationDataList){
-        List<NotificationData> saveList = SQLite.select()
-                .from(NotificationData.class)
-                .queryList();
-        if (saveList!=null&&saveList.size()!=0)
-            return;
+
         FlowManager.getDatabase(AppDatabase.class)
                 .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
                         new ProcessModelTransaction.ProcessModel<NotificationData>() {
                             @Override
                             public void processModel(NotificationData notificationData, DatabaseWrapper wrapper) {
-                                notificationData.save();
+                                NotificationData sqlData = SQLite.select()
+                                        .from(NotificationData.class)
+                                        .where(NotificationData_Table.packageName.is(notificationData.packageName))
+                                        .querySingle();
+                                if (sqlData!=null){
+                                    sqlData.name = notificationData.name;
+                                    sqlData.update();
+                                }else
+                                    notificationData.save();
                             }
                         }).addAll(notificationDataList).build())  // add elements (can also handle multiple)
                 .error(new Transaction.Error() {
@@ -683,29 +688,29 @@ public class SaveDataUtil {
      * 清除数据库
      * */
     public void clearDB(){
-        SQLite.delete()
-                .from(BloodOxygenData.class)
-                .execute();
-        SQLite.delete()
-                .from(BloodPressureData.class)
-                .execute();
-        SQLite.delete()
-                .from(EcgData.class)
-                .execute();
-        SQLite.delete()
-                .from(HeartData.class)
-                .execute();
-        SQLite.delete()
-                .from(SleepData.class)
-                .execute();
-        SQLite.delete()
-                .from(StepData.class)
-                .execute();
-        SQLite.delete()
-                .from(SportData.class)
-                .execute();
-        SQLite.delete()
-                .from(AnimalHeatData.class)
-                .execute();
+//        SQLite.delete()
+//                .from(BloodOxygenData.class)
+//                .execute();
+//        SQLite.delete()
+//                .from(BloodPressureData.class)
+//                .execute();
+//        SQLite.delete()
+//                .from(EcgData.class)
+//                .execute();
+//        SQLite.delete()
+//                .from(HeartData.class)
+//                .execute();
+//        SQLite.delete()
+//                .from(SleepData.class)
+//                .execute();
+//        SQLite.delete()
+//                .from(StepData.class)
+//                .execute();
+//        SQLite.delete()
+//                .from(SportData.class)
+//                .execute();
+//        SQLite.delete()
+//                .from(AnimalHeatData.class)
+//                .execute();
     }
 }

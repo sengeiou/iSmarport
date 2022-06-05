@@ -2,6 +2,7 @@ package com.szip.sportwatch.Util;
 
 
 import android.content.Context;
+import android.os.Handler;
 
 import com.szip.sportwatch.BuildConfig;
 import com.szip.sportwatch.DB.SaveDataUtil;
@@ -94,6 +95,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Accept-Language",language)
                 .addHeader("Time-Diff",time)
                 .addParams("type",type)
@@ -121,6 +123,7 @@ public class HttpMessgeUtil {
                 .jpost()
                 .id(GET_VERIFICATION)
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("Accept-Language",language)
                 .addParams("type",type)
@@ -144,6 +147,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Accept-Language",language)
                 .addParams("type",type)
                 .addParams("areaCode",areaCode)
@@ -167,6 +171,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("Accept-Language",language)
                 .addParams("type",type)
@@ -195,6 +200,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("Accept-Language",language)
                 .addParams("type",type)
@@ -215,6 +221,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -231,6 +238,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -258,6 +266,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .id(UPDATA_USERINFO)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
@@ -282,6 +291,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .id(id)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
@@ -296,6 +306,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .id(id)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
@@ -310,6 +321,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -324,6 +336,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -341,6 +354,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .fpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .id(UPDOWN_AVATAR)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -358,6 +372,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -375,6 +390,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -393,6 +409,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -409,6 +426,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .jpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .id(UPDOWN_LOG)
                 .addParams("appName",appName)
                 .addParams("appVersion",appVersion)
@@ -426,6 +444,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .listpost()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .id(UPDOWN_DATA)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
@@ -443,6 +462,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("token",token)
                 .addHeader("Accept-Language",language)
@@ -457,6 +477,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("Accept-Language",language)
                 .build()
@@ -468,6 +489,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("Accept-Language",language)
                 .addHeader("token",token)
@@ -483,6 +505,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("Accept-Language",language)
                 .addParams("pageNum","1")
@@ -496,6 +519,7 @@ public class HttpMessgeUtil {
         OkHttpUtils
                 .get()
                 .url(url)
+                .addHeader("project",BuildConfig.APP_NAME)
                 .addHeader("Time-Diff",time)
                 .addHeader("Accept-Language",language)
                 .addParams("id",id)
@@ -665,7 +689,14 @@ public class HttpMessgeUtil {
                 if (response.getData().getSportDataList().size()!=0)
                     saveDataUtil.saveSportDataListData(response.getData().getSportDataList());
 
-                MathUitl.saveLastTime(mContext.getSharedPreferences(FILE,MODE_PRIVATE));
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MathUitl.saveLastTime(mContext.getSharedPreferences(FILE,MODE_PRIVATE));
+                    }
+                },10000);
+
             }else {
                 ProgressHudModel.newInstance().diss();
                 MathUitl.showToast(mContext,response.getMessage());

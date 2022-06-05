@@ -890,12 +890,37 @@ public class MathUitl {
                 return 1;
             case "com.tencent.mobileqq":
                 return 2;
-            case "com.twitter.android":
-                return 3;
-            case "com.instagram.android":
-                return 4;
             case "com.whatsapp":
                 return 5;
+            case "com.twitter.android":
+                return 6;
+            case "com.instagram.android":
+                return 7;
+            case "com.facebook.katana":
+            case "com.facebook.orca":
+                return 8;
+            case "com.skype.rover":
+                return 9;
+            case "com.linkedin.android":
+                return 10;
+            case "jp.naver.line.android":
+                return 11;
+            case "com.snapchat.android":
+                return 12;
+            case "com.pinterest":
+                return 13;
+            case "com.google.android.apps.plus":
+                return 14;
+            case "com.tumblr":
+                return 15;
+            case "com.viber.voip":
+                return 16;
+            case "com.vkontakte.android":
+                return 17;
+            case "org.telegram.messenger":
+                return 18;
+            case "com.zhiliaoapp.musically":
+                return 20;
             default:
                 return -1;
         }

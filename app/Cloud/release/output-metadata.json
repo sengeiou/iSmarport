@@ -10,8 +10,8 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 60,
-      "versionName": "1.60",
+      "versionCode": 61,
+      "versionName": "1.61",
       "outputFile": "app-Cloud-release.apk"
     }
   ]
