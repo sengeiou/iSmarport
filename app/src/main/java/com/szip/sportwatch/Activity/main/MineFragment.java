@@ -116,7 +116,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     @Override
     protected void afterOnCreated(Bundle savedInstanceState) {
         app = (MyApplication) getActivity().getApplicationContext();
-        userInfo = app.getUserInfo();
         initView();
         initEvent();
         initWindow();
@@ -126,7 +125,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
-        if (app.getUserInfo().getDeviceCode()==null){
+        userInfo = app.getUserInfo();
+        if (userInfo.getDeviceCode()==null){
             deviceTv.setText("");
             stateTv.setText(getString(R.string.addDevice));
         } else {
