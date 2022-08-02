@@ -21,10 +21,11 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.mediatek.ctrl.map.MapController;
-import com.mediatek.ctrl.notification.NotificationController;
 import com.mediatek.wearable.WearableListener;
 import com.mediatek.wearable.WearableManager;
 import com.szip.sportwatch.BLE.BleClient;
+import com.szip.sportwatch.BLE.NotificationController;
+import com.szip.sportwatch.DB.LoadDataUtil;
 import com.szip.sportwatch.DB.SaveDataUtil;
 import com.szip.sportwatch.DB.dbModel.AnimalHeatData;
 import com.szip.sportwatch.DB.dbModel.BloodOxygenData;
@@ -40,6 +41,7 @@ import com.szip.sportwatch.Model.EvenBusModel.ConnectState;
 import com.szip.sportwatch.Model.SendDialModel;
 import com.szip.sportwatch.Model.UpdateSportView;
 import com.szip.sportwatch.MyApplication;
+import com.szip.sportwatch.Notification.AppList;
 import com.szip.sportwatch.Notification.NotificationView;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.DateUtil;
@@ -60,6 +62,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -461,6 +464,7 @@ public class MainService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate() {
         Log.i(TAG, "onCreate()");
@@ -471,6 +475,31 @@ public class MainService extends Service {
         mSevice = this;
         app = MyApplication.getInstance();
         mIsMainServiceActive = true;
+
+        Map<Object, Object> applist = AppList.getInstance().getAppList();
+        if (applist.size() == 0) {
+            applist.put(AppList.MAX_APP, (int) AppList.CREATE_LENTH);
+            applist.put(AppList.CREATE_LENTH, AppList.BATTERYLOW_APPID);
+            applist.put(AppList.CREATE_LENTH, AppList.SMSRESULT_APPID);
+            AppList.getInstance().saveAppList(applist);
+        }
+        if (!applist.containsValue(AppList.BATTERYLOW_APPID)) {
+            int max = Integer.parseInt(applist.get(AppList.MAX_APP).toString());
+            applist.remove(AppList.MAX_APP);
+            max = max + 1;
+            applist.put(AppList.MAX_APP, max);
+            applist.put(max, AppList.BATTERYLOW_APPID);
+            AppList.getInstance().saveAppList(applist);
+        }
+        if (!applist.containsValue(AppList.SMSRESULT_APPID)) {
+            int max = Integer.parseInt(applist.get(AppList.MAX_APP).toString());
+            applist.remove(AppList.MAX_APP);
+            max = max + 1;
+            applist.put(AppList.MAX_APP, max);
+            applist.put(max, AppList.SMSRESULT_APPID);
+            AppList.getInstance().saveAppList(applist);
+        }
+
 
         registerService();
     }
@@ -550,7 +579,7 @@ public class MainService extends Service {
         Log.i(TAG, "onDestroy()");
         WearableManager manager = WearableManager.getInstance();
         manager.removeController(MapController.getInstance(sContext));
-        manager.removeController(NotificationController.getInstance(sContext));
+        manager.removeController(NotificationController.getInstance());
         manager.removeController(EXCDController.getInstance());
         EXCDController.getInstance().setReceiveDataCallback(null);
         manager.unregisterWearableListener(mWearableListener);
@@ -571,13 +600,13 @@ public class MainService extends Service {
     public void startNotificationService() {
         Log.i(TAG, "startNotificationService()");
         mNotificationService = new NotificationService();
-        NotificationController.setListener(mNotificationService);
+//        NotificationController.setListener(mNotificationService);
 
     }
 
     public void stopNotificationService() {
         Log.i(TAG, "stopNotificationService()");
-        NotificationController.setListener(null);
+//        NotificationController.setListener(null);
         mNotificationService = null;
     }
 
@@ -623,13 +652,12 @@ public class MainService extends Service {
         Log.i(TAG, "registerService()");
 
         WearableManager manager = WearableManager.getInstance();
-        manager.addController(NotificationController.getInstance(sContext));
+        manager.addController(NotificationController.getInstance());
         manager.addController(EXCDController.getInstance());
-        manager.addController(MapController.getInstance(sContext));
         EXCDController.getInstance().setReceiveDataCallback(receiveDataCallback);
         manager.registerWearableListener(mWearableListener);
         // start SMS service
-        if (checkSelfPermission(Manifest.permission.READ_SMS)== PackageManager.PERMISSION_GRANTED)
+        if (LoadDataUtil.newInstance().needNotify("message"))
             startSmsService();
         startNotificationService();
         BleClient.getInstance().setiOtaResponse(iOtaResponse);

@@ -48,6 +48,8 @@ import com.szip.sportwatch.DB.dbModel.StepData;
 import com.szip.sportwatch.DB.dbModel.StepData_Table;
 import com.szip.sportwatch.Model.UserInfo;
 import com.szip.sportwatch.MyApplication;
+import com.szip.sportwatch.Notification.AppList;
+import com.szip.sportwatch.R;
 
 
 import org.json.JSONArray;
@@ -59,12 +61,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.text.TextUtils.isEmpty;
 import static com.szip.sportwatch.MyApplication.FILE;
+import static com.szip.sportwatch.MyApplication.getInstance;
 
 /**
  * Created by Administrator on 2019/1/28.
@@ -926,6 +932,26 @@ public class MathUitl {
         }
     }
 
+    public static String getApplicationName(String pakeName){
+        switch (pakeName){
+            case "com.tencent.mm":
+                return getInstance().getString(R.string.wechat);
+            case "com.tencent.mobileqq":
+                return getInstance().getString(R.string.qq);
+            case "com.twitter.android":
+                return getInstance().getString(R.string.twitter);
+            case "com.instagram.android":
+                return getInstance().getString(R.string.instagram);
+            case "com.whatsapp":
+                return getInstance().getString(R.string.whatsApp);
+            case "com.facebook.katana":
+            case "com.facebook.orca":
+                return getInstance().getString(R.string.facebook);
+            default:
+                return getInstance().getString(R.string.other);
+        }
+    }
+
     public static void speaker(AudioManager mAudioManager) {
         //关闭Sco
         if (isBluetoothHeadsetConnected()) {
@@ -950,6 +976,25 @@ public class MathUitl {
             return true;
         }
         return false;
+    }
+
+        public static String getKeyFromValue(CharSequence charSequence) {
+        Map<Object, Object> appList = AppList.getInstance().getAppList();
+        for (Object ob:appList.keySet()){
+            Log.d("key******","key = "+ob.toString()+" ;value = "+appList.get(ob).toString());
+        }
+        Set<?> set = appList.entrySet();
+        Iterator<?> it = set.iterator();
+        String key = "";
+        while (it.hasNext()) {
+            @SuppressWarnings("rawtypes")
+            Map.Entry entry = (Map.Entry) it.next();
+            if (entry.getValue() != null && entry.getValue().equals(charSequence)) {
+                key = entry.getKey().toString();
+                break;
+            }
+        }
+        return key;
     }
 
     public static double[]getMapOption(String[] lats,String[] lngs){

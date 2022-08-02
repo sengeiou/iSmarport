@@ -18,10 +18,10 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.mediatek.ctrl.notification.NotificationActions;
-import com.mediatek.ctrl.notification.NotificationController;
 import com.mediatek.ctrl.notification.NotificationData;
 import com.mediatek.wearable.WearableManager;
 import com.szip.sportwatch.BLE.BleClient;
+import com.szip.sportwatch.BLE.NotificationController;
 import com.szip.sportwatch.DB.LoadDataUtil;
 import com.szip.sportwatch.MyApplication;
 import com.szip.sportwatch.Service.MainService;
@@ -134,7 +134,7 @@ public class NotificationDataManager {
             // notificationData.setGroupKey(getGroupKey(notification));
             notificationData.setActionsList(null);
             notificationData.setPackageName(packageName);
-            notificationData.setAppID("");
+            notificationData.setAppID(MathUitl.getKeyFromValue(notificationData.getPackageName()));
             notificationData.setWhen(notification.when);
         }
 
@@ -441,6 +441,7 @@ public class NotificationDataManager {
     private long msgTime;
     private static long time1 = 0;
     private static long time2 = 0;
+    Map<Object, Object> applist = AppList.getInstance().getAppList();
     private class SendNotficationDataThread extends Thread {
         public static final int MESSAGE_SEND_NOTIFICATION = 1;
         private NotificationData notificationData = null;
@@ -478,15 +479,35 @@ public class NotificationDataManager {
                                     }
                                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                    //mtk
+
+
+                                    try {
+                                        if (!applist.containsValue(notificationData.getPackageName())) {
+                                            int max = Integer.parseInt(applist.get(AppList.MAX_APP).toString());
+                                            if (!applist.equals("[]")) {
+                                                applist.remove(AppList.MAX_APP);
+                                                max = max + 1;
+                                            } else {
+                                                max = 1;
+                                            }
+                                            applist.put(AppList.MAX_APP, max);
+                                            applist.put(max, notificationData.getPackageName());
+                                            notificationData.setAppID(max + "");
+                                            AppList.getInstance().saveAppList(applist);
+                                        }
+                                    } catch (Exception E) {
+                                        E.printStackTrace();
+                                    }
+
                                         if (null != notificationData && null != notificationData.getPackageName()) {
                                             if (notificationData.getPackageName().contains("incallui")) {
                                                 MainService mainService = MainService.getInstance();
-                                                NotificationController.getInstance(mContext).sendNotfications(notificationData);
+                                                NotificationController.getInstance().sendNotfications(notificationData);
                                                 notificationData = null;
                                             } else {
                                                 if (null != notificationData && null != notificationData.getTextList()) {
                                                     if (MyApplication.getInstance().isMtk()){
-                                                        NotificationController.getInstance(mContext)
+                                                        NotificationController.getInstance()
                                                                 .sendNotfications(notificationData);
                                                     }else {
                                                         BleClient.getInstance().writeForSendNotify(notificationData.getTickerText(),

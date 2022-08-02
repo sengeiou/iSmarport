@@ -188,6 +188,9 @@ public class MyApplication extends Application{
                 if (mFinalCount == 1) {
                     //说明从后台回到了前台
                     Log.i("DATA******", " 返回到了 前台");
+                    if (MainService.getInstance()!=null){
+                        WearableManager.getInstance().scanDevice(true);
+                    }
                     if(isFirst){
                         isFirst = false;
                     }else {
@@ -291,11 +294,11 @@ public class MyApplication extends Application{
 
     private void initNotifyList() {
         List<NotificationData> list = new ArrayList<>();
-        list.add(new NotificationData("massage", R.mipmap.cp_icon_empty, getString(R.string.message), true));
+        list.add(new NotificationData("message", R.mipmap.cp_icon_empty, getString(R.string.message), true));
         list.add(new NotificationData("com.tencent.mm", R.mipmap.cp_icon_empty, getString(R.string.wechat), true));
         list.add(new NotificationData("com.tencent.mobileqq", R.mipmap.cp_icon_empty, getString(R.string.qq), true));
         list.add(new NotificationData("com.facebook.katana", R.mipmap.cp_icon_empty, getString(R.string.facebook), true));
-        list.add(new NotificationData("com.facebook.orca", R.mipmap.cp_icon_empty, getString(R.string.facebook_massage), true));
+        list.add(new NotificationData("com.facebook.orca", R.mipmap.cp_icon_empty, getString(R.string.facebook_message), true));
         list.add(new NotificationData("com.twitter.android", R.mipmap.cp_icon_empty, getString(R.string.twitter), true));
         list.add(new NotificationData("com.whatsapp", R.mipmap.cp_icon_empty, getString(R.string.whatsApp), true));
         list.add(new NotificationData("com.instagram.android", R.mipmap.cp_icon_empty, getString(R.string.instagram), true));

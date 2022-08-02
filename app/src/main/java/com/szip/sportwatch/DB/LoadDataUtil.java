@@ -1343,6 +1343,14 @@ public class LoadDataUtil {
         return list;
     }
 
+    public NotificationData getNotification(String packageName){
+        NotificationData notificationData = SQLite.select()
+                .from(NotificationData.class)
+                .where(NotificationData_Table.packageName.is(packageName))
+                .querySingle();
+        return notificationData;
+    }
+
     public boolean needNotify(String packageName){
        NotificationData notificationData = SQLite.select()
                 .from(NotificationData.class)
