@@ -587,13 +587,13 @@ public class MainService extends Service {
         stopNotificationService();
         mSevice = null;
         BleClient.getInstance().setiOtaResponse(null);
-        Intent intent = new Intent();
-        intent.setClass(this,MainService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent);
-        }else {
-            startService(intent);
-        }
+//        Intent intent = new Intent();
+//        intent.setClass(this,MainService.class);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            startForegroundService(intent);
+//        }else {
+//            startService(intent);
+//        }
     }
 
 
