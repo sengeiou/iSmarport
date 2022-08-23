@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">iSmarport</string>
-
+    <string name="graphic_verification_code">Сначала введите код подтверждения изображения</string>
+    <string name="enter_numbers_letters">Пожалуйста, введите цифры или буквы с картинки</string>
+    <string name="enter_verification_code">Сначала введите код подтверждения изображения</string>
     <!--Страница авторизации/Получить страницу пароля/Страница регистрации-->
     <string name="logo">Добро пожаловать в iSmarport</string>
     <string name="user">учетная запись</string>

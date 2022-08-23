@@ -3,7 +3,9 @@ package com.szip.sportwatch.Util;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
+import com.google.gson.Gson;
 import com.szip.sportwatch.BuildConfig;
 import com.szip.sportwatch.DB.SaveDataUtil;
 import com.szip.sportwatch.Model.HttpBean.AvatarBean;
@@ -16,6 +18,7 @@ import com.szip.sportwatch.Model.HttpBean.DialBean;
 import com.szip.sportwatch.Model.HttpBean.DownloadDataBean;
 import com.szip.sportwatch.Model.HttpBean.FaqBean;
 import com.szip.sportwatch.Model.HttpBean.FaqListBean;
+import com.szip.sportwatch.Model.HttpBean.ImageVerificationBean;
 import com.szip.sportwatch.Model.HttpBean.LoginBean;
 import com.szip.sportwatch.Model.HttpBean.UserInfoBean;
 import com.szip.sportwatch.Model.HttpBean.WeatherBean;
@@ -25,6 +28,8 @@ import com.zhy.http.okhttp.callback.GenericsCallback;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Interceptor;
@@ -527,6 +532,61 @@ public class HttpMessgeUtil {
                 .execute(callback,new TokenInterceptor());
     }
 
+    /**
+     * 获取图片验证码
+     * */
+    private void _postGetImageVerification(GenericsCallback<ImageVerificationBean> callback)  {
+        String url = this.url+"user/captcha";
+        OkHttpUtils
+                .jpost()
+                .url(url)
+                .addHeader("Accept-Language",language)
+                .addHeader("Time-Diff",time)
+                .addHeader("project",BuildConfig.APP_NAME)
+                .build()
+                .execute(callback,new TokenInterceptor());
+    }
+
+    /**
+     * 获取图片验证码
+     * */
+    private void _getVerificationV2(int type,String areaCode,String phoneNumber,String email,String captchaId,int captchaType,
+                                    String captchaInput, GenericsCallback<BaseApi> callback)  {
+        String url = this.url+"v2/user/sendVerifyCode";
+        String nonceStr = SignUtil.getRandomStr();
+        Map<String,Object> json = new HashMap<>();
+        json.put("type",type);
+        json.put("areaCode",areaCode);
+        json.put("phoneNumber",phoneNumber);
+        json.put("email",email);
+        json.put("captchaId",captchaId);
+        json.put("captchaType",captchaType);
+        json.put("captchaInput",captchaInput);
+        json.put("signType","MD5");
+        json.put("timestamp",System.currentTimeMillis());
+        json.put("nonceStr",nonceStr);
+
+        try {
+            String sign = SignUtil.generateSignature(json,nonceStr,"MD5");
+            Log.d("data******","md5 = "+sign);
+            json.put("sign",sign);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Gson gson = new Gson();
+        OkHttpUtils
+                .listpost()
+                .url(url)
+                .addHeader("Accept-Language",language)
+                .addHeader("Time-Diff",time)
+                .addHeader("project",BuildConfig.APP_NAME)
+                .addParams("data",gson.toJson(json))
+                .id(GET_VERIFICATION)
+                .build()
+                .execute(callback,new TokenInterceptor());
+    }
+
+
     public void getFaq(String id,GenericsCallback<FaqBean> callback)throws IOException{
         _getFaqContent(id,callback);
     }
@@ -636,6 +696,17 @@ public class HttpMessgeUtil {
     public void getDialList(String watchPlateGroupId ,GenericsCallback<DialBean> callback)throws IOException{
         _getDialList(watchPlateGroupId,callback);
     }
+
+    public void postGetImageVerification(GenericsCallback<ImageVerificationBean> callback){
+        _postGetImageVerification(callback);
+    }
+
+
+    public void getVerificationV2(int type,String areaCode,String phoneNumber,String email,String captchaId,int captchaType,
+                                  String captchaInput, GenericsCallback<BaseApi> callback){
+        _getVerificationV2(type,areaCode,phoneNumber,email,captchaId,captchaType,captchaInput,callback);
+    }
+
     /**
      * 接口回调
      **/

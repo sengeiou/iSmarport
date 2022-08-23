@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">iSmarport</string>
-
+    <string name="graphic_verification_code">insira primeiro o código de verificação da imagem</string>
+    <string name="enter_numbers_letters">por favor, insira números ou letras da imagem</string>
+    <string name="enter_verification_code">insira primeiro o código de verificação da imagem</string>
     <!--Página de login/Página de recuperação de senha/ Página de registro-->
     <string name="logo"> Bem-vindo ao iSmarport</string>
     <string name="user"> Conta</string>

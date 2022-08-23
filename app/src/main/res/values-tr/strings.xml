@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">iSmarport</string>
-
+    <string name="graphic_verification_code">Grafik doğrulama kodu</string>
+    <string name="enter_numbers_letters">Lütfen resimdeki sayıları veya harfleri girin</string>
+    <string name="enter_verification_code">Lütfen önce resim doğrulama kodunu girin</string>
 
     <string name = "logo"> iSmarport\'a Hoş Geldiniz </string>
     <string name = "user"> hesap numarası </string>

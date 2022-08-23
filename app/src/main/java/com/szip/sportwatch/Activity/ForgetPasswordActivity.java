@@ -12,10 +12,13 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.szip.sportwatch.Model.HttpBean.BaseApi;
+import com.szip.sportwatch.Model.HttpBean.ImageVerificationBean;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.HttpMessgeUtil;
 import com.szip.sportwatch.Util.JsonGenericsSerializator;
@@ -58,6 +61,10 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
 
     private int flagForEt;
 
+    private ImageView imageIv;
+    private String imageId;
+    private EditText imageEt;
+
 
     private Handler handler = new Handler(){
         @Override
@@ -92,7 +99,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-
+        updateImageVerification();
     }
 
     /**
@@ -111,6 +118,9 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         passwordEt = findViewById(R.id.passwordEt);
         passwordTipTv = findViewById(R.id.passwordTipTv);
 
+        imageEt = findViewById(R.id.imageEt);
+        imageIv = findViewById(R.id.imageIv);
+
         verifyCodeEt = findViewById(R.id.verifyCodeEt);
         verifyCodeTipTv = findViewById(R.id.verifyCodeTipTv);
         sendTv = findViewById(R.id.sendTv);
@@ -128,6 +138,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         findViewById(R.id.countryRl).setOnClickListener(this);
         findViewById(R.id.resetBtn).setOnClickListener(this);
         findViewById(R.id.backIv).setOnClickListener(this);
+        findViewById(R.id.imageIv).setOnClickListener(this);
         userEt.addTextChangedListener(watcher);
         userEt.setOnFocusChangeListener(focusChangeListener);
         passwordEt.addTextChangedListener(watcher);
@@ -152,28 +163,14 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
      * 开始倒计时
      * */
     private void startTimer(){
-        try {
-            if (userEt.getText().toString().contains("@"))
-                HttpMessgeUtil.getInstance().getVerificationCode("2","","",
-                        userEt.getText().toString(),callback);
-            else
-                HttpMessgeUtil.getInstance().getVerificationCode("1","00"+countryCodeTv.getText().toString().substring(1),
-                        userEt.getText().toString(),"",callback);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        sendTv.setTextColor(getResources().getColor(R.color.gray));
-        sendTv.setEnabled(false);
-        time = 60;
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                handler.sendEmptyMessage(100);
-            }
-        };
-        timer = new Timer();
-        timer.schedule(timerTask,1000,1000);
+        if (userEt.getText().toString().contains("@"))
+            HttpMessgeUtil.getInstance().getVerificationV2(2,"","",
+                    userEt.getText().toString().trim(),imageId,1,imageEt.getText().toString().trim(),callback);
+        else
+            HttpMessgeUtil.getInstance().getVerificationV2(1,"00"+countryCodeTv.getText().toString().substring(1),
+                    userEt.getText().toString(),"",imageId,1,imageEt.getText().toString().trim(),callback);
+
     }
 
     /**
@@ -215,6 +212,8 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     showToast(getString(R.string.choseCountry));
                 }else if (userEt.getText().toString().equals("")){
                     showToast(getString(R.string.phoneOrEmail));
+                }else if (imageEt.getText().toString().equals("")){
+                    showToast(getString(R.string.enter_verification_code));
                 }else {
                     if (userEt.getText().toString().contains("@")){
                         if (!isEmail(userEt.getText().toString()))
@@ -258,6 +257,9 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.backIv:
                 finish();
+                break;
+            case R.id.imageIv:
+                updateImageVerification();
                 break;
         }
     }
@@ -344,8 +346,41 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 ProgressHudModel.newInstance().diss();
                 showToast(getString(R.string.resetSuccess));
                 finish();
+            }else {
+                if (response.getCode()==200){
+                    sendTv.setTextColor(getResources().getColor(R.color.gray));
+                    sendTv.setEnabled(false);
+                    time = 120;
+                    TimerTask timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            handler.sendEmptyMessage(100);
+                        }
+                    };
+                    timer = new Timer();
+                    timer.schedule(timerTask,1000,1000);
+                }else {
+                    showToast(response.getMessage());
+                }
             }
         }
     };
+
+    private void updateImageVerification(){
+        HttpMessgeUtil.getInstance().postGetImageVerification(new GenericsCallback<ImageVerificationBean>(new JsonGenericsSerializator()) {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+
+            }
+
+            @Override
+            public void onResponse(ImageVerificationBean response, int id) {
+                imageId = response.getData().getId();
+                Glide.with(ForgetPasswordActivity.this)
+                        .load(response.getData().getInputImage())
+                        .into(imageIv);
+            }
+        });
+    }
 
 }

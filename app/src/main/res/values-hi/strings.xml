@@ -3,6 +3,10 @@
 
     <string name="app_name">iSmarport</string>
 
+    <string name="graphic_verification_code">ग्राफिक सत्यापन कोड</string>
+    <string name="enter_numbers_letters">कृपया चित्र से संख्या या अक्षर दर्ज करें</string>
+    <string name="enter_verification_code">कृपया पहले छवि सत्यापन कोड दर्ज करें</string>
+
     <!--लॉगिन पेज:/पासवर्ड पृष्ठ पुनः प्राप्त करे/पंजीकरण पृष्ठ-->
     <string name="logo"> iSmarport में आपका स्वागत ह</string>
     <string name="user">खाता</string>

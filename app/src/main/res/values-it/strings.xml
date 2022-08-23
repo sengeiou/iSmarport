@@ -3,6 +3,9 @@
 
     <string name = "app_name">iSmarport</string>
 
+    <string name="graphic_verification_code">Codice di verifica grafico</string>
+    <string name="enter_numbers_letters">Si prega di inserire numeri o lettere dall\'immagine</string>
+    <string name="enter_verification_code">Inserisci prima il codice di verifica dell\'immagine</string>
 
     <string name = "logo">Benvenuto in iSmarport</string>
     <string name = "user">numero di conto</string>

@@ -2,7 +2,9 @@
 <resources>
 
     <string name = "app_name"> iSmarport </string>
-
+    <string name="graphic_verification_code">Mã xác minh đồ họa</string>
+    <string name="enter_numbers_letters">Vui lòng nhập số hoặc chữ cái từ hình ảnh</string>
+    <string name="enter_verification_code">Vui lòng nhập mã xác minh hình ảnh trước</string>
 
     <string name = "logo"> Chào mừng bạn đến với iSmarport </string>
     <string name = "user"> số tài khoản </string>

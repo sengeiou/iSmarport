@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">艾跑特</string>
-
+    <string name="graphic_verification_code">圖文驗證碼</string>
+    <string name="enter_numbers_letters">請輸入圖片中的數字或字母</string>
+    <string name="enter_verification_code">請先輸入圖文驗證碼</string>
     <!--登錄頁面/找回密碼頁面/註冊頁面-->
     <string name="logo">歡迎來到艾跑特</string>
     <string name="user">賬號</string>

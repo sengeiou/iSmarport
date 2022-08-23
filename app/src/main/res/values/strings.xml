@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">iSmarport</string>
 
+    <string name="graphic_verification_code">Graphic Verification Code</string>
+    <string name="enter_numbers_letters">Please enter the numbers or letters in the picture.</string>
+    <string name="enter_verification_code">Please input the graphic verification code first.</string>
+
     <!--登录页面 Login Page /找回密码页面 Retrieve Password Page/注册页面 Registration Page-->
     <string name="logo">Welcome To iSmarport</string>
     <string name="user">Account</string>

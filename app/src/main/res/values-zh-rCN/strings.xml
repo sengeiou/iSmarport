@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">艾跑特</string>
-
+    <string name="graphic_verification_code">图文验证码</string>
+    <string name="enter_numbers_letters">请输入图片中的数字或字母</string>
+    <string name="enter_verification_code">请先输入图文验证码</string>
     <!--登录页面/找回密码页面/注册页面-->
     <string name="logo">欢迎来到艾跑特</string>
     <string name="user">账号</string>

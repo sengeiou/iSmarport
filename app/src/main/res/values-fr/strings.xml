@@ -3,6 +3,11 @@
 
     <string name="app_name">iSmarport</string>
 
+
+    <string name="graphic_verification_code">Code de vérification graphique</string>
+    <string name="enter_numbers_letters">Veuillez entrer des chiffres ou des lettres de l\'image</string>
+    <string name="enter_verification_code">Veuillez d\'abord entrer le code de vérification de l\'image</string>
+
     <!--Page de connexion / récupération de mot de passe / page d \'enregistrement-->
     <string name="logo">Bienvenue à iSmarport.</string>
     <string name="user">Numéro de compte</string>

@@ -3,6 +3,10 @@
 
     <string name = "app_name"> Ai Paote </string>
 
+    <string name="graphic_verification_code">رمز التحقق البياني</string>
+    <string name="enter_numbers_letters">الرجاء إدخال أرقام أو أحرف من الصورة</string>
+    <string name="enter_verification_code">الرجاء إدخال رمز التحقق من الصورة أولاً</string>
+
     <string name = "logo"> مرحبًا بك في Ai Paote </string>
     <string name = "user"> رقم الحساب </string>
     <string name = "phoneOrEmail"> يرجى إدخال رقم هاتفك / بريدك الإلكتروني </string>

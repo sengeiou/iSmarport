@@ -3,6 +3,11 @@
 
     <string name="app_name">iSmarport</string>
 
+
+    <string name="graphic_verification_code">グラフィック検証コード</string>
+    <string name="enter_numbers_letters">写真の数字または文字を入力してください</string>
+    <string name="enter_verification_code">最初に画像確認コードを入力してください</string>
+
     <!--ログインページ/パスワードの取得ページ/登録ページ-->
     <string name="logo">iSmarportへようこそ</string>
     <string name="user">アカウント</string>

@@ -3,6 +3,10 @@
 
     <string name="app_name">iSmarport</string>
 
+    <string name="graphic_verification_code">Kode verifikasi grafis</string>
+    <string name="enter_numbers_letters">Silakan masukkan angka atau huruf dari gambar</string>
+    <string name="enter_verification_code">Silakan masukkan kode verifikasi gambar terlebih dahulu</string>
+
     <!--Halaman daftar masuk / halaman pemulihan sandi / halaman pendaftaran-->
     <string name="logo">Selamat datang di iSmarport</string>
     <string name="user">nomor rekening</string>
