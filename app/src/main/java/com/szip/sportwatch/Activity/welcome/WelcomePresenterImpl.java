@@ -73,8 +73,7 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
 
     @Override
     public void initBle(Context context) {
-        LocalBluetoothLEManager.getInstance().init(context, 511);
-        boolean isSuccess = WearableManager.getInstance().init(true, context, "we had", R.xml.wearable_config);
+
         //切换成GATT模式
         if (WearableManager.getInstance().getWorkingMode() == WearableManager.MODE_SPP)
             WearableManager.getInstance().switchMode();

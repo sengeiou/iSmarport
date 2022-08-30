@@ -69,10 +69,10 @@
 
     <!--スポーツ-->
     <string name="best">屋外ランニングの個人記録</string>
-    <string name="history">歴史的な動きの記録</string>
+    <string name="history">記録</string>
     <string name="track">スポーツ情報</string>
     <string name="speed">速度</string>
-    <string name="kcal">消費（kcal）</string>
+    <string name="kcal">消費カロリー（kcal）</string>
     <string name="time">時間</string>
     <string name="heart_rate">心拍数（bpm）</string>
     <string name="cadence">ストライド</string>
@@ -127,11 +127,11 @@
     <string name="chooseClock">時計のスタイルを選択してください</string>
     <string name="clock">時計スタイル</string>
     <string name="background">写真をアップロード</string>
-    <string name="about">約</string>
+    <string name="about">アプリについて</string>
     <string name="logout">サインアウト</string>
     <string name="me">私の</string>
     <string name="set">設定</string>
-    <string name="other">その他の</string>
+    <string name="other">その他</string>
     <string name="cancel">キャンセル</string>
     <string name="confirm">確認</string>
     <string name="tip">ヒント</string>
@@ -294,7 +294,7 @@
     <string name="checkGPS">携帯電話の位置スイッチがオンになっていないことを検知した場合、アプリが正常に動作するように位置スイッチをオンにしてください。</string>
     <string name="speedPerHour">時速</string>
     <string name="training">トレーニングで走る</string>
-    <string name="heart_switch">タイミング測定</string>
+    <string name="heart_switch">自動測定心拍数</string>
     <string name="runFinsh">現在のランニングを終了するかどうかを確認してください。</string>
     <string name="runShort">ランニングタイムや距離が短すぎて、統計にならない。</string>
     <string name="started">まずはランニングを始めてください</string>
