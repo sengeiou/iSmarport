@@ -246,9 +246,11 @@ public class MyApplication extends Application{
         String packageName = getPackageName();
         String strListener = Settings.Secure.getString(this.getContentResolver(),
                 "enabled_notification_listeners");
+        Log.d("data******","初始化通知 = "+strListener);
         if (strListener != null
                 && strListener
                 .contains(packageName)) {
+
             ComponentName localComponentName = new ComponentName(this, MyNotificationReceiver.class);
             PackageManager localPackageManager = this.getPackageManager();
             localPackageManager.setComponentEnabledSetting(localComponentName, 2, 1);

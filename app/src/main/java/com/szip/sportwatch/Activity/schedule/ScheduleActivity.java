@@ -18,6 +18,7 @@ import com.szip.sportwatch.Model.EvenBusModel.UpdateSchedule;
 import com.szip.sportwatch.DB.dbModel.ScheduleData;
 import com.szip.sportwatch.R;
 import com.szip.sportwatch.Util.LogUtil;
+import com.szip.sportwatch.Util.ProgressHudModel;
 import com.szip.sportwatch.Util.StatusBarCompat;
 
 import org.greenrobot.eventbus.EventBus;
@@ -48,6 +49,7 @@ public class ScheduleActivity extends BaseActivity {
                 .execute();
         initView();
         initEvent();
+        ProgressHudModel.newInstance().show(this,getString(R.string.loading));
         BleClient.getInstance().writeForGetSchedule();
     }
 
@@ -76,6 +78,7 @@ public class ScheduleActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateList(UpdateSchedule updateSchedule){
+        ProgressHudModel.newInstance().diss();
         initData();
     }
 

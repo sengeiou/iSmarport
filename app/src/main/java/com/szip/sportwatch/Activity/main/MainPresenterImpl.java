@@ -187,6 +187,42 @@ public class MainPresenterImpl implements IMainPrisenter{
                 MainService.getInstance().startConnect();
             }
         }
+
+        if (!isNotificationListenerActived())
+            showNotifiListnerPrompt();
+    }
+
+
+    private boolean isNotificationListenerActived() {
+        String packageName = context.getPackageName();
+        String strListener = Settings.Secure.getString(context.getContentResolver(),
+                "enabled_notification_listeners");
+        return strListener != null
+                && strListener
+                .contains(packageName);
+    }
+
+    private void showNotifiListnerPrompt() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(R.string.notificationlistener_prompt_title);
+        builder.setMessage(R.string.notificationlistener_prompt_content);
+
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        // Go to notification listener settings
+        builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                context.startActivity(new Intent(
+                        "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+            }
+        });
+        builder.create().show();
     }
 
     @Override

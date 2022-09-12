@@ -106,7 +106,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onResume() {
         super.onResume();
-        updateImageVerification();
+
     }
 
 
@@ -133,6 +133,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             sharedPreferencesp = getSharedPreferences(FILE,MODE_PRIVATE);
         countryTv.setText(sharedPreferencesp.getString("countryName",""));
         countryCodeTv.setText(sharedPreferencesp.getString("countryCode",""));
+        updateImageVerification();
 
     }
     /**
@@ -323,6 +324,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void onResponse(BaseApi response, int id) {
             if (response.getCode() != 200) {
+                updateImageVerification();
                 ProgressHudModel.newInstance().diss();
                 MathUitl.showToast(mContext,response.getMessage());
             }else {
@@ -361,6 +363,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     startActivity(intent);
                 }
             }else {
+                updateImageVerification();
                 ProgressHudModel.newInstance().diss();
                 MathUitl.showToast(mContext,response.getMessage());
             }

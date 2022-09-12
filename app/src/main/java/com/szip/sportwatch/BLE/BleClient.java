@@ -203,6 +203,8 @@ public class BleClient {
         @Override
         public void onConnectStatusChanged(String mac, int status) {
             LogUtil.getInstance().logd("connectStatus",status+"");
+            if (MainService.getInstance()==null)
+                return;
             if( status == 0x10){
                 connectState = 3;
                 LogUtil.getInstance().logd("DATA******","连接");

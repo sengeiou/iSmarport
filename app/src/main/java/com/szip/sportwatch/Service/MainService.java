@@ -13,11 +13,13 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.mediatek.ctrl.map.MapController;
@@ -587,6 +589,7 @@ public class MainService extends Service {
         stopNotificationService();
         mSevice = null;
         BleClient.getInstance().setiOtaResponse(null);
+        stopConnect();
 //        Intent intent = new Intent();
 //        intent.setClass(this,MainService.class);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -620,10 +623,17 @@ public class MainService extends Service {
         Vibrator vib = (Vibrator) mSevice.getSystemService(Service.VIBRATOR_SERVICE);
         vib.cancel();
     }
+    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        // We don't provide binding, so return null
-        return null;
+        LogUtil.getInstance().logd("data******","service bind");
+        return new Binder();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        LogUtil.getInstance().logd("data******","service onUnbind");
+        return super.onUnbind(intent);
     }
 
     /**

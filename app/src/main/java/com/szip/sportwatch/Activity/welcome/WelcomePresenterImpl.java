@@ -77,10 +77,7 @@ public class WelcomePresenterImpl implements IWelcomePresenter{
         //切换成GATT模式
         if (WearableManager.getInstance().getWorkingMode() == WearableManager.MODE_SPP)
             WearableManager.getInstance().switchMode();
-        if (!MainService.isMainServiceActive()) {
-            context.startService(
-                    new Intent(context, MainService.class));
-        }
+
         if (iWelcomeView!=null)
             iWelcomeView.initBleFinish();
     }

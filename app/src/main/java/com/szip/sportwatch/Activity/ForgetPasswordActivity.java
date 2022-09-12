@@ -99,7 +99,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        updateImageVerification();
+
     }
 
     /**
@@ -128,6 +128,8 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         SharedPreferences sharedPreferencesp = getSharedPreferences(FILE,MODE_PRIVATE);
         countryTv.setText(sharedPreferencesp.getString("countryName",""));
         countryCodeTv.setText(sharedPreferencesp.getString("countryCode",""));
+
+        updateImageVerification();
     }
 
     /**
@@ -342,12 +344,14 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
 
         @Override
         public void onResponse(BaseApi response, int id) {
-            if(id!=GET_VERIFICATION){
-                ProgressHudModel.newInstance().diss();
-                showToast(getString(R.string.resetSuccess));
-                finish();
-            }else {
-                if (response.getCode()==200){
+
+            if (response.getCode()==200){
+
+                if(id!=GET_VERIFICATION){
+                    ProgressHudModel.newInstance().diss();
+                    showToast(getString(R.string.resetSuccess));
+                    finish();
+                }else {
                     sendTv.setTextColor(getResources().getColor(R.color.gray));
                     sendTv.setEnabled(false);
                     time = 120;
@@ -359,10 +363,14 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     };
                     timer = new Timer();
                     timer.schedule(timerTask,1000,1000);
-                }else {
-                    showToast(response.getMessage());
                 }
+
+
+            }else {
+                updateImageVerification();
+                showToast(response.getMessage());
             }
+
         }
     };
 

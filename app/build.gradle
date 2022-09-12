@@ -86,6 +86,36 @@ android {
 
     }
 
+
+    //改写APK名称
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                def fileName
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    switch (variant.buildType.name) {
+                        case "release":
+                            fileName = "iSmarport_v${defaultConfig.versionName}_release.apk"
+                            break
+                        case "debug":
+                            fileName = "iSmarport_v${defaultConfig.versionName}_debug.apk"
+                            break
+                        default:
+                            fileName = "iSmarport_v.apk"
+                            break
+                    }
+                    /*******************************************************************
+                     * qinchun add 20180404
+                     * gradle 3.0, outputFile is read only property
+                     *******************************************************************/
+                    outputFileName = fileName
+                }
+            }
+            variant.getPackageApplication().outputDirectory = new File("F:\\aab\\release")
+        }
+    }
+
 }
 
 
