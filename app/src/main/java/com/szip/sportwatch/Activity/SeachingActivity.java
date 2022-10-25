@@ -227,14 +227,17 @@ public class SeachingActivity extends BaseActivity implements View.OnClickListen
                         @Override
                         public void onResponse(BindBean response, int id) {
                             if (response.getCode() == 200){
+                                ProgressHudModel.newInstance().diss();
                                 //停止蓝牙扫描
                                 searchDevice(false);
+                                if (!checkBluetoochState())
+                                    return;
                                 BluetoothDevice device = deviceAdapter.getDevice(selectPos);
                                 //缓存蓝牙mac地址
                                 MyApplication app = (MyApplication) getApplicationContext();
                                 app.getUserInfo().setDeviceCode(device.getAddress());
                                 MathUitl.saveStringData(SeachingActivity.this,"deviceCode",device.getAddress()).commit();
-                                ProgressHudModel.newInstance().diss();
+
 
                                 //启动后台自动连接线程
                                 app.setDeviceConfig(device.getName());
@@ -317,6 +320,17 @@ public class SeachingActivity extends BaseActivity implements View.OnClickListen
         public void onModeSwitch(int newMode) {
         }
     };
+
+    private boolean checkBluetoochState() {
+        //判断蓝牙状态
+        BluetoothAdapter blueadapter = BluetoothAdapter.getDefaultAdapter();
+        if (!blueadapter.isEnabled()) {
+            Intent bleIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivity(bleIntent);
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

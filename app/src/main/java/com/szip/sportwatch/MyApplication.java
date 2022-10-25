@@ -190,7 +190,7 @@ public class MyApplication extends Application{
                 mFinalCount++;
                 //如果mFinalCount ==1，说明是从后台到前台
                 Log.e("onActivityStarted", mFinalCount + "");
-                if (mFinalCount == 1&&"com.szip.sportwatch.Activity.main.MainActivity".equals(activity.getClass().getName())) {
+                if (mFinalCount == 1) {
                     //说明从后台回到了前台
                     Log.i("DATA******", " 返回到了 前台 = "+activity.getClass().getName());
                     if (MainService.getInstance()!=null){
@@ -223,7 +223,7 @@ public class MyApplication extends Application{
 
                 Log.i("onActivityStopped", mFinalCount + "");
                 String packageName = activity.getClass().getName();
-                if (mFinalCount == 0&&packageName.equals("com.szip.sportwatch.Activity.main.MainActivity")){
+                if (mFinalCount == 0){
                     //说明从前台回到了后台
                     Log.i("DATA******", " 切换到了 后台");
                     if (isMtk()&&WearableManager.getInstance().getConnectState()==WearableManager.STATE_CONNECTED){
@@ -310,17 +310,17 @@ public class MyApplication extends Application{
         list.add(new NotificationData("com.twitter.android", R.mipmap.cp_icon_empty, getString(R.string.twitter), true));
         list.add(new NotificationData("com.whatsapp", R.mipmap.cp_icon_empty, getString(R.string.whatsApp), true));
         list.add(new NotificationData("com.instagram.android", R.mipmap.cp_icon_empty, getString(R.string.instagram), true));
-        list.add(new NotificationData("com.skype.rover", R.mipmap.cp_icon_empty, "Skype", true));
-        list.add(new NotificationData("com.linkedin.android", R.mipmap.cp_icon_empty, "Linkedin", true));
+//        list.add(new NotificationData("com.skype.rover", R.mipmap.cp_icon_empty, "Skype", true));
+//        list.add(new NotificationData("com.linkedin.android", R.mipmap.cp_icon_empty, "Linkedin", true));
         list.add(new NotificationData("jp.naver.line.android", R.mipmap.cp_icon_empty, "Line", true));
         list.add(new NotificationData("com.snapchat.android", R.mipmap.cp_icon_empty, "Snapchat", true));
-        list.add(new NotificationData("com.pinterest", R.mipmap.cp_icon_empty, "Pinterest", true));
-        list.add(new NotificationData("com.google.android.apps.plus", R.mipmap.cp_icon_empty, "Google+", true));
+//        list.add(new NotificationData("com.pinterest", R.mipmap.cp_icon_empty, "Pinterest", true));
+//        list.add(new NotificationData("com.google.android.apps.plus", R.mipmap.cp_icon_empty, "Google+", true));
         list.add(new NotificationData("com.tumblr", R.mipmap.cp_icon_empty, "Tumblr", true));
-        list.add(new NotificationData("com.viber.voip", R.mipmap.cp_icon_empty, "Viber", true));
-        list.add(new NotificationData("com.vkontakte.android", R.mipmap.cp_icon_empty, "Vkontakte", true));
-        list.add(new NotificationData("org.telegram.messenger", R.mipmap.cp_icon_empty, "Telegram", true));
-        list.add(new NotificationData("com.zhiliaoapp.musically", R.mipmap.cp_icon_empty, "Tiktok", true));
+//        list.add(new NotificationData("com.viber.voip", R.mipmap.cp_icon_empty, "Viber", true));
+//        list.add(new NotificationData("com.vkontakte.android", R.mipmap.cp_icon_empty, "Vkontakte", true));
+//        list.add(new NotificationData("org.telegram.messenger", R.mipmap.cp_icon_empty, "Telegram", true));
+//        list.add(new NotificationData("com.zhiliaoapp.musically", R.mipmap.cp_icon_empty, "Tiktok", true));
         SaveDataUtil.newInstance().saveNotificationList(list);
     }
 

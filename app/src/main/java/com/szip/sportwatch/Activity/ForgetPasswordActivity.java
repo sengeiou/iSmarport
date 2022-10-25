@@ -367,7 +367,8 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
 
 
             }else {
-                updateImageVerification();
+                if (id!=GET_VERIFICATION)
+                    updateImageVerification();
                 showToast(response.getMessage());
             }
 

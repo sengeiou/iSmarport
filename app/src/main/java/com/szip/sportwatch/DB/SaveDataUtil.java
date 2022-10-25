@@ -656,7 +656,7 @@ public class SaveDataUtil {
     }
 
     public void saveNotificationList(final List<NotificationData> notificationDataList){
-
+        SQLite.delete().from(NotificationData.class).execute();
         FlowManager.getDatabase(AppDatabase.class)
                 .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
                         new ProcessModelTransaction.ProcessModel<NotificationData>() {
